@@ -11,7 +11,7 @@
 	{
 		"identifier" : "Oryo's Player-Side Rebalances",
 		"host" : {
-			"meta" : ""
+			"meta" : "https://github.com/TattlingJam4231/Player-Side-Rebalances/raw/master/latest.json"
 		}
 	}
 ]
