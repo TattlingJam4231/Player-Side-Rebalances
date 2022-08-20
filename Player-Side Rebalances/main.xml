@@ -1,0 +1,578 @@
+<mod name="Player-Side Rebalances" author="TattlingJam" color="Color(0.929,0.733,0.953)" min_lib_ver="3.38">
+	<Localization directory="loc" default="english.txt">
+		<loc file="english.txt" language="english.txt"/>
+	</Localization>
+
+	<!-- FMJ rounds -->
+		<WeaponMod
+			id="wpn_upg_a_fmj"
+			name_id="FMJ"
+			based_on="wpn_fps_upg_a_slug"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+			<stats
+				damage = "0"
+				spread = "0"
+				recoil = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				armor_piercing_add = "0"
+				can_shoot_through_shield = "false"
+				can_shoot_through_wall = "false"
+				can_shoot_through_enemy = "true"
+				max_enemy_penetration_distance = "2000"
+				enemy_pen_energy_loss = "1500"
+				optimal_distance_mul = "2000"
+				optimal_range_mul = "0"
+				near_falloff_mul = "0"
+				far_falloff_mul = "0"
+				near_damage_mul = "1"
+				far_damage_mul = "1.20"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_ass_sub2000"/>
+				<value_node value="wpn_fps_ass_m14"/>
+				<value_node value="wpn_fps_ass_ching"/>
+				<value_node value="wpn_fps_ass_contraband"/>
+				
+				<value_node value="wpn_fps_ass_akm"/>
+				<value_node value="wpn_fps_ass_akm_gold"/>
+				<value_node value="wpn_fps_ass_m16"/>
+				<value_node value="wpn_fps_ass_scar"/>
+				<value_node value="wpn_fps_ass_fal"/>
+				<value_node value="wpn_fps_ass_flint"/>
+				<value_node value="wpn_fps_ass_g3"/>
+				<value_node value="wpn_fps_ass_groza"/>
+				<value_node value="wpn_fps_ass_shak12"/>
+				
+				<value_node value="wpn_fps_ass_74"/>
+				<value_node value="wpn_fps_ass_corgi"/>
+				<value_node value="wpn_fps_ass_komodo"/>
+				<value_node value="wpn_fps_ass_aug"/>
+				<value_node value="wpn_fps_ass_vhs"/>
+				<value_node value="wpn_fps_ass_ak5"/>
+				<value_node value="wpn_fps_ass_l85a2"/>
+				<value_node value="wpn_fps_ass_m4"/>
+				<value_node value="wpn_fps_ass_galil"/>
+				
+				<value_node value="wpn_fps_ass_amcar"/>
+				<value_node value="wpn_fps_ass_tecci"/>
+				<value_node value="wpn_fps_ass_famas"/>
+				<value_node value="wpn_fps_ass_s552"/>
+				<value_node value="wpn_fps_ass_g36"/>
+				<value_node value="wpn_fps_ass_asval"/>
+				
+			</weapons>
+		</WeaponMod>
+	
+	<!-- Ballistic Tip rounds -->
+		<WeaponMod
+			id="wpn_upg_a_ballistic_tip"
+			name_id="Ballistic Tip"
+			based_on="wpn_fps_upg_a_slug"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2">
+			<stats
+				damage = "15"
+				spread = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				armor_piercing_add = "0"
+				can_shoot_through_shield = "false"
+				can_shoot_through_wall = "false"
+				can_shoot_through_enemy = "false"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_ass_sub2000"/>
+				<value_node value="wpn_fps_ass_m14"/>
+				<value_node value="wpn_fps_ass_ching"/>
+				<value_node value="wpn_fps_ass_contraband"/>
+				
+				<value_node value="wpn_fps_ass_akm"/>
+				<value_node value="wpn_fps_ass_akm_gold"/>
+				<value_node value="wpn_fps_ass_m16"/>
+				<value_node value="wpn_fps_ass_scar"/>
+				<value_node value="wpn_fps_ass_fal"/>
+				<value_node value="wpn_fps_ass_flint"/>
+				<value_node value="wpn_fps_ass_g3"/>
+				<value_node value="wpn_fps_ass_groza"/>
+				<value_node value="wpn_fps_ass_shak12"/>
+				
+				<value_node value="wpn_fps_ass_74"/>
+				<value_node value="wpn_fps_ass_corgi"/>
+				<value_node value="wpn_fps_ass_komodo"/>
+				<value_node value="wpn_fps_ass_aug"/>
+				<value_node value="wpn_fps_ass_vhs"/>
+				<value_node value="wpn_fps_ass_ak5"/>
+				<value_node value="wpn_fps_ass_l85a2"/>
+				<value_node value="wpn_fps_ass_m4"/>
+				<value_node value="wpn_fps_ass_galil"/>
+				
+				<value_node value="wpn_fps_ass_amcar"/>
+				<value_node value="wpn_fps_ass_tecci"/>
+				<value_node value="wpn_fps_ass_famas"/>
+				<value_node value="wpn_fps_ass_s552"/>
+				<value_node value="wpn_fps_ass_g36"/>
+				<value_node value="wpn_fps_ass_asval"/>
+			</weapons>
+		</WeaponMod>
+		
+	<!-- Hollow Point -->
+		<WeaponMod
+			id="wpn_upg_a_pis_hp"
+			name_id="Hollow Point"
+			based_on="wpn_fps_upg_a_slug"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+			<stats
+				damage = "0"
+				spread = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				armor_piercing_add = "0"
+				can_shoot_through_shield = "false"
+				can_shoot_through_wall = "false"
+				can_shoot_through_enemy = "false"
+				crit_chance = "0.05"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_pis_lemming"/>
+				<value_node value="wpn_fps_pis_chinchilla"/>
+				<value_node value="wpn_fps_pis_deagle"/>
+				<value_node value="wpn_fps_pis_rage"/>
+				<value_node value="wpn_fps_pis_2006m"/>
+				<value_node value="wpn_fps_pis_peacemaker"/>
+
+				<value_node value="wpn_fps_pis_x_chinchilla"/>
+				<value_node value="wpn_fps_x_deagle"/>
+				<value_node value="wpn_fps_pis_x_rage"/>
+				<value_node value="wpn_fps_pis_x_2006m"/>
+
+				<value_node value="wpn_fps_pis_sparrow"/>
+				<value_node value="wpn_fps_pis_beretta"/>
+				<value_node value="wpn_fps_pis_c96"/>
+				<value_node value="wpn_fps_pis_g17"/>
+				<value_node value="wpn_fps_pis_g26"/>
+				<value_node value="wpn_fps_pis_g22c"/>
+				<value_node value="wpn_fps_pis_packrat"/>
+				<value_node value="wpn_fps_pis_1911"/>
+				<value_node value="wpn_fps_pis_shrew"/>
+				<value_node value="wpn_fps_pis_ppk"/>
+				<value_node value="wpn_fps_pis_usp"/>
+				<value_node value="wpn_fps_pis_hs2000"/>
+				<value_node value="wpn_fps_pis_breech"/>
+				<value_node value="wpn_fps_pis_p226"/>
+				<value_node value="wpn_fps_pis_g18c"/>
+				<value_node value="wpn_fps_pis_pl14"/>
+				<value_node value="wpn_fps_pis_legacy"/>
+				<value_node value="wpn_fps_pis_beer"/>
+				<value_node value="wpn_fps_pis_czech"/>
+				<value_node value="wpn_fps_pis_stech"/>
+				<value_node value="wpn_fps_pis_model3"/>
+				<value_node value="wpn_fps_pis_holt"/>
+				<value_node value="wpn_fps_pis_m1911"/>
+
+				<value_node value="wpn_fps_pis_x_sparrow"/>
+				<value_node value="wpn_fps_x_b92fs"/>
+				<value_node value="wpn_fps_pis_x_c96"/>
+				<value_node value="wpn_fps_pis_x_g17"/>
+				<value_node value="wpn_fps_jowi"/>
+				<value_node value="wpn_fps_pis_x_g22c"/>
+				<value_node value="wpn_fps_x_packrat"/>
+				<value_node value="wpn_fps_x_1911"/>
+				<value_node value="wpn_fps_pis_x_shrew"/>
+				<value_node value="wpn_fps_pis_x_ppk"/>
+				<value_node value="wpn_fps_pis_x_usp"/>
+				<value_node value="wpn_fps_pis_x_hs2000"/>
+				<value_node value="wpn_fps_pis_x_breech"/>
+				<value_node value="wpn_fps_pis_x_p226"/>
+				<value_node value="wpn_fps_pis_x_g18c"/>
+				<value_node value="wpn_fps_pis_x_pl14"/>
+				<value_node value="wpn_fps_pis_x_legacy"/>
+				<value_node value="wpn_fps_pis_x_beer"/>
+				<value_node value="wpn_fps_pis_x_czech"/>
+				<value_node value="wpn_fps_pis_x_stech"/>
+				<value_node value="wpn_fps_pis_x_model3"/>
+				<value_node value="wpn_fps_pis_x_holt"/>
+				<value_node value="wpn_fps_pis_x_m1911"/>
+
+				<value_node value="wpn_fps_smg_tec9"/>
+				<value_node value="wpn_fps_smg_thompson"/>
+				<value_node value="wpn_fps_smg_mp9"/>
+				<value_node value="wpn_fps_smg_scorpion"/>
+				<value_node value="wpn_fps_smg_mp5"/>
+				<value_node value="wpn_fps_smg_hajk"/>
+				<value_node value="wpn_fps_smg_sr2"/>
+				<value_node value="wpn_fps_smg_schakal"/>
+				<value_node value="wpn_fps_smg_cobray"/>
+				<value_node value="wpn_fps_smg_p90"/>
+				<value_node value="wpn_fps_smg_akmsu"/>
+				<value_node value="wpn_fps_smg_polymer"/>
+				<value_node value="wpn_fps_smg_mac10"/>
+				<value_node value="wpn_fps_smg_baka"/>
+				<value_node value="wpn_fps_smg_erma"/>
+				<value_node value="wpn_fps_smg_olympic"/>
+				<value_node value="wpn_fps_smg_sterling"/>
+				<value_node value="wpn_fps_smg_mp7"/>
+				<value_node value="wpn_fps_smg_m45"/>
+				<value_node value="wpn_fps_smg_coal"/>
+				<value_node value="wpn_fps_smg_uzi"/>
+				<value_node value="wpn_fps_smg_shepheard"/>
+				<value_node value="wpn_fps_smg_vityaz"/>
+				<value_node value="wpn_fps_smg_pm9"/>
+				<value_node value="wpn_fps_smg_fmg9"/>
+				
+				<value_node value="wpn_fps_smg_x_tec9"/>
+				<value_node value="wpn_fps_smg_x_m1928"/>
+				<value_node value="wpn_fps_smg_x_mp9"/>
+				<value_node value="wpn_fps_smg_x_scorpion"/>
+				<value_node value="wpn_fps_smg_x_mp5"/>
+				<value_node value="wpn_fps_smg_x_hajk"/>
+				<value_node value="wpn_fps_smg_x_sr2"/>
+				<value_node value="wpn_fps_smg_x_schakal"/>
+				<value_node value="wpn_fps_smg_x_cobray"/>
+				<value_node value="wpn_fps_smg_x_p90"/>
+				<value_node value="wpn_fps_smg_x_akmsu"/>
+				<value_node value="wpn_fps_smg_x_polymer"/>
+				<value_node value="wpn_fps_smg_x_mac10"/>
+				<value_node value="wpn_fps_smg_x_baka"/>
+				<value_node value="wpn_fps_smg_x_erma"/>
+				<value_node value="wpn_fps_smg_x_olympic"/>
+				<value_node value="wpn_fps_smg_x_sterling"/>
+				<value_node value="wpn_fps_smg_x_mp7"/>
+				<value_node value="wpn_fps_smg_x_m45"/>
+				<value_node value="wpn_fps_smg_x_coal"/>
+				<value_node value="wpn_fps_smg_x_uzi"/>
+				<value_node value="wpn_fps_smg_x_shepheard"/>
+				<value_node value="wpn_fps_smg_x_vityaz"/>
+				<value_node value="wpn_fps_smg_x_pm9"/>
+			</weapons>
+		</WeaponMod>
+	
+	<!-- FMJ pistol/smg -->
+		<WeaponMod
+			id="wpn_upg_a_pis_fmj"
+			name_id="FMJ Pistol"
+			based_on="wpn_fps_upg_a_slug"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+			<stats
+				damage = "0"
+				spread = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				falloff_mul = "1.25"
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				armor_piercing_add = "0"
+				can_shoot_through_shield = "false"
+				can_shoot_through_wall = "false"
+				can_shoot_through_enemy = "true"
+				max_enemy_penetration_distance = "2000"
+				enemy_pen_energy_loss = "1500"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_pis_sparrow"/>
+				<value_node value="wpn_fps_pis_beretta"/>
+				<value_node value="wpn_fps_pis_c96"/>
+				<value_node value="wpn_fps_pis_g17"/>
+				<value_node value="wpn_fps_pis_g26"/>
+				<value_node value="wpn_fps_pis_g22c"/>
+				<value_node value="wpn_fps_pis_packrat"/>
+				<value_node value="wpn_fps_pis_1911"/>
+				<value_node value="wpn_fps_pis_shrew"/>
+				<value_node value="wpn_fps_pis_ppk"/>
+				<value_node value="wpn_fps_pis_usp"/>
+				<value_node value="wpn_fps_pis_hs2000"/>
+				<value_node value="wpn_fps_pis_breech"/>
+				<value_node value="wpn_fps_pis_p226"/>
+				<value_node value="wpn_fps_pis_g18c"/>
+				<value_node value="wpn_fps_pis_pl14"/>
+				<value_node value="wpn_fps_pis_legacy"/>
+				<value_node value="wpn_fps_pis_beer"/>
+				<value_node value="wpn_fps_pis_czech"/>
+				<value_node value="wpn_fps_pis_stech"/>
+				<value_node value="wpn_fps_pis_model3"/>
+				<value_node value="wpn_fps_pis_holt"/>
+				<value_node value="wpn_fps_pis_m1911"/>
+
+				<value_node value="wpn_fps_pis_x_sparrow"/>
+				<value_node value="wpn_fps_x_b92fs"/>
+				<value_node value="wpn_fps_pis_x_c96"/>
+				<value_node value="wpn_fps_pis_x_g17"/>
+				<value_node value="wpn_fps_jowi"/>
+				<value_node value="wpn_fps_pis_x_g22c"/>
+				<value_node value="wpn_fps_x_packrat"/>
+				<value_node value="wpn_fps_x_1911"/>
+				<value_node value="wpn_fps_pis_x_shrew"/>
+				<value_node value="wpn_fps_pis_x_ppk"/>
+				<value_node value="wpn_fps_pis_x_usp"/>
+				<value_node value="wpn_fps_pis_x_hs2000"/>
+				<value_node value="wpn_fps_pis_x_breech"/>
+				<value_node value="wpn_fps_pis_x_p226"/>
+				<value_node value="wpn_fps_pis_x_g18c"/>
+				<value_node value="wpn_fps_pis_x_pl14"/>
+				<value_node value="wpn_fps_pis_x_legacy"/>
+				<value_node value="wpn_fps_pis_x_beer"/>
+				<value_node value="wpn_fps_pis_x_czech"/>
+				<value_node value="wpn_fps_pis_x_stech"/>
+				<value_node value="wpn_fps_pis_x_model3"/>
+				<value_node value="wpn_fps_pis_x_holt"/>
+				<value_node value="wpn_fps_pis_x_m1911"/>
+
+				<value_node value="wpn_fps_smg_tec9"/>
+				<value_node value="wpn_fps_smg_thompson"/>
+				<value_node value="wpn_fps_smg_mp9"/>
+				<value_node value="wpn_fps_smg_scorpion"/>
+				<value_node value="wpn_fps_smg_mp5"/>
+				<value_node value="wpn_fps_smg_hajk"/>
+				<value_node value="wpn_fps_smg_sr2"/>
+				<value_node value="wpn_fps_smg_schakal"/>
+				<value_node value="wpn_fps_smg_cobray"/>
+				<value_node value="wpn_fps_smg_p90"/>
+				<value_node value="wpn_fps_smg_akmsu"/>
+				<value_node value="wpn_fps_smg_polymer"/>
+				<value_node value="wpn_fps_smg_mac10"/>
+				<value_node value="wpn_fps_smg_baka"/>
+				<value_node value="wpn_fps_smg_erma"/>
+				<value_node value="wpn_fps_smg_olympic"/>
+				<value_node value="wpn_fps_smg_sterling"/>
+				<value_node value="wpn_fps_smg_mp7"/>
+				<value_node value="wpn_fps_smg_m45"/>
+				<value_node value="wpn_fps_smg_coal"/>
+				<value_node value="wpn_fps_smg_uzi"/>
+				<value_node value="wpn_fps_smg_shepheard"/>
+				<value_node value="wpn_fps_smg_vityaz"/>
+				<value_node value="wpn_fps_smg_pm9"/>
+				<value_node value="wpn_fps_smg_fmg9"/>
+				
+				<value_node value="wpn_fps_smg_x_tec9"/>
+				<value_node value="wpn_fps_smg_x_m1928"/>
+				<value_node value="wpn_fps_smg_x_mp9"/>
+				<value_node value="wpn_fps_smg_x_scorpion"/>
+				<value_node value="wpn_fps_smg_x_mp5"/>
+				<value_node value="wpn_fps_smg_x_hajk"/>
+				<value_node value="wpn_fps_smg_x_sr2"/>
+				<value_node value="wpn_fps_smg_x_schakal"/>
+				<value_node value="wpn_fps_smg_x_cobray"/>
+				<value_node value="wpn_fps_smg_x_p90"/>
+				<value_node value="wpn_fps_smg_x_akmsu"/>
+				<value_node value="wpn_fps_smg_x_polymer"/>
+				<value_node value="wpn_fps_smg_x_mac10"/>
+				<value_node value="wpn_fps_smg_x_baka"/>
+				<value_node value="wpn_fps_smg_x_erma"/>
+				<value_node value="wpn_fps_smg_x_olympic"/>
+				<value_node value="wpn_fps_smg_x_sterling"/>
+				<value_node value="wpn_fps_smg_x_mp7"/>
+				<value_node value="wpn_fps_smg_x_m45"/>
+				<value_node value="wpn_fps_smg_x_coal"/>
+				<value_node value="wpn_fps_smg_x_uzi"/>
+				<value_node value="wpn_fps_smg_x_shepheard"/>
+				<value_node value="wpn_fps_smg_x_vityaz"/>
+				<value_node value="wpn_fps_smg_x_pm9"/>
+			</weapons>
+		</WeaponMod>
+	
+	<!-- AP pistol -->
+		<WeaponMod
+			id="wpn_upg_a_pis_ap"
+			name_id="AP"
+			based_on="wpn_fps_upg_a_slug"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+			<stats
+				damage = "0"
+				spread = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				falloff_mul = "1.25"
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				ammo_pickup_min_mul = "0.4"
+				ammo_pickup_max_mul = "0.534"
+				armor_piercing_add = "1"
+				can_shoot_through_shield = "true"
+				max_shield_penetration_distance = "2000"
+				shield_pen_energy_loss = "500"
+				can_shoot_through_wall = "true"
+				max_wall_penetration_distance = "2000"
+				wall_pen_energy_loss = "500"
+				can_shoot_through_enemy = "true"
+				max_enemy_penetration_distance = "2000"
+				enemy_pen_energy_loss = "500"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_pis_lemming"/>
+				<value_node value="wpn_fps_pis_chinchilla"/>
+				<value_node value="wpn_fps_pis_deagle"/>
+				<value_node value="wpn_fps_pis_rage"/>
+				<value_node value="wpn_fps_pis_2006m"/>
+				<value_node value="wpn_fps_pis_peacemaker"/>
+
+				<value_node value="wpn_fps_pis_x_chinchilla"/>
+				<value_node value="wpn_fps_x_deagle"/>
+				<value_node value="wpn_fps_pis_x_rage"/>
+				<value_node value="wpn_fps_pis_x_2006m"/>
+			</weapons>
+		</WeaponMod>
+		
+	<!-- SLAP -->
+		<WeaponMod
+			id="wpn_upg_snp_slap"
+			name_id="SLAP"
+			based_on="wpn_fps_upg_a_slug"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+			<stats
+				damage = "0"
+				spread = "-3"
+				total_ammo_mod = "-13"
+			/>
+			<custom_stats
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				ammo_pickup_min_mul = "0"
+				ammo_pickup_max_mul = "0"
+				armor_piercing_add = "1"
+				can_shoot_through_shield = "true"
+				can_shoot_through_wall = "true"
+				can_shoot_through_enemy = "true"
+				can_shoot_through_armor_plating = "true"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_snp_m95"/>
+			</weapons>
+		</WeaponMod>
+
+
+	<!-- Dragon's Breath Alt -->
+		<WeaponMod
+			id="wpn_fps_upg_a_dragons_breath_alt"
+			name_id="dragons_breath_alt"
+			based_on="wpn_fps_upg_a_dragons_breath"
+			inherit_weapons="true"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+		</WeaponMod>
+
+	<!-- Flechette Alt -->
+		<WeaponMod
+			id="wpn_fps_upg_a_piercing_alt"
+			name_id="piercing_alt"
+			based_on="wpn_fps_upg_a_piercing"
+			inherit_weapons="true"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2"
+			>
+			<stats
+				damage = "0"
+			/>
+			<custom_stats
+				damage_near_mul = "1"
+				damage_far_mul = "1"
+				add_head_shot_mul = "0.5"
+				optimal_range_mul = "1.33"
+				far_damage_mul = "2.5"
+			/>
+		</WeaponMod>
+		
+	<!-- HE -->
+		<!-- <WeaponMod -->
+			<!-- id="wpn_upg_snp_he" -->
+			<!-- name_id="HE" -->
+			<!-- based_on="wpn_fps_upg_a_slug" -->
+			<!-- inherit_weapons="false" -->
+			<!-- inherit_adds="false" -->
+			<!-- inherit_override="false" -->
+			<!-- inherit_parts_override="false" -->
+			<!-- inherit_parts_forbids="false" -->
+			<!-- type="ammo" -->
+			<!-- ver="2" -->
+			<!-- > -->
+			<!-- <stats -->
+				<!-- damage = "0" -->
+				<!-- spread = "0" -->
+				<!-- total_ammo_mod = "0" -->
+			<!-- /> -->
+			<!-- <custom_stats -->
+				<!-- ammo_pickup_min_mul = "0" -->
+				<!-- ammo_pickup_max_mul = "0" -->
+				<!-- armor_piercing_add = "1" -->
+				<!-- can_shoot_through_shield = "true" -->
+				<!-- can_shoot_through_wall = "true" -->
+				<!-- can_shoot_through_enemy = "true" -->
+			<!-- /> -->
+			<!-- <weapons> -->
+				<!-- <value_node value="wpn_fps_snp_m95"/> -->
+			<!-- </weapons> -->
+		<!-- </WeaponMod> -->
+		
+	<AddFiles directory="assets">
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_ballistic_tip"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_fmj"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_ap"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_fmj"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_hp"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_snp_slap"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_dragons_breath_alt"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_piercing_alt"/>
+		
+        <effect path="effects\particles\explosions\smoke_screen"/>
+        <effect path="effects\particles\explosions\poison_gas"/>
+	</AddFiles>
+</mod>
