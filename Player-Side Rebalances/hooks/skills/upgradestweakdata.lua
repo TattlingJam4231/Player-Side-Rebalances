@@ -1,4 +1,4 @@
-Hooks:PostHook(UpgradesTweakData, "init", "Oryo UpgradesTweakData init", function(self)
+Hooks:PostHook(UpgradesTweakData, "init", "Oryo Skills UpgradesTweakData init", function(self)
 
 	local reload_multiplier = 1.35
 	self.values.assault_rifle.reload_speed_multiplier = {reload_multiplier}
@@ -157,4 +157,3 @@ Hooks:PostHook(UpgradesTweakData, "init", "Oryo UpgradesTweakData init", functio
 		}
 	}
 end)
-

@@ -1,4 +1,4 @@
-Hooks:PostHook(UpgradesTweakData, "init", "Oryo UpgradesTweakData init", function(self)
+Hooks:PostHook(UpgradesTweakData, "init", "Oryo Perk Deck UpgradesTweakData init", function(self)
 
 	-- Player-Side Rebalances: Crew Chief
 	self.definitions.team_hsituation_health_regen = {

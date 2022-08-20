@@ -1,4 +1,4 @@
-Hooks:PostHook(SkillTreeTweakData, "init", "Oryo SkillTreeTweakData itit", function(self)
+Hooks:PostHook(SkillTreeTweakData, "init", "Oryo Perk Deck SkillTreeTweakData init", function(self)
 
 	-- Crew Chief
 	table.insert(self.specializations[1][9].upgrades, "team_hsituation_health_regen")
