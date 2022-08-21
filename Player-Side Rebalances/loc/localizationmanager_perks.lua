@@ -11,11 +11,11 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
 
         --Muscle-----------------------------------------------------------------------------------
         ["menu_deck2_3_desc"] =     "You are ##35%## more likely to be targeted by enemies.\n\n" ..
-                                    "When you are within ##10## meters of a crew memeber, you recieve a ##35%## damage reduction that lasts ##7## seconds.\n\n" ..
+                                    "When you are within ##10## meters of a crew member, you receive a ##35%## damage reduction that lasts ##7## seconds.\n\n" ..
                                     "You gain an additional ##10%## more health.",
                                     
         ["menu_deck2_9_desc"] =     "You gain an additional ##60%## more health.\n\n" ..
-                                    "You regenerate ##3%## health every 5 seconds.\n\n" ..
+                                    "You regenerate ##3%## health every ##5## seconds.\n\n" ..
                                     "Deck Completion Bonus: Your chance of getting a higher quality item during a PAYDAY is increased by ##10%##.",
 
 
@@ -97,7 +97,7 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
 
         --Yakuza-----------------------------------------------------------------------------------
 		
-		["menu_deck12_1_desc"] = 	"The lower your health, the more armor recovery rate you have. when your helth is below ##25%##, you will gain up to ##20%## armor recovery rate.\n\n" ..
+		["menu_deck12_1_desc"] = 	"The lower your health, the more armor recovery rate you have. when your health is below ##25%##, you will gain up to ##20%## armor recovery rate.\n\n" ..
                                     "Note: Entering this state negates third party regeneration effects.",
 
         ["menu_deck12_9_desc"] =    "All berserker state effects in this perk deck will start at ##50%## health instead of ##25%##.\n\n" ..
@@ -108,16 +108,21 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
                                     "Deck Completion Bonus: Your chance of getting a higher quality item during a PAYDAY is increased by ##10%##.",
 
         --Ex-President-----------------------------------------------------------------------------
+        ["menu_deck13_1_desc"] =    "While your armor is above ##0##, you will store ##4## health for every ##1## enemy you or your crew kills.\n\n" ..
+                                    "While your armor is at ##0##, gaining armor will deplete stored health up to your missing health. This heals you for an equivalent amount.\n\n" ..
+                                    "Maximum amount of stored health depends on your equipped armor.",
+
         ["menu_deck13_5_desc"] =    "Increases the maximum health that can be stored by ##50%##.\n\n" ..
-                                    "You gain ##10%## more health.\n\nYour chance to dodge is increased by ##25%##.",
+                                    "You gain ##10%## more health.\n\n" ..
+                                    "Your chance to dodge is increased by ##25%##.",
 
 
         --Maniac-----------------------------------------------------------------------------------
         ["menu_deck14_1_desc"] =    "##100%## of damage you deal is converted into hysteria stacks, up to ##180## every ##3## seconds. Max amount of stacks is ##600##.\n\n" ..
                                     "Hysteria Stacks:\n" ..
-                                    "You gain ##1## damage absorption for every ##30## stacks of Hysteria. Taking damage reduces Hysteria Stacks by ##7%## - this can only occur once every ##0.5## seconds. " ..
+                                    "You gain ##1## damage absorption for every ##30## stacks of Hysteria. Taking damage reduces Hysteria Stacks by ##7%## - this cannot occur more than once every ##0.5## seconds. " ..
                                     "Hysteria Stacks decays ##50%## every ##3## seconds if you haven't dealt damage for ##6## seconds.\n\n" ..
-                                    "Note: Damage from dots and sentry guns does not prevent decay.",
+                                    "Note: Damage from DOTs and Sentry Guns grants Hysteria Stacks but does not prevent decay.",
 
         ["menu_deck14_3_desc"] =    "Damage absorption from Hysteria Stacks on you is increased by ##50%##.\n\n" ..
                                     "Members of your crew gain the damage absorption effect of your Hysteria Stacks.\n\n" ..
@@ -128,19 +133,19 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
 
         ["menu_deck14_7_desc"] =    "Change the damage absorption of your Hysteria Stacks on you and your crew to ##1## absorption for every ##25## stacks of Hysteria.",
 
-        ["menu_deck14_9_desc"] =    "While you have ##450## or more Hysteria Stacks, damage you take is reduced by ##25%## before absorption.\n\n" ..
+        ["menu_deck14_9_desc"] =    "While you have ##450## or more Hysteria Stacks, you gain ##25%## damage reduction.\n\n" ..
                                     "Deck Completion Bonus: Your chance of getting a higher quality item during a PAYDAY is increased by ##10%##.",
 
 
         --Anarchist--------------------------------------------------------------------------------
-        ["menu_deck15_9_desc"] =    "Dealing damage will grant you ##30## armor - this can only occur once every ##1.5## seconds.\n\n" ..
+        ["menu_deck15_9_desc"] =    "Dealing damage will grant you ##30## armor. This cannot occur more than once every ##1.5## seconds.\n\n" ..
                                     "Deck Completion Bonus: Your chance of getting a higher quality item during a PAYDAY is increased by ##10%##.",
 
 
         --Biker------------------------------------------------------------------------------------
-        ["menu_deck16_5_desc"] =    "Every ##10%## health missing will reduce the 4 second cooldown to kill regen by ##0.2## second.",
+        ["menu_deck16_5_desc"] =    "Every ##10%## health missing will reduce the ##4## second cooldown to kill regen by ##0.2## seconds.",
 
-        ["menu_deck16_9_desc"] =    "Every ##10%## armor missing will reduce the 4 second cooldown to kill regen by ##0.2## second.\n\n" ..
+        ["menu_deck16_9_desc"] =    "Every ##10%## armor missing will reduce the ##4## second cooldown to kill regen by ##0.2## seconds.\n\n" ..
                                     "Deck Completion Bonus: Your chance of getting a higher quality item during a PAYDAY is increased by ##10%##.",
 
 
