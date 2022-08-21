@@ -306,7 +306,7 @@ Hooks:PostHook(UpgradesTweakData, "init", "Oryo Perk Deck UpgradesTweakData init
 		}
 	}
 	self.values.player.cocaine_stack_absorption_multiplier = {1.5}
-	self.values.player.cocaine_stacks_damage_reduction = {0.65}
+	self.values.player.cocaine_stacks_damage_reduction = {0.75}
 	self.values.player.cocaine_stacks_dr_threshold = {450}
 	self.values.player.cocaine_stacks_damaged_1 = {0.07}
 	self.values.player.cocaine_stacks_damaged_2 = {0.05}
