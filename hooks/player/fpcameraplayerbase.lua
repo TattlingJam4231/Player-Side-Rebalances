@@ -115,7 +115,55 @@ function FPCameraPlayerBase:break_recoil()
 	self:stop_shooting()
 end
 
-function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) -- Player-Side Rebalances: added recoil_table
+
+local function save_recoil(recoil,filename)
+	local file,err = io.open(filename, "w")
+	if err then return err end
+
+	file:write( "{\n")
+	local previous = false
+	for _,v in ipairs(recoil) do
+		if previous then file:write(",\n") end
+		file:write("	{"..tostring(v[1])..","..tostring(v[2]).."}")
+		previous = true
+	end
+	file:write("\n}")
+	file:close()
+end
+
+local record_recoil = 0
+local recoil = {}
+local current_rot = nil
+local previous_rot = nil
+
+
+
+function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) --added recoil_table
+
+	if record_recoil > 0 then
+		local function round(num, decimal_places)
+			local mult = 10^(decimal_places or 0)
+			return math.floor(num * mult + 0.5) / mult
+		end
+		previous_rot = current_rot
+		current_rot = {self._camera_properties.pitch, self._camera_properties.spin}
+		if previous_rot then
+			local vertical_recoil = current_rot[1] - previous_rot[1]
+			local horizontal_recoil = current_rot[2] - previous_rot[2]
+			
+			vertical_recoil = round(vertical_recoil > 180 and vertical_recoil%-360 or vertical_recoil < -180 and vertical_recoil%360 or vertical_recoil, 2)
+			horizontal_recoil = - round(horizontal_recoil > 180 and horizontal_recoil%-360 or horizontal_recoil < -180 and horizontal_recoil%360 or horizontal_recoil, 2)
+
+			table.insert(recoil,{vertical_recoil,horizontal_recoil})
+			record_recoil = record_recoil - 1
+		end
+		if record_recoil == 0 then
+			local file_path = nil
+			if file_path then
+				save_recoil(recoil, file_path)
+			end
+		end
+	end
 
 	if recoil_table then
 		local kick_table = recoil_table.kick_table
