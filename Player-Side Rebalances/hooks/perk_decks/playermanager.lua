@@ -1,6 +1,14 @@
 Hooks:PostHook(PlayerManager, "update", "Oryo PlayerManager update", function(self)
+	-- <Player-Side Rebalances: Gambler
+	if self:has_category_upgrade("temporary", "loose_ammo_crit_bonus") then
+		self:update_gambler_crit_bonus_oryo(t)
+	end
+	-- Player-Side Rebalances>
+	
 	-- <Player-Side Rebalances: Yakuza
-	self:upd_shallow_grave()
+	if self:has_category_upgrade("temporary", "shallow_grave") then
+		self:upd_shallow_grave_oryo()
+	end
 	-- Player-Side Rebalances>
 end)
 
@@ -95,6 +103,11 @@ function PlayerManager:check_skills()
 		self._super_syndrome_count = 0
 	end
 
+	if managers.mutators:is_mutator_active(MutatorPiggyBank) then
+		self._message_system:register(Message.OnLethalHeadShot, "play_pda9_headshot", callback(self, self, "_play_pda9_headshot_event"))
+	else
+		self._message_system:unregister(Message.OnLethalHeadShot, "play_pda9_headshot")
+	end
 
 	-- <Player-Side Rebalances: Sicario
 	if self:has_category_upgrade("player", "dodge_shot_gain") then
@@ -149,32 +162,11 @@ function PlayerManager:critical_hit_chance(detection_risk)
 
 	-- <Player-Side Rebalances: Gambler
 	if self:has_category_upgrade("temporary", "loose_ammo_crit_bonus") then
-		multiplier = multiplier + managers.player:get_gambler_crit_bonus()
+		multiplier = multiplier + managers.player:get_gambler_crit_bonus_oryo()
 	end
 	-- Player-Side Rebalances>
 
 	return multiplier
-end
-
-function PlayerManager:_update_timers(t)
-	local timers_copy = table.map_copy(self._timers)
-
-	for key, timer in pairs(timers_copy) do
-		if not timer.t or timer.t <= t then
-			self._timers[key] = nil
-
-			if timer.func then
-				timer.func(key, timer.t)
-			end
-		end
-	end
-	
-
-	-- <Player-Side Rebalances: Gambler
-	if self:has_category_upgrade("temporary", "loose_ammo_crit_bonus") then
-		PlayerManager:update_gambler_crit_bonus(t)
-	end
-	-- Player-Side Rebalances>
 end
 
 function PlayerManager:health_regen()
@@ -182,7 +174,7 @@ function PlayerManager:health_regen()
 
 
 	-- <Player-Side Rebalances: Crew Chief
-	health_regen = health_regen + self:get_crew_chief_addend()
+	health_regen = health_regen + self:get_crew_chief_addend_oryo()
 	-- Player-Side Rebalances>
 
 	health_regen = health_regen + self:temporary_upgrade_value("temporary", "wolverine_health_regen", 0)
@@ -308,7 +300,7 @@ function PlayerManager:skill_dodge_chance(running, crouching, on_zipline, overri
 end
 
 -- Player-Side Rebalances: Crew Chief
-function PlayerManager:get_crew_chief_addend()
+function PlayerManager:get_crew_chief_addend_oryo()
 	local health_regen = 0
 	local hostages = managers.groupai and managers.groupai:state():hostage_count() or 0
 	local minions = self:num_local_minions() or 0
@@ -321,7 +313,7 @@ function PlayerManager:get_crew_chief_addend()
 end
 
 -- Player-Side Rebalances: Armorer
-function PlayerManager:armorer_damage_reduction(damage)
+function PlayerManager:armorer_damage_reduction_oryo(damage)
 	local dmg = damage
 	local damage_reduction_1 = self:upgrade_value("player", "armorer_damage_reduction_1", 0)
 	local damage_threshold_1 = self:upgrade_value("player", "armorer_damage_reduction_threshold_1", 0)
@@ -353,24 +345,26 @@ function PlayerManager:armorer_damage_reduction(damage)
 	return dmg
 end
 
-
 -- Player-Side Rebalances: Gambler
-function PlayerManager:update_gambler_crit_bonus(t)
-	self.gambler_crit_stacks = self.gambler_crit_stacks or {}
+function PlayerManager:update_gambler_crit_bonus_oryo()
+	if not self.gambler_crit_stacks then
+		return
+	end
+	local current_time = Application:time()
 	self.gambler_jackpot = self.gambler_jackpot or 0
 	self.jackpot_expire_time = self.jackpot_expire_time or 0
 	
-	if self.gambler_crit_stacks[1] and self.gambler_crit_stacks[1][2] < t then
+	if self.gambler_crit_stacks[1] and self.gambler_crit_stacks[1][2] < current_time then
 		table.remove(self.gambler_crit_stacks, 1)
 	end
 	
-	if self.gambler_jackpot == 7 and self.jackpot_expire_time < t then
+	if self.gambler_jackpot == 7 and self.jackpot_expire_time < current_time then
 		self.gambler_jackpot = 0
 		self.jackpot_expire_time = 0
 	end
 end
 
-function PlayerManager:add_gambler_crit_stack()
+function PlayerManager:add_gambler_crit_stack_oryo()
 	self.gambler_crit_stacks = self.gambler_crit_stacks or {}
 	self.just_lucky = self.just_lucky or 0
 	self.gambler_jackpot = self.gambler_jackpot or 0
@@ -389,7 +383,7 @@ function PlayerManager:add_gambler_crit_stack()
  
 end
 
-function PlayerManager:get_gambler_crit_bonus()
+function PlayerManager:get_gambler_crit_bonus_oryo()
 	self.gambler_crit_stacks = self.gambler_crit_stacks or {}
 	
 	if self.gambler_jackpot == 7 then
@@ -404,6 +398,9 @@ function PlayerManager:get_gambler_crit_bonus()
 	return crit_bonus * 0.01
 end
 
+function PlayerManager:num_connected_players()
+	return #self._player_list + 1
+end
 
 -- Player-Side Rebalances: Maniac
 function PlayerManager:_update_damage_dealt(t, dt)
@@ -455,7 +452,6 @@ function PlayerManager:_update_damage_dealt(t, dt)
 	end
 end
 
-
 function PlayerManager:_check_damage_to_cops(t, unit, damage_info)
 	local player_unit = self:player_unit()
 
@@ -480,7 +476,7 @@ function PlayerManager:_check_damage_to_cops(t, unit, damage_info)
 	self._damage_dealt_to_cops = self._damage_dealt_to_cops + (damage_info.damage or 0)
 end
 
-function PlayerManager:cocaine_stack_damage()
+function PlayerManager:cocaine_stack_damage_oryo()
 	local local_peer_id = managers.network:session() and managers.network:session():local_peer():id()
 
 	if not local_peer_id or not self:has_category_upgrade("player", "cocaine_stacking") then
@@ -506,7 +502,7 @@ function PlayerManager:cocaine_stack_damage()
 
 end
 
-function PlayerManager:cocaine_stack_damage_reduction(damage)
+function PlayerManager:cocaine_stack_damage_reduction_oryo(damage)
 	local local_peer_id = managers.network:session() and managers.network:session():local_peer():id()
 
 	if not local_peer_id or not self:has_category_upgrade("player", "cocaine_stacking") then
@@ -526,13 +522,22 @@ function PlayerManager:cocaine_stack_damage_reduction(damage)
 	return damage
 end
 
-
 -- Player-Side Rebalances: Yakuza
-function PlayerManager:active_shallow_grave()
+function PlayerManager:active_shallow_grave_oryo()
 	return self._shallow_grave
 end
 
-function PlayerManager:activate_shallow_grave(health_subtracted)
+function PlayerManager:activate_shallow_grave_oryo(attack_data, health_subtracted)
+
+	local variant = attack_data and attack_data.variant
+	if not table.contains({"bullet", "melee"}, variant) then
+		return
+	end
+
+	if not table.contains({"level_2", "level_3", "level_4"}, managers.blackmarket:equipped_armor(true, true)) then
+		return
+	end
+
 	local player = self:player_unit()
 	player:sound():play("perkdeck_activate")
 	self._shallow_grave_restore_point = health_subtracted
@@ -545,37 +550,39 @@ function PlayerManager:activate_shallow_grave(health_subtracted)
 	return 3.5
 end
 
-function PlayerManager:deactivate_shallow_grave()
+function PlayerManager:deactivate_shallow_grave_oryo()
 	self._shallow_grave = nil
 	self.shallow_grave_activate_t = nil
 	managers.hud:activate_teammate_ability_radial(HUDManager.PLAYER_PANEL, 0)
 end
 
-function PlayerManager:shallow_grave_revive()
+function PlayerManager:shallow_grave_revive_oryo()
 	local player = self:player_unit()
 	if self._shallow_grave_revive then
 		player:character_damage():set_health(self._shallow_grave_restore_point)
-		self:deactivate_shallow_grave()
+		self:deactivate_shallow_grave_oryo()
 	else
 		if not player:character_damage():is_downed() then
 			self:player_unit():character_damage():force_into_bleedout(true)
 		end
-		self:deactivate_shallow_grave()
+		self:deactivate_shallow_grave_oryo()
 	end
 end
 
-function PlayerManager:activate_shallow_grave_revive()
-	self._shallow_grave_revive = true
+function PlayerManager:activate_shallow_grave_revive_oryo()
+	if self:has_category_upgrade("temporary", "shallow_grave") then
+		self._shallow_grave_revive = true
+	end
 end
 
-function PlayerManager:upd_shallow_grave()
+function PlayerManager:upd_shallow_grave_oryo()
 	local player = self:player_unit()
 	if player and player:character_damage():is_downed() then
-		self:deactivate_shallow_grave()
+		self:deactivate_shallow_grave_oryo()
 		return
 	end
 	if self._shallow_grave and self.shallow_grave_activate_t and (TimerManager:game():time() - self.shallow_grave_activate_t > 3.5) then
-		self:shallow_grave_revive()
+		self:shallow_grave_revive_oryo()
 	end
 end
 

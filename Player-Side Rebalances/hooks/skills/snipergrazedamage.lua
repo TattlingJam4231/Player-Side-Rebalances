@@ -44,7 +44,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 				damage_mul = headshot and upgrade_value.damage_factor_headshot or damage_mul
 			end
 
-			local damage = attack_data.true_damage * damage_mul
+			local damage = attack_data.raw_damage * damage_mul
 
 			if best_damage < damage then
 				best_damage = damage

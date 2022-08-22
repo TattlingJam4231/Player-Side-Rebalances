@@ -551,6 +551,21 @@ function NewRaycastWeaponBase:conditional_accuracy_multiplier(current_state)
 	return self:_convert_add_to_mul(mul)
 end
 
+function NewRaycastWeaponBase:get_add_head_shot_mul()
+
+	-- <Player-Side Rebalances
+	if self._ammo_data and self._ammo_data.add_head_shot_mul then
+		return self._ammo_data.add_head_shot_mul
+	end
+	-- Player-Side Rebalances>
+
+	if self:is_category("smg", "lmg", "assault_rifle", "minigun") and self._fire_mode == ids_auto or self:is_category("bow", "saw") then
+		return managers.player:upgrade_value("weapon", "automatic_head_shot_add", nil)
+	end
+
+	return nil
+end
+
 Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWeaponBase _update_stats_values", function(self, disallow_replenish)
 
 	self:_get_penetration_stats_oryo()

@@ -171,27 +171,10 @@ Hooks:PostHook(UpgradesTweakData, "init", "Oryo Perk Deck UpgradesTweakData init
 		}
 	}
 	
-	self.loose_ammo_restore_health_values = {
-		{
-			0,
-			4
-		},
-		{
-			4,
-			8
-		},
-		{
-			8,
-			12
-		},
-		multiplier = 0.1,
-		cd = 2.5,
-		base = 8
-	}
+	self.loose_ammo_restore_health_values.multiplier = 0.2
+	self.loose_ammo_restore_health_values.cd = 2.5
 	self.values.temporary.loose_ammo_restore_health = {}
 	for i, data in ipairs(self.loose_ammo_restore_health_values) do
-		local base = self.loose_ammo_restore_health_values.base
-
 		table.insert(self.values.temporary.loose_ammo_restore_health, {
 			{
 				8,
@@ -201,7 +184,6 @@ Hooks:PostHook(UpgradesTweakData, "init", "Oryo Perk Deck UpgradesTweakData init
 		})
 	end
 		
-	self.loose_ammo_give_team_health_ratio = 1
 	self.loose_ammo_give_team_ratio = 0.25
 	self.values.temporary.loose_ammo_give_team = {
 		{

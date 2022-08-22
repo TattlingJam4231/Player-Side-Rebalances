@@ -72,7 +72,7 @@ function CopActionShoot:update(t)
 				self._autoshots_fired = nil
 			end
 
-			if not self._ext_anim.base_no_reload then
+			if self._can_reload_while_moving_tmp or not self._ext_anim.base_no_reload then
 				local res = CopActionReload._play_reload(self)
 
 				if res then

@@ -14,11 +14,25 @@ function SentryGunDamage:die(attacker_unit, variant, options)
 
 		managers.statistics:killed(data)
 	end
+
+	if self._is_car then
+		local ja22_01_data = tweak_data.achievement.ja22_01
+		local total_health = self._HEALTH_INIT + self._SHIELD_HEALTH_INIT * (1 + self._repair_counter)
+
+		if ja22_01_data.percentage_dmg < self._local_car_damage / total_health then
+			print("JA22_01: Sentrygun Achievement Awarded!", "Damage: " .. math.truncate(self._local_car_damage, 1), "Percentage: " .. math.truncate(self._local_car_damage / total_health * 100, 1) .. "%")
+			managers.achievment:award(ja22_01_data.award)
+		else
+			print("JA22_01: Not enough damage", "Damage: " .. math.truncate(self._local_car_damage, 1), "Percentage: " .. math.truncate(self._local_car_damage / total_health * 100, 1) .. "%")
+		end
+	else
+		print("JA22_01: Sentrygun not a car")
+	end
 	
-	--
+	-- <Player-Side Rebalances
 	local weapon = self._unit:weapon()
 	weapon._ammo_total = 0
-	--
+	-- Player-Side Rebalances>
 	
 	self._health = 0
 	self._dead = true
@@ -57,6 +71,8 @@ function SentryGunDamage:die(attacker_unit, variant, options)
 	elseif alive(self._unit) then
 		self._turret_destroyed_snd = self._unit:sound_source():post_event("wp_sentrygun_broken_loop")
 	end
+
+	--[[ self._unit:event_listener():call("on_death") ]]
 end
 
 function SentryGunDamage:set_shield_health(shield_health_amount)

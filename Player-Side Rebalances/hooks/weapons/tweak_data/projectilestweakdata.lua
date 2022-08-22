@@ -1,4 +1,4 @@
-Hooks:PostHook(BlackMarketTweakData, "_init_projectiles", "Oryo ProjectilesTweakData init", function(self)
+Hooks:PostHook(BlackMarketTweakData, "_init_projectiles", "Oryo ProjectilesTweakData _init_projectiles", function(self)
 
     -- Piglet
         self.projectiles.launcher_frag_m32.time_cheat = 0.5

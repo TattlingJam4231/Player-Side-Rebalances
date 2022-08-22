@@ -214,7 +214,7 @@ function DOTManager:_add_doted_enemy(col_ray, enemy_unit, dot_damage_received_ti
 end
 
 function DOTManager:_damage_dot(dot_info)
-	local action_data = dot_info
+	local action_data = deep_clone(dot_info)
 	action_data.attacker_unit = managers.player:player_unit()
 	action_data.damage = dot_info.dot_damage
 

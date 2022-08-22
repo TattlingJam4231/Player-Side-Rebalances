@@ -1,4 +1,4 @@
-function WeaponTweakData:set_kick_zero(wpn_id)
+function WeaponTweakData:set_kick_zero_oryo(wpn_id)
 	if wpn_id then
 		self[wpn_id] = self[wpn_id] or {}
 		self[wpn_id].kick = {}

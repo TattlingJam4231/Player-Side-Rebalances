@@ -8,7 +8,9 @@ function PlayerDamage:damage_bullet(attack_data)
 			variant = "bullet",
 			type = "hurt"
 		},
-		attacker_unit = attack_data.attacker_unit
+		attacker_unit = attack_data.attacker_unit,
+		attack_dir = attack_data.attacker_unit and attack_data.attacker_unit:movement():m_pos() - self._unit:movement():m_pos() or Vector3(1, 0, 0),
+		pos = mvector3.copy(self._unit:movement():m_head_pos())
 	}
 	local pm = managers.player
 	local dmg_mul = pm:damage_reduction_skill_multiplier("bullet")
@@ -16,7 +18,7 @@ function PlayerDamage:damage_bullet(attack_data)
 	
 
 	-- <Player-Side Rebalances: Armorer
-	attack_data.damage = pm:armorer_damage_reduction(attack_data.damage)
+	attack_data.damage = pm:armorer_damage_reduction_oryo(attack_data.damage)
 	-- Player-Side Rebalances>
 
 
@@ -34,8 +36,8 @@ function PlayerDamage:damage_bullet(attack_data)
 	end
 
 	-- <Player-Side Rebalances: Maniac
-	pm:cocaine_stack_damage()
-	attack_data.damage = pm:cocaine_stack_damage_reduction(attack_data.damage)
+	pm:cocaine_stack_damage_oryo()
+	attack_data.damage = pm:cocaine_stack_damage_reduction_oryo(attack_data.damage)
 	-- Player-Side Rebalances>
 
 	local damage_absorption = pm:damage_absorption()
@@ -170,10 +172,8 @@ function PlayerDamage:damage_bullet(attack_data)
 
 	if not self._bleed_out and health_subtracted > 0 then
 		self:_send_damage_drama(attack_data, health_subtracted)
-	elseif self._bleed_out and attack_data.attacker_unit and attack_data.attacker_unit:alive() and attack_data.attacker_unit:base()._tweak_table == "tank" then
-		self._kill_taunt_clbk_id = "kill_taunt" .. tostring(self._unit:key())
-
-		managers.enemy:add_delayed_clbk(self._kill_taunt_clbk_id, callback(self, self, "clbk_kill_taunt", attack_data), TimerManager:game():time() + tweak_data.timespeed.downed.fade_in + tweak_data.timespeed.downed.sustain + tweak_data.timespeed.downed.fade_out)
+	elseif self._bleed_out then
+		self:chk_queue_taunt_line(attack_data)
 	end
 
 	pm:send_message(Message.OnPlayerDamage, nil, attack_data)
@@ -371,44 +371,24 @@ function PlayerDamage:_regenerate_armor(no_sound)
 
 
 	-- <Player-Side Rebalances: Yakuza
-	managers.player:activate_shallow_grave_revive()
+	managers.player:activate_shallow_grave_revive_oryo()
 	-- Player-Side Rebalances>
 
 
 	self._current_state = nil
 end
 
-function PlayerDamage:_on_enter_swansong_event()
-	self:_remove_on_damage_event()
-	
-
+Hooks:PostHook(PlayerDamage, "_on_enter_swansong_event", "Oryo PlayerDamage _on_enter_swansong_event", function(self)
 	-- <Player-Side Rebalances: Yakuza
 	self._block_shallow_grave = true
 	-- Player-Side Rebalances>
+end)
 
-
-	self._block_medkit_auto_revive = true
-	self.swansong = true
-
-	if Network:is_client() then
-		managers.network:session():send_to_host("sync_player_swansong", self._unit, true)
-	else
-		managers.network:session():send_to_peers("sync_swansong_hud", self._unit, managers.network:session():local_peer():id())
-	end
-end
-
-function PlayerDamage:_on_revive_event()
-	self:_add_on_damage_event()
-	
-
+Hooks:PostHook(PlayerDamage, "_on_revive_event", "Oryo PlayerDamage _on_revive_event", function(self)
 	-- <Player-Side Rebalances: Yakuza
 	self._block_shallow_grave = false
 	-- Player-Side Rebalances>
-
-
-	self._block_medkit_auto_revive = false
-	self.swansong = nil
-end
+end)
 
 function PlayerDamage:_calc_health_damage(attack_data)
 	local health_subtracted = 0
@@ -472,16 +452,9 @@ function PlayerDamage:_check_bleed_out(can_activate_berserker, ignore_movement_s
 		local time = Application:time()
 
 		-- <Player-Side Rebalances: Yakuza
-		local attacker_unit = attack_data and attack_data.attacker_unit
-		local friendly_fire = self:is_friendly_fire(attacker_unit)
-		local variant = attack_data and attack_data.variant
-		local can_activate_shallow_grave = table.contains({"bullet", "melee"}, variant)
-		if can_activate_shallow_grave and not friendly_fire and not self._block_shallow_grave and managers.player:has_category_upgrade("temporary", "shallow_grave") and not managers.player:active_shallow_grave() then
-			local player_armor = managers.blackmarket:equipped_armor(true, true)
-			local armors_allowed = {"level_2", "level_3", "level_4"}
-			
-			if table.contains(armors_allowed, player_armor) then
-				self._can_take_dmg_timer = managers.player:activate_shallow_grave(health_subtracted)
+		if not self._block_shallow_grave and managers.player:has_category_upgrade("temporary", "shallow_grave") and not managers.player:active_shallow_grave_oryo() then
+			self._can_take_dmg_timer = managers.player:activate_shallow_grave_oryo(attack_data, health_subtracted) or self._can_take_dmg_timer
+			if managers.player:active_shallow_grave_oryo() then
 				return
 			end
 		end
