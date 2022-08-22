@@ -80,7 +80,6 @@
 		    <post :hook_id="managers/menu/blackmarketgui"                       :script_path="blackmarketgui.lua"/>
 		    <post :hook_id="managers/blackmarketmanager"                        :script_path="blackmarketmanager.lua"/>
 		    <post :hook_id="utils/inventorydescription"                         :script_path="inventorydescription.lua"/>
-		    <post :hook_id="units/weapons/newflamethrowerbase"                  :script_path="newflamethrowerbase.lua"/>
             <post :hook_id="units/weapons/newraycastweaponbase"                 :script_path="newraycastweaponbase.lua"/>
             <post :hook_id="units/weapons/raycastweaponbase"                    :script_path="raycastweaponbase.lua"/>
             <post :hook_id="units/weapons/shotgun/shotgunbase"                  :script_path="shotgunbase.lua"/>
