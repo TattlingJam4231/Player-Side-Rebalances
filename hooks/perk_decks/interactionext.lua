@@ -1,5 +1,4 @@
 local original_func = BaseInteractionExt._get_timer
-
 function BaseInteractionExt:_get_timer()
 	local local_peer_id = managers.network:session() and managers.network:session():local_peer():id()
 	local timer = original_func(self)
