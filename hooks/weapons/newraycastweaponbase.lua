@@ -470,19 +470,7 @@ function NewRaycastWeaponBase:stop_shooting()
 	
 	local fire_mode_data = tweak_data.weapon[self._name_id].fire_mode_data or {}
 
-	if self._fire_mode == Idstring("single") then
-		fire_mode_data = fire_mode_data and fire_mode_data.single or fire_mode_data
-		local fire_rate = fire_mode_data.fire_rate or 0
-		local next_fire = fire_rate / self:fire_rate_multiplier()
-		self._next_fire_allowed = self._next_fire_allowed + next_fire
-
-	elseif self._fire_mode == Idstring("auto") then
-		fire_mode_data = fire_mode_data and fire_mode_data.auto or fire_mode_data
-		local fire_rate = fire_mode_data.fire_rate or 0
-		local next_fire = fire_rate / self:fire_rate_multiplier()
-		self._next_fire_allowed = self._next_fire_allowed + next_fire
-
-	elseif self._fire_mode == Idstring("burst") then
+	if self._fire_mode == Idstring("burst") then
 		fire_mode_data = fire_mode_data and fire_mode_data.burst or fire_mode_data
 		local fire_rate = fire_mode_data.fire_rate or 0
 		local burst_cooldown = fire_mode_data.burst_cooldown or fire_rate * 2
