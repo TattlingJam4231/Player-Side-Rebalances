@@ -1,9 +1,9 @@
 Hooks:PostHook(PlayerMovement, "update", "Oryo PlayerMovement update", function(self)
-    self:upd_meat_shield()
+    self:upd_meat_shield_oryo()
 end)
 
 -- Player-Side Rebalances: Muscle
-function PlayerMovement:upd_meat_shield()
+function PlayerMovement:upd_meat_shield_oryo()
     if not managers.player:has_category_upgrade("temporary", "meat_shield_dmg_dampener") then return end
 
     local my_pos = self._m_pos

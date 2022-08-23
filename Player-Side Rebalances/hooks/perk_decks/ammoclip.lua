@@ -1,6 +1,7 @@
 local _pickup_original = AmmoClip._pickup
 function AmmoClip:_pickup(unit)
-
+	local player_manager = managers.player
+	
 	local medical_supplies_cooldown = player_manager:has_activate_temporary_upgrade("temporary", "loose_ammo_restore_health")
 
 	local picked_up = _pickup_original(self, unit)
@@ -34,8 +35,10 @@ function AmmoClip:_pickup(unit)
 			managers.network:session():send_to_peers_synched("sync_unit_event_id_16", self._unit, "pickup", 2 + sync_value)
 		end
 	end
+	return picked_up
 end
 
+local sync_net_event_original = AmmoClip.sync_net_event
 function AmmoClip:sync_net_event(event, peer)
 	local player = managers.player:local_player()
 
@@ -43,14 +46,15 @@ function AmmoClip:sync_net_event(event, peer)
 		return
 	end
 
-	if event == AmmoClip.EVENT_IDS.bonnie_share_ammo then
+	local bonnie_share_ammo = 1
+	if event == bonnie_share_ammo then
 		local inventory = player:inventory()
 
 		if inventory then
 			local picked_up = false
-			local give_ammo = math.random()
 
 			for id, weapon in pairs(inventory:available_selections()) do
+				local give_ammo = math.random()
 				if give_ammo < tweak_data.upgrades.loose_ammo_give_team_ratio then
 					picked_up = weapon.unit:base():add_ammo(1) or picked_up
 				end
@@ -64,24 +68,8 @@ function AmmoClip:sync_net_event(event, peer)
 				end
 			end
 		end
-	elseif event == AmmoClip.EVENT_IDS.register_grenade then
-		if peer and not self._grenade_registered then
-			managers.player:register_grenade(peer:id())
-
-			self._grenade_registered = true
-		end
-	elseif AmmoClip.EVENT_IDS.bonnie_share_ammo < event then
-		local damage_ext = player:character_damage()
-
-		if not damage_ext:need_revive() and not damage_ext:dead() and not damage_ext:is_berserker() then
-			local restore_value = event - 2 + (tweak_data.upgrades.loose_ammo_restore_health_values.base or 3)
-			restore_value = restore_value * (tweak_data.upgrades.loose_ammo_restore_health_values.multiplier or 0.1)
-			restore_value = restore_value * (tweak_data.upgrades.loose_ammo_give_team_health_ratio or 0.35)
-
-			if damage_ext:restore_health(restore_value, true, true) then
-				player:sound():play("pickup_ammo_health_boost", nil, true)
-			end
-		end
+	else
+		sync_net_event_original(self, event, peer)
 	end
 end
 

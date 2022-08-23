@@ -86,36 +86,21 @@ function FPCameraPlayerBase:_update_movement(t, dt)
 	self:set_rotation(new_shoulder_rot)
 end
 
-function FPCameraPlayerBase:start_shooting()
-	self._recoil_kick.accumulated = self._recoil_kick.to_reduce or 0
-	self._recoil_kick.to_reduce = nil
-	self._recoil_kick.current = self._recoil_kick.current and self._recoil_kick.current or self._recoil_kick.accumulated or 0
-	self._recoil_kick.h.accumulated = self._recoil_kick.h.to_reduce or 0
-	self._recoil_kick.h.to_reduce = nil
-	self._recoil_kick.h.current = self._recoil_kick.h.current and self._recoil_kick.h.current or self._recoil_kick.h.accumulated or 0
+Hooks:PostHook(FPCameraPlayerBase, "start_shooting", "Oryo FPCameraPlayerBase start_shooting", function(self)
 	self._reduce_kick_indices = nil -- Player-Side Rebalances
+end)
 
-end
-
-function FPCameraPlayerBase:stop_shooting(wait)
-	self._recoil_kick.to_reduce = self._recoil_kick.accumulated
-	self._recoil_kick.h.to_reduce = self._recoil_kick.h.accumulated
-	self._recoil_wait = wait or {flat = 0, curve = 0}
+Hooks:PostHook(FPCameraPlayerBase, "stop_shooting", "Oryo FPCameraPlayerBase stop_shooting", function(self)
+	self._recoil_wait = type(self._recoil_wait) == "number" and {flat = 0, curve = 0} or self._recoil_wait
 	self._reduce_kick_indices = true -- Player-Side Rebalances
 	self._kick_indices_timer = kick_indices_timer -- Player-Side Rebalances
-end
+end)
 
-function FPCameraPlayerBase:break_recoil()
-	self._recoil_kick.current = 0
-	self._recoil_kick.h.current = 0
-	self._recoil_kick.accumulated = 0
-	self._recoil_kick.h.accumulated = 0
-	self._kick_indices = {} --Player-Side Rebalances
+Hooks:PreHook(FPCameraPlayerBase, "break_recoil", "Oryo FPCameraPlayerBase break_recoil", function(self)
+	self._kick_indices = {} -- Player-Side Rebalances
+end)
 
-	self:stop_shooting()
-end
-
-function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) -- Player-Side Rebalances: added recoil_table
+function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) --added recoil_table
 
 	if recoil_table then
 		local kick_table = recoil_table.kick_table

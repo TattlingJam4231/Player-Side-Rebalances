@@ -1,18 +1,10 @@
 {
-"name" : "Player-Side Rebalances",
+"name" : "Player-Side Rebalances Developer",
 "description" : "",
 "author" : "Oryo",
-"version" : "0.0.2",
+"version" : "developer",
 "priority" : 800,
 "blt_version" : 2
-"image" : "oryo.png",
-"color" : "0.929 0.733 0.953",
-"updates" : [
-	{
-		"identifier" : "Oryo's Player-Side Rebalances",
-		"host" : {
-			"meta" : "https://github.com/TattlingJam4231/Player-Side-Rebalances/raw/master/latest.json"
-		}
-	}
-]
+"image" : "icon.png",
+"color" : "0.498 0.894 0.784"
 }

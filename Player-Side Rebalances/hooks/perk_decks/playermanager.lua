@@ -169,85 +169,46 @@ function PlayerManager:critical_hit_chance(detection_risk)
 	return multiplier
 end
 
-function PlayerManager:health_regen()
-	local health_regen = tweak_data.player.damage.HEALTH_REGEN
-
+local health_regen_original = PlayerManager.health_regen
+function PlayerManager:health_regen(...)
+	local health_regen = health_regen_original(self, ...)
 
 	-- <Player-Side Rebalances: Crew Chief
 	health_regen = health_regen + self:get_crew_chief_addend_oryo()
 	-- Player-Side Rebalances>
 
-	health_regen = health_regen + self:temporary_upgrade_value("temporary", "wolverine_health_regen", 0)
-	health_regen = health_regen + self:get_hostage_bonus_addend("health_regen")
-	health_regen = health_regen + self:upgrade_value("player", "passive_health_regen", 0)
-
-
 	-- <Player-Side Rebalances: Stoic
 	health_regen = health_regen * self:upgrade_value("player", "damage_control_reduced_regen", 1)
 	-- Player-Side Rebalances>
 
-
 	return health_regen
 end
 
+local fixed_health_regen_original = PlayerManager.fixed_health_regen
 function PlayerManager:fixed_health_regen(health_ratio)
-	local health_regen = 0
-
-	if not health_ratio or not self:is_damage_health_ratio_active(health_ratio) then
-		health_regen = health_regen + self:upgrade_value("team", "crew_health_regen", 0)
-	end
-
+	local health_regen = fixed_health_regen_original(self, health_ratio)
 
 	-- <Player-Side Rebalances: Stoic
 	health_regen = health_regen * self:upgrade_value("player", "damage_control_reduced_regen", 1)
 	-- Player-Side Rebalances>
 
-
 	return health_regen
 end
 
+local damage_reduction_skill_multiplier_original = PlayerManager.damage_reduction_skill_multiplier
 function PlayerManager:damage_reduction_skill_multiplier(damage_type)
-	local multiplier = 1
-
+	local multiplier = damage_reduction_skill_multiplier_original(self, damage_type)
 
 	-- <Player-Side Rebalances: Muscle
 	multiplier = multiplier * self:temporary_upgrade_value("temporary", "meat_shield_dmg_dampener", 1)
 	-- Player-Side Rebalances>
 
+	multiplier = multiplier * self:cocaine_stack_damage_reduction_oryo()
 
-	multiplier = multiplier * self:temporary_upgrade_value("temporary", "dmg_dampener_outnumbered", 1)
-	multiplier = multiplier * self:temporary_upgrade_value("temporary", "dmg_dampener_outnumbered_strong", 1)
-	multiplier = multiplier * self:temporary_upgrade_value("temporary", "dmg_dampener_close_contact", 1)
-	multiplier = multiplier * self:temporary_upgrade_value("temporary", "revived_damage_resist", 1)
-	multiplier = multiplier * self:upgrade_value("player", "damage_dampener", 1)
-	multiplier = multiplier * self:upgrade_value("player", "health_damage_reduction", 1)
-	multiplier = multiplier * self:temporary_upgrade_value("temporary", "first_aid_damage_reduction", 1)
-	multiplier = multiplier * self:temporary_upgrade_value("temporary", "revive_damage_reduction", 1)
-	multiplier = multiplier * self:get_hostage_bonus_multiplier("damage_dampener")
-	multiplier = multiplier * self._properties:get_property("revive_damage_reduction", 1)
-	multiplier = multiplier * self._temporary_properties:get_property("revived_damage_reduction", 1)
-	local dmg_red_mul = self:team_upgrade_value("damage_dampener", "team_damage_reduction", 1)
+	local damage = self:get_current_incoming_damage_oryo() * multiplier
 
-	if self:has_category_upgrade("player", "passive_damage_reduction") then
-		local health_ratio = self:player_unit():character_damage():health_ratio()
-		local min_ratio = self:upgrade_value("player", "passive_damage_reduction")
-
-		if health_ratio < min_ratio then
-			dmg_red_mul = dmg_red_mul - (1 - dmg_red_mul)
-		end
-	end
-
-	multiplier = multiplier * dmg_red_mul
-
-	if damage_type == "melee" then
-		multiplier = multiplier * managers.player:upgrade_value("player", "melee_damage_dampener", 1)
-	end
-
-	local current_state = self:get_current_state()
-
-	if current_state and current_state:_interacting() then
-		multiplier = multiplier * managers.player:upgrade_value("player", "interacting_damage_multiplier", 1)
-	end
+	multiplier = multiplier * self:armorer_damage_reduction_oryo(damage)
+	self:get_current_incoming_damage_oryo(0)
 
 	return multiplier
 end
@@ -255,28 +216,23 @@ end
 function PlayerManager:skill_dodge_chance(running, crouching, on_zipline, override_armor, detection_risk)
 	local chance = self:upgrade_value("player", "passive_dodge_chance", 0)
 	local dodge_shot_gain = self:_dodge_shot_gain()
-	local smoked = false
+
+	local smoked = false -- Player-Side Rebalances: Sicario, prevent double smoke_screen bonus
 
 	for _, smoke_screen in ipairs(self._smoke_screen_effects or {}) do
-		if smoke_screen:is_in_smoke(self:player_unit()) and not smoked then
+		if smoke_screen:is_in_smoke(self:player_unit()) and not smoked then -- Player-Side Rebalances: Sicario, prevent double smoke_screen bonus
 			if smoke_screen:mine() then
 				chance = chance * self:upgrade_value("player", "sicario_multiplier", 1)
 				dodge_shot_gain = dodge_shot_gain * self:upgrade_value("player", "sicario_multiplier", 1)
 			else
 				chance = chance + smoke_screen:dodge_bonus()
 			end
-			smoked = true
+			smoked = true -- Player-Side Rebalances: Sicario, prevent double smoke_screen bonus
 		end
 	end
 
 	chance = chance + dodge_shot_gain
 	chance = chance + self:upgrade_value("player", "tier_dodge_chance", 0)
-
-
-	-- <Player-Side Rebalances: Ex-President
-	chance = chance + self:upgrade_value("player", "president_dodge_chance", 0)
-	-- Player-Side Rebalances>
-
 
 	if running then
 		chance = chance + self:upgrade_value("player", "run_dodge_chance", 0)
@@ -296,6 +252,10 @@ function PlayerManager:skill_dodge_chance(running, crouching, on_zipline, overri
 	chance = chance + self:upgrade_value("team", "crew_add_dodge", 0)
 	chance = chance + self:temporary_upgrade_value("temporary", "pocket_ecm_kill_dodge", 0)
 
+	-- <Player-Side Rebalances: Ex-President
+	chance = chance + self:upgrade_value("player", "president_dodge_chance", 0)
+	-- Player-Side Rebalances>
+
 	return chance
 end
 
@@ -314,7 +274,7 @@ end
 
 -- Player-Side Rebalances: Armorer
 function PlayerManager:armorer_damage_reduction_oryo(damage)
-	local dmg = damage
+	local raw_damage = damage
 	local damage_reduction_1 = self:upgrade_value("player", "armorer_damage_reduction_1", 0)
 	local damage_threshold_1 = self:upgrade_value("player", "armorer_damage_reduction_threshold_1", 0)
 	local damage_reduction_2 = self:upgrade_value("player", "armorer_damage_reduction_2", 0)
@@ -324,25 +284,33 @@ function PlayerManager:armorer_damage_reduction_oryo(damage)
 	local damage_threshold_4 = 300
 	
 	if damage_reduction_3 ~= 0 then
-		dmg = math.max(dmg - damage_threshold_4, 0) 
-			  + (math.max(math.min(damage_threshold_4 - damage_threshold_3, dmg - damage_threshold_3), 0) * damage_reduction_3)
-			  + (math.max(math.min(damage_threshold_3 - damage_threshold_2, dmg - damage_threshold_2), 0) * damage_reduction_2)
-			  + (math.max(math.min(damage_threshold_2 - damage_threshold_1, dmg - damage_threshold_1), 0) * damage_reduction_1)
-			  + math.min(damage_threshold_1, dmg)
+		damage = math.max(damage - damage_threshold_4, 0) 
+			  + (math.max(math.min(damage_threshold_4 - damage_threshold_3, damage - damage_threshold_3), 0) * damage_reduction_3)
+			  + (math.max(math.min(damage_threshold_3 - damage_threshold_2, damage - damage_threshold_2), 0) * damage_reduction_2)
+			  + (math.max(math.min(damage_threshold_2 - damage_threshold_1, damage - damage_threshold_1), 0) * damage_reduction_1)
+			  + math.min(damage_threshold_1, damage)
 		
 	elseif damage_reduction_2 ~= 0 then
-		dmg = math.max(dmg - damage_threshold_4, 0) 
-			  + (math.max(math.min(damage_threshold_4 - damage_threshold_2, dmg - damage_threshold_2), 0) * damage_reduction_2)
-			  + (math.max(math.min(damage_threshold_2 - damage_threshold_1, dmg - damage_threshold_1), 0) * damage_reduction_1)
-			  + math.min(damage_threshold_1, dmg)
+		damage = math.max(damage - damage_threshold_4, 0) 
+			  + (math.max(math.min(damage_threshold_4 - damage_threshold_2, damage - damage_threshold_2), 0) * damage_reduction_2)
+			  + (math.max(math.min(damage_threshold_2 - damage_threshold_1, damage - damage_threshold_1), 0) * damage_reduction_1)
+			  + math.min(damage_threshold_1, damage)
 		
 	elseif damage_reduction_1 ~= 0 then
-		dmg = math.max(dmg - damage_threshold_4, 0)
-			  + (math.max(math.min(damage_threshold_4 - damage_threshold_1, dmg - damage_threshold_1), 0) * damage_reduction_1)
-			  + math.min(damage_threshold_1, dmg)
+		damage = math.max(damage - damage_threshold_4, 0)
+			  + (math.max(math.min(damage_threshold_4 - damage_threshold_1, damage - damage_threshold_1), 0) * damage_reduction_1)
+			  + math.min(damage_threshold_1, damage)
 	end
-	
-	return dmg
+	local multiplier = damage / raw_damage
+	return multiplier
+end
+
+function PlayerManager:set_current_incoming_damage_oryo(damage)
+	self._incoming_damage = damage
+end
+
+function PlayerManager:get_current_incoming_damage_oryo()
+	return self._incoming_damage or 0
 end
 
 -- Player-Side Rebalances: Gambler
@@ -502,24 +470,23 @@ function PlayerManager:cocaine_stack_damage_oryo()
 
 end
 
-function PlayerManager:cocaine_stack_damage_reduction_oryo(damage)
+function PlayerManager:cocaine_stack_damage_reduction_oryo()
 	local local_peer_id = managers.network:session() and managers.network:session():local_peer():id()
+	local multiplier = 1
 
-	if not local_peer_id or not self:has_category_upgrade("player", "cocaine_stacking") then
-		return damage
+	if not local_peer_id or not self:has_category_upgrade("player", "cocaine_stacking") or not self:has_category_upgrade("player", "cocaine_stacks_damage_reduction") then
+		return multiplier
 	end
-	
+
 	local cocaine_stack = self:get_synced_cocaine_stacks(local_peer_id)
 	local amount = cocaine_stack and cocaine_stack.amount or 0
-
-	local damage_reduction = self:has_category_upgrade("player", "cocaine_stacks_damage_reduction") and self:upgrade_value_by_level("player", "cocaine_stacks_damage_reduction", 1, 0) or 1
 	local damage_reduction_threshold = self:upgrade_value_by_level("player", "cocaine_stacks_dr_threshold", 1, 0)
 
 	if amount >= damage_reduction_threshold then
-		damage = damage * damage_reduction
+		multiplier = self:upgrade_value_by_level("player", "cocaine_stacks_damage_reduction", 1, 0)
 	end
 
-	return damage
+	return multiplier
 end
 
 -- Player-Side Rebalances: Yakuza
