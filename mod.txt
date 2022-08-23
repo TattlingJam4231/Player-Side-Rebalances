@@ -5,6 +5,6 @@
 "version" : "developer",
 "priority" : 800,
 "blt_version" : 2
-"image" : "oryo.png",
+"image" : "icon.png",
 "color" : "0.498 0.894 0.784"
 }
