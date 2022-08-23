@@ -1,3 +1,52 @@
+-- <Developer
+local function save_recoil(recoil,filename)
+	local file,err = io.open(filename, "w")
+	if err then return err end
+
+	file:write( "{\n")
+	local previous = false
+	for _,v in ipairs(recoil) do
+		if previous then file:write(",\n") end
+		file:write("	{"..tostring(v[1])..","..tostring(v[2]).."}")
+		previous = true
+	end
+	file:write("\n}")
+	file:close()
+end
+
+local function record_recoil_table()
+	if record_recoil > 0 then
+		local function round(num, decimal_places)
+			local mult = 10^(decimal_places or 0)
+			return math.floor(num * mult + 0.5) / mult
+		end
+		previous_rot = current_rot
+		current_rot = {self._camera_properties.pitch, self._camera_properties.spin}
+		if previous_rot then
+			local vertical_recoil = current_rot[1] - previous_rot[1]
+			local horizontal_recoil = current_rot[2] - previous_rot[2]
+			
+			vertical_recoil = round(vertical_recoil > 180 and vertical_recoil%-360 or vertical_recoil < -180 and vertical_recoil%360 or vertical_recoil, 2)
+			horizontal_recoil = - round(horizontal_recoil > 180 and horizontal_recoil%-360 or horizontal_recoil < -180 and horizontal_recoil%360 or horizontal_recoil, 2)
+
+			table.insert(recoil,{vertical_recoil,horizontal_recoil})
+			record_recoil = record_recoil - 1
+		end
+		if record_recoil == 0 then
+			local file_path = nil
+			if file_path then
+				save_recoil(recoil, file_path)
+			end
+		end
+	end
+end
+
+local record_recoil = 0
+local recoil = {}
+local current_rot = nil
+local previous_rot = nil
+-- Developer>
+
 local kick_indices_timer = 0.5
 
 function FPCameraPlayerBase:_update_movement(t, dt)
@@ -86,84 +135,21 @@ function FPCameraPlayerBase:_update_movement(t, dt)
 	self:set_rotation(new_shoulder_rot)
 end
 
-function FPCameraPlayerBase:start_shooting()
-	self._recoil_kick.accumulated = self._recoil_kick.to_reduce or 0
-	self._recoil_kick.to_reduce = nil
-	self._recoil_kick.current = self._recoil_kick.current and self._recoil_kick.current or self._recoil_kick.accumulated or 0
-	self._recoil_kick.h.accumulated = self._recoil_kick.h.to_reduce or 0
-	self._recoil_kick.h.to_reduce = nil
-	self._recoil_kick.h.current = self._recoil_kick.h.current and self._recoil_kick.h.current or self._recoil_kick.h.accumulated or 0
+Hooks:PostHook(FPCameraPlayerBase, "start_shooting", "Oryo FPCameraPlayerBase start_shooting", function(self)
 	self._reduce_kick_indices = nil -- Player-Side Rebalances
+end)
 
-end
-
-function FPCameraPlayerBase:stop_shooting(wait)
-	self._recoil_kick.to_reduce = self._recoil_kick.accumulated
-	self._recoil_kick.h.to_reduce = self._recoil_kick.h.accumulated
-	self._recoil_wait = wait or {flat = 0, curve = 0}
+Hooks:PostHook(FPCameraPlayerBase, "stop_shooting", "Oryo FPCameraPlayerBase stop_shooting", function(self)
+	self._recoil_wait = type(self._recoil_wait) == "number" and {flat = 0, curve = 0} or self._recoil_wait
 	self._reduce_kick_indices = true -- Player-Side Rebalances
 	self._kick_indices_timer = kick_indices_timer -- Player-Side Rebalances
-end
+end)
 
-function FPCameraPlayerBase:break_recoil()
-	self._recoil_kick.current = 0
-	self._recoil_kick.h.current = 0
-	self._recoil_kick.accumulated = 0
-	self._recoil_kick.h.accumulated = 0
-	self._kick_indices = {} --Player-Side Rebalances
-
-	self:stop_shooting()
-end
-
-
-local function save_recoil(recoil,filename)
-	local file,err = io.open(filename, "w")
-	if err then return err end
-
-	file:write( "{\n")
-	local previous = false
-	for _,v in ipairs(recoil) do
-		if previous then file:write(",\n") end
-		file:write("	{"..tostring(v[1])..","..tostring(v[2]).."}")
-		previous = true
-	end
-	file:write("\n}")
-	file:close()
-end
-
-local record_recoil = 0
-local recoil = {}
-local current_rot = nil
-local previous_rot = nil
-
-
+Hooks:PreHook(FPCameraPlayerBase, "break_recoil", "Oryo FPCameraPlayerBase break_recoil", function(self)
+	self._kick_indices = {} -- Player-Side Rebalances
+end)
 
 function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) --added recoil_table
-
-	if record_recoil > 0 then
-		local function round(num, decimal_places)
-			local mult = 10^(decimal_places or 0)
-			return math.floor(num * mult + 0.5) / mult
-		end
-		previous_rot = current_rot
-		current_rot = {self._camera_properties.pitch, self._camera_properties.spin}
-		if previous_rot then
-			local vertical_recoil = current_rot[1] - previous_rot[1]
-			local horizontal_recoil = current_rot[2] - previous_rot[2]
-			
-			vertical_recoil = round(vertical_recoil > 180 and vertical_recoil%-360 or vertical_recoil < -180 and vertical_recoil%360 or vertical_recoil, 2)
-			horizontal_recoil = - round(horizontal_recoil > 180 and horizontal_recoil%-360 or horizontal_recoil < -180 and horizontal_recoil%360 or horizontal_recoil, 2)
-
-			table.insert(recoil,{vertical_recoil,horizontal_recoil})
-			record_recoil = record_recoil - 1
-		end
-		if record_recoil == 0 then
-			local file_path = nil
-			if file_path then
-				save_recoil(recoil, file_path)
-			end
-		end
-	end
 
 	if recoil_table then
 		local kick_table = recoil_table.kick_table

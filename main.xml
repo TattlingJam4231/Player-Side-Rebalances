@@ -1,4 +1,4 @@
-<mod name="Player-Side Rebalances Developer" author="TattlingJam" color="Color(0.498 0.894 0.784)" min_lib_ver="3.38">
+<mod name="Player-Side Rebalances Developer" author="TattlingJam" color="Color(0.498,0.894,0.784)" min_lib_ver="3.38">
 	<Localization directory="loc" default="english.txt">
 		<loc file="english.txt" language="english.txt"/>
 	</Localization>
