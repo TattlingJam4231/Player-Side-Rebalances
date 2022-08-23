@@ -93,6 +93,8 @@ Hooks:Add("LocalizationManagerPostInit", "WRd Localization", function(loc)
 
 		["bm_wp_upg_a_slug_desc"] =						"Fires a single lead slug that has a longer effective range. Penetrates enemies, shields and walls up to four times. Penetrates body armor.",
 
-		["bm_wp_upg_a_dragons_breath_desc"] = 			"Fires pellets that go up in sparks and flames. Burns through shields and body armor. This ammo type is harder to find."
+		["bm_wp_upg_a_dragons_breath_desc"] = 			"Fires pellets that go up in sparks and flames. Burns through shields and body armor. This ammo type is harder to find.",
+		
+		["bm_wp_upg_i_singlefire"] = 					"Select Fire: Single/Burst"
 	})
 end)
