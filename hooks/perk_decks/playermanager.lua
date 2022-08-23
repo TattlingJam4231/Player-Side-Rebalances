@@ -366,10 +366,6 @@ function PlayerManager:get_gambler_crit_bonus_oryo()
 	return crit_bonus * 0.01
 end
 
-function PlayerManager:num_connected_players()
-	return #self._player_list + 1
-end
-
 -- Player-Side Rebalances: Maniac
 function PlayerManager:_update_damage_dealt(t, dt)
 	local local_peer_id = managers.network:session() and managers.network:session():local_peer():id()

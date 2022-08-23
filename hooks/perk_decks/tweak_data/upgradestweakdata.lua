@@ -170,9 +170,24 @@ Hooks:PostHook(UpgradesTweakData, "init", "Oryo Perk Deck UpgradesTweakData init
 			category = "temporary"
 		}
 	}
-	
-	self.loose_ammo_restore_health_values.multiplier = 0.2
-	self.loose_ammo_restore_health_values.cd = 2.5
+
+	self.loose_ammo_restore_health_values = {
+		{
+			0,
+			0
+		},
+		{
+			0,
+			0
+		},
+		{
+			0,
+			0
+		},
+		multiplier = 0.2,
+		cd = 2.5,
+		base = 0
+	}
 	self.values.temporary.loose_ammo_restore_health = {}
 	for i, data in ipairs(self.loose_ammo_restore_health_values) do
 		table.insert(self.values.temporary.loose_ammo_restore_health, {
