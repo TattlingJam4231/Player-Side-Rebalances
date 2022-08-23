@@ -169,9 +169,9 @@ function PlayerManager:critical_hit_chance(detection_risk)
 	return multiplier
 end
 
-local health_regen_original = PlayerManager:health_regen
+local health_regen_original = PlayerManager.health_regen
 function PlayerManager:health_regen(...)
-	local health_regen = health_regen_original(self,...)
+	local health_regen = health_regen_original(self, ...)
 
 	-- <Player-Side Rebalances: Crew Chief
 	health_regen = health_regen + self:get_crew_chief_addend_oryo()
@@ -184,7 +184,7 @@ function PlayerManager:health_regen(...)
 	return health_regen
 end
 
-local fixed_health_regen_original = PlayerManager:fixed_health_regen
+local fixed_health_regen_original = PlayerManager.fixed_health_regen
 function PlayerManager:fixed_health_regen(health_ratio)
 	local health_regen = fixed_health_regen_original(self, health_ratio)
 
