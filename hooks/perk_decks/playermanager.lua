@@ -169,39 +169,28 @@ function PlayerManager:critical_hit_chance(detection_risk)
 	return multiplier
 end
 
-function PlayerManager:health_regen()
-	local health_regen = tweak_data.player.damage.HEALTH_REGEN
-
+local health_regen_original = PlayerManager:health_regen
+function PlayerManager:health_regen(...)
+	local health_regen = health_regen_original(self,...)
 
 	-- <Player-Side Rebalances: Crew Chief
 	health_regen = health_regen + self:get_crew_chief_addend_oryo()
 	-- Player-Side Rebalances>
 
-	health_regen = health_regen + self:temporary_upgrade_value("temporary", "wolverine_health_regen", 0)
-	health_regen = health_regen + self:get_hostage_bonus_addend("health_regen")
-	health_regen = health_regen + self:upgrade_value("player", "passive_health_regen", 0)
-
-
 	-- <Player-Side Rebalances: Stoic
 	health_regen = health_regen * self:upgrade_value("player", "damage_control_reduced_regen", 1)
 	-- Player-Side Rebalances>
-
 
 	return health_regen
 end
 
+local fixed_health_regen_original = PlayerManager:fixed_health_regen
 function PlayerManager:fixed_health_regen(health_ratio)
-	local health_regen = 0
-
-	if not health_ratio or not self:is_damage_health_ratio_active(health_ratio) then
-		health_regen = health_regen + self:upgrade_value("team", "crew_health_regen", 0)
-	end
-
+	local health_regen = fixed_health_regen_original(self, health_ratio)
 
 	-- <Player-Side Rebalances: Stoic
 	health_regen = health_regen * self:upgrade_value("player", "damage_control_reduced_regen", 1)
 	-- Player-Side Rebalances>
-
 
 	return health_regen
 end
@@ -227,28 +216,23 @@ end
 function PlayerManager:skill_dodge_chance(running, crouching, on_zipline, override_armor, detection_risk)
 	local chance = self:upgrade_value("player", "passive_dodge_chance", 0)
 	local dodge_shot_gain = self:_dodge_shot_gain()
-	local smoked = false
+
+	local smoked = false -- Player-Side Rebalances: Sicario, prevent double smoke_screen bonus
 
 	for _, smoke_screen in ipairs(self._smoke_screen_effects or {}) do
-		if smoke_screen:is_in_smoke(self:player_unit()) and not smoked then
+		if smoke_screen:is_in_smoke(self:player_unit()) and not smoked then -- Player-Side Rebalances: Sicario, prevent double smoke_screen bonus
 			if smoke_screen:mine() then
 				chance = chance * self:upgrade_value("player", "sicario_multiplier", 1)
 				dodge_shot_gain = dodge_shot_gain * self:upgrade_value("player", "sicario_multiplier", 1)
 			else
 				chance = chance + smoke_screen:dodge_bonus()
 			end
-			smoked = true
+			smoked = true -- Player-Side Rebalances: Sicario, prevent double smoke_screen bonus
 		end
 	end
 
 	chance = chance + dodge_shot_gain
 	chance = chance + self:upgrade_value("player", "tier_dodge_chance", 0)
-
-
-	-- <Player-Side Rebalances: Ex-President
-	chance = chance + self:upgrade_value("player", "president_dodge_chance", 0)
-	-- Player-Side Rebalances>
-
 
 	if running then
 		chance = chance + self:upgrade_value("player", "run_dodge_chance", 0)
@@ -267,6 +251,10 @@ function PlayerManager:skill_dodge_chance(running, crouching, on_zipline, overri
 	chance = chance + self:upgrade_value("player", tostring(override_armor or managers.blackmarket:equipped_armor(true, true)) .. "_dodge_addend", 0)
 	chance = chance + self:upgrade_value("team", "crew_add_dodge", 0)
 	chance = chance + self:temporary_upgrade_value("temporary", "pocket_ecm_kill_dodge", 0)
+
+	-- <Player-Side Rebalances: Ex-President
+	chance = chance + self:upgrade_value("player", "president_dodge_chance", 0)
+	-- Player-Side Rebalances>
 
 	return chance
 end
