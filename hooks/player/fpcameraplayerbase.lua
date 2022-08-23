@@ -16,18 +16,14 @@ end
 
 local function record_recoil_table()
 	if record_recoil > 0 then
-		local function round(num, decimal_places)
-			local mult = 10^(decimal_places or 0)
-			return math.floor(num * mult + 0.5) / mult
-		end
 		previous_rot = current_rot
 		current_rot = {self._camera_properties.pitch, self._camera_properties.spin}
 		if previous_rot then
 			local vertical_recoil = current_rot[1] - previous_rot[1]
 			local horizontal_recoil = current_rot[2] - previous_rot[2]
 			
-			vertical_recoil = round(vertical_recoil > 180 and vertical_recoil%-360 or vertical_recoil < -180 and vertical_recoil%360 or vertical_recoil, 2)
-			horizontal_recoil = - round(horizontal_recoil > 180 and horizontal_recoil%-360 or horizontal_recoil < -180 and horizontal_recoil%360 or horizontal_recoil, 2)
+			vertical_recoil = math.round_with_precision(vertical_recoil > 180 and vertical_recoil%-360 or vertical_recoil < -180 and vertical_recoil%360 or vertical_recoil, 2)
+			horizontal_recoil = - math.round_with_precision(horizontal_recoil > 180 and horizontal_recoil%-360 or horizontal_recoil < -180 and horizontal_recoil%360 or horizontal_recoil, 2)
 
 			table.insert(recoil,{vertical_recoil,horizontal_recoil})
 			record_recoil = record_recoil - 1

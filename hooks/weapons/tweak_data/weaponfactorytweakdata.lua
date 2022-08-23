@@ -711,7 +711,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						optimal_range_mul = 1.75,
 						falloff_override = {
 							far_falloff = 0,
-							far_multiplier = 0
+							far_mul = 0
 						},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
@@ -2350,12 +2350,16 @@ function WeaponFactoryTweakData:_init_attachments_oryo()
 	self:_init_CAR_attachments_oryo()
 	--Custom
 
-		--Single Fire
+		--Single Fire, aka Select Fire: Single/Burst
 		self.parts.wpn_fps_upg_i_singlefire.stats.damage = 0
 		self.parts.wpn_fps_upg_i_singlefire.stats.spread = 2
 		self.parts.wpn_fps_upg_i_singlefire.stats.recoil = 1
+		self.parts.wpn_fps_upg_i_singlefire.perks = nil
 		self.parts.wpn_fps_upg_i_singlefire.custom_stats = {
-			fire_rate_multiplier = 0.9
+			can_toggle_firemode = {
+				"single",
+				"burst"
+			}
 		}
 
 		--Auto Fire
