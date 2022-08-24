@@ -32,8 +32,10 @@ function NewRaycastWeaponBase:reload_expire_t(is_not_empty)
 end
 
 Hooks:PostHook(NewRaycastWeaponBase, "start_reload", "Oryo NewRaycastWeaponBase start_reload", function(self)
-	local t = managers.player:player_timer():time()
-	self._reload_interupt_grace = t + (self._next_shell_reloded_t - t) / self._current_reload_speed_multiplier * 0
+	if self._use_shotgun_reload then
+		local t = managers.player:player_timer():time()
+		self._reload_interupt_grace =  t + (self._next_shell_reloded_t - t) / self._current_reload_speed_multiplier * 0
+	end
 end)
 
 local reload_interuptable_original = NewRaycastWeaponBase.reload_interuptable
