@@ -1783,6 +1783,14 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 		self.parts.wpn_fps_upg_ns_ass_smg_v6.stats.suppression = -3
 		
 		
+		-- KS12-S Long Silencer
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.damage = -4
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.spread = 3
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.recoil = 1
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.concealment = -5
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.suppression = 12
+
+		
 		--Slotted Barrel Extension(Jacket's Piece/Mark 10)
 		self.parts.wpn_fps_smg_cobray_ns_barrelextension.stats.damage = 0
 		self.parts.wpn_fps_smg_cobray_ns_barrelextension.stats.spread = 3
