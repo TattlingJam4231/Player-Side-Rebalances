@@ -90,8 +90,9 @@
     </hooks>
     
     <hooks hook_id="lib/" script_path="loc/">
-		<post :hook_id="managers/localizationmanager"			                :script_path="localizationmanager.lua" />
 		<post :hook_id="managers/localizationmanager"						    :script_path="localizationmanager_perks.lua" />
+		<post :hook_id="managers/localizationmanager"			                :script_path="localizationmanager_skills.lua" />
+		<post :hook_id="managers/localizationmanager"						    :script_path="localizationmanager_weapons.lua" />
     </hooks>
     
 </mod>
