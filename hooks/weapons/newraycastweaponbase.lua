@@ -31,6 +31,32 @@ function NewRaycastWeaponBase:reload_expire_t(is_not_empty)
 	return reload_expire_t_original(self, is_not_empty)
 end
 
+Hooks:PostHook(NewRaycastWeaponBase, "start_reload", "Oryo NewRaycastWeaponBase start_reload", function(self)
+	local t = managers.player:player_timer():time()
+	self._reload_interupt_grace = t + (self._next_shell_reloded_t - t) / self._current_reload_speed_multiplier * 0
+end)
+
+local reload_interuptable_original = NewRaycastWeaponBase.reload_interuptable
+function NewRaycastWeaponBase:reload_interuptable()
+	if self._use_shotgun_reload then
+		if self._reload_interupt_grace and self._reload_interupt_grace < managers.player:player_timer():time() then
+			return true
+		else
+			return false
+		end
+	end
+
+	return reload_interuptable_original
+end
+
+Hooks:PostHook(NewRaycastWeaponBase, "on_reload_stop", "Oryo NewRaycastWeaponBase on_reload_stop", function(self)
+	self._reload_interupt_grace = nil
+	
+	if managers.player:get_current_state() then
+		managers.player:get_current_state():empty_reload_interupt_queue_oryo()
+	end
+end)
+
 function NewRaycastWeaponBase:recoil_wait() -- Player-Side Rebalances: rewritten
 	local recoil_wait = self:weapon_tweak_data().recoil_wait or {flat = 1, curve = 1}
 	local multiplier_flat = recoil_wait.flat or 0.5
