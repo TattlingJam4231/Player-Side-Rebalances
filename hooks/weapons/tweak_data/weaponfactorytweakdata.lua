@@ -1783,6 +1783,22 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 		self.parts.wpn_fps_upg_ns_ass_smg_v6.stats.suppression = -3
 		
 		
+		-- Verdunkeln Muzzle Brake
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.damage = 0
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.spread = 2
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.recoil = -1
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.concealment = 0
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.suppression = 0
+		
+		
+		-- KS12-A Burst Muzzle
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.damage = 0
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.spread = 1
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.recoil = 1
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.concealment = -1
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.suppression = 0
+		
+		
 		-- KS12-S Long Silencer
 		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.damage = -4
 		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.spread = 3
