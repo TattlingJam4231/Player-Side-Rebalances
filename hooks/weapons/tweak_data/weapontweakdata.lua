@@ -299,7 +299,7 @@ function WeaponTweakData:_init_falloff_oryo()
 				optimal_range = 900,
 				near_falloff = 200,
 				far_falloff = 2250,
-				near_multiplier = 1.35,
+				near_multiplier = 1,
 				far_multiplier = 0.1
 			},
 			tier_5 = {
@@ -685,7 +685,60 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 	}
 end
 
+function WeaponTweakData:_init_burst_count()
+	self.burst_count = {
+		assault_rifle = {
+			tier_4 = 3,
+			tier_3 = 3,
+			tier_2 = 4,
+			tier_1 = 5
+		},
+		shotgun = {
+			double_barrel = 2,
+			tier_5 = 		2,
+			pump_action = 	2,
+			tier_4 = 		2,
+			tier_3 = 		2,
+			tier_2 = 		3,
+			tier_1 = 		3
+		},
+		lmg = {
+			tier_3 = 3,
+			tier_2 = 4,
+			tier_1 = 5
+		},
+		snp = {
+			tier_4 = 1,
+			tier_3 = 1,
+			tier_2 = 1,
+			tier_1 = 1
+		},
+		smg = {
+			tier_3 = 3,
+			tier_2 = 4,
+			tier_1 = 5
+		},
+		pistol = {
+			tier_4 = 1,
+			tier_3 = 2,
+			tier_2 = 3,
+			tier_1 = 3
+		},
+		gl = {
+			tier_2 = 1,
+			tier_1 = 2
+		}
+	}
+end
+
 function WeaponTweakData:_init_default_stats_oryo()
+
+	self:_init_spread_oryo()
+	self:_init_falloff_oryo()
+	self:_init_recoil_wait_oryo()
+	self:_init_ammo_pickup_oryo()
+	self:_init_burst_count()
+
 	for category, tiers in pairs(self.weapon_index) do
 		for tier, weapons in pairs(tiers) do
 			for _, weapon in ipairs(weapons) do 
@@ -695,6 +748,7 @@ function WeaponTweakData:_init_default_stats_oryo()
 					self[weapon].spread = self.default_spread
 					self[weapon].spread_multiplier = self.spread_multiplier[category] and self.spread_multiplier[category][tier]
 					self[weapon].recoil_wait = self.recoil_wait[category] and self.recoil_wait[category][tier] or self.recoil_wait[category]
+					self[weapon].BURST_COUNT = self.burst_count[category] and self.burst_count[category][tier]
 				end
 			end
 		end
@@ -1162,6 +1216,12 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 			self.tecci.kick.crouching = self.tecci.kick.standing
 			self.tecci.kick.steelsight = self:kick_steelsight_oryo(self.tecci.kick.standing)
 			
+			self.tecci.BURST_COUNT = 5
+			self.tecci.fire_mode_data.burst = {
+				fire_rate = 0.07,
+				burst_cooldown = 0.21
+			}
+			
 			-- Clarion Rifle
 			self.famas.AMMO_MAX = 300
 			self.famas.stats.damage = 47
@@ -1237,8 +1297,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.b682.stats.damage = 157
 			self.b682.stats.spread = 16
 			self.b682.stats.recoil = 14
-			self.b682.stats.reload = 14
+			self.b682.stats.reload = 12
 			self.b682.stats.concealment = 7
+			self.b682.CAN_TOGGLE_FIREMODE = {
+				"single",
+				"burst"
+			}
 
 
 			-- Mosconi 12G Shotgun
@@ -1247,8 +1311,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.huntsman.stats.damage = 157
 			self.huntsman.stats.spread = 16
 			self.huntsman.stats.recoil = 10
-			self.huntsman.stats.reload = 15
+			self.huntsman.stats.reload = 12
 			self.huntsman.stats.concealment = 7
+			self.huntsman.CAN_TOGGLE_FIREMODE = {
+				"single",
+				"burst"
+			}
 
 
 			-- Claire 12G Shotgun
@@ -1257,7 +1325,11 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.coach.stats.damage = 157
 			self.coach.stats.spread = 17
 			self.coach.stats.recoil = 8
-			self.coach.stats.reload = 13
+			self.coach.stats.reload = 10
+			self.coach.CAN_TOGGLE_FIREMODE = {
+				"single",
+				"burst"
+			}
 
 
 	--T5 Shotguns---------------------------------------------------------------
@@ -2728,11 +2800,6 @@ Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(se
 	self.sentry_gun.DAMAGE = 4
 
 	self:_init_weapon_index_oryo()
-
-	self:_init_spread_oryo()
-	self:_init_falloff_oryo()
-	self:_init_recoil_wait_oryo()
-	self:_init_ammo_pickup_oryo()
 
 	self:_init_default_stats_oryo()
 	

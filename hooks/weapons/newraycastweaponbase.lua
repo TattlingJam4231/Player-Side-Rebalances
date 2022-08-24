@@ -74,16 +74,19 @@ function NewRaycastWeaponBase:zoom(...)
 	return zoom_original(self, ...)
 end
 
-local conditional_accuracy_addend_original = NewRaycastWeaponBase.conditional_accuracy_addend
-function NewRaycastWeaponBase:conditional_accuracy_addend(current_state)
-	local index = conditional_accuracy_addend_original(self, current_state)
+-- <Player-Side Rebalances: burst counts as single shot
+function NewRaycastWeaponBase:is_single_shot()
+	if self:gadget_overrides_weapon_functions() then
+		local gadget_shot = self:gadget_function_override("is_single_shot")
 
-	if self:fire_mode() == "burst" and self:is_category("assault_rifle", "smg", "snp") then -- Player-Side Rebalances: marksman basic applies to burst fire
-		index = index + managers.player:upgrade_value("weapon", "single_spread_index_addend", 0)
+		if gadget_shot ~= nil then
+			return gadget_shot
+		end
 	end
 
-	return index
+	return self:fire_mode() == "single" or self:fire_mode() == "burst"
 end
+-- Player-Side Rebalances>
 
 function NewRaycastWeaponBase:conditional_accuracy_multiplier(current_state)
 	local mul = 1
@@ -94,7 +97,7 @@ function NewRaycastWeaponBase:conditional_accuracy_multiplier(current_state)
 
 	local pm = managers.player
 
-	if current_state:in_steelsight() and self:fire_mode() ~= "auto" and self:is_category("assault_rifle", "smg", "snp") then -- Player-Side Rebalances: burst marker
+	if current_state:in_steelsight() and self:is_single_shot()  and self:is_category("assault_rifle", "smg", "snp") then -- Player-Side Rebalances: fixed vanilla bug where marksman aced affected all weapon categories
 		mul = mul + 1 - pm:upgrade_value("player", "single_shot_accuracy_inc", 1)
 	end
 
@@ -278,9 +281,9 @@ function NewRaycastWeaponBase:_update_fire_mode_data_oryo()
 
 	if locked_fire_mode == "single" or locked_fire_mode == "auto" or locked_fire_mode == "burst" then
 		self._locked_fire_mode = Idstring(locked_fire_mode)
-	end
+	end 
 
-	self._fire_mode = self._restricted_fire_modes and self._restricted_fire_modes[1] or self._locked_fire_mode or self._fire_mode
+	self._fire_mode = type(self:can_toggle_firemode()) == "table" and Idstring(self:can_toggle_firemode()[1]) or self._locked_fire_mode or self._fire_mode
 	self._fire_mode_index = self._fire_mode_index or 1
 end
 
@@ -316,7 +319,11 @@ function NewRaycastWeaponBase:toggle_firemode(skip_post_event)
 			self._fire_mode = Idstring("burst")
 
 			if not skip_post_event then
-				self._sound_fire:post_event("wp_auto_switch_off")
+				if table.contains(can_toggle, "auto") then
+					self._sound_fire:post_event("wp_auto_switch_off")
+				else
+					self._sound_fire:post_event("wp_auto_switch_on")
+				end
 			end
 		else
 
@@ -337,7 +344,7 @@ function NewRaycastWeaponBase:stop_shooting()
 	if self._fire_mode == Idstring("burst") then
 		fire_mode_data = fire_mode_data and fire_mode_data.burst or fire_mode_data
 		local fire_rate = fire_mode_data.fire_rate or 0
-		local burst_cooldown = fire_mode_data.burst_cooldown or fire_rate * 3
+		local burst_cooldown = fire_mode_data.burst_cooldown or fire_rate * 2
 		local next_fire = burst_cooldown / self:fire_rate_multiplier()
 		self._next_fire_allowed = self._next_fire_allowed + next_fire
 	end
