@@ -2093,6 +2093,29 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_poe.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_poe.stats.concealment = -3
 	self.parts.wpn_fps_upg_o_poe.stats.magnification = 2.75
+
+	-- Pistols
+
+		--Pistol Red Dot Sight
+		self.parts.wpn_fps_upg_o_rmr.stats.spread = 0
+		self.parts.wpn_fps_upg_o_rmr.stats.recoil = 1
+		self.parts.wpn_fps_upg_o_rmr.stats.concealment = -1
+		self.parts.wpn_fps_upg_o_rmr.stats.magnification = 1.3
+
+
+		--Riktpunkt Holosight
+		self.parts.wpn_fps_upg_o_rikt.stats.spread = 1
+		self.parts.wpn_fps_upg_o_rikt.stats.recoil = 0
+		self.parts.wpn_fps_upg_o_rikt.stats.concealment = -1
+		self.parts.wpn_fps_upg_o_rikt.stats.magnification = 1.5
+		
+
+		--SKOLD Reflex Micro Sight
+		self.parts.wpn_fps_upg_o_rms.stats.spread = 0
+		self.parts.wpn_fps_upg_o_rms.stats.recoil = 0
+		self.parts.wpn_fps_upg_o_rms.stats.concealment = 0
+		self.parts.wpn_fps_upg_o_rms.stats.magnification = 1.3
+
 end
 
 function WeaponFactoryTweakData:_init_AK_attachments_oryo()
