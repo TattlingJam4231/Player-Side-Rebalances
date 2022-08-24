@@ -1,89 +1,34 @@
+local update_reloading_original = NewRaycastWeaponBase.update_reloading
 function NewRaycastWeaponBase:update_reloading(t, dt, time_left)
-	if self._use_shotgun_reload and self._next_shell_reloded_t and self._next_shell_reloded_t < t then
+
+	-- <Player-Side Rebalances
+	if self._use_shotgun_reload and self._next_shell_reloded_t and self._next_shell_reloded_t < t and self._use_shotgun_reload == "dual" then
 		local speed_multiplier = self:reload_speed_multiplier()
-		local shotgun_reload_tweak = self:_get_shotgun_reload_tweak_data(not self._started_reload_empty)
-		local ammo_to_reload = 1
-		local next_queue_data = nil
-
-		if shotgun_reload_tweak and shotgun_reload_tweak.reload_queue then
-			self._shotgun_queue_index = self._shotgun_queue_index % #shotgun_reload_tweak.reload_queue + 1
-
-			if self._shotgun_queue_index == #shotgun_reload_tweak.reload_queue then
-				self._next_shell_reloded_t = self._next_shell_reloded_t + (shotgun_reload_tweak.reload_queue_wrap or 0)
-			end
-
-			local queue_data = shotgun_reload_tweak.reload_queue[self._shotgun_queue_index]
-			ammo_to_reload = queue_data and queue_data.reload_num or 1
-			next_queue_data = shotgun_reload_tweak.reload_queue[self._shotgun_queue_index + 1]
-			self._next_shell_reloded_t = self._next_shell_reloded_t + (next_queue_data and next_queue_data.expire_t or 0.5666666666666667) / speed_multiplier
-		else
-			self._next_shell_reloded_t = self._next_shell_reloded_t + self:reload_shell_expire_t(not self._started_reload_empty) / speed_multiplier
-			ammo_to_reload = shotgun_reload_tweak and shotgun_reload_tweak.reload_num or 1
-		end
-
-
-		-- <Player-Side Rebalances
-		if self._use_shotgun_reload == "dual" then
-			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_max_per_clip(), self:get_ammo_remaining_in_clip() + math.min(2, self:get_ammo_total() - self:get_ammo_remaining_in_clip())))
-		else
-		-- Player-Side Rebalances>
-
-
-			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_max_per_clip(), self:get_ammo_remaining_in_clip() + math.min(ammo_to_reload, self:get_ammo_total() - self:get_ammo_remaining_in_clip())))
-		end
-		managers.job:set_memory("kill_count_no_reload_" .. tostring(self._name_id), nil, true)
-
-		if not next_queue_data or not next_queue_data.skip_update_ammo then
-			self:update_ammo_objects()
-		end
-
+		self._next_shell_reloded_t = self._next_shell_reloded_t + self:reload_shell_expire_t(not self._started_reload_empty) / speed_multiplier
+		self:set_ammo_remaining_in_clip(math.min(self:get_ammo_max_per_clip(), self:get_ammo_remaining_in_clip() + math.min(2, self:get_ammo_total() - self:get_ammo_remaining_in_clip())))
+		self:update_ammo_objects()
+	
 		return true
 	end
+	-- Player-Side Rebalances>
+
+	return update_reloading_original(self, t, dt, time_left)
 end
 
+local reload_expire_t_original = NewRaycastWeaponBase.reload_expire_t
 function NewRaycastWeaponBase:reload_expire_t(is_not_empty)
-	if self._use_shotgun_reload then
+
+	-- <Player-Side Rebalances
+	if self._use_shotgun_reload and self._use_shotgun_reload == "dual" then
 		local ammo_total = self:get_ammo_total()
 		local ammo_max_per_clip = self:get_ammo_max_per_clip()
 		local ammo_remaining_in_clip = self:get_ammo_remaining_in_clip()
-		local ammo_to_reload = math.min(ammo_total - ammo_remaining_in_clip, ammo_max_per_clip - ammo_remaining_in_clip)
-		local shotgun_reload_tweak = self:_get_shotgun_reload_tweak_data(is_not_empty)
-
-		if shotgun_reload_tweak and shotgun_reload_tweak.reload_queue then
-			local reload_expire_t = 0
-			local queue_index = 0
-			local queue_data = nil
-			local queue_num = #shotgun_reload_tweak.reload_queue
-
-			while ammo_to_reload > 0 do
-				if queue_index == queue_num then
-					reload_expire_t = reload_expire_t + (shotgun_reload_tweak.reload_queue_wrap or 0)
-				end
-
-				queue_index = queue_index % queue_num + 1
-				queue_data = shotgun_reload_tweak.reload_queue[queue_index]
-				reload_expire_t = reload_expire_t + queue_data.expire_t or 0.5666666666666667
-				ammo_to_reload = ammo_to_reload - (queue_data.reload_num or 1)
-			end
-
-			return reload_expire_t
-		end
-
 		local reload_shell_expire_t = self:reload_shell_expire_t(is_not_empty)
-		local reload_num = shotgun_reload_tweak and shotgun_reload_tweak.reload_num or 1
-
-
-		-- <Player-Side Rebalances
-		if self._use_shotgun_reload == "dual" then
-			return math.ceil(math.min(ammo_total - ammo_remaining_in_clip, ammo_max_per_clip - ammo_remaining_in_clip) / 2) * reload_shell_expire_t
-		end
-		-- Player-Side Rebalances>
-
-
-		return math.ceil(ammo_to_reload / reload_num) * reload_shell_expire_t
+		return math.ceil(math.min(ammo_total - ammo_remaining_in_clip, ammo_max_per_clip - ammo_remaining_in_clip) / 2) * reload_shell_expire_t
 	end
+	-- Player-Side Rebalances>
 
-	return nil
+	return reload_expire_t_original(self, is_not_empty)
 end
 
 function NewRaycastWeaponBase:recoil_wait() -- Player-Side Rebalances: rewritten
@@ -99,8 +44,8 @@ function NewRaycastWeaponBase:recoil_wait() -- Player-Side Rebalances: rewritten
 
 end
 
-function NewRaycastWeaponBase:zoom()
-
+local zoom_original = NewRaycastWeaponBase.zoom
+function NewRaycastWeaponBase:zoom(...)
 
 	-- <Player-Side Rebalances
 	if self._magnification then
@@ -126,24 +71,7 @@ function NewRaycastWeaponBase:zoom()
 	end
 	-- Player-Side Rebalances>
 
-
-	if self:is_second_sight_on() then
-		local gadget_zoom_stats = tweak_data.weapon.factory.parts[self._second_sight_data.part_id].stats.gadget_zoom
-
-		if not gadget_zoom_stats then
-			local tweak_stats = tweak_data.weapon.factory.parts[self._second_sight_data.part_id].stats
-
-			if not tweak_stats.gadget_zoom_add then
-				debug_pause("Invalid second sight:", self._second_sight_data.part_id)
-			end
-
-			gadget_zoom_stats = math.min(NewRaycastWeaponBase.super.zoom(self) + tweak_stats.gadget_zoom_add, #tweak_data.weapon.stats.zoom)
-		end
-
-		return tweak_data.weapon.stats.zoom[gadget_zoom_stats]
-	end
-
-	return NewRaycastWeaponBase.super.zoom(self)
+	return zoom_original(self, ...)
 end
 
 local conditional_accuracy_addend_original = NewRaycastWeaponBase.conditional_accuracy_addend
