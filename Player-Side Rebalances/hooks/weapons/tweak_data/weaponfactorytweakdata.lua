@@ -711,7 +711,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						optimal_range_mul = 1.75,
 						falloff_override = {
 							far_falloff = 0,
-							far_multiplier = 0
+							far_mul = 0
 						},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
@@ -1603,6 +1603,7 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 		pistol = {
 			tier_4 = {
 				"peacemaker",		-- Peacemaker .45 Revolver
+				"rsh12",			-- RUS-12 Angry Tiger Revolver
 				"mateba",			-- Matever .357 Revolver
 				"x_2006m",			-- Akimbo Matever .357 Revolvers
 				"chinchilla",		-- Castigo .44 Revolver
@@ -1623,7 +1624,9 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"model3",			-- Frenchman Model 87 Revolver
 				"x_model3",			-- Akimbo Frenchman Model 87 Revolvers
 				"m1911",			-- Crosskill Chunky Compact Pistol
-				"x_m1911"			-- Akimbo Crosskill Chunky Compact Pistols
+				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
+				"maxim9",			-- Gecko M2 Pistol
+				"x_maxim9"			-- Akimbo Gecko M2 Pistols
 			},
 			tier_2 = {
 				"g22c",				-- Chimano Custom Pistol
@@ -1643,7 +1646,9 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"stech",			-- Igor Automatik Pistol
 				"x_stech",			-- Akimbo Igor Automatik Pistols
 				"holt",				-- Holt 9 mm Pistol
-				"x_holt"			-- Akimbo Holt 9 mm Pistols
+				"x_holt",			-- Akimbo Holt 9 mm Pistols
+				"type54",			-- Kang armos Model 54 Pistol
+				"x_type54"			-- Akimbo Kang armos Model 54 Pistols
 			},
 			tier_1 = {
 				"glock_17",			-- Chimano 88 Pistol
@@ -1782,6 +1787,30 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 		self.parts.wpn_fps_upg_ns_ass_smg_v6.stats.concealment = -1
 		self.parts.wpn_fps_upg_ns_ass_smg_v6.stats.suppression = -3
 		
+		
+		-- Verdunkeln Muzzle Brake
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.damage = 0
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.spread = 2
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.recoil = -1
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.concealment = 0
+		self.parts.wpn_fps_lmg_hk51b_ns_jcomp.stats.suppression = 0
+		
+		
+		-- KS12-A Burst Muzzle
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.damage = 0
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.spread = 1
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.recoil = 1
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.concealment = -1
+		self.parts.wpn_fps_ass_shak12_ns_muzzle.stats.suppression = 0
+		
+		
+		-- KS12-S Long Silencer
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.damage = -4
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.spread = 3
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.recoil = 1
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.concealment = -5
+		self.parts.wpn_fps_ass_shak12_ns_suppressor.stats.suppression = 12
+
 		
 		--Slotted Barrel Extension(Jacket's Piece/Mark 10)
 		self.parts.wpn_fps_smg_cobray_ns_barrelextension.stats.damage = 0
@@ -2069,6 +2098,29 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_poe.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_poe.stats.concealment = -3
 	self.parts.wpn_fps_upg_o_poe.stats.magnification = 2.75
+
+	-- Pistols
+
+		--Pistol Red Dot Sight
+		self.parts.wpn_fps_upg_o_rmr.stats.spread = 0
+		self.parts.wpn_fps_upg_o_rmr.stats.recoil = 1
+		self.parts.wpn_fps_upg_o_rmr.stats.concealment = -1
+		self.parts.wpn_fps_upg_o_rmr.stats.magnification = 1.3
+
+
+		--Riktpunkt Holosight
+		self.parts.wpn_fps_upg_o_rikt.stats.spread = 1
+		self.parts.wpn_fps_upg_o_rikt.stats.recoil = 0
+		self.parts.wpn_fps_upg_o_rikt.stats.concealment = -1
+		self.parts.wpn_fps_upg_o_rikt.stats.magnification = 1.5
+		
+
+		--SKOLD Reflex Micro Sight
+		self.parts.wpn_fps_upg_o_rms.stats.spread = 0
+		self.parts.wpn_fps_upg_o_rms.stats.recoil = 0
+		self.parts.wpn_fps_upg_o_rms.stats.concealment = 0
+		self.parts.wpn_fps_upg_o_rms.stats.magnification = 1.3
+
 end
 
 function WeaponFactoryTweakData:_init_AK_attachments_oryo()
@@ -2350,12 +2402,16 @@ function WeaponFactoryTweakData:_init_attachments_oryo()
 	self:_init_CAR_attachments_oryo()
 	--Custom
 
-		--Single Fire
+		--Single Fire, aka Select Fire: Single/Burst
 		self.parts.wpn_fps_upg_i_singlefire.stats.damage = 0
 		self.parts.wpn_fps_upg_i_singlefire.stats.spread = 2
 		self.parts.wpn_fps_upg_i_singlefire.stats.recoil = 1
+		self.parts.wpn_fps_upg_i_singlefire.perks = nil
 		self.parts.wpn_fps_upg_i_singlefire.custom_stats = {
-			fire_rate_multiplier = 0.9
+			can_toggle_firemode = {
+				"single",
+				"burst"
+			}
 		}
 
 		--Auto Fire

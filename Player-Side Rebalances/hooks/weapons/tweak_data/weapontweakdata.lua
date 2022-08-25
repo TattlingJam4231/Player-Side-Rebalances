@@ -188,6 +188,7 @@ function WeaponTweakData:_init_weapon_index_oryo()
 		pistol = {
 			tier_4 = {
 				"peacemaker",		-- Peacemaker .45 Revolver
+				"rsh12",			-- RUS-12 Angry Tiger Revolver
 				"mateba",			-- Matever .357 Revolver
 				"x_2006m",			-- Akimbo Matever .357 Revolvers
 				"chinchilla",		-- Castigo .44 Revolver
@@ -208,7 +209,9 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"model3",			-- Frenchman Model 87 Revolver
 				"x_model3",			-- Akimbo Frenchman Model 87 Revolvers
 				"m1911",			-- Crosskill Chunky Compact Pistol
-				"x_m1911"			-- Akimbo Crosskill Chunky Compact Pistols
+				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
+				"maxim9",			-- Gecko M2 Pistol
+				"x_maxim9"			-- Akimbo Gecko M2 Pistols
 			},
 			tier_2 = {
 				"g22c",				-- Chimano Custom Pistol
@@ -228,7 +231,9 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"stech",			-- Igor Automatik Pistol
 				"x_stech",			-- Akimbo Igor Automatik Pistols
 				"holt",				-- Holt 9 mm Pistol
-				"x_holt"			-- Akimbo Holt 9 mm Pistols
+				"x_holt",			-- Akimbo Holt 9 mm Pistols
+				"type54",			-- Kang armos Model 54 Pistol
+				"x_type54"			-- Akimbo Kang armos Model 54 Pistols
 			},
 			tier_1 = {
 				"glock_17",			-- Chimano 88 Pistol
@@ -299,7 +304,7 @@ function WeaponTweakData:_init_falloff_oryo()
 				optimal_range = 900,
 				near_falloff = 200,
 				far_falloff = 2250,
-				near_multiplier = 1.35,
+				near_multiplier = 1,
 				far_multiplier = 0.1
 			},
 			tier_5 = {
@@ -386,7 +391,7 @@ function WeaponTweakData:_init_falloff_oryo()
 			}
 		},
 		snp = {
-			tier_4 = {
+			tier_5 = {
 				optimal_distance = 3000,
 				optimal_range = 3000,
 				near_falloff = 3000,
@@ -394,7 +399,7 @@ function WeaponTweakData:_init_falloff_oryo()
 				near_multiplier = 1,
 				far_multiplier = 1
 			},
-			tier_3 = {
+			tier_4 = {
 				optimal_distance = 0,
 				optimal_range = 2000,
 				near_falloff = 0,
@@ -402,13 +407,21 @@ function WeaponTweakData:_init_falloff_oryo()
 				near_multiplier = 1,
 				far_multiplier = 1.8
 			},
-			tier_2 = {
+			tier_3 = {
 				optimal_distance = 0,
 				optimal_range = 2000,
 				near_falloff = 0,
 				far_falloff = 500,
 				near_multiplier = 1,
 				far_multiplier = 1.5
+			},
+			tier_2 = {
+				optimal_distance = 0,
+				optimal_range = 2000,
+				near_falloff = 0,
+				far_falloff = 500,
+				near_multiplier = 1,
+				far_multiplier = 1.35
 			},
 			tier_1 = {
 				optimal_distance = 0,
@@ -662,10 +675,11 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = {15	/1.35, 35	/1.35}
 		},
 		snp = {
-			tier_4 = {0.04, 0.54},
-			tier_3 = {0.1	/1.35, 1	/1.35},
-			tier_2 = {1		/1.35, 1	/1.35},
-			tier_1 = {1		/1.35, 1.75	/1.35}
+			tier_5 = {0.04, 0.54},
+			tier_4 = {0.1	/1.35, 1	/1.35},
+			tier_3 = {1		/1.35, 1	/1.35},
+			tier_2 = {1		/1.35, 1.75	/1.35},
+			tier_1 = {1		/1.35, 2	/1.35}
 		},
 		smg = {
 			tier_3 = {3		/1.35, 7	/1.35},
@@ -685,7 +699,60 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 	}
 end
 
+function WeaponTweakData:_init_burst_count_oryo()
+	self.burst_count = {
+		assault_rifle = {
+			tier_4 = 3,
+			tier_3 = 3,
+			tier_2 = 4,
+			tier_1 = 5
+		},
+		shotgun = {
+			double_barrel = 2,
+			tier_5 = 		2,
+			pump_action = 	2,
+			tier_4 = 		2,
+			tier_3 = 		2,
+			tier_2 = 		3,
+			tier_1 = 		3
+		},
+		lmg = {
+			tier_3 = 3,
+			tier_2 = 4,
+			tier_1 = 5
+		},
+		snp = {
+			tier_4 = 1,
+			tier_3 = 1,
+			tier_2 = 1,
+			tier_1 = 1
+		},
+		smg = {
+			tier_3 = 3,
+			tier_2 = 4,
+			tier_1 = 5
+		},
+		pistol = {
+			tier_4 = 1,
+			tier_3 = 2,
+			tier_2 = 3,
+			tier_1 = 3
+		},
+		gl = {
+			tier_2 = 1,
+			tier_1 = 2
+		}
+	}
+end
+
 function WeaponTweakData:_init_default_stats_oryo()
+
+	self:_init_spread_oryo()
+	self:_init_falloff_oryo()
+	self:_init_recoil_wait_oryo()
+	self:_init_ammo_pickup_oryo()
+	self:_init_burst_count_oryo()
+
 	for category, tiers in pairs(self.weapon_index) do
 		for tier, weapons in pairs(tiers) do
 			for _, weapon in ipairs(weapons) do 
@@ -695,6 +762,7 @@ function WeaponTweakData:_init_default_stats_oryo()
 					self[weapon].spread = self.default_spread
 					self[weapon].spread_multiplier = self.spread_multiplier[category] and self.spread_multiplier[category][tier]
 					self[weapon].recoil_wait = self.recoil_wait[category] and self.recoil_wait[category][tier] or self.recoil_wait[category]
+					self[weapon].BURST_COUNT = self.burst_count[category] and self.burst_count[category][tier]
 				end
 			end
 		end
@@ -1187,8 +1255,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.b682.stats.damage = 157
 			self.b682.stats.spread = 16
 			self.b682.stats.recoil = 14
-			self.b682.stats.reload = 14
+			self.b682.stats.reload = 12
 			self.b682.stats.concealment = 7
+			self.b682.CAN_TOGGLE_FIREMODE = {
+				"single",
+				"burst"
+			}
 
 
 			-- Mosconi 12G Shotgun
@@ -1197,8 +1269,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.huntsman.stats.damage = 157
 			self.huntsman.stats.spread = 16
 			self.huntsman.stats.recoil = 10
-			self.huntsman.stats.reload = 15
+			self.huntsman.stats.reload = 12
 			self.huntsman.stats.concealment = 7
+			self.huntsman.CAN_TOGGLE_FIREMODE = {
+				"single",
+				"burst"
+			}
 
 
 			-- Claire 12G Shotgun
@@ -1207,7 +1283,11 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.coach.stats.damage = 157
 			self.coach.stats.spread = 17
 			self.coach.stats.recoil = 8
-			self.coach.stats.reload = 13
+			self.coach.stats.reload = 10
+			self.coach.CAN_TOGGLE_FIREMODE = {
+				"single",
+				"burst"
+			}
 
 
 	--T5 Shotguns---------------------------------------------------------------
@@ -2168,6 +2248,14 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.peacemaker.fire_mode_data.fire_rate = 0.166
 			self.peacemaker.single.fire_rate = 0.166
 			self.peacemaker.armor_piercing_chance = 1
+			self.peacemaker.has_description = true
+
+
+			-- RUS-12 Angry Tiger Revolver
+			self.rsh12.can_shoot_through_enemy = nil
+			self.rsh12.can_shoot_through_shield = nil
+			self.rsh12.can_shoot_through_wall = nil
+			self.rsh12.armor_piercing_chance = nil
 
 			
 			--matever
@@ -2175,6 +2263,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.mateba.fire_mode_data.fire_rate = 0.166
 			self.mateba.single.fire_rate = 0.166
 			self.mateba.armor_piercing_chance = 1
+			self.mateba.has_description = true
 			
 					--akimbo matever
 					self.x_2006m.AMMO_MAX = 48
@@ -2188,6 +2277,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.chinchilla.fire_mode_data.fire_rate = 0.166
 			self.chinchilla.single.fire_rate = 0.166
 			self.chinchilla.armor_piercing_chance = 1
+			self.chinchilla.has_description = true
 			
 					--akimbo castigo
 					self.x_chinchilla.AMMO_MAX = 48
@@ -2201,6 +2291,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.new_raging_bull.fire_mode_data.fire_rate = 0.166
 			self.new_raging_bull.single.fire_rate = 0.166
 			self.new_raging_bull.armor_piercing_chance = 1
+			self.new_raging_bull.has_description = true
 			
 					--akimbo bronco
 					self.x_rage.AMMO_MAX = 48
@@ -2217,6 +2308,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.deagle.stats.spread = 18
 			self.deagle.stats.recoil = 1
 			self.deagle.armor_piercing_chance = 1
+			self.deagle.has_description = true
 			
 					--akimbo deagle
 					self.x_deagle.AMMO_MAX = 30
@@ -2543,11 +2635,6 @@ Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(se
 	self.sentry_gun.DAMAGE = 4
 
 	self:_init_weapon_index_oryo()
-
-	self:_init_spread_oryo()
-	self:_init_falloff_oryo()
-	self:_init_recoil_wait_oryo()
-	self:_init_ammo_pickup_oryo()
 
 	self:_init_default_stats_oryo()
 	

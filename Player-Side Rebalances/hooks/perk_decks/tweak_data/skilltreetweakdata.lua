@@ -20,10 +20,8 @@ Hooks:PostHook(SkillTreeTweakData, "init", "Oryo Perk Deck SkillTreeTweakData in
 	table.insert(self.specializations[5][7].upgrades, "akimbo_fire_rate_multiplier")
 	
 	-- Gambler
-	table.remove(self.specializations[10][7].upgrades, 1)
 	table.insert(self.specializations[10][7].upgrades, "player_loose_ammo_restore_health_alt")
 	table.insert(self.specializations[10][7].upgrades, "player_loose_ammo_restore_armor")
-	table.remove(self.specializations[10][9].upgrades, 1)
 	table.insert(self.specializations[10][9].upgrades, "temporary_loose_ammo_crit_bonus")
 	
 	-- Yakuza

@@ -80,7 +80,7 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
 		["menu_deck10_3_desc"] = 	"Medical Supplies have ##25%## chance to trigger an ammo pickup for other players in your team.\n\n" ..
 									"You gain ##20%## more health.",
 
-        ["menu_deck10_5_desc"] = 	"Medical Supplies heal your teammates for ##50%## of the ammount.\n\n" ..
+        ["menu_deck10_5_desc"] = 	"Medical Supplies heal your teammates for ##50%## of the amount.\n\n" ..
 									"You gain ##20%## more health.",
 
 		["menu_deck10_7"] = 		"More Healing",
@@ -161,7 +161,7 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
 
         --Sicario----------------------------------------------------------------------------------
         ["menu_deck18_1_desc"] =    "Unlocks and equips the thowable Smoke Bomb.\n\n" ..
-                                    "When deployed, the smoke bomb createa a smoke screen that lasts ##10## seconds. " ..
+                                    "When deployed, the smoke bomb creates a smoke screen that lasts ##10## seconds. " ..
                                     "While standing inside the smoke screen, you and any of your allies automatically avoid ##50%## of all bullets. " ..
                                     "Any enemies that stand in the smoke will see their accuracy reduced by ##50%##.\n\n" ..
                                     "You can carry up to ##2## smoke bombs. You replenish ##1## smoke bomb every ##45## seconds, this is lessened by ##1## second per enemy killed.",
@@ -178,7 +178,7 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Perk Deck Localization", function
 
         --Tag Team---------------------------------------------------------------------------------
         ["menu_deck20_1_desc"] =    "Unlocks and equips the Gas Dispenser.\n\n" ..
-                                    "To activate the Gas Dispenser you need to look at another allied unit within a ##18## meter radius with clear line of sight and press the throwable key to tag them.\n\n" ..
+                                    "To activate the Gas Dispenser you need to look at another allied unit within an ##18## meter radius with clear line of sight and press the throwable key to tag them.\n\n" ..
                                     "Each enemy you or the tagged unit kills will now heal you for ##15## health and the tagged unit for ##7.5## health.\n\n" ..
                                     "Each enemy you kill will now extend the duration by ##1.3## seconds and reduce the cooldown timer by ##2## seconds.\n\n" ..
                                     "The effect will last for a duration of ##12## seconds and has a cooldown of ##60## seconds.",

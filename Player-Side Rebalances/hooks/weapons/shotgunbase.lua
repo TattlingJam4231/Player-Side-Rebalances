@@ -419,3 +419,23 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 
 	return result
 end
+
+-- <Player-Side Rebalances: allow Close By Aced rate of fire buff to work on shotguns with magazines when fired in single or burst fire
+function ShotgunBase:fire_rate_multiplier()
+	local fire_rate_mul = self._fire_rate_multiplier
+
+	local hip_fire_rate_inc = self:is_single_shot() and managers.player:upgrade_value("shotgun", "hip_rate_of_fire", 0) or 0
+
+	if hip_fire_rate_inc ~= 0 then
+		local user_unit = self._setup and self._setup.user_unit
+		local current_state = alive(user_unit) and user_unit:movement() and user_unit:movement()._current_state
+
+		if current_state and not current_state:in_steelsight() then
+			fire_rate_mul = fire_rate_mul + 1 - hip_fire_rate_inc
+			fire_rate_mul = self:_convert_add_to_mul(fire_rate_mul)
+		end
+	end
+
+	return fire_rate_mul
+end
+-- Player-Side Rebalances>

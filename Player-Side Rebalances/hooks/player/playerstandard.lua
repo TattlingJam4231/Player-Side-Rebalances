@@ -244,6 +244,81 @@ function PlayerStandard:_check_action_primary_attack(t, input)
 	return new_action
 end
 
+function PlayerStandard:_update_reload_timers(t, dt, input)
+	if self._state_data.reload_enter_expire_t and self._state_data.reload_enter_expire_t <= t then
+		self._state_data.reload_enter_expire_t = nil
+
+		self:_start_action_reload(t)
+	end
+
+	if self._state_data.reload_expire_t then
+		local interupt = nil
+
+		if self._equipped_unit:base():update_reloading(t, dt, self._state_data.reload_expire_t - t) then
+			managers.hud:set_ammo_amount(self._equipped_unit:base():selection_index(), self._equipped_unit:base():ammo_info())
+
+			if self._queue_reload_interupt then
+				--[[ self._queue_reload_interupt = nil ]] -- Player-Side Rebalances: moved this to a new function "PlayerStandard:empty_reload_interupt_queue_oryo" that is called on reload stop, fixes vanilla bug where you could queue two reload interupts
+				interupt = true
+			end
+		end
+
+		if self._state_data.reload_expire_t <= t or interupt then
+
+			managers.player:remove_property("shock_and_awe_reload_multiplier")
+
+			self._state_data.reload_expire_t = nil
+
+			if self._equipped_unit:base():reload_exit_expire_t() then
+				local speed_multiplier = self._equipped_unit:base():reload_speed_multiplier()
+				local is_reload_not_empty = not self._equipped_unit:base():started_reload_empty()
+				local animation_name = is_reload_not_empty and "reload_not_empty_exit" or "reload_exit"
+				local animation = self:get_animation(animation_name)
+				self._state_data.reload_exit_expire_t = t + self._equipped_unit:base():reload_exit_expire_t(is_reload_not_empty) / speed_multiplier
+				local result = self._ext_camera:play_redirect(animation, speed_multiplier)
+
+				self._equipped_unit:base():tweak_data_anim_play(animation_name, speed_multiplier)
+			elseif self._equipped_unit then
+				if not interupt then
+					self._equipped_unit:base():on_reload()
+				end
+
+				managers.statistics:reloaded()
+				managers.hud:set_ammo_amount(self._equipped_unit:base():selection_index(), self._equipped_unit:base():ammo_info())
+
+				if input.btn_steelsight_state then
+					self._steelsight_wanted = true
+				elseif self.RUN_AND_RELOAD and self._running and not self._end_running_expire_t and not self._equipped_unit:base():run_and_shoot_allowed() then
+					self._ext_camera:play_redirect(self:get_animation("start_running"))
+				end
+			end
+		end
+	end
+
+	if self._state_data.reload_exit_expire_t and self._state_data.reload_exit_expire_t <= t then
+		self._state_data.reload_exit_expire_t = nil
+
+		if self._equipped_unit then
+			managers.statistics:reloaded()
+			managers.hud:set_ammo_amount(self._equipped_unit:base():selection_index(), self._equipped_unit:base():ammo_info())
+
+			if input.btn_steelsight_state then
+				self._steelsight_wanted = true
+			elseif self.RUN_AND_RELOAD and self._running and not self._end_running_expire_t and not self._equipped_unit:base():run_and_shoot_allowed() then
+				self._ext_camera:play_redirect(self:get_animation("start_running"))
+			end
+
+			if self._equipped_unit:base().on_reload_stop then
+				self._equipped_unit:base():on_reload_stop()
+			end
+		end
+	end
+end
+
+function PlayerStandard:empty_reload_interupt_queue_oryo()
+	self._queue_reload_interupt = nil
+end
+
 function PlayerStandard:_stance_entered(unequipped) 
 	local stance_standard = tweak_data.player.stances.default[managers.player:current_state()] or tweak_data.player.stances.default.standard
 	local head_stance = self._state_data.ducking and tweak_data.player.stances.default.crouched.head or stance_standard.head

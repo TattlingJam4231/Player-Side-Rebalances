@@ -72,4 +72,3 @@ function AmmoClip:sync_net_event(event, peer)
 		sync_net_event_original(self, event, peer)
 	end
 end
-

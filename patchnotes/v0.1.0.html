@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<title>Player-Side Rebalances v0.1.0 - Patch Notes</title>
+<link rel="stylesheet" type="text/css" href="https://fragtrane.github.io/SuperBLT-Update-Demo/style.css">
+<style type="text/css">
+body, html {
+    background-color: #cfcfcf;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#mainContainer {
+    background-color: #ffffff;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 900px;
+    border-color: #afafaf;
+    border-style: solid;
+    border-width: 1px;
+    padding: 40px;
+}
+</style>
+</head>
+<body>
+<div id="mainContainer" class="markdown-body">
+<h2>Player-Side Rebalances v0.1.0 - Patch Notes</h2>
+<ul>
+    <li>fixed Gambler's Medical Supplies perk not being removed when switching to another perk deck</li>
+    <li>fixed vanilla bug where Close By Aced didn't apply the fire rate increase to shotguns with magazines even if they were fired in single fire mode</li>
+    <li>fixed sometimes not being able to swap fire modes</li>
+    <li>more changes converted to hooks</li>
+    <li>weapon changes:</li>
+    <ul>
+        <li>descriptions of pistols that can use AP Rounds now say so</li>
+        <li>double barrel shotguns now have a burst fire mode</li>
+        <li>double barrel shotguns no longer get 35% more damage at close range</li>
+        <li>fixed vanilla bug where you could queue two reload interupts by firing twice while reloading; 
+            also added a grace period at the start of reloads that prevents you from interupting the reload by firing</li>
+        <li>fixed certain sniper stats being the value for the tier above, this also fixes missing stats on the Thanatos</li>
+        <li>tier 1 snipers have had their ammo pickup increased: <b>1-1.75 🠊 <FONT COLOR="GREEN">1-2</FONT></b></li>
+        
+        <li><b>Kang Arms Model 54 Pistol and Akimbo variant:</b></li>
+        <ul>
+            <li>now has access to hollow point and fmj ammo types</li>
+            <li>ammo pickup: <b>2.03-2.84 🠊 <FONT COLOR="GREEN">4-9</FONT></b></li>
+        </ul>
+        
+        <li><b>Gecko M2 Pistol and Akimbo variant:</b></li>
+        <ul>
+            <li>now has access to hollow point and fmj ammo types</li>
+            <li>ammo pickup: <b>2.3-3.21 🠊 <FONT COLOR="GREEN">2.5-5</FONT></b></li>
+        </ul>
+        
+        <li><b>RUS-12 Angry Tiger Revolver:</b></li>
+        <ul>
+            <li>now has access to hollow point and ap ammo types; no longer has ap ammo by default</li>
+            <li>ammo pickup: <b>0.34-1.01 🠊 <FONT COLOR="GREEN">1.5-3</FONT></b></li>
+        </ul>
+    </ul>
+    <li>attachment tweaks:</li>
+    <ul>
+        <li>Single Fire weapon attachment is now Select Fire: Single/Burst</li>
+        <li>fixed description for assault rifle FMJ Rounds having the wrong penetration value</li>
+
+        <li><b>Verdunkeln Muzzle Brake:</b></li>
+        <ul>
+            <li>damage: <b>+1 🠊 <FONT COLOR="RED">0</FONT></b></li>
+            <li>accuracy: <b>+4 🠊 <FONT COLOR="GREEN">+8</FONT></b></li>
+            <li>stability: <b>+4 🠊 <FONT COLOR="RED">-4</FONT></b></li>
+            <li>concealment: <b>-1 🠊 <FONT COLOR="GREEN">0</FONT></b></li>
+        </ul>
+
+        <li><b>KS12-A Burst Muzzle:</b></li>
+        <ul>
+            <li>damage: <b>+2 🠊 <FONT COLOR="RED">0</FONT></b></li>
+        </ul>
+        
+        <li><b>KS12-S Long Silencer:</b></li>
+        <ul>
+            <li>damage: <b>-2 🠊 <FONT COLOR="RED">-4</FONT></b></li>
+        </ul>
+        
+        <li><b>Pistol Red Dot Sight:</b></li>
+        <ul>
+            <li>accuracy: <b>+4 🠊 <FONT COLOR="RED">0</FONT></b></li>
+            <li>stability: <b>0 🠊 <FONT COLOR="GREEN">+4</FONT></b></li>
+            <li>displays correct magnification value</li>
+        </ul>
+        
+        <li><b>Riktpunkt Holosight:</b></li>
+        <ul>
+            <li>accuracy: <b>0 🠊 <FONT COLOR="GREEN">+4</FONT></b></li>
+            <li>stability: <b>+4 🠊 <FONT COLOR="RED">0</FONT></b></li>
+            <li>magnification: <b>1.3x 🠊 1.5x</b>; to match displayed value</li>
+        </ul>
+        
+        <li><b>SKOLD Reflex Micro Sight:</b></li>
+        <ul>
+            <li>stability: <b>-4 🠊 <FONT COLOR="GREEN">0</FONT></b></li>
+            <li>displays correct magnification value</li>
+        </ul>
+    </ul>
+</ul>
+<p><i>2022-08-24 - Update 226</i></p>
+</div>
+</body>
+</html>
