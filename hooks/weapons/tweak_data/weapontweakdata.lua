@@ -188,6 +188,7 @@ function WeaponTweakData:_init_weapon_index_oryo()
 		pistol = {
 			tier_4 = {
 				"peacemaker",		-- Peacemaker .45 Revolver
+				"rsh12",			-- RUS-12 Angry Tiger Revolver
 				"mateba",			-- Matever .357 Revolver
 				"x_2006m",			-- Akimbo Matever .357 Revolvers
 				"chinchilla",		-- Castigo .44 Revolver
@@ -208,7 +209,9 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"model3",			-- Frenchman Model 87 Revolver
 				"x_model3",			-- Akimbo Frenchman Model 87 Revolvers
 				"m1911",			-- Crosskill Chunky Compact Pistol
-				"x_m1911"			-- Akimbo Crosskill Chunky Compact Pistols
+				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
+				"maxim9",			-- Gecko M2 Pistol
+				"x_maxim9"			-- Akimbo Gecko M2 Pistols
 			},
 			tier_2 = {
 				"g22c",				-- Chimano Custom Pistol
@@ -228,7 +231,9 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"stech",			-- Igor Automatik Pistol
 				"x_stech",			-- Akimbo Igor Automatik Pistols
 				"holt",				-- Holt 9 mm Pistol
-				"x_holt"			-- Akimbo Holt 9 mm Pistols
+				"x_holt",			-- Akimbo Holt 9 mm Pistols
+				"type54",			-- Kang armos Model 54 Pistol
+				"x_type54"			-- Akimbo Kang armos Model 54 Pistols
 			},
 			tier_1 = {
 				"glock_17",			-- Chimano 88 Pistol
@@ -386,7 +391,7 @@ function WeaponTweakData:_init_falloff_oryo()
 			}
 		},
 		snp = {
-			tier_4 = {
+			tier_5 = {
 				optimal_distance = 3000,
 				optimal_range = 3000,
 				near_falloff = 3000,
@@ -394,7 +399,7 @@ function WeaponTweakData:_init_falloff_oryo()
 				near_multiplier = 1,
 				far_multiplier = 1
 			},
-			tier_3 = {
+			tier_4 = {
 				optimal_distance = 0,
 				optimal_range = 2000,
 				near_falloff = 0,
@@ -402,13 +407,21 @@ function WeaponTweakData:_init_falloff_oryo()
 				near_multiplier = 1,
 				far_multiplier = 1.8
 			},
-			tier_2 = {
+			tier_3 = {
 				optimal_distance = 0,
 				optimal_range = 2000,
 				near_falloff = 0,
 				far_falloff = 500,
 				near_multiplier = 1,
 				far_multiplier = 1.5
+			},
+			tier_2 = {
+				optimal_distance = 0,
+				optimal_range = 2000,
+				near_falloff = 0,
+				far_falloff = 500,
+				near_multiplier = 1,
+				far_multiplier = 1.35
 			},
 			tier_1 = {
 				optimal_distance = 0,
@@ -662,10 +675,11 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = {15	/1.35, 35	/1.35}
 		},
 		snp = {
-			tier_4 = {0.04, 0.54},
-			tier_3 = {0.1	/1.35, 1	/1.35},
-			tier_2 = {1		/1.35, 1	/1.35},
-			tier_1 = {1		/1.35, 1.75	/1.35}
+			tier_5 = {0.04, 0.54},
+			tier_4 = {0.1	/1.35, 1	/1.35},
+			tier_3 = {1		/1.35, 1	/1.35},
+			tier_2 = {1		/1.35, 1.75	/1.35},
+			tier_1 = {1		/1.35, 2	/1.35}
 		},
 		smg = {
 			tier_3 = {3		/1.35, 7	/1.35},

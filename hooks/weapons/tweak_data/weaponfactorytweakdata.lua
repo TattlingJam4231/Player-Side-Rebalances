@@ -1603,6 +1603,7 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 		pistol = {
 			tier_4 = {
 				"peacemaker",		-- Peacemaker .45 Revolver
+				"rsh12",			-- RUS-12 Angry Tiger Revolver
 				"mateba",			-- Matever .357 Revolver
 				"x_2006m",			-- Akimbo Matever .357 Revolvers
 				"chinchilla",		-- Castigo .44 Revolver
@@ -1623,7 +1624,9 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"model3",			-- Frenchman Model 87 Revolver
 				"x_model3",			-- Akimbo Frenchman Model 87 Revolvers
 				"m1911",			-- Crosskill Chunky Compact Pistol
-				"x_m1911"			-- Akimbo Crosskill Chunky Compact Pistols
+				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
+				"maxim9",			-- Gecko M2 Pistol
+				"x_maxim9"			-- Akimbo Gecko M2 Pistols
 			},
 			tier_2 = {
 				"g22c",				-- Chimano Custom Pistol
@@ -1643,7 +1646,9 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"stech",			-- Igor Automatik Pistol
 				"x_stech",			-- Akimbo Igor Automatik Pistols
 				"holt",				-- Holt 9 mm Pistol
-				"x_holt"			-- Akimbo Holt 9 mm Pistols
+				"x_holt",			-- Akimbo Holt 9 mm Pistols
+				"type54",			-- Kang armos Model 54 Pistol
+				"x_type54"			-- Akimbo Kang armos Model 54 Pistols
 			},
 			tier_1 = {
 				"glock_17",			-- Chimano 88 Pistol
