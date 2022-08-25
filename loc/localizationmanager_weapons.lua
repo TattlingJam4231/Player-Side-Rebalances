@@ -1,5 +1,22 @@
 Hooks:Add("LocalizationManagerPostInit", "Oryo Weapon Localization", function(loc)
 	LocalizationManager:add_localized_strings({
+
+		--Weapons----------------------------------------------------------------------------------
+		["bm_w_lemming_desc"] =							"Has access to AP Rounds",
+
+		["bm_w_deagle_desc"] =							"Has access to AP Rounds",
+		
+		["bm_w_raging_bull_desc"] =						"Has access to AP Rounds",
+		
+		["bm_w_chinchilla_desc"] =						"Has access to AP Rounds",
+		
+		["bm_w_mateba_desc"] =							"Has access to AP Rounds",
+		
+		["bm_w_peacemaker_desc"] =						"Has access to AP Rounds",
+		
+		["bm_w_rsh12_desc"] =							"Has access to AP Rounds",
+
+		--Attachments------------------------------------------------------------------------------
 		["bm_wp_upg_a_custom_desc"] =					"Fewer pellets but larger impact. Pellets can penetrate one enemy and can penetrate walls at close range.",
 
 		["bm_wp_upg_a_explosive_desc"] =				"Fires one explosive charge that kills or stuns targets. This ammo type is harder to find.",

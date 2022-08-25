@@ -2428,6 +2428,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.peacemaker.fire_mode_data.fire_rate = 0.166
 			self.peacemaker.single.fire_rate = 0.166
 			self.peacemaker.armor_piercing_chance = 1
+			self.peacemaker.has_description = true
 
 
 			-- RUS-12 Angry Tiger Revolver
@@ -2442,6 +2443,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.mateba.fire_mode_data.fire_rate = 0.166
 			self.mateba.single.fire_rate = 0.166
 			self.mateba.armor_piercing_chance = 1
+			self.mateba.has_description = true
 			
 					--akimbo matever
 					self.x_2006m.AMMO_MAX = 48
@@ -2455,6 +2457,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.chinchilla.fire_mode_data.fire_rate = 0.166
 			self.chinchilla.single.fire_rate = 0.166
 			self.chinchilla.armor_piercing_chance = 1
+			self.chinchilla.has_description = true
 			
 					--akimbo castigo
 					self.x_chinchilla.AMMO_MAX = 48
@@ -2468,6 +2471,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.new_raging_bull.fire_mode_data.fire_rate = 0.166
 			self.new_raging_bull.single.fire_rate = 0.166
 			self.new_raging_bull.armor_piercing_chance = 1
+			self.new_raging_bull.has_description = true
 			
 					--akimbo bronco
 					self.x_rage.AMMO_MAX = 48
@@ -2484,6 +2488,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.deagle.stats.spread = 18
 			self.deagle.stats.recoil = 1
 			self.deagle.armor_piercing_chance = 1
+			self.deagle.has_description = true
 			
 					--akimbo deagle
 					self.x_deagle.AMMO_MAX = 30
