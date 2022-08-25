@@ -2429,6 +2429,13 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.peacemaker.single.fire_rate = 0.166
 			self.peacemaker.armor_piercing_chance = 1
 
+
+			-- RUS-12 Angry Tiger Revolver
+			self.rsh12.can_shoot_through_enemy = nil
+			self.rsh12.can_shoot_through_shield = nil
+			self.rsh12.can_shoot_through_wall = nil
+			self.rsh12.armor_piercing_chance = nil
+
 			
 			--matever
 			self.mateba.AMMO_MAX = 48
