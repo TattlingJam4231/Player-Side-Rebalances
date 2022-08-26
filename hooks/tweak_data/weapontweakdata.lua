@@ -1515,6 +1515,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.saiga.rays = 12
 			self.saiga.stats.damage = 45
 			self.saiga.stats.reload = 8
+			self.saiga.stats.recoil = 7
 
 			
 			-- Steakout 12G Shotgun
@@ -1522,6 +1523,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- self.aa12.auto.fire_rate = 0.1667
 			self.aa12.rays = 12
 			self.aa12.stats.damage = 45
+			self.aa12.stats.recoil = 14
 		
 			-- Grimm 12G Shotgun
 			self.basset.AMMO_MAX = 56

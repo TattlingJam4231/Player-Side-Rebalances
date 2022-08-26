@@ -1307,7 +1307,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.667,
-						ammo_pickup_max_mul = 0.333,
+						ammo_pickup_max_mul = 0.667,
 						dot_data = {
 							type = "fire",
 							custom_data = {
