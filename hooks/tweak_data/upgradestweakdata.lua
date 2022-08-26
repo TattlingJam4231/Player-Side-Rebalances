@@ -13,8 +13,6 @@ function UpgradesTweakData:_init_skill_trees_oryo()
 	self:_init_enforcer_oryo()
 	self:_init_ghost_oryo()
 	self:_init_fugitive_oryo()
-
-	self:_init_crew_oryo()
 end
 
 function UpgradesTweakData:_init_mastermind_oryo()
