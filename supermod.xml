@@ -39,14 +39,11 @@
                 <post :hook_id="projectilestweakdata"                           :script_path="projectilestweakdata.lua"/>
             </group>
 
-            <post :hook_id="playertweakdata"								:script_path="playertweakdata_perks.lua"/>
+            <post :hook_id="playertweakdata"								:script_path="playertweakdata.lua"/>
             <post :hook_id="skilltreetweakdata"								:script_path="skilltreetweakdata_perks.lua"/>
 		    <post :hook_id="skilltreetweakdata"                             :script_path="skilltreetweakdata_skills.lua"/>
-            <post :hook_id="tweakdata"										:script_path="tweakdata_perks.lua"/>
-            <post :hook_id="tweakdata"                                      :script_path="tweakdata_weapons.lua"/>
-            <post :hook_id="upgradestweakdata"								:script_path="upgradestweakdata_perks.lua"/>
-            <post :hook_id="upgradestweakdata"                              :script_path="upgradestweakdata_sentry.lua"/>
-		    <post :hook_id="upgradestweakdata"                              :script_path="upgradestweakdata_skills.lua"/>
+            <post :hook_id="tweakdata"										:script_path="tweakdata.lua"/>
+            <post :hook_id="upgradestweakdata"								:script_path="upgradestweakdata.lua"/>
             <post :hook_id="weaponfactorytweakdata"                         :script_path="weaponfactorytweakdata.lua"/>
             <post :hook_id="weapontweakdata"                                :script_path="weapontweakdata.lua"/>
         </group>
