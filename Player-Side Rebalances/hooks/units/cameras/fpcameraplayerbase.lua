@@ -1,3 +1,48 @@
+-- <Developer
+local function save_recoil(recoil,filename)
+	local file,err = io.open(filename, "w")
+	if err then return err end
+
+	file:write( "{\n")
+	local previous = false
+	for _,v in ipairs(recoil) do
+		if previous then file:write(",\n") end
+		file:write("	{"..tostring(v[1])..","..tostring(v[2]).."}")
+		previous = true
+	end
+	file:write("\n}")
+	file:close()
+end
+
+local function record_recoil_table()
+	if record_recoil > 0 then
+		previous_rot = current_rot
+		current_rot = {self._camera_properties.pitch, self._camera_properties.spin}
+		if previous_rot then
+			local vertical_recoil = current_rot[1] - previous_rot[1]
+			local horizontal_recoil = current_rot[2] - previous_rot[2]
+			
+			vertical_recoil = math.round_with_precision(vertical_recoil > 180 and vertical_recoil%-360 or vertical_recoil < -180 and vertical_recoil%360 or vertical_recoil, 2)
+			horizontal_recoil = - math.round_with_precision(horizontal_recoil > 180 and horizontal_recoil%-360 or horizontal_recoil < -180 and horizontal_recoil%360 or horizontal_recoil, 2)
+
+			table.insert(recoil,{vertical_recoil,horizontal_recoil})
+			record_recoil = record_recoil - 1
+		end
+		if record_recoil == 0 then
+			local file_path = nil
+			if file_path then
+				save_recoil(recoil, file_path)
+			end
+		end
+	end
+end
+
+local record_recoil = 0
+local recoil = {}
+local current_rot = nil
+local previous_rot = nil
+-- Developer>
+
 local kick_indices_timer = 0.5
 
 function FPCameraPlayerBase:_update_movement(t, dt)

@@ -1,6 +1,25 @@
 if not wr_tweakstats then
 	if not tweak_data then return end
 
+	-- Sicario Smoke Grenade
+    tweak_data.blackmarket.projectiles.smoke_screen_grenade = {
+		name_id = "bm_grenade_smoke_screen_grenade",
+		desc_id = "bm_grenade_smoke_screen_grenade_desc",
+		unit = "units/pd2_dlc_max/weapons/wpn_fps_smoke_screen_grenade/wpn_third_smoke_screen_grenade",
+		unit_dummy = "units/pd2_dlc_max/weapons/wpn_fps_smoke_screen_grenade/wpn_fps_smoke_screen_grenade_husk",
+		sprint_unit = "units/pd2_dlc_max/weapons/wpn_fps_smoke_screen_grenade/wpn_third_smoke_screen_grenade_sprint",
+		icon = "smoke_screen_grenade",
+		texture_bundle_folder = "max",
+		base_cooldown = 45,
+		max_amount = 2,
+		is_a_grenade = true,
+		throwable = true,
+		animation = "throw_grenade_com",
+		anim_global_param = "projectile_frag_com",
+		no_shouting = true
+	}
+
+	-- HRL Rocket
 	tweak_data.projectiles.launcher_rocket = {
 		damage = 620,
 		launch_speed = 2500,
@@ -13,6 +32,7 @@ if not wr_tweakstats then
 		name_id = "bm_launcher_rocket"
 	}
 
+	-- Commando Rocket
 	tweak_data.projectiles.rocket_ray_frag = {
 		damage = 210,
 		launch_speed = 2500,
@@ -28,6 +48,7 @@ if not wr_tweakstats then
 		push_at_body_index = 0
 	}
 
+	-- China Puff Grenade
 	tweak_data.projectiles.launcher_frag_china = {
 		damage = 96,
 		launch_speed = 1250,
@@ -40,7 +61,7 @@ if not wr_tweakstats then
 		name_id = "bm_launcher_frag"
 		}
 	
-		
+	--Basilisk Grenade
 	tweak_data.projectiles.launcher_frag_ms3gl = {
 		damage = 32,
 		launch_speed = 1250,
@@ -53,6 +74,7 @@ if not wr_tweakstats then
 		name_id = "bm_launcher_frag"
 	}
 
+	-- Arbiter Grenade
 	tweak_data.projectiles.launcher_frag_arbiter = {
 		damage = 54,
 		launch_speed = 7000,
