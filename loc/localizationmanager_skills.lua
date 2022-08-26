@@ -21,11 +21,11 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Skill Localization", function(loc
 
 		--Sharpshooter-----------------------------------------------------------------------------
 		["menu_sniper_graze_damage_desc"] = 			"BASIC: ##4 points##\n" ..
-														"Snipers that hit their target deal ##20%## of the damage dealt in a ##1m## radius around the bullet trajectory.\n\n" ..
-														"When fired in single shot fire mode, SMGs and Assault Rifles that hit their target deal ##20%## of the damage dealt in a ##2.5m## radius around the bullet impact.\n\n" ..
+														"Snipers that hit their target deal ##20%## of the damage dealt in a ##1m## radius around the bullet ##trajectory##.\n\n" ..
+														"When fired in single shot fire mode, SMGs and Assault Rifles that hit their target deal ##20%## of the damage dealt in a ##2.5m## radius around the bullet ##impact##.\n\n" ..
 														"ACE: ##8 points##\n" ..
-														"If a Sniper would headshot kill someone, the graze skill will deal ##100%## of the damage dealt instead of ##20%##.\n\n" ..
-														"If an SMG or Assault Rifle fired in single shot fire mode would headshot someone, the graze skill will deal ##50%## of the damage dealt instead of ##20%##.",
+														"If a Sniper would ##headshot kill## someone, the graze skill will deal ##100%## of the damage dealt instead of ##20%##.\n\n" ..
+														"If an SMG or Assault Rifle fired in single shot fire mode would ##headshot## someone, the graze skill will deal ##50%## of the damage dealt instead of ##20%##.",
 
 		["menu_single_shot_ammo_return_beta_desc"] =	"BASIC: ##3 points##\n" ..
 														"Getting a headshot within ##2## seconds of your previous headshot will refund ##1## bullet to your used weapon. " ..
