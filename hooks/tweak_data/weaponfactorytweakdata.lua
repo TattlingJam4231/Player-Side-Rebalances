@@ -1,3 +1,248 @@
+function WeaponFactoryTweakData:_init_weapon_index_oryo()
+	self.weapon_index = {
+		assault_rifle = {
+			tier_4 = {
+				"wpn_fps_ass_sub2000",			-- Cavity 9mm
+				"wpn_fps_ass_ching",			-- Galant Rifle
+				"wpn_fps_ass_contraband",		-- Little Friend 7.62 Assault Rifle
+				"wpn_fps_ass_m14"				-- M308 Rifle
+			},
+			tier_3 = {
+				"wpn_fps_ass_flint",			-- AK17 Rifle
+				"wpn_fps_ass_akm",				-- AK.762 Rifle
+				"wpn_fps_ass_akm_gold",			-- Golden AK.762 Rifle
+				"wpn_fps_ass_m16",				-- AMR-16 Rifle
+				"wpn_fps_ass_scar",				-- Eagle Heavy Rifle
+				"wpn_fps_ass_fal",				-- Falcon Rifle
+				"wpn_fps_ass_g3",				-- Gewehr 3 Rifle
+				"wpn_fps_ass_groza",			-- KETCHNOV Byk-1 Assault Rifle
+				"wpn_fps_ass_shak12"			-- KS12 Urban Rifle
+			},
+			tier_2 = {
+				"wpn_fps_ass_74",				-- AK Rifle
+				"wpn_fps_ass_ak5",				-- AK5 Rifle
+				"wpn_fps_ass_m4",				-- CAR-4 Rifle
+				"wpn_fps_ass_galil",			-- Gecko 7.62 Rifle
+				"wpn_fps_ass_vhs",				-- Lion's Roar Rifle
+				"wpn_fps_ass_l85a2",			-- Queen's Wrath Rifle
+				"wpn_fps_ass_komodo",			-- Tempest-21 Rifle
+				"wpn_fps_ass_aug",				-- UAR Rifle
+				"wpn_fps_ass_corgi"				-- Union 5.56 Rifle
+			},
+			tier_1 = {
+				"wpn_fps_ass_amcar",			-- AMCAR Rifle
+				"wpn_fps_ass_tecci",			-- Bootleg Rifle
+				"wpn_fps_ass_famas",			-- Clarion Rifle
+				"wpn_fps_ass_s552",				-- Commando 553 Rifle
+				"wpn_fps_ass_g36",				-- JP36 Rifle
+				"wpn_fps_ass_asval"				-- Valkyria Rifle
+			}
+		},
+		shotgun = {
+			tier_4 = {
+				"wpn_fps_shot_b682",			-- Joceline O/U 12G Shotgun
+				"wpn_fps_shot_huntsman",		-- Mosconi 12G Shotgun
+				"wpn_fps_sho_boot",				-- Breaker 12G Shotgun
+				"wpn_fps_shot_m37",				-- GSPS 12G Shotgun
+				"wpn_fps_sho_coach"				-- Claire 12G Shotgun
+			},
+			pump_action = {
+				"wpn_fps_sho_m590",				-- Mosconi 12G Tactical Shotgun
+				"wpn_fps_sho_ksg",				-- Raven Shotgun
+				"wpn_fps_shot_m1897",			-- Reinfeld 88 Shotgun
+				"wpn_fps_shot_r870",			-- Reinfeld 880 Shotgun
+				"wpn_fps_shot_serbu",			-- Locomotive 12G Shotgun
+			},
+			tier_3 = {
+				"wpn_fps_pis_judge",			-- The Judge Shotgun
+				"wpn_fps_pis_x_judge",			-- Akimbo Judge Shotguns
+				"rotwpn_fps_sho_rotaa",			-- Goliath 12G Shotgun
+				"wpn_fps_sho_x_rota",			-- Akimbo Goliath 12G Shotguns
+				"wpn_fps_sho_ultima"			-- Argos III Shotgun
+			},
+			tier_2 = {
+				"wpn_fps_sho_ben",			-- M1014 Shotgun
+				"wpn_fps_sho_spas12",			-- Predator 12G Shotgun
+				"wpn_fps_sho_striker"			-- Street Sweeper Shotgun
+			},
+			tier_1 = {
+				"wpn_fps_shot_saiga",			-- Izhma 12G Shotgun
+				"wpn_fps_sho_aa12",				-- Steakout 12G Shotgun
+				"wpn_fps_sho_basset",			-- Grimm 12G Shotgun
+				"wpn_fps_sho_x_basset"			-- Brothers Grimm 12G Shotguns
+			}
+		},
+		lmg = {
+			tier_3 = {
+				"m60"				-- M60 Light Machine Gun
+			},
+			tier_2 = {
+				"rpk",				-- RPK Light Machine Gun
+				"hk21"				-- Brenner-21 Light Machine Gun
+			},
+			tier_1 = {
+				"m249",				-- KSP Light Machine Gun
+				"par",				-- KSP 58 Light Machine Gun
+				"mg42"				-- Buzzsaw 42 Light Machine Gun
+			}
+		},
+		snp = {
+			tier_5 = {
+				"m95"				-- Thanatos .50 cal Sniper Rifle
+			},
+			tier_4 = {
+				"mosin",			-- Nagant Sniper Rifle
+				"desertfox",		-- Desertfox Sniper Rifle
+				"r93",				-- R93 Sniper Rifle
+				"model70"			-- Platypus 70 Sniper Rifle
+			},
+			tier_3 = {
+				"msr",				-- Rattlesnake Sniper Rifle
+				"winchester1874",	-- Repeater 1874 Sniper Rifle
+				"r700",				-- R700 Sniper Rifle
+				"scout"				-- Pronghorn Sniper Rifle
+			},
+			tier_2 = {
+				"sbl"				-- Bernetti Rangehitter Sniper Rifle
+			},
+			tier_1 = {
+				"wa2000",			-- Lebensauger .308 Sniper Rifle
+				"tti",				-- Contractor .308 Sniper Rifle
+				"siltstone",		-- Grom Sniper Rifle
+				"qbu88"				-- Kang Arms X1 Sniper Rifle
+			}
+		},
+		smg = {
+			tier_3 = {
+				"hajk",				-- CR 805B Submachine Gun
+				"x_hajk",			-- Akimbo CR 805B Submachine Guns
+				"schakal",			-- Jackal Submachine Gun
+				"x_schakal",		-- Akimbo Jackal Submachine Guns
+				"akmsu",			-- Krinkov Submachine Gun
+				"x_akmsu",			-- Akimbo Krinkov Submachine Gun
+				"erma",				-- MP40 Submachine Gun
+				"x_erma",			-- Akimbo MP40 Submachine Guns
+				"sterling",			-- Patchett L2A1 Submachine Gun
+				"x_sterling",		-- Akimbo Patchett L2A1 Submachine Guns
+				"m45",				-- Swedish K Submachine Gun
+				"x_m45",			-- Akimbo Swedish K Submachine Guns
+				"coal",				-- Tatonka Submachine Gun
+				"x_coal"			-- Akimbo Tatonka Submachine Guns
+			},
+			tier_2 = {
+				"vityaz",			-- AK Gen 21 Tactical Submachine Gun
+				"x_vityaz",			-- Akimbo AK Gen 21 Tactical SMGs
+				"m1928",			-- Chicago Typewriter Submachine Gun
+				"x_m1928",			-- Akimbo Chicago Typewriter SMGs
+				"sr2",				-- Heather Submachine Gun
+				"x_sr2",			-- Akimbo Heather Submachine Guns
+				"cobray",			-- Jacket's Piece
+				"x_cobray",			-- Akimbo Jacket's Piece
+				"p90",				-- Kobus 90 Submachine Gun
+				"x_p90",			-- Akimbo Kobus 90 Submachine Guns
+				"polymer",			-- Kross Vertex Submachine Gun
+				"x_polymer",		-- Akimbo Kross Vertex Submachine Guns
+				"mac10",			-- Mark 10 Submachine Gun
+				"x_mac10",			-- Akimbo Mark 10 Submachine Guns
+				"pm9",				-- Miyaka 10 Special Submachine Gun
+				"x_pm9",			-- Akimbo Miyaka 10 Special SMGs
+				"olympic",			-- Para Submachine Gun
+				"x_olympic",		-- Akimbo Para Submachine Guns
+				"mp7",				-- Specops Submachine Gun
+				"x_mp7"				-- Akimbo Specops Submachine Guns
+			},
+			tier_1 = {
+				"tec9",				-- Blaster 9mm Submachine Gun
+				"x_tec9",			-- Akimbo Blaster 9mm Submachine Guns
+				"mp9",				-- CMP Submachine Gun
+				"x_mp9",			-- Akimbo CMP Submachine Guns
+				"scorpion",			-- Cobra Submachine Gun
+				"x_scorpion",		-- Akimbo Cobra Submachine Guns
+				"new_mp5",			-- Compact-5 Submachine Gun
+				"x_new_mp5",		-- Akimbo Compact-5 Submachine Guns
+				"baka",				-- Micro Uzi Submachine Gun
+				"x_baka",			-- Akimbo Micro Uzi Submachine Guns
+				"shepheard",		-- Signature Submachine Gun
+				"x_shepheard",		-- Akimbo Signature Submachine Guns
+				"uzi",				-- Uzi Submachine Gun
+				"x_uzi",			-- Akimbo Uzi Submachine Guns
+				"fmg9"				-- Wasp-DS SMG
+			}
+		},
+		pistol = {
+			tier_4 = {
+				"peacemaker",		-- Peacemaker .45 Revolver
+				"rsh12",			-- RUS-12 Angry Tiger Revolver
+				"mateba",			-- Matever .357 Revolver
+				"x_2006m",			-- Akimbo Matever .357 Revolvers
+				"chinchilla",		-- Castigo .44 Revolver
+				"x_chinchilla",		-- Akimbo Castigo .44 Revolvers
+				"new_raging_bull",	-- Bronco .44 Revolver
+				"x_rage",			-- Akimbo Bronco .44 Revolvers
+				"deagle",			-- Deagle Pistol
+				"x_deagle"			-- Akimbo Deagle Pistols
+			},
+			tier_3 = {
+				"pl14",				-- White Streak Pistol
+				"x_pl14",			-- Akimbo White Streak Pistols
+				"breech",			-- Parabellum Pistol
+				"x_breech",			-- Akimbo Parabellum Pistols
+				"sparrow",			-- Baby Deagle
+				"x_sparrow",		-- Akimbo Baby Deagle Pistols
+				"lemming",			-- 5/7 AP Pistol
+				"model3",			-- Frenchman Model 87 Revolver
+				"x_model3",			-- Akimbo Frenchman Model 87 Revolvers
+				"m1911",			-- Crosskill Chunky Compact Pistol
+				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
+				"maxim9",			-- Gecko M2 Pistol
+				"x_maxim9"			-- Akimbo Gecko M2 Pistols
+			},
+			tier_2 = {
+				"g22c",				-- Chimano Custom Pistol
+				"x_g22c",			-- Akimbo Chimano Custom Pistols
+				"colt_1911",		-- Crosskill Pistol
+				"x_1911",			-- Akimbo Crosskill Pistols
+				"c96",				-- Broomstick Pistol
+				"x_c96",			-- Akimbo Broomstick Pistols
+				"usp",				-- Interceptor 45 Pistol
+				"x_usp",			-- Akimbo Interceptor 45 Pistols
+				"p226",				-- Signature .40 Pistol
+				"x_p226",			-- Akimbo Signature .40 Pistols
+				"hs2000",			-- LEO Pistol
+				"x_hs2000",			-- Akimbo LEO Pistols
+				"packrat",			-- Contractor Pistol
+				"x_packrat",		-- Akimbo Contractor Pistols
+				"stech",			-- Igor Automatik Pistol
+				"x_stech",			-- Akimbo Igor Automatik Pistols
+				"holt",				-- Holt 9 mm Pistol
+				"x_holt",			-- Akimbo Holt 9 mm Pistols
+				"type54",			-- Kang armos Model 54 Pistol
+				"x_type54"			-- Akimbo Kang armos Model 54 Pistols
+			},
+			tier_1 = {
+				"glock_17",			-- Chimano 88 Pistol
+				"x_g17",			-- Akimbo Chimano 88 Pistols
+				"g26",				-- Chimano Compact Pistol
+				"jowi",				-- Akimbo Chimano Compact Pistols
+				"b92fs",			-- Bernetti 9 Pistol
+				"x_b92fs",			-- Akimbo Bernetti 9 Pistols
+				"glock_18c",		-- STRYK 18c Pistol
+				"x_g18c",			-- Akimbo STRYK 18c Pistols
+				"ppk",				-- Gruber Kurz Pistol
+				"x_ppk",			-- Akimbo Gruber Kurz Pistols
+				"legacy",			-- M13 9mm Pistol
+				"x_legacy",			-- Akimbo M13 9mm Pistols
+				"shrew",			-- Crosskill Guard Pistol
+				"x_shrew",			-- Akimbo Crosskill Guard Pistols
+				"czech",			-- Czech 92 Pistol
+				"x_czech",			-- Akimbo Czech 92 Pistols
+				"beer",				-- Bernetti Auto Pistol
+				"x_beer"			-- Akimbo Bernetti Auto Pistols
+			}
+		}
+	}
+end
+
 function WeaponFactoryTweakData:_init_ammo_types_oryo()
 	--shotgun ammo
 	self.ammo = {
@@ -508,7 +753,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						value = 5, 
 						total_ammo_mod = -5,
 						damage = 128,
-						spread = -2
+						spread = -3
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
@@ -524,7 +769,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						value = 5, 
 						total_ammo_mod = -5,
 						damage = 105,
-						spread = -2
+						spread = -3
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
@@ -540,7 +785,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						value = 5, 
 						total_ammo_mod = -5,
 						damage = 105,
-						spread = -2
+						spread = -3
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
@@ -556,7 +801,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						value = 5, 
 						total_ammo_mod = -5,
 						damage = 52,
-						spread = -2
+						spread = -3
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
@@ -572,7 +817,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						value = 5, 
 						total_ammo_mod = -5,
 						damage = 40,
-						spread = -2
+						spread = -3
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
@@ -810,251 +1055,6 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 12
 					}
 				}
-			}
-		}
-	}
-end
-
-function WeaponFactoryTweakData:_init_weapon_index_oryo()
-	self.weapon_index = {
-		assault_rifle = {
-			tier_4 = {
-				"wpn_fps_ass_sub2000",			-- Cavity 9mm
-				"wpn_fps_ass_ching",			-- Galant Rifle
-				"wpn_fps_ass_contraband",		-- Little Friend 7.62 Assault Rifle
-				"wpn_fps_ass_m14"				-- M308 Rifle
-			},
-			tier_3 = {
-				"wpn_fps_ass_flint",			-- AK17 Rifle
-				"wpn_fps_ass_akm",				-- AK.762 Rifle
-				"wpn_fps_ass_akm_gold",			-- Golden AK.762 Rifle
-				"wpn_fps_ass_m16",				-- AMR-16 Rifle
-				"wpn_fps_ass_scar",				-- Eagle Heavy Rifle
-				"wpn_fps_ass_fal",				-- Falcon Rifle
-				"wpn_fps_ass_g3",				-- Gewehr 3 Rifle
-				"wpn_fps_ass_groza",			-- KETCHNOV Byk-1 Assault Rifle
-				"wpn_fps_ass_shak12"			-- KS12 Urban Rifle
-			},
-			tier_2 = {
-				"wpn_fps_ass_74",				-- AK Rifle
-				"wpn_fps_ass_ak5",				-- AK5 Rifle
-				"wpn_fps_ass_m4",				-- CAR-4 Rifle
-				"wpn_fps_ass_galil",			-- Gecko 7.62 Rifle
-				"wpn_fps_ass_vhs",				-- Lion's Roar Rifle
-				"wpn_fps_ass_l85a2",			-- Queen's Wrath Rifle
-				"wpn_fps_ass_komodo",			-- Tempest-21 Rifle
-				"wpn_fps_ass_aug",				-- UAR Rifle
-				"wpn_fps_ass_corgi"				-- Union 5.56 Rifle
-			},
-			tier_1 = {
-				"wpn_fps_ass_amcar",			-- AMCAR Rifle
-				"wpn_fps_ass_tecci",			-- Bootleg Rifle
-				"wpn_fps_ass_famas",			-- Clarion Rifle
-				"wpn_fps_ass_s552",				-- Commando 553 Rifle
-				"wpn_fps_ass_g36",				-- JP36 Rifle
-				"wpn_fps_ass_asval"				-- Valkyria Rifle
-			}
-		},
-		shotgun = {
-			tier_4 = {
-				"wpn_fps_shot_b682",			-- Joceline O/U 12G Shotgun
-				"wpn_fps_shot_huntsman",		-- Mosconi 12G Shotgun
-				"wpn_fps_sho_boot",				-- Breaker 12G Shotgun
-				"wpn_fps_shot_m37",				-- GSPS 12G Shotgun
-				"wpn_fps_sho_coach"				-- Claire 12G Shotgun
-			},
-			pump_action = {
-				"wpn_fps_sho_m590",				-- Mosconi 12G Tactical Shotgun
-				"wpn_fps_sho_ksg",				-- Raven Shotgun
-				"wpn_fps_shot_m1897",			-- Reinfeld 88 Shotgun
-				"wpn_fps_shot_r870",			-- Reinfeld 880 Shotgun
-				"wpn_fps_shot_serbu",			-- Locomotive 12G Shotgun
-			},
-			tier_3 = {
-				"wpn_fps_pis_judge",			-- The Judge Shotgun
-				"wpn_fps_pis_x_judge",			-- Akimbo Judge Shotguns
-				"rotwpn_fps_sho_rotaa",			-- Goliath 12G Shotgun
-				"wpn_fps_sho_x_rota",			-- Akimbo Goliath 12G Shotguns
-				"wpn_fps_sho_ultima"			-- Argos III Shotgun
-			},
-			tier_2 = {
-				"wpn_fps_sho_ben",			-- M1014 Shotgun
-				"wpn_fps_sho_spas12",			-- Predator 12G Shotgun
-				"wpn_fps_sho_striker"			-- Street Sweeper Shotgun
-			},
-			tier_1 = {
-				"wpn_fps_shot_saiga",			-- Izhma 12G Shotgun
-				"wpn_fps_sho_aa12",				-- Steakout 12G Shotgun
-				"wpn_fps_sho_basset",			-- Grimm 12G Shotgun
-				"wpn_fps_sho_x_basset"			-- Brothers Grimm 12G Shotguns
-			}
-		},
-		lmg = {
-			tier_3 = {
-				"m60"				-- M60 Light Machine Gun
-			},
-			tier_2 = {
-				"rpk",				-- RPK Light Machine Gun
-				"hk21"				-- Brenner-21 Light Machine Gun
-			},
-			tier_1 = {
-				"m249",				-- KSP Light Machine Gun
-				"par",				-- KSP 58 Light Machine Gun
-				"mg42"				-- Buzzsaw 42 Light Machine Gun
-			}
-		},
-		snp = {
-			tier_5 = {
-				"m95"				-- Thanatos .50 cal Sniper Rifle
-			},
-			tier_4 = {
-				"mosin",			-- Nagant Sniper Rifle
-				"desertfox",		-- Desertfox Sniper Rifle
-				"r93",				-- R93 Sniper Rifle
-				"model70"			-- Platypus 70 Sniper Rifle
-			},
-			tier_3 = {
-				"msr",				-- Rattlesnake Sniper Rifle
-				"winchester1874",	-- Repeater 1874 Sniper Rifle
-				"r700",				-- R700 Sniper Rifle
-				"scout"				-- Pronghorn Sniper Rifle
-			},
-			tier_2 = {
-				"sbl"				-- Bernetti Rangehitter Sniper Rifle
-			},
-			tier_1 = {
-				"wa2000",			-- Lebensauger .308 Sniper Rifle
-				"tti",				-- Contractor .308 Sniper Rifle
-				"siltstone",		-- Grom Sniper Rifle
-				"qbu88"				-- Kang Arms X1 Sniper Rifle
-			}
-		},
-		smg = {
-			tier_3 = {
-				"hajk",				-- CR 805B Submachine Gun
-				"x_hajk",			-- Akimbo CR 805B Submachine Guns
-				"schakal",			-- Jackal Submachine Gun
-				"x_schakal",		-- Akimbo Jackal Submachine Guns
-				"akmsu",			-- Krinkov Submachine Gun
-				"x_akmsu",			-- Akimbo Krinkov Submachine Gun
-				"erma",				-- MP40 Submachine Gun
-				"x_erma",			-- Akimbo MP40 Submachine Guns
-				"sterling",			-- Patchett L2A1 Submachine Gun
-				"x_sterling",		-- Akimbo Patchett L2A1 Submachine Guns
-				"m45",				-- Swedish K Submachine Gun
-				"x_m45",			-- Akimbo Swedish K Submachine Guns
-				"coal",				-- Tatonka Submachine Gun
-				"x_coal"			-- Akimbo Tatonka Submachine Guns
-			},
-			tier_2 = {
-				"vityaz",			-- AK Gen 21 Tactical Submachine Gun
-				"x_vityaz",			-- Akimbo AK Gen 21 Tactical SMGs
-				"m1928",			-- Chicago Typewriter Submachine Gun
-				"x_m1928",			-- Akimbo Chicago Typewriter SMGs
-				"sr2",				-- Heather Submachine Gun
-				"x_sr2",			-- Akimbo Heather Submachine Guns
-				"cobray",			-- Jacket's Piece
-				"x_cobray",			-- Akimbo Jacket's Piece
-				"p90",				-- Kobus 90 Submachine Gun
-				"x_p90",			-- Akimbo Kobus 90 Submachine Guns
-				"polymer",			-- Kross Vertex Submachine Gun
-				"x_polymer",		-- Akimbo Kross Vertex Submachine Guns
-				"mac10",			-- Mark 10 Submachine Gun
-				"x_mac10",			-- Akimbo Mark 10 Submachine Guns
-				"pm9",				-- Miyaka 10 Special Submachine Gun
-				"x_pm9",			-- Akimbo Miyaka 10 Special SMGs
-				"olympic",			-- Para Submachine Gun
-				"x_olympic",		-- Akimbo Para Submachine Guns
-				"mp7",				-- Specops Submachine Gun
-				"x_mp7"				-- Akimbo Specops Submachine Guns
-			},
-			tier_1 = {
-				"tec9",				-- Blaster 9mm Submachine Gun
-				"x_tec9",			-- Akimbo Blaster 9mm Submachine Guns
-				"mp9",				-- CMP Submachine Gun
-				"x_mp9",			-- Akimbo CMP Submachine Guns
-				"scorpion",			-- Cobra Submachine Gun
-				"x_scorpion",		-- Akimbo Cobra Submachine Guns
-				"new_mp5",			-- Compact-5 Submachine Gun
-				"x_new_mp5",		-- Akimbo Compact-5 Submachine Guns
-				"baka",				-- Micro Uzi Submachine Gun
-				"x_baka",			-- Akimbo Micro Uzi Submachine Guns
-				"shepheard",		-- Signature Submachine Gun
-				"x_shepheard",		-- Akimbo Signature Submachine Guns
-				"uzi",				-- Uzi Submachine Gun
-				"x_uzi",			-- Akimbo Uzi Submachine Guns
-				"fmg9"				-- Wasp-DS SMG
-			}
-		},
-		pistol = {
-			tier_4 = {
-				"peacemaker",		-- Peacemaker .45 Revolver
-				"rsh12",			-- RUS-12 Angry Tiger Revolver
-				"mateba",			-- Matever .357 Revolver
-				"x_2006m",			-- Akimbo Matever .357 Revolvers
-				"chinchilla",		-- Castigo .44 Revolver
-				"x_chinchilla",		-- Akimbo Castigo .44 Revolvers
-				"new_raging_bull",	-- Bronco .44 Revolver
-				"x_rage",			-- Akimbo Bronco .44 Revolvers
-				"deagle",			-- Deagle Pistol
-				"x_deagle"			-- Akimbo Deagle Pistols
-			},
-			tier_3 = {
-				"pl14",				-- White Streak Pistol
-				"x_pl14",			-- Akimbo White Streak Pistols
-				"breech",			-- Parabellum Pistol
-				"x_breech",			-- Akimbo Parabellum Pistols
-				"sparrow",			-- Baby Deagle
-				"x_sparrow",		-- Akimbo Baby Deagle Pistols
-				"lemming",			-- 5/7 AP Pistol
-				"model3",			-- Frenchman Model 87 Revolver
-				"x_model3",			-- Akimbo Frenchman Model 87 Revolvers
-				"m1911",			-- Crosskill Chunky Compact Pistol
-				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
-				"maxim9",			-- Gecko M2 Pistol
-				"x_maxim9"			-- Akimbo Gecko M2 Pistols
-			},
-			tier_2 = {
-				"g22c",				-- Chimano Custom Pistol
-				"x_g22c",			-- Akimbo Chimano Custom Pistols
-				"colt_1911",		-- Crosskill Pistol
-				"x_1911",			-- Akimbo Crosskill Pistols
-				"c96",				-- Broomstick Pistol
-				"x_c96",			-- Akimbo Broomstick Pistols
-				"usp",				-- Interceptor 45 Pistol
-				"x_usp",			-- Akimbo Interceptor 45 Pistols
-				"p226",				-- Signature .40 Pistol
-				"x_p226",			-- Akimbo Signature .40 Pistols
-				"hs2000",			-- LEO Pistol
-				"x_hs2000",			-- Akimbo LEO Pistols
-				"packrat",			-- Contractor Pistol
-				"x_packrat",		-- Akimbo Contractor Pistols
-				"stech",			-- Igor Automatik Pistol
-				"x_stech",			-- Akimbo Igor Automatik Pistols
-				"holt",				-- Holt 9 mm Pistol
-				"x_holt",			-- Akimbo Holt 9 mm Pistols
-				"type54",			-- Kang armos Model 54 Pistol
-				"x_type54"			-- Akimbo Kang armos Model 54 Pistols
-			},
-			tier_1 = {
-				"glock_17",			-- Chimano 88 Pistol
-				"x_g17",			-- Akimbo Chimano 88 Pistols
-				"g26",				-- Chimano Compact Pistol
-				"jowi",				-- Akimbo Chimano Compact Pistols
-				"b92fs",			-- Bernetti 9 Pistol
-				"x_b92fs",			-- Akimbo Bernetti 9 Pistols
-				"glock_18c",		-- STRYK 18c Pistol
-				"x_g18c",			-- Akimbo STRYK 18c Pistols
-				"ppk",				-- Gruber Kurz Pistol
-				"x_ppk",			-- Akimbo Gruber Kurz Pistols
-				"legacy",			-- M13 9mm Pistol
-				"x_legacy",			-- Akimbo M13 9mm Pistols
-				"shrew",			-- Crosskill Guard Pistol
-				"x_shrew",			-- Akimbo Crosskill Guard Pistols
-				"czech",			-- Czech 92 Pistol
-				"x_czech",			-- Akimbo Czech 92 Pistols
-				"beer",				-- Bernetti Auto Pistol
-				"x_beer"			-- Akimbo Bernetti Auto Pistols
 			}
 		}
 	}
