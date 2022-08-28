@@ -284,29 +284,10 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 		},
 		shotgun = {
 			wpn_fps_upg_a_custom = {
-				double_barrel = {
+				tier_4 = {
 					stats = {
 						value = 5,
-						damage = 48,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 1400,
-						enemy_pen_energy_loss = 200,
-						max_enemy_penetrations = 1,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 12
-					}
-				},
-				tier_5 = {
-					stats = {
-						value = 5,
-						damage = 48,
+						damage = 45,
 						spread = nil
 					},
 					custom_stats = {
@@ -325,7 +306,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 				pump_action = {
 					stats = {
 						value = 5,
-						damage = 26,
+						damage = 25,
 						spread = nil
 					},
 					custom_stats = {
@@ -341,10 +322,10 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 9
 					}
 				},
-				tier_4 = {
+				tier_3 = {
 					stats = {
 						value = 5,
-						damage = 26,
+						damage = 25,
 						spread = nil
 					},
 					custom_stats = {
@@ -360,7 +341,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 9
 					}
 				},
-				tier_3 = {
+				tier_2 = {
 					stats = {
 						value = 5,
 						damage = 20,
@@ -379,10 +360,10 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 9
 					}
 				},
-				tier_2 = {
+				tier_1 = {
 					stats = {
 						value = 5,
-						damage = 17,
+						damage = 16,
 						spread = nil
 					},
 					custom_stats = {
@@ -397,53 +378,10 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						wall_pen_energy_loss = 100,
 						rays = 9
 					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5,
-						damage = 13,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 800,
-						enemy_pen_energy_loss = 200,
-						max_enemy_penetrations = 1,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 9
-					}
 				}
 			},
 			wpn_fps_upg_a_slug = {
-				double_barrel = {
-					stats = {
-						value = 5,
-						damage = 74,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2.67,
-						far_damage_mul = 5,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 2400,
-						shield_pen_energy_loss = 600,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 2400,
-						wall_pen_energy_loss = 600,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 2400,
-						enemy_pen_energy_loss = 600,
-						rays = 1
-					}
-				},
-				tier_5 = {
+				tier_4 = {
 					stats = {
 						value = 5,
 						damage = 74,
@@ -491,7 +429,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 1
 					}
 				},
-				tier_4 = {
+				tier_3 = {
 					stats = {
 						value = 5,
 						damage = 61,
@@ -515,7 +453,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 1
 					}
 				},
-				tier_3 = {
+				tier_2 = {
 					stats = {
 						value = 5,
 						damage = 32,
@@ -539,7 +477,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						rays = 1
 					}
 				},
-				tier_2 = {
+				tier_1 = {
 					stats = {
 						value = 5,
 						damage = 30,
@@ -562,65 +500,21 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						enemy_pen_energy_loss = 500,
 						rays = 1
 					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5,
-						damage = 20,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2,
-						far_damage_mul = 5,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 1600,
-						enemy_pen_energy_loss = 400,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 1600,
-						enemy_pen_energy_loss = 400,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 1600,
-						enemy_pen_energy_loss = 400,
-						rays = 1
-					}
 				}
 			},
 			wpn_fps_upg_a_explosive = {
-				double_barrel = {
+				tier_4 = {
 					stats = {
 						value = 5, 
 						total_ammo_mod = -5,
-						damage = 155,
-						spread = 0
+						damage = 128,
+						spread = -2
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.4,
+						ammo_pickup_max_mul = 0.5,
 						ignore_statistic = true,
-						optimal_range_mul = 2.25,
-						far_falloff_mul = 0,
-						far_damage_mul = 0,
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				},
-				tier_5 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 155,
-						spread = 0
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.4,
-						ignore_statistic = true,
-						optimal_range_mul = 1.75,
-						far_falloff_mul = 0,
-						far_damage_mul = 0,
+						falloff_override = {far_mul = 1},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
 					}
@@ -629,34 +523,14 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					stats = {
 						value = 5, 
 						total_ammo_mod = -5,
-						damage = 110,
-						spread = 0
+						damage = 105,
+						spread = -2
 					},
 					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.3,
+						ammo_pickup_min_mul = 0.5,
+						ammo_pickup_max_mul = 0.5,
 						ignore_statistic = true,
-						optimal_range_mul = 2,
-						far_falloff_mul = 0,
-						far_damage_mul = 0,
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				},
-				tier_4 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 110,
-						spread = 0
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.3,
-						ignore_statistic = true,
-						optimal_range_mul = 1.75,
-						far_falloff_mul = 0,
-						far_damage_mul = 0,
+						falloff_override = {far_mul = 1},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
 					}
@@ -665,16 +539,14 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					stats = {
 						value = 5, 
 						total_ammo_mod = -5,
-						damage = 55,
-						spread = 0
+						damage = 105,
+						spread = -2
 					},
 					custom_stats = {
-						ammo_pickup_min_mul = 0.3,
-						ammo_pickup_max_mul = 0.334,
+						ammo_pickup_min_mul = 0.5,
+						ammo_pickup_max_mul = 0.5,
 						ignore_statistic = true,
-						optimal_range_mul = 1.75,
-						far_falloff_mul = 0,
-						far_damage_mul = 0,
+						falloff_override = {far_mul = 1},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
 					}
@@ -683,16 +555,14 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					stats = {
 						value = 5, 
 						total_ammo_mod = -5,
-						damage = 42,
-						spread = 0
+						damage = 52,
+						spread = -2
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.334,
+						ammo_pickup_max_mul = 0.5,
 						ignore_statistic = true,
-						optimal_range_mul = 1.75,
-						far_falloff_mul = 0,
-						far_damage_mul = 0,
+						falloff_override = {far_mul = 1},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
 					}
@@ -701,711 +571,81 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					stats = {
 						value = 5, 
 						total_ammo_mod = -5,
-						damage = 18,
-						spread = 0
+						damage = 40,
+						spread = -2
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
 						ammo_pickup_max_mul = 0.5,
 						ignore_statistic = true,
-						optimal_range_mul = 1.75,
-						falloff_override = {
-							far_falloff = 0,
-							far_mul = 0
-						},
+						falloff_override = {far_mul = 1},
 						rays = 1, 
 						bullet_class = "InstantExplosiveBulletBase"
-					}
-				}
-			},
-			wpn_fps_upg_a_dragons_breath = {
-				double_barrel = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -60,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.533,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 22,
-								add_ticks = 14,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						--[[ falloff_override = {
-							optimal_distance = 0,
-							optimal_range = 2000,
-							near_falloff = 0,
-							far_falloff = 2100,
-							near_mul = 1,
-							far_mul = 0
-						}, ]]
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 16
-					}
-				},
-				tier_5 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -60,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.533,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 22,
-								add_ticks = 14,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						--[[ falloff_override = {
-							optimal_distance = 0,
-							optimal_range = 2000,
-							near_falloff = 0,
-							far_falloff = 2100,
-							near_mul = 1,
-							far_mul = 0
-						}, ]]
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				pump_action = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -30,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.5,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 18,
-								add_ticks = 12,
-								dot_trigger_max_distance = 2700,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_4 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -30,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.5,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 18,
-								add_ticks = 12,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -20,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.667,
-						ammo_pickup_max_mul = 0.333,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 14,
-								add_ticks = 10,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -15,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.6,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10, 
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								add_ticks = 8,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0, 
-						damage = -6,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.333,
-						ammo_pickup_max_mul = 0.333,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 6,
-								add_ticks = 6,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = "extend",
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
 					}
 				}
 			},
 			wpn_fps_upg_a_piercing = {
-				double_barrel = {
+				tier_4 = {
 					stats = {
 						value = 5,
-						damage = -90,
 						spread = 1
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = nil,
 						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.4,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 70,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2500,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+						add_head_shot_mul = 0.6,
+						optimal_range_mul = 1.33,
+						far_damage_mul = 2.5,
 						armor_piercing_add = 1, 
-						rays = 16,
-						bullet_class = "DOTBulletBase"
-					}
-				},
-				tier_5 = {
-					stats = {
-						value = 5,
-						damage = -90,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.4,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 70,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2500,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						rays = 12,
-						bullet_class = "DOTBulletBase"
+						rays = 12
 					}
 				},
 				pump_action = {
 					stats = {
 						value = 5,
-						damage = -77,
 						spread = 1
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = nil,
 						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.8,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 50,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 3200,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+						add_head_shot_mul = 0.6,
+						optimal_range_mul = 1.33,
+						far_damage_mul = 2.5,
 						armor_piercing_add = 1, 
-						rays = 12,
-						bullet_class = "DOTBulletBase"
-					}
-				},
-				tier_4 = {
-					stats = {
-						value = 5,
-						damage = -77,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.4,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 50,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2500,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						rays = 12,
-						bullet_class = "DOTBulletBase"
+						rays = 12
 					}
 				},
 				tier_3 = {
 					stats = {
 						value = 5,
-						damage = -34,
 						spread = 1
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = nil,
 						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.4,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 40,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2500,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+						add_head_shot_mul = 0.6,
+						optimal_range_mul = 1.33,
+						far_damage_mul = 2.5,
 						armor_piercing_add = 1, 
-						rays = 12,
-						bullet_class = "DOTBulletBase"
+						rays = 12
 					}
 				},
 				tier_2 = {
 					stats = {
 						value = 5,
-						damage = -28,
 						spread = 1
 					},
 					custom_stats = {
 						ammo_pickup_min_mul = nil,
 						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.4,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 25,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2500,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+						add_head_shot_mul = 0.6,
+						optimal_range_mul = 1.33,
+						far_damage_mul = 2.5,
 						armor_piercing_add = 1, 
-						rays = 12,
-						bullet_class = "DOTBulletBase"
+						rays = 12
 					}
 				},
 				tier_1 = {
-					stats = {
-						value = 5,
-						damage = -11,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 1.4,
-						dot_data = {
-							type = "bleed",
-							custom_data = {
-								damage = 15,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2500,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						rays = 12,
-						bullet_class = "DOTBulletBase"
-					}
-				}
-			},
-			wpn_fps_upg_a_dragons_breath_alt = {
-				double_barrel = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.533,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 50,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						--[[ falloff_override = {
-							optimal_distance = 0,
-							optimal_range = 2000,
-							near_falloff = 0,
-							far_falloff = 2100,
-							near_mul = 1,
-							far_mul = 0
-						}, ]]
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 16
-					}
-				},
-				tier_5 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.533,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 50,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						--[[ falloff_override = {
-							optimal_distance = 0,
-							optimal_range = 2000,
-							near_falloff = 0,
-							far_falloff = 2100,
-							near_mul = 1,
-							far_mul = 0
-						}, ]]
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				pump_action = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.5,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 35,
-								dot_tick_period = 0.5,
-								damage_ticks = 8,
-								dot_trigger_max_distance = 2700,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_4 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.4,
-						ammo_pickup_max_mul = 0.5,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 35,
-								dot_tick_period = 0.5,
-								damage_ticks = 8,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.667,
-						ammo_pickup_max_mul = 0.333,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 20,
-								dot_tick_period = 0.5,
-								damage_ticks = 6,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.667,
-						ammo_pickup_max_mul = 0.667,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 15,
-								dot_tick_period = 0.5,
-								damage_ticks = 6,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				}
-			},
-			wpn_fps_upg_a_piercing_alt = {
-				double_barrel = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 16
-					}
-				},
-				tier_5 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				pump_action = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				tier_4 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				tier_2 = {
 					stats = {
 						value = 5,
 						spread = 1
@@ -1417,6 +657,156 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						optimal_range_mul = 1.33,
 						far_damage_mul = 2.5,
 						armor_piercing_add = 1, 
+						rays = 12
+					}
+				}
+			},
+			wpn_fps_upg_a_dragons_breath = {
+				tier_4 = {
+					stats = {
+						value = 5, 
+						damage = -40,
+						total_ammo_mod = 0,
+						spread = -3
+					},
+					custom_stats = {
+						ammo_pickup_min_mul = 0.5,
+						ammo_pickup_max_mul = 0.533,
+						dot_data = {
+							type = "fire",
+							custom_data = {
+								damage = 20,
+								dot_tick_period = 0.5,
+								damage_ticks = 12,
+								dot_trigger_max_distance = 2000,
+								dot_can_stack = true,
+								dot_can_crit = true
+							}
+						},
+						armor_piercing_add = 1, 
+						ignore_statistic = true,  
+						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath",
+						far_falloff_mul = 0.7,
+						can_shoot_through_shield = true, 
+						bullet_class = "FlameBulletBase",
+						rays = 12
+					}
+				},
+				pump_action = {
+					stats = {
+						value = 5, 
+						damage = -30,
+						total_ammo_mod = 0,
+						spread = -3
+					},
+					custom_stats = {
+						ammo_pickup_min_mul = 0.75,
+						ammo_pickup_max_mul = 0.7,
+						dot_data = {
+							type = "fire",
+							custom_data = {
+								damage = 13,
+								dot_tick_period = 0.5,
+								damage_ticks = 12,
+								dot_trigger_max_distance = 2700,
+								dot_can_stack = true,
+								dot_can_crit = true
+							}
+						},
+						armor_piercing_add = 1, 
+						ignore_statistic = true,  
+						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
+						far_falloff_mul = 0.7,
+						can_shoot_through_shield = true, 
+						bullet_class = "FlameBulletBase",
+						rays = 12
+					}
+				},
+				tier_3 = {
+					stats = {
+						value = 5, 
+						damage = -30,
+						total_ammo_mod = 0,
+						spread = -3
+					},
+					custom_stats = {
+						ammo_pickup_min_mul = 0.75,
+						ammo_pickup_max_mul = 0.7,
+						dot_data = {
+							type = "fire",
+							custom_data = {
+								damage = 13,
+								dot_tick_period = 0.5,
+								damage_ticks = 12,
+								dot_trigger_max_distance = 2000,
+								dot_can_stack = true,
+								dot_can_crit = true
+							}
+						},
+						armor_piercing_add = 1, 
+						ignore_statistic = true,  
+						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
+						far_falloff_mul = 0.7,
+						can_shoot_through_shield = true, 
+						bullet_class = "FlameBulletBase",
+						rays = 12
+					}
+				},
+				tier_2 = {
+					stats = {
+						value = 5, 
+						total_ammo_mod = 0,
+						spread = -3
+					},
+					custom_stats = {
+						ammo_pickup_min_mul = 0.5,
+						ammo_pickup_max_mul = 0.6,
+						dot_data = {
+							type = "fire",
+							custom_data = {
+								damage = 10,
+								dot_tick_period = 0.5,
+								damage_ticks = 12,
+								dot_trigger_max_distance = 2000,
+								dot_can_stack = true,
+								dot_can_crit = true
+							}
+						},
+						armor_piercing_add = 1, 
+						ignore_statistic = true,  
+						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
+						far_falloff_mul = 0.7,
+						can_shoot_through_shield = true, 
+						bullet_class = "FlameBulletBase",
+						rays = 12
+					}
+				},
+				tier_1 = {
+					stats = {
+						value = 5, 
+						total_ammo_mod = 0,
+						spread = -3
+					},
+					custom_stats = {
+						ammo_pickup_min_mul = 0.583,
+						ammo_pickup_max_mul = 0.625,
+						dot_data = {
+							type = "fire",
+							custom_data = {
+								damage = 10,
+								dot_tick_period = 0.5,
+								damage_ticks = 10,
+								dot_trigger_max_distance = 2000,
+								dot_can_stack = true,
+								dot_can_crit = true
+							}
+						},
+						armor_piercing_add = 1, 
+						ignore_statistic = true,  
+						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
+						far_falloff_mul = 0.7,
+						can_shoot_through_shield = true, 
+						bullet_class = "FlameBulletBase",
 						rays = 12
 					}
 				}
@@ -1466,14 +856,12 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 			}
 		},
 		shotgun = {
-			double_barrel = {
+			tier_4 = {
 				"wpn_fps_shot_b682",			-- Joceline O/U 12G Shotgun
 				"wpn_fps_shot_huntsman",		-- Mosconi 12G Shotgun
-				"wpn_fps_sho_coach"				-- Claire 12G Shotgun
-			},
-			tier_5 = {
 				"wpn_fps_sho_boot",				-- Breaker 12G Shotgun
-				"wpn_fps_shot_m37"				-- GSPS 12G Shotgun
+				"wpn_fps_shot_m37",				-- GSPS 12G Shotgun
+				"wpn_fps_sho_coach"				-- Claire 12G Shotgun
 			},
 			pump_action = {
 				"wpn_fps_sho_m590",				-- Mosconi 12G Tactical Shotgun
@@ -1482,25 +870,23 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"wpn_fps_shot_r870",			-- Reinfeld 880 Shotgun
 				"wpn_fps_shot_serbu",			-- Locomotive 12G Shotgun
 			},
-			tier_4 = {
+			tier_3 = {
 				"wpn_fps_pis_judge",			-- The Judge Shotgun
 				"wpn_fps_pis_x_judge",			-- Akimbo Judge Shotguns
 				"rotwpn_fps_sho_rotaa",			-- Goliath 12G Shotgun
 				"wpn_fps_sho_x_rota",			-- Akimbo Goliath 12G Shotguns
 				"wpn_fps_sho_ultima"			-- Argos III Shotgun
 			},
-			tier_3 = {
+			tier_2 = {
 				"wpn_fps_sho_ben",			-- M1014 Shotgun
 				"wpn_fps_sho_spas12",			-- Predator 12G Shotgun
 				"wpn_fps_sho_striker"			-- Street Sweeper Shotgun
 			},
-			tier_2 = {
+			tier_1 = {
 				"wpn_fps_shot_saiga",			-- Izhma 12G Shotgun
 				"wpn_fps_sho_aa12",				-- Steakout 12G Shotgun
 				"wpn_fps_sho_basset",			-- Grimm 12G Shotgun
 				"wpn_fps_sho_x_basset"			-- Brothers Grimm 12G Shotguns
-			},
-			tier_1 = {
 			}
 		},
 		lmg = {

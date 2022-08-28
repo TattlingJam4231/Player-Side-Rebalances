@@ -630,9 +630,9 @@ function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage,
 end
 
 if not he_stats then
-	InstantExplosiveBulletBase.CURVE_POW = 0.2 -- Player-Side Rebalances: Changed from 0.5
+	InstantExplosiveBulletBase.CURVE_POW = 1 -- Player-Side Rebalances: Changed from 0.5
 	-- InstantExplosiveBulletBase.PLAYER_DMG_MUL = 0.1
-	-- InstantExplosiveBulletBase.RANGE = 200
+	InstantExplosiveBulletBase.RANGE = {max = 200, falloff_start = 100} -- Player-Side Rebalances: added falloff_start
 
 	he_stats = true
 end

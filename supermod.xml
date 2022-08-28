@@ -19,6 +19,7 @@
             
 		    <post :hook_id="blackmarketmanager"                             :script_path="blackmarketmanager.lua"/>
             <post :hook_id="dotmanager"                                     :script_path="dotmanager.lua"/>
+		    <post :hook_id="explosionmanager"                               :script_path="explosionmanager.lua"/>
             <post :hook_id="hudmanagerpd2"							        :script_path="hudmanagerpd2_perks.lua"/>
             <post :hook_id="playermanager"								    :script_path="playermanager_perks.lua"/>
 		    <post :hook_id="playermanager"                                  :script_path="playermanager_skills.lua"/>
@@ -58,7 +59,6 @@
                     <post :hook_id="playerstandard"                                 :script_path="playerstandard.lua"/>
                 </group>
 
-                <post :hook_id="playerdamage"		                            :script_path="playerdamage_dots.lua"/>
                 <post :hook_id="playerdamage"		                            :script_path="playerdamage.lua"/>
                 <post :hook_id="playerequipment"                                :script_path="playerequipment_sentry.lua"/>
                 <post :hook_id="playermovement"			                        :script_path="playermovement_perks.lua"/>

@@ -531,13 +531,14 @@
 			>
 			<stats
 				damage = "0"
+				spread = "0"
 			/>
 			<custom_stats
 				damage_near_mul = "1"
 				damage_far_mul = "1"
-				add_head_shot_mul = "0.5"
-				optimal_range_mul = "1.33"
-				far_damage_mul = "2.5"
+				add_head_shot_mul = "0"
+				optimal_range_mul = "1"
+				far_damage_mul = "1"
 			/>
 		</WeaponMod>
 		
