@@ -104,6 +104,10 @@
 
             <group :hook_id="weapons/"                                       :script_path="weapons/">
 
+                <group :hook_id="grenades/"                                     :script_path="grenades/">
+                    <post :hook_id="fraggrenade"                                    :script_path="fraggrenade.lua"/>
+                </group>
+
                 <group :hook_id="shotgun/"                                       :script_path="shotgun/">
                     <post :hook_id="shotgunbase"                                    :script_path="shotgunbase.lua"/>
                 </group>

@@ -169,7 +169,7 @@ end
 -- Player-Side Rebalances>
 
 
--- <Player-Side Rebalances: backwards compatibility with new falloff_start
+-- <Player-Side Rebalances: check for falloff start to prevent using table instead of number
 local units_to_push_original = ExplosionManager.units_to_push
 function ExplosionManager:units_to_push(units_to_push, hit_pos, range)
     if type(range) == "table" then

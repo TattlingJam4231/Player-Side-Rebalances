@@ -2714,17 +2714,18 @@ function WeaponTweakData:_init_specials_oryo()
 					}
 					
 					--Arbiter Grenade Launcher
-					self.arbiter.stats.damage = 54
+					self.arbiter.stats.damage = 60
+					self.arbiter.AMMO_MAX = 10
 			
 	--RLs-----------------------------------------------------------------------------------------------------------------------------------------------------
 		
 			--Commander 101
 				self.ray.AMMO_PICKUP = {0.02 / 1.35, 0.5 + 0.02 / 1.35}
-				self.ray.stats.damage = 21
+				self.ray.stats.damage = 55
 			
 			--HRL-7
 				self.rpg7.AMMO_PICKUP = {0.01 / 1.35, 0.5 + 0.01 / 1.35}
-				self.rpg7.stats.damage = 62
+				self.rpg7.stats.damage = 110
 			
 	--Miniguns------------------------------------------------------------------------------------------------------------------------------------------------
 			

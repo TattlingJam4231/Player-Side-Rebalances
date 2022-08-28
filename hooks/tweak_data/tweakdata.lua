@@ -21,11 +21,14 @@ if not wr_tweakstats then
 
 	-- HRL Rocket
 	tweak_data.projectiles.launcher_rocket = {
-		damage = 620,
+		damage = 1100,
 		launch_speed = 2500,
-		curve_pow = 0.1,
+		curve_pow = 1,
 		player_damage = 40,
-		range = 800,
+		range = {
+			max = 600,
+			falloff_start = 100
+		},
 		init_timer = 2.5,
 		mass_look_up_modifier = 1,
 		sound_event = "rpg_explode",
@@ -34,11 +37,14 @@ if not wr_tweakstats then
 
 	-- Commando Rocket
 	tweak_data.projectiles.rocket_ray_frag = {
-		damage = 210,
+		damage = 550,
 		launch_speed = 2500,
-		curve_pow = 0.1,
+		curve_pow = 1,
 		player_damage = 20,
-		range = 600,
+		range = {
+			max = 600,
+			falloff_start = 100
+		},
 		init_timer = 2.5,
 		mass_look_up_modifier = 1,
 		sound_event = "rpg_explode",
@@ -76,11 +82,14 @@ if not wr_tweakstats then
 
 	-- Arbiter Grenade
 	tweak_data.projectiles.launcher_frag_arbiter = {
-		damage = 54,
+		damage = 48,
 		launch_speed = 7000,
-		curve_pow = 0.4,
+		curve_pow = 0.2,
 		player_damage = 4,
-		range = 350,
+		range = {
+			max = 350,
+			falloff_start = 150
+		},
 		init_timer = 2.5,
 		mass_look_up_modifier = 1,
 		sound_event = "gl_explode",
