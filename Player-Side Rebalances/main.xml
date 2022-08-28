@@ -362,6 +362,11 @@
 				<value_node value="wpn_fps_pis_x_type54"/>
 				<value_node value="wpn_fps_pis_x_maxim9"/>
 
+				<value_node value="wpn_fps_pis_x_chinchilla"/>
+				<value_node value="wpn_fps_x_deagle"/>
+				<value_node value="wpn_fps_pis_x_rage"/>
+				<value_node value="wpn_fps_pis_x_2006m"/>
+
 				<value_node value="wpn_fps_smg_tec9"/>
 				<value_node value="wpn_fps_smg_thompson"/>
 				<value_node value="wpn_fps_smg_mp9"/>
@@ -531,13 +536,14 @@
 			>
 			<stats
 				damage = "0"
+				spread = "0"
 			/>
 			<custom_stats
 				damage_near_mul = "1"
 				damage_far_mul = "1"
-				add_head_shot_mul = "0.5"
-				optimal_range_mul = "1.33"
-				far_damage_mul = "2.5"
+				add_head_shot_mul = "0"
+				optimal_range_mul = "1"
+				far_damage_mul = "1"
 			/>
 		</WeaponMod>
 		

@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<title>Player-Side Rebalances v0.2.0 - Patch Notes</title>
+<link rel="stylesheet" type="text/css" href="https://fragtrane.github.io/SuperBLT-Update-Demo/style.css">
+<style type="text/css">
+body, html {
+    background-color: #cfcfcf;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#mainContainer {
+    background-color: #ffffff;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 900px;
+    border-color: #afafaf;
+    border-style: solid;
+    border-width: 1px;
+    padding: 40px;
+}
+</style>
+</head>
+<body>
+<div id="mainContainer" class="markdown-body">
+<h2>Player-Side Rebalances v0.2.0 - Patch Notes</h2>
+<ul>
+    <li>added emphasis to certain words in Graze's description to make the effect clearer</li>
+    <li>added functionality to the explosion falloff code to allow a minimum distance from center before falloff starts</li>
+    <li>removed unintended recoil changes from a few guns</li>
+    <li>weapon tweaks:</li>
+    <ul>
+        <li>tier 4 akimbo pistols now have access to FMJ Rounds; AP Rounds will be removed from them in v0.3.0</li>
+        <li>tier 3 and 4 shotguns have had their damage increased by <b>1</b></li>
+        <li>double barrels are no longer their own sub class in tier 4</li>
+
+        <li><b>Izhma 12G Shotgun:</b></li>
+        <ul>
+            <li>stability: <b>44 🠊 <FONT COLOR="RED">24</FONT></b></li>
+        </ul>
+        
+        <li><b>Steakout 12G Shotgun:</b></li>
+        <ul>
+            <li>stability: <b>44 🠊 <FONT COLOR="GREEN">52</FONT></b></li>
+        </ul>
+        
+        <li><b>Arbiter Grenade launcher:</b></li>
+        <ul>
+            <li>explosion falloff now starts <b>1.5m</b> from explosion center and the falloff curve has been tweaked slightly</li>
+            <li>damage: <b>540 🠊 <FONT COLOR="RED">480</FONT></b></li>
+        </ul>
+        
+        <li><b>HRL-7 Rocket launcher:</b></li>
+        <ul>
+            <li>explosion falloff now starts <b>1m</b> from explosion center and is now linear</li>
+            <li>damage: <b>6200 🠊 <FONT COLOR="GREEN">11000</FONT></b></li>
+            <li>range: <b>8m 🠊 <FONT COLOR="GREEN">6m</FONT></b></li>
+        </ul>
+        
+        <li><b>Commando 101 Rocket launcher:</b></li>
+        <ul>
+            <li>explosion falloff now starts <b>1m</b> from explosion center and is now linear</li>
+            <li>damage: <b>2100 🠊 <FONT COLOR="GREEN">5500</FONT></b></li>
+            <li>range: <b>6m 🠊 <FONT COLOR="GREEN">5m</FONT></b></li>
+        </ul>
+    </ul>
+    <li>attachment tweaks:</li>
+    <ul>
+        <li><b>000 Buckshot:</b></li>
+        <ul>
+            <li>tier 4:</li>
+            <ul>
+                <li>damage: <b>48 🠊 <FONT COLOR="RED">45</FONT></b></li>
+            </ul>
+            <li>tier 3:</li>
+            <ul>
+                <li>damage: <b>26 🠊 <FONT COLOR="RED">25</FONT></b></li>
+            </ul>
+            <li>tier 1:</li>
+            <ul>
+                <li>damage: <b>17 🠊 <FONT COLOR="RED">16</FONT></b></li>
+            </ul>
+        </ul>
+        <li><b>HE Rounds:</b></li>
+        <ul>
+            <li>removed damage falloff</li>
+            <li>explosion falloff now starts <b>1m</b> from explosion center and is now linear</li>
+            <li>accuracy: <b>0 🠊 <FONT COLOR="RED">-12</FONT></b></li>
+            <li>tier 4:</li>
+            <ul>
+                <li>damage: <b>155 🠊 <FONT COLOR="RED">128</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.4 🠊 <FONT COLOR="GREEN">0.5</FONT></b></li>
+            </ul>
+            <li>tier 3:</li>
+            <ul>
+                <li>damage: <b>110 🠊 <FONT COLOR="RED">105</FONT></b></li>
+                <li>min ammo pickup multiplier: <b>0.3 🠊 <FONT COLOR="GREEN">0.5</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.4 🠊 <FONT COLOR="GREEN">0.5</FONT></b></li>
+            </ul>
+            <li>tier 2:</li>
+            <ul>
+                <li>damage: <b>55 🠊 <FONT COLOR="RED">52</FONT></b></li>
+                <li>min ammo pickup multiplier: <b>0.334 🠊 <FONT COLOR="GREEN">0.5</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.3 🠊 <FONT COLOR="GREEN">0.5</FONT></b></li>
+            </ul>
+            <li>tier 1:</li>
+            <ul>
+                <li>damage: <b>42 🠊 <FONT COLOR="RED">40</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.334 🠊 <FONT COLOR="GREEN">0.5</FONT></b></li>
+            </ul>
+        </ul>
+        <li><b>Flechettes and experimental alt version:</b></li>
+        <ul>
+            <li>stats from alt version moved to standard version</li>
+            <li>alt version will be removed in v0.3.0</li>
+        </ul>
+        <li><b>Dragon's Breath and experimental alt version:</b></li>
+        <ul>
+            <li>stats from alt version moved to standard version with teaks found below</li>
+            <li>alt version will be removed in v0.3.0</li>
+            <li>tier 4:</li>
+            <ul>
+                <li>damage: <b>0 🠊 <FONT COLOR="RED">-40</FONT></b></li>
+                <li>dot stats:</li>
+                <ul>
+                    <li>damage: <b>50 🠊 <FONT COLOR="RED">20</FONT></b></li>
+                    <li>damage ticks: <b>10 🠊 <FONT COLOR="GREEN">12</FONT></b></li>
+                </ul>
+            </ul>
+            <li>tier 3:</li>
+            <ul>
+                <li>damage: <b>0 🠊 <FONT COLOR="RED">-30</FONT></b></li>
+                <li>min ammo pickup multiplier: <b>0.4 🠊 <FONT COLOR="GREEN">0.75</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.5 🠊 <FONT COLOR="GREEN">0.7</FONT></b></li>
+                <li>dot stats:</li>
+                <ul>
+                    <li>damage: <b>35 🠊 <FONT COLOR="RED">13</FONT></b></li>
+                    <li>damage ticks: <b>8 🠊 <FONT COLOR="GREEN">12</FONT></b></li>
+                </ul>
+            </ul>
+            <li>tier 2:</li>
+            <ul>
+                <li>min ammo pickup multiplier: <b>0.667 🠊 <FONT COLOR="RED">0.5</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.333 🠊 <FONT COLOR="GREEN">0.6</FONT></b></li>
+                <li>dot stats:</li>
+                <ul>
+                    <li>damage: <b>20 🠊 <FONT COLOR="RED">10</FONT></b></li>
+                    <li>damage ticks: <b>6 🠊 <FONT COLOR="GREEN">12</FONT></b></li>
+                </ul>
+            </ul>
+            <li>tier 1:</li>
+            <ul>
+                <li>min ammo pickup multiplier: <b>0.667 🠊 <FONT COLOR="RED">0.583</FONT></b></li>
+                <li>max ammo pickup multiplier: <b>0.333 🠊 <FONT COLOR="GREEN">0.625</FONT></b></li>
+                <li>dot stats:</li>
+                <ul>
+                    <li>damage: <b>15 🠊 <FONT COLOR="RED">10</FONT></b></li>
+                    <li>damage ticks: <b>6 🠊 <FONT COLOR="GREEN">10</FONT></b></li>
+                </ul>
+            </ul>
+        </ul>
+    </ul>
+</ul>
+<p><i>2022-08-24 - Update 226</i></p>
+</div>
+</body>
+</html>

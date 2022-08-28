@@ -51,14 +51,12 @@ function WeaponTweakData:_init_weapon_index_oryo()
 			}
 		},
 		shotgun = {
-			double_barrel = {
+			tier_4 = {
 				"b682",				-- Joceline O/U 12G Shotgun
 				"huntsman",			-- Mosconi 12G Shotgun
-				"coach"				-- Claire 12G Shotgun
-			},
-			tier_5 = {
 				"boot",				-- Breaker 12G Shotgun
-				"m37"				-- GSPS 12G Shotgun
+				"m37",				-- GSPS 12G Shotgun
+				"coach"				-- Claire 12G Shotgun
 			},
 			pump_action = {
 				"m590",				-- Mosconi 12G Tactical Shotgun
@@ -67,25 +65,23 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"r870",				-- Reinfeld 880 Shotgun
 				"serbu",			-- Locomotive 12G Shotgun
 			},
-			tier_4 = {
+			tier_3 = {
 				"judge",			-- The Judge Shotgun
 				"x_judge",			-- Akimbo Judge Shotguns
 				"rota",				-- Goliath 12G Shotgun
 				"x_rota",			-- Akimbo Goliath 12G Shotguns
 				"ultima"			-- Argos III Shotgun
 			},
-			tier_3 = {
+			tier_2 = {
 				"benelli",			-- M1014 Shotgun
 				"spas12",			-- Predator 12G Shotgun
 				"striker"			-- Street Sweeper Shotgun
 			},
-			tier_2 = {
+			tier_1 = {
 				"saiga",			-- Izhma 12G Shotgun
 				"aa12",				-- Steakout 12G Shotgun
 				"basset",			-- Grimm 12G Shotgun
 				"x_basset"			-- Brothers Grimm 12G Shotguns
-			},
-			tier_1 = {
 			}
 		},
 		lmg = {
@@ -273,6 +269,18 @@ function WeaponTweakData:_init_weapon_index_oryo()
 	}
 end
 
+function WeaponTweakData:_init_damage_oryo()
+	self.damage = {
+		shotgun = {
+			tier_4 = 158,
+			pump_action = 113,
+			tier_3 = 113,
+			tier_2 = 57,
+			tier_1 = 45
+		}
+	}
+end
+
 function WeaponTweakData:_init_spread_oryo()
 	self.default_spread = {
 		standing = 3,
@@ -285,10 +293,8 @@ function WeaponTweakData:_init_spread_oryo()
 	}
 	self.spread_multiplier = {
 		shotgun = {
-			double_barrel = {1.8, 0.6},
-			tier_5 = {1.2, 0.8},
+			tier_4 = {1.2, 0.8},
 			pump_action = {1.2, 0.8},
-			tier_4 = {1, 1},
 			tier_3 = {1, 1},
 			tier_2 = {1, 1},
 			tier_1 = {1, 1}
@@ -299,15 +305,7 @@ end
 function WeaponTweakData:_init_falloff_oryo()
 	self.falloff = {
 		shotgun = {
-			double_barrel = {
-				optimal_distance = 600,
-				optimal_range = 900,
-				near_falloff = 200,
-				far_falloff = 2250,
-				near_multiplier = 1,
-				far_multiplier = 0.1
-			},
-			tier_5 = {
+			tier_4 = {
 				optimal_distance = 0,
 				optimal_range = 1500,
 				near_falloff = 0,
@@ -323,21 +321,13 @@ function WeaponTweakData:_init_falloff_oryo()
 				near_multiplier = 1,
 				far_multiplier = 0.2
 			},
-			tier_4 = {
+			tier_3 = {
 				optimal_distance = 0,
 				optimal_range = 1500,
 				near_falloff = 0,
 				far_falloff = 2250,
 				near_multiplier = 1,
 				far_multiplier = 0.1
-			},
-			tier_3 = {
-				optimal_distance = 0,
-				optimal_range = 1500,
-				near_falloff = 0,
-				far_falloff = 2000,
-				near_multiplier = 1,
-				far_multiplier = 0.2
 			},
 			tier_2 = {
 				optimal_distance = 0,
@@ -542,11 +532,7 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 			}
 		},
 		shotgun = {
-			double_barrel = {
-				flat = 0,
-				curve = 0.5
-			},
-			tier_5 = {
+			tier_4 = {
 				flat = 0,
 				curve = 0.5
 			},
@@ -554,13 +540,9 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 				flat = 0,
 				curve = 0.5
 			},
-			tier_4 = {
-				flat = 0,
-				curve = 0.5
-			},
 			tier_3 = {
 				flat = 0,
-				curve = 2
+				curve = 0.5
 			},
 			tier_2 = {
 				flat = 0,
@@ -661,13 +643,11 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = {12	/1.35, 24	/1.35}
 		},
 		shotgun = {
-			double_barrel = {0.4	/1.35, 1.5	/1.35},
-			tier_5 = 		{0.4	/1.35, 1.5	/1.35},
+			tier_4 = 		{0.4	/1.35, 1.5	/1.35},
 			pump_action = 	{1		/1.35, 2.5	/1.35},
-			tier_4 = 		{1		/1.35, 2.5	/1.35},
-			tier_3 = 		{2		/1.35, 5	/1.35},
-			tier_2 = 		{3		/1.35, 6	/1.35},
-			tier_1 = 		{5		/1.35, 10	/1.35}
+			tier_3 = 		{1		/1.35, 2.5	/1.35},
+			tier_2 = 		{2		/1.35, 5	/1.35},
+			tier_1 = 		{3		/1.35, 6	/1.35}
 		},
 		lmg = {
 			tier_3 = {5		/1.35, 10	/1.35},
@@ -708,12 +688,10 @@ function WeaponTweakData:_init_burst_count()
 			tier_1 = 5
 		},
 		shotgun = {
-			double_barrel = 2,
-			tier_5 = 		2,
-			pump_action = 	2,
 			tier_4 = 		2,
+			pump_action = 	2,
 			tier_3 = 		2,
-			tier_2 = 		3,
+			tier_2 = 		2,
 			tier_1 = 		3
 		},
 		lmg = {
@@ -747,6 +725,7 @@ end
 
 function WeaponTweakData:_init_default_stats_oryo()
 
+	self:_init_damage_oryo()
 	self:_init_spread_oryo()
 	self:_init_falloff_oryo()
 	self:_init_recoil_wait_oryo()
@@ -757,12 +736,13 @@ function WeaponTweakData:_init_default_stats_oryo()
 		for tier, weapons in pairs(tiers) do
 			for _, weapon in ipairs(weapons) do 
 				if self[weapon] then
-					self[weapon].AMMO_PICKUP = self.ammo_pickup[category] and self.ammo_pickup[category][tier]
-					self[weapon].damage_falloff = self.falloff[category] and self.falloff[category][tier] or self.falloff[category]
-					self[weapon].spread = self.default_spread
-					self[weapon].spread_multiplier = self.spread_multiplier[category] and self.spread_multiplier[category][tier]
-					self[weapon].recoil_wait = self.recoil_wait[category] and self.recoil_wait[category][tier] or self.recoil_wait[category]
-					self[weapon].BURST_COUNT = self.burst_count[category] and self.burst_count[category][tier]
+					self[weapon].AMMO_PICKUP = self.ammo_pickup[category] and self.ammo_pickup[category][tier] or self[weapon].AMMO_PICKUP
+					self[weapon].damage_falloff = self.falloff[category] and self.falloff[category][tier] or self.falloff[category] or self[weapon].damage_falloff
+					self[weapon].spread = self.default_spread or self[weapon].spread
+					self[weapon].spread_multiplier = self.spread_multiplier[category] and self.spread_multiplier[category][tier] or self[weapon].spread_multiplier
+					self[weapon].recoil_wait = self.recoil_wait[category] and self.recoil_wait[category][tier] or self.recoil_wait[category] or self[weapon].recoil_wait
+					self[weapon].BURST_COUNT = self.burst_count[category] and self.burst_count[category][tier] or self[weapon].BURST_COUNT
+					self[weapon].stats.damage = self.damage[category] and self.damage[category][tier] or self.damage[category] or self[weapon].stats.damage
 				end
 			end
 		end
@@ -957,56 +937,6 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 			}
 			self.fal.kick.crouching = self.fal.kick.standing
 			self.fal.kick.steelsight = self:kick_steelsight_oryo(self.fal.kick.standing)
-			self.fal.kick_table = {
-				state_mul = {
-					standing = 1,
-					crouching = 1,
-					steelsight = 0.75
-				},
-				start_variance = 10,
-				end_variance = 20,
-				v_variance = {
-					starting = {0,0},
-					ending = {-0.55,-0.45}
-				},
-				h_variance = {
-					starting = {-0.05,0.05},
-					ending = {-0.25,0.25}
-				},
-				loop_last = 4,
-				kicks = {
-					{0.75,0.15},
-					{0.75,0.2},
-					{0.75,0.22},
-					{0.75,0.23},
-					{0.75,0.15},
-					{0.75,0.05},
-					{0.75,-0.05},
-					{0.75,-0.2},
-					{0.75,-0.3},
-					{0.75,0},
-					{0.75,0.1},
-					{0.75,-0.2},
-					{0.75,-0.28},
-					{0.75,-0.1},
-					{0.75,0},
-					{0.75,0},
-					{0.75,0},
-					{0.75,0.2},
-					{0.75,0.4},
-					{0.75,0.5},
-					{0.75,-0.5},
-					{0.75,-0.3},
-					{0.75,0.1},
-					{0.75,0.2},
-					{0.75,-0.7},
-					{0.75,0.3},
-					{0.75,0.5},
-					{0.75,0.2},
-					{0.75,-0.15},
-					{0.75,-0.35}
-				}
-			}
 			
 			-- Gewehr 3 Rifle
 			self.g3.AMMO_MAX = 140
@@ -1308,7 +1238,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Joceline O/U 12G Shotgun
 			self.b682.AMMO_MAX = 32
 			self.b682.rays = 16
-			self.b682.stats.damage = 157
 			self.b682.stats.spread = 16
 			self.b682.stats.recoil = 14
 			self.b682.stats.reload = 12
@@ -1322,7 +1251,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Mosconi 12G Shotgun
 			self.huntsman.AMMO_MAX = 34
 			self.huntsman.rays = 16
-			self.huntsman.stats.damage = 157
 			self.huntsman.stats.spread = 16
 			self.huntsman.stats.recoil = 10
 			self.huntsman.stats.reload = 12
@@ -1336,7 +1264,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Claire 12G Shotgun
 			self.coach.AMMO_MAX = 24
 			self.coach.rays = 16
-			self.coach.stats.damage = 157
 			self.coach.stats.spread = 17
 			self.coach.stats.recoil = 8
 			self.coach.stats.reload = 10
@@ -1353,14 +1280,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.boot.single.fire_rate = 0.7
 			self.boot.AMMO_MAX = 28
 			self.boot.rays = 12
-			self.boot.stats.damage = 157
 			self.boot.stats.concealment = 22
 
 			
 			-- GSPS 12G Shotgun
 			self.m37.AMMO_MAX = 21
 			self.m37.rays = 12
-			self.m37.stats.damage = 157
 			self.m37.stats.reload = 13
 			self.m37.stats.concealment = 17
 
@@ -1377,7 +1302,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.judge.single.fire_rate = 0.166
 			self.judge.AMMO_MAX = 30
 			self.judge.rays = 9
-			self.judge.stats.damage = 112
 			self.judge.stats.reload = 7
 			self.judge.damage_falloff = {
 				optimal_distance = 0,
@@ -1399,7 +1323,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 					self.x_judge.single.fire_rate = self.judge.single.fire_rate
 					self.x_judge.AMMO_MAX = self.judge.AMMO_MAX
 					self.x_judge.rays = self.judge.rays
-					self.x_judge.stats.damage = self.judge.stats.damage
 					self.x_judge.stats.reload = 10
 					self.x_judge.damage_falloff = self.judge.damage_falloff
 
@@ -1407,7 +1330,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Mosconi 12G Tactical Shotgun
 			self.m590.AMMO_MAX = 42
 			self.m590.rays = 12
-			self.m590.stats.damage = 112
 			self.m590.stats.recoil = 7
 			self.m590.stats.reload = 12
 			self.m590.kick.standing = {
@@ -1422,14 +1344,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			-- Raven Shotgun
 			self.ksg.rays = 12
-			self.ksg.stats.damage = 112
 			self.ksg.stats.reload = 15
 
 			
 			-- Reinfeld 88 Shotgun
 			self.m1897.AMMO_MAX = 42
 			self.m1897.rays = 12
-			self.m1897.stats.damage = 112
 			self.m1897.stats.reload = 15
 
 			
@@ -1437,7 +1357,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.r870.AMMO_MAX = 40
 			self.r870.CLIP_AMMO_MAX = 8
 			self.r870.rays = 12
-			self.r870.stats.damage = 112
 			self.r870.stats.recoil = 11
 			self.r870.stats.reload = 15
 
@@ -1446,7 +1365,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.serbu.AMMO_MAX = 35
 			self.serbu.CLIP_AMMO_MAX = 5
 			self.serbu.rays = 12
-			self.serbu.stats.damage = 112
 			self.serbu.stats.recoil = 5
 			self.serbu.stats.reload = 13
 			self.serbu.kick.standing = {
@@ -1463,7 +1381,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.rota.has_magazine = nil
 			self.rota.AMMO_MAX = 30
 			self.rota.rays = 12
-			self.rota.stats.damage = 112
 			self.rota.stats.reload = 6
 			
 					-- Akimbo Goliath 12G Shotguns
@@ -1475,14 +1392,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			
 			-- Argos III Shotgun
-			self.ultima.stats.damage = 112
 
 
 	--T3 Shotguns----------------------------------------------------------------
 		
 			-- M1014 Shotgun
 			self.benelli.rays = 12
-			self.benelli.stats.damage = 57
 			self.benelli.stats.spread = 8
 			self.benelli.stats.recoil = 11
 			self.benelli.stats.reload = 11
@@ -1492,7 +1407,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			-- Predator 12G Shotgun
 			self.spas12.rays = 12
-			self.spas12.stats.damage = 57
 			self.spas12.stats.spread = 9
 			self.spas12.stats.recoil = 14
 			self.spas12.stats.reload = 11
@@ -1502,7 +1416,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			
 			-- Street Sweeper Shotgun
 			self.striker.rays = 12
-			self.striker.stats.damage = 57
 			self.striker.stats.reload = 11
 			self.striker.use_shotgun_reload = "dual"
 
@@ -1510,28 +1423,22 @@ function WeaponTweakData:_init_shotguns_oryo()
 	--T2 Shotguns----------------------------------------------------------------
 
 			-- Izhma 12G Shotgun
-			-- self.saiga.fire_mode_data.fire_rate = 0.15
-			-- self.saiga.auto.fire_rate = 0.15
 			self.saiga.rays = 12
-			self.saiga.stats.damage = 45
 			self.saiga.stats.reload = 8
+			self.saiga.stats.recoil = 7
 
 			
 			-- Steakout 12G Shotgun
-			-- self.aa12.fire_mode_data.fire_rate = 0.1667
-			-- self.aa12.auto.fire_rate = 0.1667
 			self.aa12.rays = 12
-			self.aa12.stats.damage = 45
+			self.aa12.stats.recoil = 14
 		
 			-- Grimm 12G Shotgun
 			self.basset.AMMO_MAX = 56
-			self.basset.stats.damage = 45
 			self.basset.stats.recoil = 12
 			self.basset.stats.reload = 5
 
 					-- Brothers Grimm 12G Shotguns
 					self.x_basset.AMMO_MAX = self.basset.AMMO_MAX
-					self.x_basset.stats.damage = self.basset.stats.damage
 					self.x_basset.stats.recoil = self.basset.stats.recoil
 					self.x_basset.stats.reload = 6
 
@@ -1580,130 +1487,6 @@ function WeaponTweakData:_init_lmgs_oryo()
 			self.m249.stats.recoil = 12--20
 			self.m249.stats.suppression = 1
 			self.m249.panic_suppression_chance = 1
-			-- self:set_kick_zero("m249")
-			self.m249.kick_table = {
-				state_mul = {
-					standing = 1,
-					crouching = 1,
-					steelsight = 0.75
-				},
-				scale_factor = 1,
-				v_scale_factor = 1,
-				h_scale_factor = 1,
-				start_variance = 1,
-				end_variance = 40,
-				v_variance = {
-					starting = {-0.2,0.3},
-					ending = {-0.12,-0.08}
-				},
-				h_variance = {
-					starting = {-1,1},
-					ending = {-0.2,0.2}
-				},
-				loop_last = 25,
-				kicks = {
-					{0.33,0.05},
-					{0.41,0.11},
-					{0.32,0.43},
-					{0.21,0.33},
-					{0.36,0.11},
-					{0.27,0.33},
-					{0.32,0.05},
-					{0.27,0.11},
-					{0.21,0.05},
-					{0.43,0.11},
-					{0.21,0.05},
-					{0.32,0.11},
-					{0.32,0.11},
-					{0.48,0.11},
-					{0.64,0.11},
-					{0.32,0.05},
-					{0.37,0.11},
-					{0.59,0.11},
-					{0.43,0.11},
-					{0.37,0.16},
-					{0.54,0.11},
-					{0.21,-0},
-					{0.32,0.16},
-					{0.05,0.16},
-					{0.05,0.38},
-					{0,-0},
-					{0.59,-0.16},
-					{0.43,-0.49},
-					{0.11,-0.11},
-					{0.11,0.05},
-					{0.21,0.54},
-					{0.05,0.22},
-					{0,0.05},
-					{0.16,-0},
-					{0.48,-0},
-					{0.32,-0.05},
-					{0.32,-0.05},
-					{0.43,-0.05},
-					{0.37,-0.05},
-					{0.05,-0.05},
-					{0.11,-0.05},
-					{0.32,-0.16},
-					{0.37,-0.22},
-					{0.21,-0.11},
-					{0.27,0.22},
-					{0.21,0.49},
-					{0.11,0.27},
-					{0.21,0.16},
-					{0.64,0.11},
-					{0.59,-0},
-					{0.21,-0},
-					{0.27,-0.16},
-					{0.43,-0.27},
-					{0.16,-0.05},
-					{0.27,-0.22},
-					{0.48,-0.16},
-					{0.43,-0.22},
-					{0.37,-0},
-					{0.48,0.11},
-					{0.43,0.16},
-					{0.48,0.33},
-					{0.11,0.22},
-					{0.16,0.22},
-					{0.11,0.22},
-					{0.27,0.27},
-					{0.32,0.33},
-					{0.37,0.33},
-					{0.27,0.16},
-					{0.59,0.11},
-					{0.75,0.05},
-					{0.16,-0},
-					{0.16,-0.27},
-					{0.21,-0.27},
-					{0.05,-0.11},
-					{0.32,0.22},
-					{0.43,0.45},
-					{0.16,-0.33},
-					{0.21,0.33},
-					{0.37,0.23},
-					{0.37,-0.28},
-					{0.32,-0.13},
-					{0.16,0.21},
-					{0.27,0.17},
-					{0.32,-0.16},
-					{0.16,0.05},
-					{0.21,0.05},
-					{0.27,0.12},
-					{0.16,0.13},
-					{0.16,0.25},
-					{0.32,-0.25},
-					{0.11,-0.11},
-					{0.27,-0.16},
-					{0.21,0.22},
-					{0,-0},
-					{0.16,0.16},
-					{0.11,-0.05},
-					{0.16,0.11},
-					{0.16,-0.11},
-					{0.11,0.11},
-					{0.16,0.22}
-				}
-			}
 			
 			-- ksp 58
 			self.par.AMMO_MAX = 600
@@ -2732,17 +2515,18 @@ function WeaponTweakData:_init_specials_oryo()
 					}
 					
 					--Arbiter Grenade Launcher
-					self.arbiter.stats.damage = 54
+					self.arbiter.stats.damage = 60
+					self.arbiter.AMMO_MAX = 10
 			
 	--RLs-----------------------------------------------------------------------------------------------------------------------------------------------------
 		
 			--Commander 101
 				self.ray.AMMO_PICKUP = {0.02 / 1.35, 0.5 + 0.02 / 1.35}
-				self.ray.stats.damage = 21
+				self.ray.stats.damage = 55
 			
 			--HRL-7
 				self.rpg7.AMMO_PICKUP = {0.01 / 1.35, 0.5 + 0.01 / 1.35}
-				self.rpg7.stats.damage = 62
+				self.rpg7.stats.damage = 110
 			
 	--Miniguns------------------------------------------------------------------------------------------------------------------------------------------------
 			

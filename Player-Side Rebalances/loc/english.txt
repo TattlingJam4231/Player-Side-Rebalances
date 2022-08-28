@@ -10,7 +10,7 @@
 	"AP" : "AP Rounds"
 	"AP_desc" : "Rounds that have a longer effective range and can penetrate enemies, shields and walls up to four times. Penetrates body armor. This ammo type is harder to find"
 	"SLAP" : "Saboted Light Armor Penetrator Rounds"
-	"dragons_breath_alt" : "Dragon's Breath Alt"
-	"piercing_alt" : "Flechette Alt"
+	"dragons_breath_alt" : "moved to Dragon's Breath"
+	"piercing_alt" : "moved to Flechette"
 	
 }

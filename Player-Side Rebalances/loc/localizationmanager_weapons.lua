@@ -21,7 +21,7 @@ Hooks:Add("LocalizationManagerPostInit", "Oryo Weapon Localization", function(lo
 
 		["bm_wp_upg_a_explosive_desc"] =				"Fires one explosive charge that kills or stuns targets. This ammo type is harder to find.",
 
-		["bm_wp_upg_a_piercing_desc"] =					"Fires darts that have a longer effective range. Penetrates body armor and causes enemies to bleed.",
+		["bm_wp_upg_a_piercing_desc"] =					"Fires darts that have a longer effective range. Penetrates body armor and does a portion of headshot damage on bodyshots.",
 
 		["bm_wp_upg_a_slug_desc"] =						"Fires a single lead slug that has a longer effective range. Penetrates enemies, shields and walls up to four times. Penetrates body armor.",
 
