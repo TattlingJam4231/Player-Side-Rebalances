@@ -73,7 +73,7 @@ function CopDamage:damage_dot(attack_data)
 	local result = damage_dot_original(self, attack_data)
 
 	local is_civilian = CopDamage.is_civilian(self._unit:base()._tweak_table)
-	if result.type == "death" and not is_civilian and managers.player:has_category_upgrade("temporary", "overkill_damage_multiplier") and attack_data.attacker_unit == managers.player:player_unit() and alive(attack_data.weapon_unit) and not attack_data.weapon_unit:base().thrower_unit and attack_data.weapon_unit:base().is_category and attack_data.weapon_unit:base():is_category("shotgun", "saw") then
+	if result and result.type == "death" and not is_civilian and managers.player:has_category_upgrade("temporary", "overkill_damage_multiplier") and attack_data.attacker_unit == managers.player:player_unit() and alive(attack_data.weapon_unit) and not attack_data.weapon_unit:base().thrower_unit and attack_data.weapon_unit:base().is_category and attack_data.weapon_unit:base():is_category("shotgun", "saw") then
 		managers.player:activate_temporary_upgrade("temporary", "overkill_damage_multiplier")
 	end
 
