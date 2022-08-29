@@ -2502,21 +2502,9 @@ function WeaponTweakData:_init_specials_oryo()
 					--Basilisk 3V Grenade Launcher
 					self.ms3gl.AMMO_PICKUP = {0.13, 0.63}
 					self.ms3gl.AMMO_MAX = 15
-					self.ms3gl.CAN_TOGGLE_FIREMODE = {
-						"burst",
-						"single"
-					}
-					self.ms3gl.fire_mode_data.burst = {
-						fire_rate = 0.33,
-						burst_cooldown = 1
-					}
-					self.ms3gl.fire_mode_data.single = {
-						fire_rate = 0.5
-					}
 					
 					--Arbiter Grenade Launcher
-					self.arbiter.stats.damage = 60
-					self.arbiter.AMMO_MAX = 10
+					self.arbiter.stats.damage = 48
 			
 	--RLs-----------------------------------------------------------------------------------------------------------------------------------------------------
 		
