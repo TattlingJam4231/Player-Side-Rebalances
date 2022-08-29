@@ -2714,7 +2714,7 @@ function WeaponTweakData:_init_specials_oryo()
 					}
 					
 					--Arbiter Grenade Launcher
-					self.arbiter.stats.damage = 60
+					self.arbiter.stats.damage = 48
 					self.arbiter.AMMO_MAX = 10
 			
 	--RLs-----------------------------------------------------------------------------------------------------------------------------------------------------
