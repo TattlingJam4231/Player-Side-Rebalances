@@ -64,12 +64,11 @@ function NewRaycastWeaponBase:recoil_wait() -- Player-Side Rebalances: rewritten
 	local multiplier_flat = recoil_wait.flat or 0.5
 	local multiplier_curve = recoil_wait.curve or 0.5
 	local fire_rate = self:weapon_tweak_data().fire_mode_data.fire_rate
-	wait = {
+	local wait = {
 		flat = fire_rate * multiplier_flat,
 		curve = fire_rate * multiplier_curve
 	}
 	return wait
-
 end
 
 local zoom_original = NewRaycastWeaponBase.zoom
