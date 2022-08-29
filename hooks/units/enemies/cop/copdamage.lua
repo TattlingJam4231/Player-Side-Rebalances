@@ -70,7 +70,7 @@ function CopDamage:damage_dot(attack_data)
 		attack_data.fire_dot_data.start_dot_dance_antimation = true
 	end
 
-	local result = damage_dot_original(self, attack_data) or attack_data.result
+	local result = damage_dot_original(self, attack_data)
 	
 
 	local is_civilian = CopDamage.is_civilian(self._unit:base()._tweak_table)
