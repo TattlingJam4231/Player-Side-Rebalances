@@ -147,7 +147,7 @@ function ExplosionManager:client_damage_and_push(position, normal, user_unit, dm
 		if apply_dmg then
 			dir = hit_body:center_of_mass()
 			len = mvector3.direction(dir, position, dir)
-			damage = self:get_explosion_falloff_oryo(damage, range, curve_pow, len) -- Player-Side Rebalances: falloff start
+			damage = self:get_explosion_falloff_oryo(dmg, range, curve_pow, len) -- Player-Side Rebalances: falloff start
 			damage = math.max(damage, math.min(dmg, 1))
 
 			self:_apply_body_damage(false, hit_body, user_unit, dir, damage)
