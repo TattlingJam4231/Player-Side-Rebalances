@@ -1249,107 +1249,107 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 	--Pistol
 		
 		--IPSC Compensator
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 3
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		self.parts.wpn_fps_upg_ns_pis_ipsccomp.stats.damage = 0
+		self.parts.wpn_fps_upg_ns_pis_ipsccomp.stats.spread = 3
+		self.parts.wpn_fps_upg_ns_pis_ipsccomp.stats.recoil = -1
+		self.parts.wpn_fps_upg_ns_pis_ipsccomp.stats.concealment = -1
+		self.parts.wpn_fps_upg_ns_pis_ipsccomp.stats.suppression = 0
 		
 		
 		--Rotec Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -3
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_medium_gem.stats.damage = -3
+		self.parts.wpn_fps_upg_ns_pis_medium_gem.stats.spread = 0
+		self.parts.wpn_fps_upg_ns_pis_medium_gem.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_pis_medium_gem.stats.concealment = -1
+		self.parts.wpn_fps_upg_ns_pis_medium_gem.stats.suppression = 12
 		
 		
 		--Champion's Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_large_kac.stats.damage = -1
+		self.parts.wpn_fps_upg_ns_pis_large_kac.stats.spread = 1
+		self.parts.wpn_fps_upg_ns_pis_large_kac.stats.recoil = -1
+		self.parts.wpn_fps_upg_ns_pis_large_kac.stats.concealment = -2
+		self.parts.wpn_fps_upg_ns_pis_large_kac.stats.suppression = 12
 
 		
 		--Facepunch Compensator
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 3
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		self.parts.wpn_fps_upg_ns_pis_meatgrinder.stats.damage = 0
+		self.parts.wpn_fps_upg_ns_pis_meatgrinder.stats.spread = -1
+		self.parts.wpn_fps_upg_ns_pis_meatgrinder.stats.recoil = 3
+		self.parts.wpn_fps_upg_ns_pis_meatgrinder.stats.concealment = -1
+		self.parts.wpn_fps_upg_ns_pis_meatgrinder.stats.suppression = 0
 		
 		
 		--Standard Issue Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_medium.stats.damage = -2
+		self.parts.wpn_fps_upg_ns_pis_medium.stats.spread = 0
+		self.parts.wpn_fps_upg_ns_pis_medium.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_pis_medium.stats.concealment = -2
+		self.parts.wpn_fps_upg_ns_pis_medium.stats.suppression = 12
 		
 		
 		--Medved R4 Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_putnik.stats.damage = -2
+		self.parts.wpn_fps_upg_ns_pis_putnik.stats.spread = 1
+		self.parts.wpn_fps_upg_ns_pis_putnik.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_pis_putnik.stats.concealment = -2
+		self.parts.wpn_fps_upg_ns_pis_putnik.stats.suppression = 12
 		
 		
 		--Size Doesn't Matter Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -4
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_small.stats.damage = -4
+		self.parts.wpn_fps_upg_ns_pis_small.stats.spread = 0
+		self.parts.wpn_fps_upg_ns_pis_small.stats.recoil = 0
+		self.parts.wpn_fps_upg_ns_pis_small.stats.concealment = 0
+		self.parts.wpn_fps_upg_ns_pis_small.stats.suppression = 12
 		
 		
 		--Monolith Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -3
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_large.stats.damage = -1
+		self.parts.wpn_fps_upg_ns_pis_large.stats.spread = 0
+		self.parts.wpn_fps_upg_ns_pis_large.stats.recoil = 2
+		self.parts.wpn_fps_upg_ns_pis_large.stats.concealment = -3
+		self.parts.wpn_fps_upg_ns_pis_large.stats.suppression = 12
 		
 		
 		--Asepsis Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_medium_slim.stats.damage = 0
+		self.parts.wpn_fps_upg_ns_pis_medium_slim.stats.spread = -2
+		self.parts.wpn_fps_upg_ns_pis_medium_slim.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_pis_medium_slim.stats.concealment = -2
+		self.parts.wpn_fps_upg_ns_pis_medium_slim.stats.suppression = 12
 
 		
 		--Flash Hider
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		self.parts.wpn_fps_upg_pis_ns_flash.stats.damage = 0
+		self.parts.wpn_fps_upg_pis_ns_flash.stats.spread = -1
+		self.parts.wpn_fps_upg_pis_ns_flash.stats.recoil = 2
+		self.parts.wpn_fps_upg_pis_ns_flash.stats.concealment = 0
+		self.parts.wpn_fps_upg_pis_ns_flash.stats.suppression = 0
 		
 		
 		--Budget Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -3
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_ass_filter.stats.damage = -3
+		self.parts.wpn_fps_upg_ns_ass_filter.stats.spread = -1
+		self.parts.wpn_fps_upg_ns_ass_filter.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_ass_filter.stats.concealment = -2
+		self.parts.wpn_fps_upg_ns_ass_filter.stats.suppression = 12
 		
 		
 		--Jungle Ninja Suppressor
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 2
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -5
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		self.parts.wpn_fps_upg_ns_pis_jungle.stats.damage = -1
+		self.parts.wpn_fps_upg_ns_pis_jungle.stats.spread = 1
+		self.parts.wpn_fps_upg_ns_pis_jungle.stats.recoil = 2
+		self.parts.wpn_fps_upg_ns_pis_jungle.stats.concealment = -5
+		self.parts.wpn_fps_upg_ns_pis_jungle.stats.suppression = 12
 
 		
 		--Hurricane Compensator
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
-		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		self.parts.wpn_fps_upg_ns_pis_typhoon.stats.damage = 0
+		self.parts.wpn_fps_upg_ns_pis_typhoon.stats.spread = 1
+		self.parts.wpn_fps_upg_ns_pis_typhoon.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_pis_typhoon.stats.concealment = -1
+		self.parts.wpn_fps_upg_ns_pis_typhoon.stats.suppression = 0
 end
 
 function WeaponFactoryTweakData:_init_gadgets_oryo()
