@@ -1294,7 +1294,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Joceline O/U 12G Shotgun
 			self.b682.AMMO_MAX = 32
 			self.b682.rays = 16
-			-- self.b682.stats.damage = 157
 			self.b682.stats.spread = 16
 			self.b682.stats.recoil = 14
 			self.b682.stats.reload = 12
@@ -1308,7 +1307,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Mosconi 12G Shotgun
 			self.huntsman.AMMO_MAX = 34
 			self.huntsman.rays = 16
-			-- self.huntsman.stats.damage = 157
 			self.huntsman.stats.spread = 16
 			self.huntsman.stats.recoil = 10
 			self.huntsman.stats.reload = 12
@@ -1322,7 +1320,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Claire 12G Shotgun
 			self.coach.AMMO_MAX = 24
 			self.coach.rays = 16
-			-- self.coach.stats.damage = 157
 			self.coach.stats.spread = 17
 			self.coach.stats.recoil = 8
 			self.coach.stats.reload = 10
@@ -1339,7 +1336,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.boot.single.fire_rate = 0.7
 			self.boot.AMMO_MAX = 28
 			self.boot.rays = 12
-			-- self.boot.stats.damage = 157
 			self.boot.stats.concealment = 22
 
 			
@@ -1363,7 +1359,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.judge.single.fire_rate = 0.166
 			self.judge.AMMO_MAX = 30
 			self.judge.rays = 9
-			-- self.judge.stats.damage = 113
 			self.judge.stats.reload = 7
 			self.judge.damage_falloff = {
 				optimal_distance = 0,
@@ -1385,7 +1380,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 					self.x_judge.single.fire_rate = self.judge.single.fire_rate
 					self.x_judge.AMMO_MAX = self.judge.AMMO_MAX
 					self.x_judge.rays = self.judge.rays
-					-- self.x_judge.stats.damage = self.judge.stats.damage
 					self.x_judge.stats.reload = 10
 					self.x_judge.damage_falloff = self.judge.damage_falloff
 
@@ -1393,7 +1387,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Mosconi 12G Tactical Shotgun
 			self.m590.AMMO_MAX = 42
 			self.m590.rays = 12
-			-- self.m590.stats.damage = 113
 			self.m590.stats.recoil = 7
 			self.m590.stats.reload = 12
 			self.m590.kick.standing = {
@@ -1408,14 +1401,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			-- Raven Shotgun
 			self.ksg.rays = 12
-			-- self.ksg.stats.damage = 113
 			self.ksg.stats.reload = 15
 
 			
 			-- Reinfeld 88 Shotgun
 			self.m1897.AMMO_MAX = 42
 			self.m1897.rays = 12
-			-- self.m1897.stats.damage = 113
 			self.m1897.stats.reload = 15
 
 			
@@ -1423,7 +1414,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.r870.AMMO_MAX = 40
 			self.r870.CLIP_AMMO_MAX = 8
 			self.r870.rays = 12
-			-- self.r870.stats.damage = 113
 			self.r870.stats.recoil = 11
 			self.r870.stats.reload = 15
 
@@ -1432,7 +1422,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.serbu.AMMO_MAX = 35
 			self.serbu.CLIP_AMMO_MAX = 5
 			self.serbu.rays = 12
-			-- self.serbu.stats.damage = 113
 			self.serbu.stats.recoil = 5
 			self.serbu.stats.reload = 13
 			self.serbu.kick.standing = {
@@ -1449,7 +1438,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.rota.has_magazine = nil
 			self.rota.AMMO_MAX = 30
 			self.rota.rays = 12
-			-- self.rota.stats.damage = 113
 			self.rota.stats.reload = 6
 			
 					-- Akimbo Goliath 12G Shotguns
@@ -1461,14 +1449,12 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			
 			-- Argos III Shotgun
-			-- self.ultima.stats.damage = 113
 
 
 	--T3 Shotguns----------------------------------------------------------------
 		
 			-- M1014 Shotgun
 			self.benelli.rays = 12
-			-- self.benelli.stats.damage = 57
 			self.benelli.stats.spread = 8
 			self.benelli.stats.recoil = 11
 			self.benelli.stats.reload = 11
@@ -1478,7 +1464,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			-- Predator 12G Shotgun
 			self.spas12.rays = 12
-			-- self.spas12.stats.damage = 57
 			self.spas12.stats.spread = 9
 			self.spas12.stats.recoil = 14
 			self.spas12.stats.reload = 11
@@ -1488,7 +1473,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			
 			-- Street Sweeper Shotgun
 			self.striker.rays = 12
-			-- self.striker.stats.damage = 57
 			self.striker.stats.reload = 11
 			self.striker.use_shotgun_reload = "dual"
 
@@ -1496,30 +1480,22 @@ function WeaponTweakData:_init_shotguns_oryo()
 	--T2 Shotguns----------------------------------------------------------------
 
 			-- Izhma 12G Shotgun
-			-- self.saiga.fire_mode_data.fire_rate = 0.15
-			-- self.saiga.auto.fire_rate = 0.15
 			self.saiga.rays = 12
-			-- self.saiga.stats.damage = 45
 			self.saiga.stats.reload = 8
 			self.saiga.stats.recoil = 7
 
 			
 			-- Steakout 12G Shotgun
-			-- self.aa12.fire_mode_data.fire_rate = 0.1667
-			-- self.aa12.auto.fire_rate = 0.1667
 			self.aa12.rays = 12
-			self.aa12.stats.damage = 45
 			self.aa12.stats.recoil = 14
 		
 			-- Grimm 12G Shotgun
 			self.basset.AMMO_MAX = 56
-			-- self.basset.stats.damage = 45
 			self.basset.stats.recoil = 12
 			self.basset.stats.reload = 5
 
 					-- Brothers Grimm 12G Shotguns
 					self.x_basset.AMMO_MAX = self.basset.AMMO_MAX
-					-- self.x_basset.stats.damage = self.basset.stats.damage
 					self.x_basset.stats.recoil = self.basset.stats.recoil
 					self.x_basset.stats.reload = 6
 
