@@ -34,8 +34,8 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 		if not is_turret and not is_ally and hit.damage_result then
 			local result = hit.damage_result
 			local attack_data = result.attack_data
-			local headshot = attack_data.headshot
-			local headshot_kill = attack_data.headshot and result.type == "death" or result.type == "healed"
+			local headshot = attack_data and attack_data.headshot
+			local headshot_kill = attack_data and attack_data.headshot and result.type == "death" or result.type == "healed"
 			local damage_mul = upgrade_value.damage_factor
 
 			if weapon_unit:base():is_category("snp") then
@@ -44,7 +44,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 				damage_mul = headshot and upgrade_value.damage_factor_headshot or damage_mul
 			end
 
-			local damage = attack_data.raw_damage * damage_mul
+			local damage = attack_data and attack_data.raw_damage * damage_mul or 0
 
 			if best_damage < damage then
 				best_damage = damage

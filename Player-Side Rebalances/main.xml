@@ -463,11 +463,6 @@
 				<value_node value="wpn_fps_pis_2006m"/>
 				<value_node value="wpn_fps_pis_peacemaker"/>
 				<value_node value="wpn_fps_pis_rsh12"/>
-
-				<value_node value="wpn_fps_pis_x_chinchilla"/>
-				<value_node value="wpn_fps_x_deagle"/>
-				<value_node value="wpn_fps_pis_x_rage"/>
-				<value_node value="wpn_fps_pis_x_2006m"/>
 			</weapons>
 		</WeaponMod>
 		
@@ -505,48 +500,6 @@
 			</weapons>
 		</WeaponMod>
 
-
-	<!-- Dragon's Breath Alt -->
-		<WeaponMod
-			id="wpn_fps_upg_a_dragons_breath_alt"
-			name_id="dragons_breath_alt"
-			based_on="wpn_fps_upg_a_dragons_breath"
-			inherit_weapons="true"
-			inherit_adds="false"
-			inherit_override="false"
-			inherit_parts_override="false"
-			inherit_parts_forbids="false"
-			type="ammo"
-			ver="2"
-			>
-		</WeaponMod>
-
-	<!-- Flechette Alt -->
-		<WeaponMod
-			id="wpn_fps_upg_a_piercing_alt"
-			name_id="piercing_alt"
-			based_on="wpn_fps_upg_a_piercing"
-			inherit_weapons="true"
-			inherit_adds="false"
-			inherit_override="false"
-			inherit_parts_override="false"
-			inherit_parts_forbids="false"
-			type="ammo"
-			ver="2"
-			>
-			<stats
-				damage = "0"
-				spread = "0"
-			/>
-			<custom_stats
-				damage_near_mul = "1"
-				damage_far_mul = "1"
-				add_head_shot_mul = "0"
-				optimal_range_mul = "1"
-				far_damage_mul = "1"
-			/>
-		</WeaponMod>
-		
 	<!-- HE -->
 		<!-- <WeaponMod -->
 			<!-- id="wpn_upg_snp_he" -->

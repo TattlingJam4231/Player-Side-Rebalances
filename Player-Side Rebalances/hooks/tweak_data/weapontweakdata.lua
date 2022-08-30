@@ -277,6 +277,12 @@ function WeaponTweakData:_init_damage_oryo()
 			tier_3 = 113,
 			tier_2 = 57,
 			tier_1 = 45
+		},
+		pistol = {
+			tier_4 = 180,
+			tier_3 = 120,
+			tier_2 = 85,
+			tier_1 = 53
 		}
 	}
 end
@@ -2219,6 +2225,8 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.rsh12.can_shoot_through_shield = nil
 			self.rsh12.can_shoot_through_wall = nil
 			self.rsh12.armor_piercing_chance = nil
+			self.rsh12.AMMO_MAX = 30
+			self.rsh12.stats.damage = 210
 
 			
 			--matever
@@ -2292,13 +2300,11 @@ function WeaponTweakData:_init_pistols_oryo()
 
 			
 			--parabellum
-			self.breech.stats.damage = 121
 			self.breech.fire_mode_data.fire_rate = 0.25
 			self.breech.single.fire_rate = 0.25
 			
 					--akimbo parabellum
 					self.x_breech.AMMO_MAX = 56
-					self.x_breech.stats.damage = 121
 					self.x_breech.fire_mode_data.fire_rate = 0.25
 					self.x_breech.single.fire_rate = 0.25
 
@@ -2313,6 +2319,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.lemming.can_shoot_through_enemy = nil
 			self.lemming.can_shoot_through_shield = nil
 			self.lemming.can_shoot_through_wall = nil
+			self.lemming.armor_piercing_chance = nil
 
 			
 			--frenchman model 87
@@ -2320,15 +2327,13 @@ function WeaponTweakData:_init_pistols_oryo()
 			
 					--akimbo frenchman model 87
 					self.x_model3.AMMO_MAX = self.model3.AMMO_MAX
-					self.x_model3.stats.damage = 135
+					self.x_model3.stats.damage = self.model3.stats.damage
 
 			
 			--crosskill chunky
-			-- self.m1911.stats.damage = 120
 			
 					--akimbo crosskill chunky
 					self.x_m1911.AMMO_MAX = self.x_m1911.AMMO_MAX
-					-- self.x_m1911.stats.damage = 120
 
 		
 	--t2 pistols----------------------------------------------------------------
@@ -2384,9 +2389,11 @@ function WeaponTweakData:_init_pistols_oryo()
 			
 			--igor automatik pistol
 			self.stech.AMMO_MAX = 80
+			self.stech.stats.damage = 53
 			
 					--akimbo igor automatik pistol
 					self.x_stech.AMMO_MAX = self.stech.AMMO_MAX
+					self.x_stech.stats.damage = self.stech.stats.damage
 
 			
 			--holt 9mm
@@ -2425,9 +2432,11 @@ function WeaponTweakData:_init_pistols_oryo()
 			
 			--stryk
 			self.glock_18c.AMMO_MAX = 120
+			self.glock_18c.stats.damage = 39
 			
 					--akimbo stryk
 					self.x_g18c.AMMO_MAX = self.glock_18c.AMMO_MAX
+					self.x_g18c.stats.damage = self.glock_18c.stats.damage
 
 			
 			--gruber kurz
@@ -2455,16 +2464,20 @@ function WeaponTweakData:_init_pistols_oryo()
 			
 			--czech 92 pistol
 			self.czech.AMMO_MAX = 120
+			self.czech.stats.damage = 39
 			
 					--akimbo czech 92 pistol
 					self.x_czech.AMMO_MAX = self.czech.AMMO_MAX
+					self.x_czech.stats.damage = self.czech.stats.damage
 
 			
 			--bernetti auto pistol
 			self.beer.AMMO_MAX = 120
+			self.beer.stats.damage = 39
 			
 					--akimbo bernetti auto pistols
 					self.x_beer.AMMO_MAX = self.beer.AMMO_MAX
+					self.x_beer.stats.damage = self.beer.stats.damage
 end
 
 function WeaponTweakData:_init_specials_oryo()
@@ -2505,6 +2518,7 @@ function WeaponTweakData:_init_specials_oryo()
 					
 					--Arbiter Grenade Launcher
 					self.arbiter.stats.damage = 48
+					self.arbiter.AMMO_MAX = 10
 			
 	--RLs-----------------------------------------------------------------------------------------------------------------------------------------------------
 		
