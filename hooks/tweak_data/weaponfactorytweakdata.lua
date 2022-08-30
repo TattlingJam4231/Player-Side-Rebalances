@@ -1244,6 +1244,112 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 		--Donalds Horizontal Leveller
 		self.parts.wpn_fps_upg_ns_duck.stats.damage = 0
 		self.parts.wpn_fps_upg_ns_duck.stats.spread_multi = {1.4, 0.25}
+
+
+	--Pistol
+		
+		--IPSC Compensator
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 3
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		
+		
+		--Rotec Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -3
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		
+		
+		--Champion's Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+
+		
+		--Facepunch Compensator
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 3
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		
+		
+		--Standard Issue Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		
+		
+		--Medved R4 Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		
+		
+		--Size Doesn't Matter Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -4
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		
+		
+		--Monolith Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -3
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		
+		
+		--Asepsis Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+
+		
+		--Flash Hider
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
+		
+		
+		--Budget Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -3
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+		
+		
+		--Jungle Ninja Suppressor
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 2
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -5
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 12
+
+		
+		--Hurricane Compensator
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.damage = 0
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.spread = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.recoil = 1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.concealment = -1
+		self.parts.wpn_fps_smg_schakal_ns_silencer.stats.suppression = 0
 end
 
 function WeaponFactoryTweakData:_init_gadgets_oryo()
@@ -1275,6 +1381,13 @@ function WeaponFactoryTweakData:_init_gadgets_oryo()
 	self.parts.wpn_fps_upg_fl_ass_laser.stats.concealment = 0
 
 
+	--Angled Sight
+	self.parts.wpn_fps_upg_o_45iron.stats.spread = 0
+	self.parts.wpn_fps_upg_o_45iron.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_45iron.stats.concealment = 1
+	self.parts.wpn_fps_upg_o_45iron.stats.gadget_magnification = 1
+
+
 	--Military Laser Module
 	self.parts.wpn_fps_upg_fl_ass_peq15.stats.recoil = 1
 	self.parts.wpn_fps_upg_fl_ass_peq15.stats.concealment = -2
@@ -1292,7 +1405,7 @@ function WeaponFactoryTweakData:_init_gadgets_oryo()
 	self.parts.wpn_fps_upg_o_45rds.stats.gadget_magnification = 1.25
 
 
-	--45 Degree Ironights
+	--45 Degree Ironsights
 	self.parts.wpn_fps_upg_o_45steel.stats.spread = 0
 	self.parts.wpn_fps_upg_o_45steel.stats.recoil = 0
 	self.parts.wpn_fps_upg_o_45steel.stats.concealment = 1
@@ -1357,7 +1470,7 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_t1micro.stats.spread = 0
 	self.parts.wpn_fps_upg_o_t1micro.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_t1micro.stats.concealment = -1
-	self.parts.wpn_fps_upg_o_t1micro.stats.magnification = 2.5
+	self.parts.wpn_fps_upg_o_t1micro.stats.magnification = 2
 	
 
 	--Surgeon Sight
@@ -1371,21 +1484,21 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_acog.stats.spread = 1
 	self.parts.wpn_fps_upg_o_acog.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_acog.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_acog.stats.magnification = 3
+	self.parts.wpn_fps_upg_o_acog.stats.magnification = 2.5
 	
 
 	--Military Red Dot Sight
 	self.parts.wpn_fps_upg_o_aimpoint.stats.spread = 1
 	self.parts.wpn_fps_upg_o_aimpoint.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_aimpoint.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_aimpoint.stats.magnification = 3
+	self.parts.wpn_fps_upg_o_aimpoint.stats.magnification = 2.5
 	
 
 	--Milspec Scope
 	self.parts.wpn_fps_upg_o_specter.stats.spread = 1
 	self.parts.wpn_fps_upg_o_specter.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_specter.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_specter.stats.magnification = 2.75
+	self.parts.wpn_fps_upg_o_specter.stats.magnification = 2.5
 	
 
 	--See More Sight
@@ -1434,21 +1547,21 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_leupold.stats.spread = 1
 	self.parts.wpn_fps_upg_o_leupold.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_leupold.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_leupold.stats.magnification = 6
+	self.parts.wpn_fps_upg_o_leupold.stats.magnification = 4.5
 	
 
 	--Box Buddy Sight
 	self.parts.wpn_fps_upg_o_box.stats.spread = 1
 	self.parts.wpn_fps_upg_o_box.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_box.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_box.stats.magnification = 6
+	self.parts.wpn_fps_upg_o_box.stats.magnification = 4.5
 	
 
 	--Reconnaissance Sight
 	self.parts.wpn_fps_upg_o_spot.stats.spread = 1
 	self.parts.wpn_fps_upg_o_spot.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_spot.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_spot.stats.magnification = 3
+	self.parts.wpn_fps_upg_o_spot.stats.magnification = 2.75
 	
 
 	--Compact Tactical Box Sight
@@ -1462,7 +1575,7 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_fc1.stats.spread = 0
 	self.parts.wpn_fps_upg_o_fc1.stats.recoil = 0
 	self.parts.wpn_fps_upg_o_fc1.stats.concealment = 0
-	self.parts.wpn_fps_upg_o_fc1.stats.magnification = 1.3
+	self.parts.wpn_fps_upg_o_fc1.stats.magnification = 1.15
 	
 
 	--Maelstrom Sight
@@ -1476,7 +1589,7 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_bmg.stats.spread = 1
 	self.parts.wpn_fps_upg_o_bmg.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_bmg.stats.concealment = -3
-	self.parts.wpn_fps_upg_o_bmg.stats.magnification = 4
+	self.parts.wpn_fps_upg_o_bmg.stats.magnification = 3
 	
 
 	--Z5 Owl Glass Universal Scope
@@ -2931,7 +3044,7 @@ function WeaponFactoryTweakData:_init_lmg_attachments_oryo()
 end
 
 function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
---T4 Snipers----------------------------------------------------------
+	--T4 Snipers----------------------------------------------------------
 							
 			--Thanatos
 			
@@ -2946,6 +3059,17 @@ function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 						--Suppressed Barrel
 						self.parts.wpn_fps_snp_m95_barrel_suppressed.stats.damage = 0
 						self.parts.wpn_fps_snp_m95_barrel_suppressed.stats.recoil = -3
+
+							
+			--Repeater 1874
+			
+					--Sights
+
+							--A5 Scope
+							self.parts.wpn_fps_upg_winchester_o_classic.stats.spread = 1
+							self.parts.wpn_fps_upg_winchester_o_classic.stats.recoil = 1
+							self.parts.wpn_fps_upg_winchester_o_classic.stats.concealment = -3
+							self.parts.wpn_fps_upg_winchester_o_classic.stats.magnification = 3.5
 end
 
 function WeaponFactoryTweakData:_init_smg_attachments_oryo()
