@@ -1291,7 +1291,7 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 		--Medved R4 Suppressor
 		self.parts.wpn_fps_upg_ns_pis_putnik.stats.damage = -2
 		self.parts.wpn_fps_upg_ns_pis_putnik.stats.spread = 1
-		self.parts.wpn_fps_upg_ns_pis_putnik.stats.recoil = 1
+		self.parts.wpn_fps_upg_ns_pis_putnik.stats.recoil = 0
 		self.parts.wpn_fps_upg_ns_pis_putnik.stats.concealment = -2
 		self.parts.wpn_fps_upg_ns_pis_putnik.stats.suppression = 12
 		
