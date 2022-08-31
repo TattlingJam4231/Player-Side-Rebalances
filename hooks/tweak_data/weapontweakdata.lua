@@ -1342,7 +1342,6 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- GSPS 12G Shotgun
 			self.m37.AMMO_MAX = 21
 			self.m37.rays = 12
-			-- self.m37.stats.damage = 157
 			self.m37.stats.reload = 13
 			self.m37.stats.concealment = 17
 

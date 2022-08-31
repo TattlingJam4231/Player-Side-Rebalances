@@ -86,6 +86,7 @@ end
 -- <Player-Side Rebalances
 local damage_bullet_original = CopDamage.damage_bullet
 function CopDamage:damage_bullet(attack_data)
+	attack_data.hit_unit_max_health = self._HEALTH_INIT
 
 	if bullet_class == "FireBulletBase" or bullet_class == "FlameBulletBase" then
 		attack_data.fire_dot_data = {}
