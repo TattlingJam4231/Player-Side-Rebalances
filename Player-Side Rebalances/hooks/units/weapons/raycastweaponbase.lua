@@ -1,6 +1,9 @@
 function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	local ray_hits = nil
 	local hit_enemy = false
+	local can_shoot_through_wall = self:can_shoot_through_wall()
+	local can_shoot_through_shield = self:can_shoot_through_shield()
+	local can_shoot_through_enemy = self:can_shoot_through_enemy()
 	local enemy_mask = managers.slot:get_mask("enemies")
 	local wall_mask = managers.slot:get_mask("world_geometry", "vehicles")
 	local shield_mask = managers.slot:get_mask("enemy_shield_check")
@@ -15,6 +18,19 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	local weapon_unit = self._unit
 	local armor_piercing = weapon_unit:base()._use_armor_piercing or nil
 	local pierce_armor = armor_piercing
+
+	local can_shoot_through_armor_plating = self._can_shoot_through_armor_plating
+
+	local max_enemy_penetration_distance = self._max_enemy_penetration_distance or self._max_penetration_distance
+	local enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss
+	
+	local max_wall_penetration_distance = self.max_wall_penetration_distance or self._max_penetration_distance
+	local wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss
+	
+	local max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance
+	local shield_pen_energy_loss = self._shield_pen_energy_loss or self._pen_energy_loss
+	
+	local max_penetrations = self._max_penetrations
 	
 	local penetrations = 0
 	local enemy_penetrations = 0
@@ -23,7 +39,7 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	local shield_penetrations = 0
 	local energy_loss = 0
 
-	if self._can_shoot_through_armor_plating then
+	if can_shoot_through_armor_plating then
 
 		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
 		
@@ -44,7 +60,7 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	-- Player-Side Rebalances>
 
 
-	elseif self._can_shoot_through_wall then
+	elseif can_shoot_through_wall then
 		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
 	else
 		ray_hits = World:raycast_all("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
@@ -107,42 +123,33 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 			
 
 			-- <Player-Side Rebalances
-			if self._can_shoot_through_armor_plating then
+			if can_shoot_through_armor_plating then
 				--nothing
 			elseif hit_enemy then
 				if hit.body:name() == Idstring("body_plate") and not pierce_armor then
 					break
-				elseif not self._can_shoot_through_enemy then
+				elseif not can_shoot_through_enemy then
 					break
-				elseif self._max_enemy_penetration_distance and self._max_enemy_penetration_distance < hit.distance then
+				elseif max_enemy_penetration_distance and max_enemy_penetration_distance < hit.distance then
 					break
-				elseif (type(self._can_shoot_through_enemy) == "number") and (self._can_shoot_through_enemy < math.random()) then
-					break
-				elseif  self._max_enemy_penetrations then
-					if self._max_enemy_penetrations == enemy_penetrations then
+				elseif type(can_shoot_through_enemy) == "number" then
+					if can_shoot_through_enemy <= enemy_penetrations or max_penetrations and max_penetrations <= penetrations then
 						break
 					else
 						enemy_penetrations = enemy_penetrations + 1
-					end
-				elseif  self._max_penetrations then
-					if self._max_penetrations == penetrations then
-						break
-					else
 						penetrations = penetrations + 1
 					end
 				end
-				if self._enemy_pen_energy_loss then
-					energy_loss = energy_loss + self._enemy_pen_energy_loss
+				if enemy_pen_energy_loss then
+					energy_loss = energy_loss + enemy_pen_energy_loss
 				end
 			elseif hit.unit:in_slot(wall_mask) and weak_body then
-				if not self._can_shoot_through_wall then
+				if not can_shoot_through_wall then
 					break
-				elseif self._max_wall_penetration_distance and self._max_wall_penetration_distance < hit.distance then
+				elseif max_wall_penetration_distance and max_wall_penetration_distance < hit.distance then
 					break
-				elseif (type(self._can_shoot_through_wall) == "number") and (self._can_shoot_through_wall < math.random()) then
-					break
-				elseif  self._max_wall_penetrations then
-					if self._max_wall_penetrations == wall_penetrations then
+				elseif type(can_shoot_through_wall) == "number" then
+					if can_shoot_through_wall <= wall_penetrations or max_penetrations and max_penetrations <= penetrations then
 						if prev_hit_wall.distance then
 							if hit.distance - prev_hit_wall.distance > 40 then
 								break
@@ -160,57 +167,29 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 							end
 						else
 							wall_penetrations = wall_penetrations + 1
-							prev_hit_wall.distance = hit.distance
-						end
-					end
-				elseif  self._max_penetrations then
-					if self._max_penetrations == penetrations then
-						if prev_hit_wall.distance then
-							if hit.distance - prev_hit_wall.distance > 40 then
-								break
-							end
-						else
-							break
-						end
-					else
-						if prev_hit_wall.distance then
-							if hit.distance - prev_hit_wall.distance > 40 then
-								penetrations = penetrations + 1
-								prev_hit_wall.distance = hit.distance
-							else
-								--nothing
-							end
-						else
 							penetrations = penetrations + 1
 							prev_hit_wall.distance = hit.distance
 						end
 					end
 				end
-				if self._wall_pen_energy_loss then
-					energy_loss = energy_loss + self._wall_pen_energy_loss
+				if wall_pen_energy_loss then
+					energy_loss = energy_loss + wall_pen_energy_loss
 				end
 			elseif hit.unit:in_slot(shield_mask) then
-				if not self._can_shoot_through_shield then
+				if not can_shoot_through_shield then
 					break
-				elseif self._max_shield_penetration_distance and self._max_shield_penetration_distance < hit.distance then
+				elseif max_shield_penetration_distance and max_shield_penetration_distance < hit.distance then
 					break
-				elseif (type(self._can_shoot_through_shield) == "number") and (self._can_shoot_through_shield < math.random()) then
-					break
-				elseif  self._max_shield_penetrations then
-					if self._max_shield_penetrations == shield_penetrations then
+				elseif type(can_shoot_through_shield) == "number" then
+					if can_shoot_through_shield <= shield_penetrations or max_penetrations and max_penetrations <= penetrations then
 						break
 					else
 						shield_penetrations = shield_penetrations + 1
-					end
-				elseif  self._max_penetrations then
-					if self._max_penetrations == penetrations then
-						break
-					else
 						penetrations = penetrations + 1
 					end
 				end
-				if self._shield_pen_energy_loss then
-					energy_loss = energy_loss + self._shield_pen_energy_loss
+				if shield_pen_energy_loss then
+					energy_loss = energy_loss + shield_pen_energy_loss
 				end
 			end
 			-- Player-Side Rebalances>

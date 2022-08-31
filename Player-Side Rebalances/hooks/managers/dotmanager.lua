@@ -162,7 +162,7 @@ function DOTManager:update(t, dt)
 				dot_info.dot_counter = 0
 			end
 
-			if not dot_info.damage_table[1] or dot_info.enemy_unit:character_damage():dead() then
+			if not dot_info.damage_table[1] or tostring(dot_info.enemy_unit) == "[Unit NULL]" or dot_info.enemy_unit:character_damage():dead() then
 				clear_dot()
 			else
 				dot_info.dot_counter = dot_info.dot_counter + dt
@@ -174,7 +174,7 @@ function DOTManager:update(t, dt)
 				dot_info.dot_counter = 0
 			end	
 			
-			if t > dot_info.dot_damage_received_time + dot_info.dot_length or dot_info.enemy_unit:character_damage():dead() then
+			if t > dot_info.dot_damage_received_time + dot_info.dot_length or tostring(dot_info.enemy_unit) == "[Unit NULL]" or dot_info.enemy_unit:character_damage():dead() then
 				clear_dot()
 			else
 				dot_info.dot_counter = dot_info.dot_counter + dt

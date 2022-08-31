@@ -218,17 +218,17 @@ function NewRaycastWeaponBase:_get_penetration_stats_oryo()
 
 	self._can_shoot_through_armor_plating = tweak_data.weapon[self._name_id].can_shoot_through_armor_plating
 
-	self._max_shield_penetration_distance = tweak_data.weapon[self._name_id].max_shield_penetration_distance
 	self._max_enemy_penetration_distance = tweak_data.weapon[self._name_id].max_enemy_penetration_distance
-	self._max_wall_penetration_distance = tweak_data.weapon[self._name_id].max_wall_penetration_distance
-
-	self._max_shield_penetrations = tweak_data.weapon[self._name_id].max_shield_penetrations
-	self._max_enemy_penetrations = tweak_data.weapon[self._name_id].max_enemy_penetrations
-	self._max_wall_penetrations = tweak_data.weapon[self._name_id].max_wall_penetrations
-
-	self._shield_pen_energy_loss = tweak_data.weapon[self._name_id].shield_pen_energy_loss
 	self._enemy_pen_energy_loss = tweak_data.weapon[self._name_id].enemy_pen_energy_loss
+
+	self._max_wall_penetration_distance = tweak_data.weapon[self._name_id].max_wall_penetration_distance
 	self._wall_pen_energy_loss = tweak_data.weapon[self._name_id].wall_pen_energy_loss
+
+	self._max_shield_penetration_distance = tweak_data.weapon[self._name_id].max_shield_penetration_distance
+	self._shield_pen_energy_loss = tweak_data.weapon[self._name_id].shield_pen_energy_loss
+
+	self._max_penetration_distance = tweak_data.weapon[self._name_id].max_penetration_distance
+	self._pen_energy_loss = tweak_data.weapon[self._name_id].pen_energy_loss
 
 end
 
@@ -240,50 +240,40 @@ function NewRaycastWeaponBase:_update_penetration_stats_oryo()
 		end
 
 
-
-		if self._ammo_data.max_shield_penetration_distance ~= nil then
-			self._max_shield_penetration_distance = self._ammo_data.max_shield_penetration_distance
-		end
-
 		if self._ammo_data.max_enemy_penetration_distance ~= nil then
 			self._max_enemy_penetration_distance = self._ammo_data.max_enemy_penetration_distance
 		end
-
-		if self._ammo_data.max_wall_penetration_distance ~= nil then
-			self._max_wall_penetration_distance = self._ammo_data.max_wall_penetration_distance
-		end
-
-		
-
-		if self._ammo_data.max_shield_penetrations ~= nil then
-			self._max_shield_penetrations = self._ammo_data.max_shield_penetrations
-		end
-
-		if self._ammo_data.max_enemy_penetrations ~= nil then
-			self._max_enemy_penetrations = self._ammo_data.max_enemy_penetrations
-		end
-
-		if self._ammo_data.max_wall_penetrations ~= nil then
-			self._max_wall_penetrations = self._ammo_data.max_wall_penetrations
-		end
-
-		if self._ammo_data.max_penetrations ~= nil then
-			self._max_penetrations = self._ammo_data.max_penetrations
-		end
-
-
-
-		if self._ammo_data.shield_pen_energy_loss ~= nil then
-			self._shield_pen_energy_loss = self._ammo_data.shield_pen_energy_loss
-		end
-
 		if self._ammo_data.enemy_pen_energy_loss ~= nil then
 			self._enemy_pen_energy_loss = self._ammo_data.enemy_pen_energy_loss
 		end
 
+
+		if self._ammo_data.max_wall_penetration_distance ~= nil then
+			self._max_wall_penetration_distance = self._ammo_data.max_wall_penetration_distance
+		end
 		if self._ammo_data.wall_pen_energy_loss ~= nil then
 			self._wall_pen_energy_loss = self._ammo_data.wall_pen_energy_loss
 		end
+
+
+		if self._ammo_data.max_shield_penetration_distance ~= nil then
+			self._max_shield_penetration_distance = self._ammo_data.max_shield_penetration_distance
+		end
+		if self._ammo_data.shield_pen_energy_loss ~= nil then
+			self._shield_pen_energy_loss = self._ammo_data.shield_pen_energy_loss
+		end
+
+
+		if self._ammo_data.max_penetration_distance ~= nil then
+			self._max_penetration_distance = self._ammo_data.max_penetration_distance
+		end
+		if self._ammo_data.max_penetrations ~= nil then
+			self._max_penetrations = self._ammo_data.max_penetrations
+		end
+		if self._ammo_data.pen_energy_loss ~= nil then
+			self._pen_energy_loss = self._ammo_data.pen_energy_loss
+		end
+
 	end
 end
 
