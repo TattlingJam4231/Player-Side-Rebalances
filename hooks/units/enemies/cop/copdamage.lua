@@ -1,12 +1,13 @@
 function CopDamage:add_crit_chance_oryo(attack_data)
 	local add_crit = 0
+	local weapon_unit = attack_data.weapon_unit
 
-	if attack_data.is_fire_dot_damage then -- Player-Side Rebalances: check to prevent acces violation caused by calling a method from a null unit
+	if tostring(weapon_unit) == "[Unit NULL]"  then
 		return add_crit
 	end
 
 	if attack_data.weapon_unit then
-		local weapon_unit = self:get_unit_oryo(attack_data.weapon_unit)
+		-- local weapon_unit = self:get_unit_oryo(attack_data.weapon_unit)
 
 		if weapon_unit and weapon_unit:base() and weapon_unit:base()._ammo_data and weapon_unit:base()._ammo_data.crit_chance then
 			add_crit = add_crit + weapon_unit:base()._ammo_data.crit_chance
@@ -16,19 +17,19 @@ function CopDamage:add_crit_chance_oryo(attack_data)
 	return add_crit
 end
 
-function CopDamage:get_unit_oryo(_unit)
-	local data_type = type(_unit)
-	local unit = nil
+-- function CopDamage:get_unit_oryo(_unit)
+-- 	local data_type = type(_unit)
+-- 	local unit = nil
 
-	if data_type == 'number' then
-		local peer = managers.network:session():peer(_unit)
-		unit = peer:unit()
-	else
-		unit = _unit
-	end
+-- 	if data_type == 'number' then
+-- 		local peer = managers.network:session():peer(_unit)
+-- 		unit = peer:unit()
+-- 	else
+-- 		unit = _unit
+-- 	end
 
-	return unit
-end
+-- 	return unit
+-- end
 
 -- <Player-Side Rebalances
 local damage_fire_original = CopDamage.damage_fire
