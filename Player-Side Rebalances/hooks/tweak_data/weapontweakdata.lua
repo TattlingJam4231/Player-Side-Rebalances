@@ -2227,6 +2227,7 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.rsh12.armor_piercing_chance = nil
 			self.rsh12.AMMO_MAX = 30
 			self.rsh12.stats.damage = 210
+			self.rsh12.stats_modifiers = {damage = 1}
 
 			
 			--matever
