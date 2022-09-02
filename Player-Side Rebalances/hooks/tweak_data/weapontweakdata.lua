@@ -1,15 +1,3 @@
-function WeaponTweakData:set_kick_zero_oryo(wpn_id)
-	if wpn_id then
-		self[wpn_id] = self[wpn_id] or {}
-		self[wpn_id].kick = {}
-		self[wpn_id].kick = {
-			standing = {0,0,0,0},
-			crouching = {0,0,0,0},
-			steelsight = {0,0,0,0}
-		}
-	end
-end
-
 function WeaponTweakData:_init_weapon_index_oryo()
 	self.weapon_index = {
 		assault_rifle = {
@@ -295,7 +283,7 @@ function WeaponTweakData:_init_spread_oryo()
 		moving_standing = 3,
 		moving_crouching = 3,
 		moving_steelsight = 1.2,
-		bipod = 3
+		bipod = 2.5
 	}
 	self.spread_multiplier = {
 		shotgun = {
@@ -943,6 +931,76 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 			}
 			self.fal.kick.crouching = self.fal.kick.standing
 			self.fal.kick.steelsight = self:kick_steelsight_oryo(self.fal.kick.standing)
+			self.fal.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						start = 1,
+						v = {-0.25,-0.25},
+						h = {-0.05,0.05}
+					},
+					{
+						start = 3,
+						v = {-0.25,-0.25},
+						h = {-0.05,0.05}
+					},
+					{
+						start = 12,
+						v = {0,0},
+						h = {-0.15,0.15}
+					},
+					{
+						start = 20,
+						v = {-0.55,-0.45},
+						h = {-0.35,0.35}
+					},
+					{
+						start = 30,
+						v = {-0.8,-0.7},
+						h = {-0.45,0.45}
+					}
+				},
+				loop_last = 4,
+				kicks = {
+					{0.75,0.15},
+					{0.75,0.2},
+					{0.75,0.22},
+					{0.75,0.23},
+					{0.75,0.15},
+					{0.75,0.05},
+					{0.75,-0.05},
+					{0.75,-0.2},
+					{0.75,-0.3},
+					{0.75,0},
+					{0.75,0.1},
+					{0.75,-0.2},
+					{0.75,-0.28},
+					{0.75,-0.1},
+					{0.75,0},
+					{0.75,0},
+					{0.75,0},
+					{0.75,0.2},
+					{0.75,0.4},
+					{0.75,0.5},
+					{0.75,-0.5},
+					{0.75,-0.3},
+					{0.75,0.1},
+					{0.75,0.2},
+					{0.75,-0.7},
+					{0.75,0.3},
+					{0.75,0.5},
+					{0.75,0.2},
+					{0.75,-0.15},
+					{0.75,-0.35}
+				}
+			}
 			
 			-- Gewehr 3 Rifle
 			self.g3.AMMO_MAX = 140
@@ -978,7 +1036,6 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 				"grenade_launcher",
 				"assault_rifle"
 				}
-			-- self.groza_underbarrel.spread = default_spread
 
 			-- KS12 Urban Rifle
 			self.shak12.AMMO_MAX = 150
@@ -1489,10 +1546,168 @@ function WeaponTweakData:_init_lmgs_oryo()
 			-- ksp
 			self.m249.AMMO_MAX = 600
 			self.m249.stats.damage = 55
-			self.m249.stats.spread = 14--22
-			self.m249.stats.recoil = 12--20
+			self.m249.stats.spread = 14
+			self.m249.stats.recoil = 12
 			self.m249.stats.suppression = 1
 			self.m249.panic_suppression_chance = 1
+			self.m249.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						start = 8,
+						v = {-0.2,1},
+						h = {-1,1.2}
+					},
+					{
+						start = 50,
+						v = {-0.12,0.12},
+						h = {-0.7,0.9}
+					},
+					{
+						start = 80,
+						v = {-0.12,0.12},
+						h = {-0.2,0.4}
+					}
+				}--[[ ,
+				loop_last = 25,
+				kicks = {
+					{0.33,0.05},
+					{0.41,0.11},
+					{0.32,0.43},
+					{0.21,0.33},
+					{0.36,0.11},
+					{0.27,0.33},
+					{0.32,0.05},
+					{0.27,0.11},
+					{0.21,0.05},
+					{0.43,0.11},
+					{0.21,0.05},
+					{0.32,0.11},
+					{0.32,0.11},
+					{0.48,0.11},
+					{0.64,0.11},
+					{0.32,0.05},
+					{0.37,0.11},
+					{0.59,0.11},
+					{0.43,0.11},
+					{0.37,0.16},
+					{0.54,0.11},
+					{0.21,-0},
+					{0.32,0.16},
+					{0.05,0.16},
+					{0.05,0.38},
+					{0,-0},
+					{0.59,-0.16},
+					{0.43,-0.49},
+					{0.11,-0.11},
+					{0.11,0.05},
+					{0.21,0.54},
+					{0.05,0.22},
+					{0,0.05},
+					{0.16,-0},
+					{0.48,-0},
+					{0.32,-0.05},
+					{0.32,-0.05},
+					{0.43,-0.05},
+					{0.37,-0.05},
+					{0.05,-0.05},
+					{0.11,-0.05},
+					{0.32,-0.16},
+					{0.37,-0.22},
+					{0.21,-0.11},
+					{0.27,0.22},
+					{0.21,0.49},
+					{0.11,0.27},
+					{0.21,0.16},
+					{0.64,0.11},
+					{0.59,-0},
+					{0.21,-0},
+					{0.27,-0.16},
+					{0.43,-0.27},
+					{0.16,-0.05},
+					{0.27,-0.22},
+					{0.48,-0.16},
+					{0.43,-0.22},
+					{0.37,-0},
+					{0.48,0.11},
+					{0.43,0.16},
+					{0.48,0.33},
+					{0.11,0.22},
+					{0.16,0.22},
+					{0.11,0.22},
+					{0.27,0.27},
+					{0.32,0.33},
+					{0.37,0.33},
+					{0.27,0.16},
+					{0.59,0.11},
+					{0.75,0.05},
+					{0.16,-0},
+					{0.16,-0.27},
+					{0.21,-0.27},
+					{0.05,-0.11},
+					{0.32,0.22},
+
+					{0.43,0.45},
+					{0.16,-0.33},
+					{0.21,0.33},
+					{0.37,0.23},
+					{0.37,-0.28},
+					{0.32,-0.13},
+					{0.16,0.21},
+					{0.27,0.17},
+					{0.32,-0.16},
+					{0.16,0.05},
+					{0.21,0.05},
+					{0.27,0.12},
+					{0.16,0.13},
+					{0.16,0.25},
+					{0.32,-0.25},
+					{0.11,-0.11},
+					{0.27,-0.16},
+					{0.21,0.22},
+					{0,-0},
+					{0.16,0.16},
+					{0.11,-0.05},
+					{0.16,0.11},
+					{0.16,-0.11},
+					{0.11,0.11},
+					{0.16,0.22}
+
+					{0.21,0.45},
+					{0.21,-0.33},
+					{0.21,0.33},
+					{0.21,0.23},
+					{0.21,-0.28},
+					{0.21,-0.13},
+					{0.21,0.21},
+					{0.21,0.17},
+					{0.21,-0.16},
+					{0.21,0.05},
+					{0.21,0.05},
+					{0.21,0.12},
+					{0.21,0.13},
+					{0.21,0.25},
+					{0.21,-0.25},
+					{0.21,-0.11},
+					{0.21,-0.16},
+					{0.21,0.22},
+					{0.21,-0},
+					{0.21,0.16},
+					{0.21,-0.05},
+					{0.21,0.11},
+					{0.21,-0.11},
+					{0.21,0.11},
+					{0.21,0.22}
+				} ]]
+			}
+			
 			
 			-- ksp 58
 			self.par.AMMO_MAX = 600
@@ -1503,13 +1718,40 @@ function WeaponTweakData:_init_lmgs_oryo()
 			self.par.panic_suppression_chance = 1
 			
 			-- buzzsaw
-			self.mg42.CLIP_AMMO_MAX = 200
+			-- self.mg42.CLIP_AMMO_MAX = 10
 			self.mg42.AMMO_MAX = 600
 			self.mg42.stats.damage = 57
 			self.mg42.stats.spread = 12
 			self.mg42.stats.recoil = 9
 			self.mg42.stats.suppression = 1
 			self.mg42.panic_suppression_chance = 1
+			self.mg42.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						start = 10,
+						v = {-0.2,0.8},
+						h = {-1,1.4}
+					},
+					{
+						start = 60,
+						v = {-0.1,0.1},
+						h = {-0.7,1.1}
+					},
+					{
+						start = 100,
+						v = {-0.1,0.1},
+						h = {-0.2,0.7}
+					}
+				}
+			}
 end
 
 function WeaponTweakData:_init_snipers_oryo()
@@ -2008,6 +2250,35 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.mp7.kick.crouching = self.mp7.kick.standing
 			self.mp7.kick.steelsight = self:kick_steelsight_oryo(self.mp7.kick.standing)
+			self.mp7.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						start = 1,
+						v = {0.7,1.1},
+						h = {-0.4,0.4}
+					},
+					{
+						start = 5,
+						v = {0.7,1.1},
+						h = {-0.7,0.7}
+					},
+					{
+						start = 10,
+						v = {-0.2,0.2},
+						h = {-1.1,1.1}
+					}
+				},
+				loop_last = 1,
+				kicks = {0,0}
+			}
 			
 					-- Akimbo Specops Submachine Guns
 					self.x_mp7.AMMO_MAX = self.mp7.AMMO_MAX

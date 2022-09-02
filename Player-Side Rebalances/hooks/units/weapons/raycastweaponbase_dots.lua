@@ -28,6 +28,11 @@ function DOTBulletBase:_dot_data_by_weapon(weapon_unit)
 end
 
 function DOTBulletBase:start_dot_damage(col_ray, weapon_unit, user_unit, dot_data, weapon_id)
+
+	if not col_ray.unit:base() then
+		return
+	end
+
 	dot_data = dot_data or self.DOT_DATA
 	dot_data.hurt_animation = not dot_data.hurt_animation_chance or math.rand(1) < dot_data.hurt_animation_chance
 	
