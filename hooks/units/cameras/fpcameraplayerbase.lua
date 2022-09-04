@@ -142,7 +142,7 @@ function FPCameraPlayerBase:get_loop_index_oryo(recoil_table)
 	local kick_table = recoil_table.kick_table
 	local kick_index = math.ceil(self._kick_indices[recoil_table.weapon_name_id])
 	local loop_length = kick_table.loop_last or 1
-	local num_kicks = kick_table.kicks and #kick_table.kicks or 1
+	local num_kicks = kick_table.kicks and (#kick_table.kicks and kick_table.kicks[#kick_table.kicks].index or #kick_table.kicks) or 1
 	kick_index = kick_index > num_kicks and kick_index - (loop_length * (math.floor((kick_index - num_kicks - 1) / loop_length) + 1)) or kick_index
 
 	return kick_index
@@ -159,9 +159,9 @@ function FPCameraPlayerBase:get_kick_variance_oryo(kick_table, kick_index)
 			variance = kick_table.variance
 		else
 			for i = 1, #kick_table.variance do
-				if kick_table.variance[i].start > kick_index then
+				if kick_table.variance[i].index > kick_index then
 					if kick_table.variance[i-1] then
-						local variance_index = math.clamp(math.inverse_lerp(kick_table.variance[i-1].start, kick_table.variance[i].start, kick_index),0,1)
+						local variance_index = math.clamp(math.inverse_lerp(kick_table.variance[i-1].index, kick_table.variance[i].index, kick_index),0,1)
 						variance.v = {
 							math.lerp(kick_table.variance[i-1].v[1], kick_table.variance[i].v[1], variance_index),
 							math.lerp(kick_table.variance[i-1].v[2], kick_table.variance[i].v[2], variance_index)
@@ -189,29 +189,60 @@ function FPCameraPlayerBase:get_kick_variance_oryo(kick_table, kick_index)
 	return variance
 end
 
+function FPCameraPlayerBase:get_base_kick_oryo(kick_table, loop_index)
+	local v = 0
+	local h = 0
+	if kick_table.kicks then
+		if type(kick_table.kicks[1]) == "number" and type(kick_table.kicks[2]) == "number" then
+			v = kick_table.kicks[1]
+			h = kick_table.kicks[2]
+		elseif kick_table.kicks[loop_index] and type(kick_table.kicks[loop_index][1]) == "number" and type(kick_table.kicks[loop_index][2]) == "number" then
+			v = kick_table.kicks[loop_index][1]
+			h = kick_table.kicks[loop_index][2]
+		else
+			for i = 1, #kick_table.kicks do
+				if kick_table.kicks[i].index > loop_index then
+					if kick_table.kicks[i-1] then
+						local lerp_index = math.clamp(math.inverse_lerp(kick_table.kicks[i-1].index, kick_table.kicks[i].index, loop_index),0,1)
+						v = math.lerp(kick_table.kicks[i-1].kick[1], kick_table.kicks[i].kick[1], lerp_index)
+						h = math.lerp(kick_table.kicks[i-1].kick[2], kick_table.kicks[i].kick[2], lerp_index)
+						break
+					else
+						v = kick_table.kicks[i].kick[1]
+						h = kick_table.kicks[i].kick[2]
+						break
+					end
+				elseif i == #kick_table.kicks then
+					v = kick_table.kicks[i].kick[1]
+					h = kick_table.kicks[i].kick[2]
+				end
+			end
+		end
+	end
+	return v, h
+end
+
 function FPCameraPlayerBase:get_kick_values_oryo(recoil_table)
 	local kick_table = recoil_table.kick_table
 	self:increment_kick_index_oryo(recoil_table)
 	local loop_index = self:get_loop_index_oryo(recoil_table)
 	local kick_index = self:get_kick_index_oryo(recoil_table)
 	local variance = self:get_kick_variance_oryo(kick_table, kick_index)
+	local v, h = self:get_base_kick_oryo(kick_table, loop_index)
 	local recoil_multiplier = recoil_table.recoil_multiplier * kick_table.state_mul[recoil_table.state] * (kick_table.scale_factor or 1)
 	local v_mul = kick_table.v_scale_factor or 1
 	local h_mul = kick_table.h_scale_factor or 1
 
-	local v = 0
 	if math.abs(self._recoil_kick.accumulated) < 100 then 
 		local v_variance = math.lerp(variance.v[1], variance.v[2], math.random())
-
-		v = kick_table.kicks and (type(kick_table.kicks[1]) == "number" and kick_table.kicks[1] or kick_table.kicks[loop_index][1]) or 0
 		v = (v + v_variance) * recoil_multiplier * v_mul
-
 	end
 
 	local h_variance = math.lerp(variance.h[1], variance.h[2], math.random())
-
-	local h = kick_table.kicks and (type(kick_table.kicks[2]) == "number" and kick_table.kicks[2] or kick_table.kicks[loop_index][2]) or 0
 	h = (h + h_variance) * recoil_multiplier * h_mul
+
+	log("loop: " .. loop_index)
+	log("kick: {" .. v .. ", " .. h .. "}")
 
 	return v, h
 end

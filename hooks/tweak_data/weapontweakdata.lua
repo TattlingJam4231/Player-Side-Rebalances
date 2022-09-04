@@ -74,7 +74,8 @@ function WeaponTweakData:_init_weapon_index_oryo()
 		},
 		lmg = {
 			tier_3 = {
-				"m60"				-- M60 Light Machine Gun
+				"m60",				-- M60 Light Machine Gun
+				"hk51b"				-- SG Versteckt 51D Light Machine Gun
 			},
 			tier_2 = {
 				"rpk",				-- RPK Light Machine Gun
@@ -509,20 +510,20 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 	self.recoil_wait = {
 		assault_rifle = {
 			tier_4 = {
-				flat = 1,
+				flat = 2.1,
 				curve = 1
 			},
 			tier_3 = {
-				flat = 0.5,
-				curve = 1.5
+				flat = 2.1,
+				curve = 1
 			},
 			tier_2 = {
-				flat = 0.5,
-				curve = 1.5
+				flat = 2.1,
+				curve = 1
 			},
 			tier_1 = {
-				flat = 0.5,
-				curve = 1.5
+				flat = 2.1,
+				curve = 1
 			}
 		},
 		shotgun = {
@@ -549,15 +550,15 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 		},
 		lmg = {
 			tier_3 = {
-				flat = 0,
+				flat = 0.5,
 				curve = 1
 			},
 			tier_2 = {
-				flat = 0,
+				flat = 0.5,
 				curve = 1
 			},
 			tier_1 = {
-				flat = 0,
+				flat = 0.5,
 				curve = 1
 			}
 		},
@@ -585,16 +586,16 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 		},
 		smg = {
 			tier_3 = {
-				flat = 0,
-				curve = 2
+				flat = 2,
+				curve = 0.5
 			},
 			tier_2 = {
-				flat = 0,
-				curve = 2
+				flat = 2,
+				curve = 0.5
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 2
+				flat = 2,
+				curve = 0.5
 			}
 		},
 		pistol = {
@@ -644,9 +645,9 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = 		{3		/1.35, 6	/1.35}
 		},
 		lmg = {
-			tier_3 = {5		/1.35, 10	/1.35},
-			tier_2 = {10	/1.35, 25	/1.35},
-			tier_1 = {15	/1.35, 35	/1.35}
+			tier_3 = {5		/1.35, 9	/1.35},
+			tier_2 = {10	/1.35, 18	/1.35},
+			tier_1 = {15	/1.35, 25	/1.35}
 		},
 		snp = {
 			tier_5 = {0.04, 0.54},
@@ -942,64 +943,74 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 				h_scale_factor = 1,
 				variance = {
 					{
-						start = 1,
-						v = {-0.25,-0.25},
-						h = {-0.05,0.05}
+						index = 1,
+						v = {-0.3,-0.2},
+						h = {-0.1,0.1}
 					},
 					{
-						start = 3,
-						v = {-0.25,-0.25},
-						h = {-0.05,0.05}
+						index = 3,
+						v = {-0.3,-0.2},
+						h = {-0.1,0.1}
 					},
 					{
-						start = 12,
-						v = {0,0},
-						h = {-0.15,0.15}
+						index = 8,
+						v = {0.1,0.3},
+						h = {-0.2,0.2}
 					},
 					{
-						start = 20,
+						index = 20,
 						v = {-0.55,-0.45},
-						h = {-0.35,0.35}
+						h = {-0.5,0.5}
 					},
 					{
-						start = 30,
+						index = 30,
 						v = {-0.8,-0.7},
-						h = {-0.45,0.45}
+						h = {-0.8,0.8}
 					}
 				},
 				loop_last = 4,
 				kicks = {
-					{0.75,0.15},
-					{0.75,0.2},
-					{0.75,0.22},
-					{0.75,0.23},
-					{0.75,0.15},
-					{0.75,0.05},
-					{0.75,-0.05},
-					{0.75,-0.2},
-					{0.75,-0.3},
-					{0.75,0},
-					{0.75,0.1},
-					{0.75,-0.2},
-					{0.75,-0.28},
-					{0.75,-0.1},
-					{0.75,0},
-					{0.75,0},
-					{0.75,0},
-					{0.75,0.2},
-					{0.75,0.4},
-					{0.75,0.5},
-					{0.75,-0.5},
-					{0.75,-0.3},
-					{0.75,0.1},
-					{0.75,0.2},
-					{0.75,-0.7},
-					{0.75,0.3},
-					{0.75,0.5},
-					{0.75,0.2},
-					{0.75,-0.15},
-					{0.75,-0.35}
+				{
+					index = 1,
+					kick = {0.75,0.25}
+				},
+				{
+					index = 4,
+					kick = {0.75,0.25}
+				},
+				{
+					index = 8,
+					kick = {0.75,-0.1}
+				},
+				{
+					index = 10,
+					kick = {0.75,-0.2}
+				},
+				{
+					index = 12,
+					kick = {0.75,0}
+				},
+				{
+					index = 16,
+					kick = {0.75,-0.25}
+				},
+				{
+					index = 20,
+					kick = {0.75,0}
+				},
+				{
+					index = 25,
+					kick = {0.75,0.5}
+				},
+				{
+					index = 28,
+					kick = {0.75,-0.2}
+				},
+				{
+					index = 30,
+					kick = {0.75,0.5}
 				}
+			}
 			}
 			
 			-- Gewehr 3 Rifle
@@ -1522,6 +1533,74 @@ function WeaponTweakData:_init_lmgs_oryo()
 			self.m60.stats.recoil = 4
 			self.m60.stats.suppression = 6
 			self.m60.panic_suppression_chance = 1
+			self.m60.kick.standing = {
+				0.7,
+				1,
+				-0.6,
+				1
+			}
+			self.m60.kick.crouching = self.m60.kick.standing
+			self.m60.kick.steelsight = self:kick_steelsight_oryo(self.m60.kick.standing)
+			self.m60.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.7,1},
+						h = {-0.6,1}
+					},
+					{
+						index = 10,
+						v = {0.4,0.6},
+						h = {-0.55,0.9}
+					},
+					{
+						index = 25,
+						v = {-0.2,0.2},
+						h = {-0.4,0.7}
+					}
+				}
+			}
+
+			-- SG Versteckt 51D
+			self.hk51b.panic_suppression_chance = 1
+			self.hk51b.kick.standing = {
+				0.8,
+				1,
+				-1,
+				0.6
+			}
+			self.hk51b.kick.crouching = self.hk51b.kick.standing
+			self.hk51b.kick.steelsight = self:kick_steelsight_oryo(self.hk51b.kick.standing)
+			self.hk51b.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.8,1},
+						h = {-0.6,1}
+					},
+					{
+						index = 20,
+						v = {-0.2,0.2},
+						h = {-0.7,0.4}
+					}
+				}
+			}
 		
 	--t2 lmgs-------------------------------------------------------------------
 		
@@ -1532,6 +1611,36 @@ function WeaponTweakData:_init_lmgs_oryo()
 			self.rpk.stats.recoil = 9
 			self.rpk.stats.suppression = 1
 			self.rpk.panic_suppression_chance = 1
+			self.rpk.kick.standing = {
+				0.1,
+				0.8,
+				-0.8,
+				1.2
+			}
+			self.rpk.kick.crouching = self.rpk.kick.standing
+			self.rpk.kick.steelsight = self:kick_steelsight_oryo(self.rpk.kick.standing)
+			self.rpk.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 5,
+						v = {0.1,0.8},
+						h = {-0.8,1.2}
+					},
+					{
+						index = 30,
+						v = {-0.2,0.2},
+						h = {-0.6,0.8}
+					}
+				}
+			}
 			
 			-- Brenner
 			self.hk21.AMMO_MAX = 450
@@ -1540,16 +1649,54 @@ function WeaponTweakData:_init_lmgs_oryo()
 			self.hk21.stats.recoil = 11
 			self.hk21.stats.suppression = 1
 			self.hk21.panic_suppression_chance = 1
+			self.hk21.kick.standing = {
+				0.4,
+				0.8,
+				-0.7,
+				0.7
+			}
+			self.hk21.kick.crouching = self.hk21.kick.standing
+			self.hk21.kick.steelsight = self:kick_steelsight_oryo(self.hk21.kick.standing)
+			self.hk21.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 5,
+						v = {0.4,0.8},
+						h = {-0.7,0.7}
+					},
+					{
+						index = 30,
+						v = {-0.2,0.2},
+						h = {-0.5,0.5}
+					}
+				}
+			}
 		
 	--t1 lmgs-------------------------------------------------------------------
 		
-			-- ksp
+			-- KSP
 			self.m249.AMMO_MAX = 600
 			self.m249.stats.damage = 55
 			self.m249.stats.spread = 14
 			self.m249.stats.recoil = 12
 			self.m249.stats.suppression = 1
 			self.m249.panic_suppression_chance = 1
+			self.m249.kick.standing = {
+				-0.2,
+				1,
+				-1,
+				1.2
+			}
+			self.m249.kick.crouching = self.m249.kick.standing
+			self.m249.kick.steelsight = self:kick_steelsight_oryo(self.m249.kick.standing)
 			self.m249.kick_table = {
 				state_mul = {
 					standing = 1,
@@ -1561,40 +1708,72 @@ function WeaponTweakData:_init_lmgs_oryo()
 				h_scale_factor = 1,
 				variance = {
 					{
-						start = 8,
+						index = 5,
 						v = {-0.2,1},
 						h = {-1,1.2}
 					},
 					{
-						start = 50,
-						v = {-0.12,0.12},
+						index = 40,
+						v = {-0.18,0.18},
 						h = {-0.7,0.9}
-					},
-					{
-						start = 80,
-						v = {-0.12,0.12},
-						h = {-0.2,0.4}
 					}
 				}
 			}
 			
 			
-			-- ksp 58
+			-- KSP 58
 			self.par.AMMO_MAX = 600
 			self.par.stats.damage = 56
 			self.par.stats.spread = 14
 			self.par.stats.recoil = 14
 			self.par.stats.suppression = 1
 			self.par.panic_suppression_chance = 1
+			self.par.kick.standing = {
+				-0.2,
+				0.8,
+				-0.8,
+				1.6
+			}
+			self.par.kick.crouching = self.par.kick.standing
+			self.par.kick.steelsight = self:kick_steelsight_oryo(self.par.kick.standing)
+			self.par.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 5,
+						v = {-0.2,0.8},
+						h = {-0.8,1.6}
+					},
+					{
+						index = 40,
+						v = {-0.12,0.12},
+						h = {-0.45,1.15}
+					}
+				}
+			}
 			
-			-- buzzsaw
-			self.mg42.CLIP_AMMO_MAX = 200
+			-- Buzzsaw
 			self.mg42.AMMO_MAX = 600
 			self.mg42.stats.damage = 57
 			self.mg42.stats.spread = 12
 			self.mg42.stats.recoil = 9
 			self.mg42.stats.suppression = 1
 			self.mg42.panic_suppression_chance = 1
+			self.mg42.kick.standing = {
+				-0.2,
+				0.8,
+				-1,
+				1.4
+			}
+			self.mg42.kick.crouching = self.mg42.kick.standing
+			self.mg42.kick.steelsight = self:kick_steelsight_oryo(self.mg42.kick.standing)
 			self.mg42.kick_table = {
 				state_mul = {
 					standing = 1,
@@ -1606,19 +1785,14 @@ function WeaponTweakData:_init_lmgs_oryo()
 				h_scale_factor = 1,
 				variance = {
 					{
-						start = 10,
+						index = 5,
 						v = {-0.2,0.8},
 						h = {-1,1.4}
 					},
 					{
-						start = 60,
+						index = 40,
 						v = {-0.1,0.1},
-						h = {-0.7,1.1}
-					},
-					{
-						start = 100,
-						v = {-0.1,0.1},
-						h = {-0.2,0.7}
+						h = {-0.6,1}
 					}
 				}
 			}
@@ -2131,17 +2305,17 @@ function WeaponTweakData:_init_smgs_oryo()
 				h_scale_factor = 1,
 				variance = {
 					{
-						start = 1,
+						index = 1,
 						v = {0.7,1.1},
 						h = {-0.4,0.4}
 					},
 					{
-						start = 5,
+						index = 5,
 						v = {0.7,1.1},
 						h = {-0.7,0.7}
 					},
 					{
-						start = 10,
+						index = 10,
 						v = {-0.2,0.2},
 						h = {-1.1,1.1}
 					}
