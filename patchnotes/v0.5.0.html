@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+<title>Player-Side Rebalances v0.5.0 - Patch Notes</title>
+<link rel="stylesheet" type="text/css" href="https://fragtrane.github.io/SuperBLT-Update-Demo/style.css">
+<style type="text/css">
+body, html {
+    background-color: #cfcfcf;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#mainContainer {
+    background-color: #ffffff;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 900px;
+    border-color: #afafaf;
+    border-style: solid;
+    border-width: 1px;
+    padding: 40px;
+}
+</style>
+</head>
+<body>
+<div id="mainContainer" class="markdown-body">
+<h2>Player-Side Rebalances v0.5.0 - Patch Notes</h2>
+<ul>
+    <li>fixed crash that occured when hitting a shield with melee that has a dot</li>
+    <li>slightly increased accuracy when using a bipod</li>
+    <li>weapon changes:</li>
+    <ul>
+
+        <li><b>NOTE: assume walk-in closet for ammo pickup values</b></li>
+
+        <li>Assault Rifles:</li>
+        <ul>
+            <li>tier 4 ARs' recoil decay now starts <b>2.1</b>(from <b>1</b>) times their shot cooldown after shooting</li>
+            <li>tier 1, 2, & 3 ARs' recoil decay now starts <b>2.1</b>(from <b>0.5</b>) times their shot cooldown after shooting</li>
+            <li>tier 1, 2, & 3 ARs' recoil decay acceleration period now lasts <b>1.5</b>(from <b>1</b>) times their shot cooldown</li>
+        </ul>
+
+        <li>SMGs:</li>
+        <ul>
+            <li>recoil decay now starts <b>2</b>(from <b>0</b>) times their shot cooldown after shooting</li>
+            <li>recoil decay acceleration period now lasts <b>0.5</b>(from <b>2</b>) times their shot cooldown</li>
+        </ul>
+        
+        <li>LMGs:</li>
+        <ul>
+            <li>recoil decay now starts <b>0.5</b>(from <b>0</b>) times their shot cooldown after shooting</li>
+
+            <li>M60:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>max: <b>10 🠊 <FONT COLOR="RED">9</FONT></b></li>
+                </ul>
+                
+                <li>recoil:</li>
+                <ul>
+                    <li>vertical: <b>(-0.2, 0.8) 🠊 (0.1, 1)</b></li>
+                    <li>horizontal: <b>(-1, 1.4) 🠊 (-0.6, 1)</b></li>
+                    <li>recoil is now reduced the longer you fire, capping after <b>25</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.2, 0.2)</b></li>
+                        <li>min horizontal: <b>(-0.4, 0.7)</b></li>
+                    </ul>
+                </ul>
+            </ul>
+
+            <li>SG Versteckt 51D:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>min: <b>6.08 🠊 <FONT COLOR="RED">5</FONT></b></li>
+                    <li>max: <b>8.51 🠊 <FONT COLOR="GREEN">9</FONT></b></li>
+                </ul>
+
+                <li>recoil:</li>
+                <ul>
+                    <li>recoil is now reduced the longer you fire, capping after <b>20</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.2, 0.2)</b></li>
+                        <li>min horizontal: <b>(-0.7, 0.4)</b></li>
+                    </ul>
+                </ul>
+            </ul>
+
+            <li>RPK:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>max: <b>25 🠊 <FONT COLOR="RED">18</FONT></b></li>
+                </ul>
+
+                <li>recoil:</li>
+                <ul>
+                    <li>vertical: <b>(-0.2, 0.8) 🠊 (0.1, 0.8)</b></li>
+                    <li>horizontal: <b>(-1, 1.4) 🠊 (-0.8, 1.2)</b></li>
+                    <li>recoil is now reduced the longer you fire, capping after <b>30</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.2, 0.2)</b></li>
+                        <li>min horizontal: <b>(-0.6, 0.8)</b></li>
+                    </ul>
+                </ul>
+            </ul>
+
+            <li>Brenner-21:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>max: <b>25 🠊 <FONT COLOR="RED">18</FONT></b></li>
+                </ul>
+
+                <li>recoil:</li>
+                <ul>
+                    <li>horizontal: <b>(-0.6, 0.6) 🠊 (-0.7, 0.7)</b></li>
+                    <li>recoil is now reduced the longer you fire, capping after <b>30</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.2, 0.2)</b></li>
+                        <li>min horizontal: <b>(-0.5, 0.5)</b></li>
+                    </ul>
+                </ul>
+            </ul>
+
+            <li>KSP:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>max: <b>35 🠊 <FONT COLOR="RED">25</FONT></b></li>
+                </ul>
+
+                <li>recoil:</li>
+                <ul>
+                    <li>vertical: <b>(-0.2, 0.8) 🠊 (-0.2, 1)</b></li>
+                    <li>horizontal: <b>(-1, 1.4) 🠊 (-1, 1.2)</b></li>
+                    <li>recoil is now reduced the longer you fire, capping after <b>40</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.15, 0.15)</b></li>
+                        <li>min horizontal: <b>(-0.7, 0.9)</b></li>
+                    </ul>
+                </ul>
+            </ul>
+
+            <li>KSP 58:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>max: <b>35 🠊 <FONT COLOR="RED">25</FONT></b></li>
+                </ul>
+
+                <li>recoil:</li>
+                <ul>
+                    <li>horizontal: <b>(-1, 1.7) 🠊 (-0.8, 1.6)</b></li>
+                    <li>recoil is now reduced the longer you fire, capping after <b>40</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.15, 0.15)</b></li>
+                        <li>min horizontal: <b>(-0.45, 1.15)</b></li>
+                </ul>
+            </ul>
+
+            <li>Buzzsaw:</li>
+            <ul>
+                <li>ammo pickup:</li>
+                <ul>
+                    <li>max: <b>35 🠊 <FONT COLOR="RED">25</FONT></b></li>
+                </ul>
+
+                <li>recoil:</li>
+                <ul>
+                    <li>recoil is now reduced the longer you fire, capping after <b>40</b> rounds:</li>
+                    <ul>
+                        <li>min vertical: <b>(-0.15, 0.15)</b></li>
+                        <li>min horizontal: <b>(-0.6, 1)</b></li>
+                </ul>
+            </ul>
+        </ul>
+    </ul>
+</ul>
+<p><i>2022-09-03 - Update 227 - <a href="https://tattlingjam4231.github.io/Player-Side-Rebalances/patchnotes/changelog.html">changelog</a></i></p>
+</div>
+</body>
+</html>
