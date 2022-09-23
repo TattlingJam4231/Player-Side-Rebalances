@@ -292,12 +292,12 @@ function NewRaycastWeaponBase:_update_fire_mode_data_oryo()
 		else
 			locked_fire_mode = can_toggle_firemode[1]
 		end
-	elseif type(can_toggle_firemode) == "string" and can_toggle_firemode == "single" or can_toggle_firemode == "auto" or can_toggle_firemode == "burst" then
-		locked_fire_mode = can_toggle_firemode
+	elseif type(can_toggle_firemode) == "string" then
+		locked_fire_mode = Idstring(can_toggle_firemode)
 	end
 
-	if locked_fire_mode == "single" or locked_fire_mode == "auto" or locked_fire_mode == "burst" then
-		self._locked_fire_mode = Idstring(locked_fire_mode)
+	if locked_fire_mode then
+		self._locked_fire_mode = locked_fire_mode
 	end 
 
 	self._fire_mode = type(self:can_toggle_firemode()) == "table" and Idstring(self:can_toggle_firemode()[1]) or self._locked_fire_mode or self._fire_mode
@@ -320,28 +320,23 @@ function NewRaycastWeaponBase:toggle_firemode(skip_post_event)
 		self._fire_mode_index = (self._fire_mode_index % fire_modes) + 1
 		local index = self._fire_mode_index
 
-		if can_toggle[index] == "single" then
-			self._fire_mode = Idstring("single")
+		if can_toggle[index] then
+			self._fire_mode = Idstring(can_toggle[index])
 
 			if not skip_post_event then
-				self._sound_fire:post_event("wp_auto_switch_off")
+				self._sound_fire:post_event(index % 2 == 0 and "wp_auto_switch_on" or "wp_auto_switch_off")
 			end
-		elseif can_toggle[index] == "auto" then
-			self._fire_mode = Idstring("auto")
 
-			if not skip_post_event then
-				self._sound_fire:post_event("wp_auto_switch_on")
-			end
-		elseif can_toggle[index] == "burst" then
-			self._fire_mode = Idstring("burst")
+			local fire_mode_data = self._fire_mode_data[self._fire_mode:key()]
+			local fire_effect = fire_mode_data and (self._silencer and fire_mode_data.muzzleflash_silenced or fire_mode_data.muzzleflash)
 
-			if not skip_post_event then
-				if table.contains(can_toggle, "auto") then
-					self._sound_fire:post_event("wp_auto_switch_off")
-				else
-					self._sound_fire:post_event("wp_auto_switch_on")
-				end
-			end
+			self:change_fire_effect(fire_effect)
+
+			local trail_effect = fire_mode_data and fire_mode_data.trail_effect
+
+			self:change_trail_effect(trail_effect)
+			self:call_on_digital_gui("set_firemode", self:fire_mode())
+			self:update_firemode_gui_ammo()
 		else
 
 			return false

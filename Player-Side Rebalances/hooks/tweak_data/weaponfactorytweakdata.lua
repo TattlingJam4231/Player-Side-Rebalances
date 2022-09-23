@@ -61,15 +61,17 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"wpn_fps_sho_ultima"			-- Argos III Shotgun
 			},
 			tier_2 = {
-				"wpn_fps_sho_ben",			-- M1014 Shotgun
+				"wpn_fps_sho_ben",				-- M1014 Shotgun
 				"wpn_fps_sho_spas12",			-- Predator 12G Shotgun
-				"wpn_fps_sho_striker"			-- Street Sweeper Shotgun
+				"wpn_fps_sho_striker",			-- Street Sweeper Shotgun
+				"wpn_fps_sho_sko12"				-- VD-12 Shotgun
 			},
 			tier_1 = {
 				"wpn_fps_shot_saiga",			-- Izhma 12G Shotgun
 				"wpn_fps_sho_aa12",				-- Steakout 12G Shotgun
 				"wpn_fps_sho_basset",			-- Grimm 12G Shotgun
-				"wpn_fps_sho_x_basset"			-- Brothers Grimm 12G Shotguns
+				"wpn_fps_sho_x_basset",			-- Brothers Grimm 12G Shotguns
+				"wpn_fps_sho_x_sko12"			-- Akimbo VD-12 Shotguns
 			}
 		},
 		lmg = {
