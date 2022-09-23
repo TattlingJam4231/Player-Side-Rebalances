@@ -63,13 +63,15 @@ function WeaponTweakData:_init_weapon_index_oryo()
 			tier_2 = {
 				"benelli",			-- M1014 Shotgun
 				"spas12",			-- Predator 12G Shotgun
-				"striker"			-- Street Sweeper Shotgun
+				"striker",			-- Street Sweeper Shotgun
+				"sko12",			-- VD-12 Shotgun
 			},
 			tier_1 = {
 				"saiga",			-- Izhma 12G Shotgun
 				"aa12",				-- Steakout 12G Shotgun
 				"basset",			-- Grimm 12G Shotgun
-				"x_basset"			-- Brothers Grimm 12G Shotguns
+				"x_basset",			-- Brothers Grimm 12G Shotguns
+				"x_sko12"			-- Akimbo VD-12 Shotguns
 			}
 		},
 		lmg = {
@@ -196,7 +198,9 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"m1911",			-- Crosskill Chunky Compact Pistol
 				"x_m1911",			-- Akimbo Crosskill Chunky Compact Pistols
 				"maxim9",			-- Gecko M2 Pistol
-				"x_maxim9"			-- Akimbo Gecko M2 Pistols
+				"x_maxim9",			-- Akimbo Gecko M2 Pistols
+				"korth",			-- Kahn .357 Revolver Revolver
+				"x_korth"			-- Akimbo Kahn .357 Revolver Revolvers
 			},
 			tier_2 = {
 				"g22c",				-- Chimano Custom Pistol
@@ -1347,7 +1351,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			}
 
 
-	--T5 Shotguns---------------------------------------------------------------
+	--T4 Shotguns---------------------------------------------------------------
 						
 			-- Breaker 12G Shotgun
 			self.boot.fire_mode_data.fire_rate = 0.7
@@ -1364,7 +1368,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.m37.stats.concealment = 17
 
 
-	--T4 Shotguns----------------------------------------------------------------
+	--T3 Shotguns----------------------------------------------------------------
 			
 			-- The Judge Shotgun
 			self.judge.categories = {
@@ -1468,7 +1472,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Argos III Shotgun
 
 
-	--T3 Shotguns----------------------------------------------------------------
+	--T2 Shotguns----------------------------------------------------------------
 		
 			-- M1014 Shotgun
 			self.benelli.rays = 12
@@ -1487,6 +1491,18 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.spas12.stats.concealment = 16
 			self.spas12.use_shotgun_reload = "dual"
 
+
+			-- VD-12 Shotgun
+			self.sko12.damage_falloff = {
+				optimal_distance = 0,
+				optimal_range = 1200,
+				near_falloff = 0,
+				far_falloff = 1500,
+				near_multiplier = 1,
+				far_multiplier = 0.2
+			}
+			self.sko12.stats.reload = 5
+
 			
 			-- Street Sweeper Shotgun
 			self.striker.rays = 12
@@ -1494,7 +1510,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.striker.use_shotgun_reload = "dual"
 
 
-	--T2 Shotguns----------------------------------------------------------------
+	--T1 Shotguns----------------------------------------------------------------
 
 			-- Izhma 12G Shotgun
 			self.saiga.rays = 12
@@ -1505,7 +1521,20 @@ function WeaponTweakData:_init_shotguns_oryo()
 			-- Steakout 12G Shotgun
 			self.aa12.rays = 12
 			self.aa12.stats.recoil = 14
+
+			
+			-- Steakout 12G Shotgun
+			self.x_sko12.damage_falloff = {
+				optimal_distance = 0,
+				optimal_range = 1200,
+				near_falloff = 0,
+				far_falloff = 1500,
+				near_multiplier = 1,
+				far_multiplier = 0.2
+			}
+			self.x_sko12.stats.reload = 6
 		
+
 			-- Grimm 12G Shotgun
 			self.basset.AMMO_MAX = 56
 			self.basset.stats.recoil = 12
@@ -1515,9 +1544,8 @@ function WeaponTweakData:_init_shotguns_oryo()
 					self.x_basset.AMMO_MAX = self.basset.AMMO_MAX
 					self.x_basset.stats.recoil = self.basset.stats.recoil
 					self.x_basset.stats.reload = 6
+			
 
-
-	--T1 Shotguns----------------------------------------------------------------
 end
 
 function WeaponTweakData:_init_lmgs_oryo()
@@ -1714,7 +1742,7 @@ function WeaponTweakData:_init_lmgs_oryo()
 					},
 					{
 						index = 40,
-						v = {-0.18,0.18},
+						v = {-0.15,0.15},
 						h = {-0.7,0.9}
 					}
 				}
@@ -1753,7 +1781,7 @@ function WeaponTweakData:_init_lmgs_oryo()
 					},
 					{
 						index = 40,
-						v = {-0.12,0.12},
+						v = {-0.15,0.15},
 						h = {-0.45,1.15}
 					}
 				}
@@ -1791,7 +1819,7 @@ function WeaponTweakData:_init_lmgs_oryo()
 					},
 					{
 						index = 40,
-						v = {-0.1,0.1},
+						v = {-0.15,0.15},
 						h = {-0.6,1}
 					}
 				}
@@ -2795,6 +2823,13 @@ function WeaponTweakData:_init_pistols_oryo()
 end
 
 function WeaponTweakData:_init_specials_oryo()
+	
+	--Hailstorm Mk5
+	self.hailstorm.AMMO_PICKUP = {4 / 1.35, 11 / 1.35}
+	-- self.hailstorm.fire_mode_data.volley.can_shoot_through_shield = true
+	-- self.hailstorm.fire_mode_data.volley.can_shoot_through_enemy = true
+
+
 	--GLs-----------------------------------------------------------------------------------------------------------------------------------------------------
 			
 			--t2 gls--------------------------------------------------------------------

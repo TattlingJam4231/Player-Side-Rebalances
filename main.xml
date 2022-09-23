@@ -200,6 +200,7 @@
 				<value_node value="wpn_fps_pis_m1911"/>
 				<value_node value="wpn_fps_pis_type54"/>
 				<value_node value="wpn_fps_pis_maxim9"/>
+				<value_node value="wpn_fps_pis_korth"/>
 
 				<value_node value="wpn_fps_pis_x_sparrow"/>
 				<value_node value="wpn_fps_x_b92fs"/>
@@ -226,6 +227,7 @@
 				<value_node value="wpn_fps_pis_x_m1911"/>
 				<value_node value="wpn_fps_pis_x_type54"/>
 				<value_node value="wpn_fps_pis_x_maxim9"/>
+				<value_node value="wpn_fps_pis_x_korth"/>
 
 				<value_node value="wpn_fps_smg_tec9"/>
 				<value_node value="wpn_fps_smg_thompson"/>
@@ -335,6 +337,7 @@
 				<value_node value="wpn_fps_pis_m1911"/>
 				<value_node value="wpn_fps_pis_type54"/>
 				<value_node value="wpn_fps_pis_maxim9"/>
+				<value_node value="wpn_fps_pis_korth"/>
 
 				<value_node value="wpn_fps_pis_x_sparrow"/>
 				<value_node value="wpn_fps_x_b92fs"/>
@@ -361,6 +364,7 @@
 				<value_node value="wpn_fps_pis_x_m1911"/>
 				<value_node value="wpn_fps_pis_x_type54"/>
 				<value_node value="wpn_fps_pis_x_maxim9"/>
+				<value_node value="wpn_fps_pis_x_korth"/>
 
 				<value_node value="wpn_fps_pis_x_chinchilla"/>
 				<value_node value="wpn_fps_x_deagle"/>
