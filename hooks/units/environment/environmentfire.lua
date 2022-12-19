@@ -3,11 +3,12 @@ function EnvironmentFire:on_spawn(data, normal, user_unit, added_time, range_mul
 		camera_shake_max_mul = 4,
 		sound_muffle_effect = true,
 		effect = data.effect_name,
-		sound_event = data.sound_event,
 		feedback_range = data.range * 2,
-		sound_event_burning = data.sound_event_burning,
+		sound_event = data.sound_event,
 		sound_event_impact_duration = data.sound_event_impact_duration,
-		sound_event_duration = data.burn_duration + added_time
+		sound_event_burning = data.sound_event_burning,
+		sound_event_duration = data.burn_duration + added_time,
+		sound_event_burning_stop = data.sound_event_burning_stop
 	}
 	self._data = data
 	self._normal = normal
@@ -15,13 +16,14 @@ function EnvironmentFire:on_spawn(data, normal, user_unit, added_time, range_mul
 	self._range_multiplier = range_multiplier
 	self._user_unit = user_unit
 	self._burn_duration = data.burn_duration + added_time
+    self._burn_duration_destroy = (data.fire_dot_data and data.fire_dot_data.dot_length or 0) + 1
 	self._burn_tick_counter = 0
 	self._burn_tick_period = data.burn_tick_period
 	self._range = data.range * range_multiplier
 	self._curve_pow = data.curve_pow
 	self._damage = data.damage
 	self._player_damage = data.player_damage
-	self._fire_dot_data = deep_clone(data.fire_dot_data)
+    self._fire_dot_data = data.fire_dot_data and deep_clone(data.fire_dot_data)
 	self._fire_alert_radius = data.fire_alert_radius
 	self._is_molotov = data.is_molotov
 	self._hexes = data.hexes or 6

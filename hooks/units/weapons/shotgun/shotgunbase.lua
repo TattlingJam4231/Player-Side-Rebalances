@@ -10,6 +10,7 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 
 	local damage = self:_get_current_damage(dmg_mul)
 	local autoaim, dodge_enemies = self:check_autoaim(from_pos, direction, self._range)
+	local extra_collisions = self.extra_collisions and self:extra_collisions()
 
 	local ray_hits = {}
 	local hit_enemy = false
@@ -19,16 +20,101 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 	local ai_vision_ids = Idstring("ai_vision")
 	local bulletproof_ids = Idstring("bulletproof")
 
-	local function collect_hits(from, to)
+	local setup_data = {
+		can_shoot_through_wall = self:can_shoot_through_wall(),
+		can_shoot_through_shield = self:can_shoot_through_shield(),
+		can_shoot_through_enemy = self:can_shoot_through_enemy(),
+		bullet_slotmask = self._bullet_slotmask,
+		ignore_units = self._setup.ignore_units,
+		
+		weapon_unit = self._unit,
+		armor_piercing = self._unit:base()._use_armor_piercing or nil,
+
+		can_shoot_through_armor_plating = self._can_shoot_through_armor_plating,
+
+		max_enemy_penetration_distance = self._max_enemy_penetration_distance or self._max_penetration_distance,
+		enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
+	
+		max_wall_penetration_distance = self.max_wall_penetration_distance or self._max_penetration_distance,
+		wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
+	
+		max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance,
+		shield_pen_energy_loss = self._shield_pen_energy_loss or self._pen_energy_loss,
+	
+		max_penetrations = self._max_penetrations
+	}
+	
+	local armor_pierce_value = 0
+	if not setup_data.armor_piercing then
+		local weapon_unit = setup_data.weapon_unit
+		if user_unit == managers.player:player_unit() and not weapon_unit:base().thrower_unit then
+			armor_pierce_value = armor_pierce_value + weapon_unit:base():armor_piercing_chance()
+			armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("player", "armor_piercing_chance", 0)
+			armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance", 0)
+			armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_2", 0)
+
+			if weapon_unit:base():got_silencer() then
+				armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_silencer", 0)
+			end
+
+			if weapon_unit:base():is_category("saw") then
+				armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("saw", "armor_piercing_chance", 0)
+			end
+		elseif user_unit:base() and user_unit:base().sentry_gun then
+			local owner = user_unit:base():get_owner()
+
+			if alive(owner) then
+				if owner == managers.player:player_unit() then
+					armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance", 0)
+					armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance_2", 0)
+				else
+					armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance") or 0)
+					armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance_2") or 0)
+				end
+			end
+		end
+	end
+
+	setup_data.armor_pierce_value = armor_pierce_value
+
+	local function collect_hits(from, to, setup_data)
+		setup_data = setup_data or {}
 		local hits = nil
 		hit_enemy = false
-		local weapon_unit = self._unit
-		local armor_piercing = weapon_unit:base()._use_armor_piercing or nil
-		local pierce_armor = armor_piercing
+		local can_shoot_through_wall = setup_data.can_shoot_through_wall
+		local can_shoot_through_shield = setup_data.can_shoot_through_shield
+		local can_shoot_through_enemy = setup_data.can_shoot_through_enemy
+		local bullet_slotmask = setup_data.bullet_slotmask or managers.slot:get_mask("bullet_impact_targets")
+		local enemy_mask = managers.slot:get_mask("enemies")
+		local wall_mask = managers.slot:get_mask("world_geometry", "vehicles")
+		local shield_mask = managers.slot:get_mask("enemy_shield_check")
+		local ai_vision_ids = Idstring("ai_vision")
+		local bulletproof_ids = Idstring("bulletproof")
+		local ignore_unit = setup_data.ignore_units or {}
 		
 		local units_hit = {}
 		local unique_hits = {}
-
+	
+	
+		-- <Player-Side Rebalances
+		local weapon_unit = setup_data.weapon_unit
+		local armor_piercing =  setup_data.armor_piercing
+		local pierce_armor = armor_piercing
+		local armor_pierce_value = setup_data.armor_pierce_value
+	
+		local can_shoot_through_armor_plating = setup_data.can_shoot_through_armor_plating
+	
+		local max_enemy_penetration_distance = setup_data.max_enemy_penetration_distance
+		local enemy_pen_energy_loss = setup_data._enemy_pen_energy_loss
+		
+		local max_wall_penetration_distance = setup_data.max_wall_penetration_distance
+		local wall_pen_energy_loss = setup_data._enemy_pen_energy_loss
+		
+		local max_shield_penetration_distance = setup_data._max_shield_penetration_distance
+		local shield_pen_energy_loss = setup_data._shield_pen_energy_loss
+		
+		local max_penetrations = setup_data._max_penetrations
+		
 		local penetrations = 0
 		local enemy_penetrations = 0
 		local wall_penetrations = 0
@@ -36,14 +122,9 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 		local shield_penetrations = 0
 		local energy_loss = 0
 		
-		if self._can_shoot_through_armor_plating then
-	
-			if self._can_shoot_through_wall then
-				hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
-			else
-				hits = World:raycast_all("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
-			end
-			
+		if can_shoot_through_armor_plating then
+
+			hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
 			
 			for i, hit in ipairs(hits) do
 				if not units_hit[hit.unit:key()] then
@@ -57,47 +138,24 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 					end
 				end
 			end
-		elseif self._can_shoot_through_wall then
-			hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
+	
+			hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
+
+		elseif can_shoot_through_wall then
+			hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
 		else
-			hits = World:raycast_all("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
+			hits = World:raycast_all("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit)
 		end
 		
 		for i, hit in ipairs(hits) do
 			if not units_hit[hit.unit:key()] then
 				units_hit[hit.unit:key()] = true
+	
 				hit.distance = hit.distance + energy_loss
+	
 				if hit.body:name() == Idstring("body_plate") then
 					if not armor_piercing then
 						local armor_pierce_roll = math.rand(1)
-						local armor_pierce_value = 0
-	
-						if user_unit == managers.player:player_unit() and not weapon_unit:base().thrower_unit then
-							armor_pierce_value = armor_pierce_value + weapon_unit:base():armor_piercing_chance()
-							armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("player", "armor_piercing_chance", 0)
-							armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance", 0)
-							armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_2", 0)
-	
-							if weapon_unit:base():got_silencer() then
-								armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_silencer", 0)
-							end
-	
-							if weapon_unit:base():is_category("saw") then
-								armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("saw", "armor_piercing_chance", 0)
-							end
-						elseif user_unit:base() and user_unit:base().sentry_gun then
-							local owner = user_unit:base():get_owner()
-	
-							if alive(owner) then
-								if owner == managers.player:player_unit() then
-									armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance", 0)
-									armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance_2", 0)
-								else
-									armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance") or 0)
-									armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance_2") or 0)
-								end
-							end
-						end
 	
 						if armor_pierce_value > armor_pierce_roll then
 							pierce_armor = true
@@ -105,48 +163,40 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 					end
 					hit.armor_piercing = pierce_armor
 				end
+	
 				unique_hits[#unique_hits + 1] = hit
 				hit.hit_position = hit.position
 				hit_enemy = hit_enemy or hit.unit:in_slot(enemy_mask)
 				local weak_body = hit.body:has_ray_type(ai_vision_ids)
 				weak_body = weak_body or hit.body:has_ray_type(bulletproof_ids)
-
-				if self._can_shoot_through_armor_plating then
+				
+				if can_shoot_through_armor_plating then
 					--nothing
 				elseif hit_enemy then
 					if hit.body:name() == Idstring("body_plate") and not pierce_armor then
 						break
-					elseif not self._can_shoot_through_enemy then
+					elseif not can_shoot_through_enemy then
 						break
-					elseif self._max_enemy_penetration_distance and self._max_enemy_penetration_distance < hit.distance then
+					elseif max_enemy_penetration_distance and max_enemy_penetration_distance < hit.distance then
 						break
-					elseif (type(self._can_shoot_through_enemy) == "number") and (self._can_shoot_through_enemy < math.random()) then
-						break
-					elseif  self._max_enemy_penetrations then
-						if self._max_enemy_penetrations == enemy_penetrations then
+					elseif type(can_shoot_through_enemy) == "number" then
+						if can_shoot_through_enemy <= enemy_penetrations or max_penetrations and max_penetrations <= penetrations then
 							break
 						else
 							enemy_penetrations = enemy_penetrations + 1
-						end
-					elseif  self._max_penetrations then
-						if self._max_penetrations == penetrations then
-							break
-						else
 							penetrations = penetrations + 1
 						end
 					end
-					if self._enemy_pen_energy_loss then
-						energy_loss = energy_loss + self._enemy_pen_energy_loss
+					if enemy_pen_energy_loss then
+						energy_loss = energy_loss + enemy_pen_energy_loss
 					end
 				elseif hit.unit:in_slot(wall_mask) and weak_body then
-					if not self._can_shoot_through_wall then
+					if not can_shoot_through_wall then
 						break
-					elseif self._max_wall_penetration_distance and self._max_wall_penetration_distance < hit.distance then
+					elseif max_wall_penetration_distance and max_wall_penetration_distance < hit.distance then
 						break
-					elseif (type(self._can_shoot_through_wall) == "number") and (self._can_shoot_through_wall < math.random()) then
-						break
-					elseif  self._max_wall_penetrations then
-						if self._max_wall_penetrations == wall_penetrations then
+					elseif type(can_shoot_through_wall) == "number" then
+						if can_shoot_through_wall <= wall_penetrations or max_penetrations and max_penetrations <= penetrations then
 							if prev_hit_wall.distance then
 								if hit.distance - prev_hit_wall.distance > 40 then
 									break
@@ -164,59 +214,32 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 								end
 							else
 								wall_penetrations = wall_penetrations + 1
-								prev_hit_wall.distance = hit.distance
-							end
-						end
-					elseif  self._max_penetrations then
-						if self._max_penetrations == penetrations then
-							if prev_hit_wall.distance then
-								if hit.distance - prev_hit_wall.distance > 40 then
-									break
-								end
-							else
-								break
-							end
-						else
-							if prev_hit_wall.distance then
-								if hit.distance - prev_hit_wall.distance > 40 then
-									penetrations = penetrations + 1
-									prev_hit_wall.distance = hit.distance
-								else
-									--nothing
-								end
-							else
 								penetrations = penetrations + 1
 								prev_hit_wall.distance = hit.distance
 							end
 						end
 					end
-					if self._wall_pen_energy_loss then
-						energy_loss = energy_loss + self._wall_pen_energy_loss
+					if wall_pen_energy_loss then
+						energy_loss = energy_loss + wall_pen_energy_loss
 					end
 				elseif hit.unit:in_slot(shield_mask) then
-					if not self._can_shoot_through_shield then
+					if not can_shoot_through_shield then
 						break
-					elseif self._max_shield_penetration_distance and self._max_shield_penetration_distance < hit.distance then
+					elseif max_shield_penetration_distance and max_shield_penetration_distance < hit.distance then
 						break
-					elseif (type(self._can_shoot_through_shield) == "number") and (self._can_shoot_through_shield < math.random()) then
-						break
-					elseif  self._max_shield_penetrations then
-						if self._max_shield_penetrations == shield_penetrations then
+					elseif type(can_shoot_through_shield) == "number" then
+						if can_shoot_through_shield <= shield_penetrations or max_penetrations and max_penetrations <= penetrations then
 							break
 						else
 							shield_penetrations = shield_penetrations + 1
-						end
-					elseif  self._max_penetrations then
-						if self._max_penetrations == penetrations then
-							break
-						else
 							penetrations = penetrations + 1
 						end
 					end
-					if self._shield_pen_energy_loss then
-						energy_loss = energy_loss + self._shield_pen_energy_loss
+					if shield_pen_energy_loss then
+						energy_loss = energy_loss + shield_pen_energy_loss
 					end
 				end
+				
 			end
 		end
 
@@ -258,7 +281,7 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 		mvector3.multiply(mvec_to, 20000)
 		mvector3.add(mvec_to, from_pos)
 
-		collect_hits(from_pos, mvec_to)
+		collect_hits(from_pos, mvec_to, setup_data)
 
 		local ray_from_unit = shoot_through_data and alive(shoot_through_data.ray_from_unit) and shoot_through_data.ray_from_unit or nil
 		local col_ray = (ray_from_unit or World):raycast("ray", from_pos, mvec_to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
@@ -293,7 +316,7 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 					mvector3.set(mvec_to, from_pos)
 					mvector3.add_scaled(mvec_to, autoaim.ray, ray_distance)
 	
-					collect_hits(from_pos, mvec_to)
+					collect_hits(from_pos, mvec_to, setup_data)
 				end
 			end
 	
@@ -322,6 +345,14 @@ function ShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoo
 
 		if damage > 0 then
 			hit_result = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
+			
+			if extra_collisions then
+				for idx, extra_col_data in ipairs(extra_collisions) do
+					if alive(col_ray.unit) then
+						extra_col_data.bullet_class:on_collision(col_ray, self._unit, user_unit, damage * (extra_col_data.dmg_mul or 1))
+					end
+				end
+			end
 
 
 			hit_result = managers.mutators:modify_value("ShotgunBase:_fire_raycast", hit_result)

@@ -241,9 +241,6 @@ function FPCameraPlayerBase:get_kick_values_oryo(recoil_table)
 	local h_variance = math.lerp(variance.h[1], variance.h[2], math.random())
 	h = (h + h_variance) * recoil_multiplier * h_mul
 
-	log("loop: " .. loop_index)
-	log("kick: {" .. v .. ", " .. h .. "}")
-
 	return v, h
 end
 

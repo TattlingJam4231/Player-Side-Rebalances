@@ -60,6 +60,14 @@ function CopActionShoot:update(t)
 		target_vec = self:_upd_ik(target_vec, fwd_dot, t)
 	end
 
+	if self._shield_use_cooldown and target_vec and self._common_data.allow_fire and self._shield_use_cooldown < t and target_dis < self._shield_use_range then
+		local new_cooldown = self._shield_base:request_use(t)
+
+		if new_cooldown then
+			self._shield_use_cooldown = new_cooldown
+		end
+	end
+
 	if not ext_anim.reload and not ext_anim.equip and not ext_anim.melee then
 		if ext_anim.equip then
 			-- Nothing
@@ -97,6 +105,15 @@ function CopActionShoot:update(t)
 				local falloff, i_range = self:_get_shoot_falloff(target_dis, self._falloff)
 				local dmg_buff = self._unit:base():get_total_buff("base_damage")
 				local dmg_mul = (1 + dmg_buff) * falloff.dmg_mul
+
+				if managers.mutators:is_mutator_active(MutatorCG22) then
+					local cg22_mutator = managers.mutators:get_mutator(MutatorCG22)
+
+					if cg22_mutator:can_enemy_be_affected_by_buff("green", self._unit) then
+						dmg_mul = dmg_mul * cg22_mutator:get_enemy_green_multiplier()
+					end
+				end
+
 				local new_target_pos = self._shoot_history and self:_get_unit_shoot_pos(t, target_pos, target_dis, self._w_usage_tweak, falloff, i_range, autotarget)
 
 				if new_target_pos then
@@ -198,7 +215,7 @@ function CopActionShoot:update(t)
 			if shoot then
 				local melee = nil
 
-				if autotarget and (not self._common_data.melee_countered_t or t - self._common_data.melee_countered_t > 15) and target_dis < 130 and self._w_usage_tweak.melee_speed and self._melee_timeout_t < t then
+				if autotarget and not self._shield_unit and (not self._common_data.melee_countered_t or t - self._common_data.melee_countered_t > 15) and target_dis < 130 and self._w_usage_tweak.melee_speed and self._melee_timeout_t < t then
 					melee = self:_chk_start_melee(target_vec, target_dis, autotarget, target_pos)
 				end
 
