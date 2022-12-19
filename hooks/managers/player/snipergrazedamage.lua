@@ -34,7 +34,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 		if not is_turret and not is_ally and hit.damage_result then
 			local result = hit.damage_result
 			local attack_data = result.attack_data
-			local clamp = attack_data.hit_unit_max_health
+			local clamp = attack_data and attack_data.hit_unit_max_health or 0
 			local headshot = attack_data and attack_data.headshot
 			local headshot_kill = attack_data and attack_data.headshot and result.type == "death" or result.type == "healed"
 			local damage_mul = upgrade_value.damage_factor
