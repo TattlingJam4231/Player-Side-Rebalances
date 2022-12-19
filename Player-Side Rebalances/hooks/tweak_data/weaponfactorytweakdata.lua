@@ -90,28 +90,28 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 		},
 		snp = {
 			tier_5 = {
-				"m95"				-- Thanatos .50 cal Sniper Rifle
+				"wpn_fps_snp_m95"				-- Thanatos .50 cal Sniper Rifle
 			},
 			tier_4 = {
-				"mosin",			-- Nagant Sniper Rifle
-				"desertfox",		-- Desertfox Sniper Rifle
-				"r93",				-- R93 Sniper Rifle
-				"model70"			-- Platypus 70 Sniper Rifle
+				"wpn_fps_snp_mosin",			-- Nagant Sniper Rifle
+				"wpn_fps_snp_desertfox",		-- Desertfox Sniper Rifle
+				"wpn_fps_snp_r93",				-- R93 Sniper Rifle
+				"wpn_fps_snp_model70"			-- Platypus 70 Sniper Rifle
 			},
 			tier_3 = {
-				"msr",				-- Rattlesnake Sniper Rifle
-				"winchester1874",	-- Repeater 1874 Sniper Rifle
-				"r700",				-- R700 Sniper Rifle
-				"scout"				-- Pronghorn Sniper Rifle
+				"wpn_fps_snp_msr",				-- Rattlesnake Sniper Rifle
+				"wpn_fps_snp_winchester",		-- Repeater 1874 Sniper Rifle
+				"wpn_fps_snp_r700",				-- R700 Sniper Rifle
+				"wpn_fps_snp_scout"				-- Pronghorn Sniper Rifle
 			},
 			tier_2 = {
-				"sbl"				-- Bernetti Rangehitter Sniper Rifle
+				"wpn_fps_snp_sbl"				-- Bernetti Rangehitter Sniper Rifle
 			},
 			tier_1 = {
-				"wa2000",			-- Lebensauger .308 Sniper Rifle
-				"tti",				-- Contractor .308 Sniper Rifle
-				"siltstone",		-- Grom Sniper Rifle
-				"qbu88"				-- Kang Arms X1 Sniper Rifle
+				"wpn_fps_snp_wa2000",			-- Lebensauger .308 Sniper Rifle
+				"wpn_fps_snp_tti",				-- Contractor .308 Sniper Rifle
+				"wpn_fps_snp_siltstone",		-- Grom Sniper Rifle
+				"wpn_fps_snp_qbu88"				-- Kang Arms X1 Sniper Rifle
 			}
 		},
 		smg = {
@@ -1340,19 +1340,6 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 end
 
 function WeaponFactoryTweakData:_init_gadgets_oryo()
-	--Riktpunkt 45 Degree Sight
-	self.parts.wpn_fps_upg_o_45rds_v2.stats.spread = 1
-	self.parts.wpn_fps_upg_o_45rds_v2.stats.recoil = 0
-	self.parts.wpn_fps_upg_o_45rds_v2.stats.concealment = 0
-	self.parts.wpn_fps_upg_o_45rds_v2.stats.gadget_magnification = 2
-
-	--Riktpunkt Magnifier Gadget
-	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.spread = 1
-	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.recoil = 0
-	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.concealment = 0
-	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.gadget_magnification_mul = 2
-
-
 	--Assualt Light
 	self.parts.wpn_fps_upg_fl_ass_smg_sho_surefire.stats.recoil = 1
 	self.parts.wpn_fps_upg_fl_ass_smg_sho_surefire.stats.concealment = -1
@@ -1368,13 +1355,6 @@ function WeaponFactoryTweakData:_init_gadgets_oryo()
 	self.parts.wpn_fps_upg_fl_ass_laser.stats.concealment = 0
 
 
-	--Angled Sight
-	self.parts.wpn_fps_upg_o_45iron.stats.spread = 0
-	self.parts.wpn_fps_upg_o_45iron.stats.recoil = 0
-	self.parts.wpn_fps_upg_o_45iron.stats.concealment = 1
-	self.parts.wpn_fps_upg_o_45iron.stats.gadget_magnification = 1
-
-
 	--Military Laser Module
 	self.parts.wpn_fps_upg_fl_ass_peq15.stats.recoil = 1
 	self.parts.wpn_fps_upg_fl_ass_peq15.stats.concealment = -2
@@ -1383,27 +1363,6 @@ function WeaponFactoryTweakData:_init_gadgets_oryo()
 	--LED Combo
 	self.parts.wpn_fps_upg_fl_ass_utg.stats.recoil = 1
 	self.parts.wpn_fps_upg_fl_ass_utg.stats.concealment = -2
-
-
-	--45 Degree Red Dot Sight
-	self.parts.wpn_fps_upg_o_45rds.stats.spread = 1
-	self.parts.wpn_fps_upg_o_45rds.stats.recoil = 0
-	self.parts.wpn_fps_upg_o_45rds.stats.concealment = 0
-	self.parts.wpn_fps_upg_o_45rds.stats.gadget_magnification = 1.25
-
-
-	--45 Degree Ironsights
-	self.parts.wpn_fps_upg_o_45steel.stats.spread = 0
-	self.parts.wpn_fps_upg_o_45steel.stats.recoil = 0
-	self.parts.wpn_fps_upg_o_45steel.stats.concealment = 1
-	self.parts.wpn_fps_upg_o_45steel.stats.gadget_magnification = 1
-
-
-	--Signature Magnifier Gadget
-	self.parts.wpn_fps_upg_o_sig.stats.spread = 1
-	self.parts.wpn_fps_upg_o_sig.stats.recoil = 0
-	self.parts.wpn_fps_upg_o_sig.stats.concealment = 0
-	self.parts.wpn_fps_upg_o_sig.stats.gadget_magnification_mul = 2
 
 	--Pistols
 
@@ -1430,6 +1389,48 @@ function WeaponFactoryTweakData:_init_gadgets_oryo()
 		--Polymer Flashlight
 		self.parts.wpn_fps_upg_fl_pis_m3x.stats.recoil = 1
 		self.parts.wpn_fps_upg_fl_pis_m3x.stats.concealment = -1
+end
+
+function WeaponFactoryTweakData:_init_second_sights_oryo()
+	--Riktpunkt 45 Degree Sight
+	self.parts.wpn_fps_upg_o_45rds_v2.stats.spread = 1
+	self.parts.wpn_fps_upg_o_45rds_v2.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_45rds_v2.stats.concealment = -1
+	self.parts.wpn_fps_upg_o_45rds_v2.stats.gadget_magnification = 2
+
+	--Riktpunkt Magnifier Gadget
+	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.spread = 1
+	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.concealment = -1
+	self.parts.wpn_fps_upg_o_xpsg33_magnifier.stats.gadget_magnification_mul = 2
+
+
+	--Angled Sight
+	self.parts.wpn_fps_upg_o_45iron.stats.spread = 0
+	self.parts.wpn_fps_upg_o_45iron.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_45iron.stats.concealment = 0
+	self.parts.wpn_fps_upg_o_45iron.stats.gadget_magnification = 1
+
+
+	--45 Degree Red Dot Sight
+	self.parts.wpn_fps_upg_o_45rds.stats.spread = 1
+	self.parts.wpn_fps_upg_o_45rds.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_45rds.stats.concealment = -1
+	self.parts.wpn_fps_upg_o_45rds.stats.gadget_magnification = 1.25
+
+
+	--45 Degree Ironsights
+	self.parts.wpn_fps_upg_o_45steel.stats.spread = 0
+	self.parts.wpn_fps_upg_o_45steel.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_45steel.stats.concealment = 0
+	self.parts.wpn_fps_upg_o_45steel.stats.gadget_magnification = 1
+
+
+	--Signature Magnifier Gadget
+	self.parts.wpn_fps_upg_o_sig.stats.spread = 1
+	self.parts.wpn_fps_upg_o_sig.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_sig.stats.concealment = -1
+	self.parts.wpn_fps_upg_o_sig.stats.gadget_magnification_mul = 2
 end
 
 function WeaponFactoryTweakData:_init_sights_oryo()
@@ -1470,14 +1471,14 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	--Acough Optic Scope
 	self.parts.wpn_fps_upg_o_acog.stats.spread = 1
 	self.parts.wpn_fps_upg_o_acog.stats.recoil = 1
-	self.parts.wpn_fps_upg_o_acog.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_acog.stats.concealment = -2
 	self.parts.wpn_fps_upg_o_acog.stats.magnification = 2.5
 	
 
 	--Military Red Dot Sight
 	self.parts.wpn_fps_upg_o_aimpoint.stats.spread = 1
 	self.parts.wpn_fps_upg_o_aimpoint.stats.recoil = 1
-	self.parts.wpn_fps_upg_o_aimpoint.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_aimpoint.stats.concealment = -2
 	self.parts.wpn_fps_upg_o_aimpoint.stats.magnification = 2.5
 	
 
@@ -1486,6 +1487,7 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_specter.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_specter.stats.concealment = -3
 	self.parts.wpn_fps_upg_o_specter.stats.magnification = 2.5
+	self.parts.wpn_fps_upg_o_specter_piggyback.stats.gadget_magnification = 1
 	
 
 	--See More Sight
@@ -1500,6 +1502,7 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_cs.stats.recoil = 1
 	self.parts.wpn_fps_upg_o_cs.stats.concealment = -3
 	self.parts.wpn_fps_upg_o_cs.stats.magnification = 2.75
+	self.parts.wpn_fps_upg_o_cs_piggyback.stats.gadget_magnification = 1
 	
 
 	--Compact Holosight
@@ -1547,15 +1550,22 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	--Reconnaissance Sight
 	self.parts.wpn_fps_upg_o_spot.stats.spread = 1
 	self.parts.wpn_fps_upg_o_spot.stats.recoil = 1
-	self.parts.wpn_fps_upg_o_spot.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_spot.stats.concealment = -2
 	self.parts.wpn_fps_upg_o_spot.stats.magnification = 2.75
 	
 
 	--Compact Tactical Box Sight
 	self.parts.wpn_fps_upg_o_tf90.stats.spread = 1
 	self.parts.wpn_fps_upg_o_tf90.stats.recoil = 1
-	self.parts.wpn_fps_upg_o_tf90.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_tf90.stats.concealment = -2
 	self.parts.wpn_fps_upg_o_tf90.stats.magnification = 3.25
+	
+
+	--CASSIAN Iron Sights
+	self.parts.wpn_fps_upg_o_mbus_pro.stats.spread = 0
+	self.parts.wpn_fps_upg_o_mbus_pro.stats.recoil = -1
+	self.parts.wpn_fps_upg_o_mbus_pro.stats.concealment = 2
+	self.parts.wpn_fps_upg_o_mbus_pro.stats.magnification = 1
 	
 
 	--Compact Profile Sight
@@ -1572,17 +1582,40 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 	self.parts.wpn_fps_upg_o_uh.stats.magnification = 1.7
 	
 
+	--CASSIAN Elite Scope
+	self.parts.wpn_fps_upg_o_hamr.stats.spread = 1
+	self.parts.wpn_fps_upg_o_hamr.stats.recoil = 1
+	self.parts.wpn_fps_upg_o_hamr.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_hamr.stats.magnification = 2.5
+	self.parts.wpn_fps_upg_o_hamr_reddot.stats.gadget_magnification = 1.5
+	
+
+	--Biometric Analyzer
+	self.parts.wpn_fps_upg_o_health.stats.spread = 1
+	self.parts.wpn_fps_upg_o_health.stats.recoil = 0
+	self.parts.wpn_fps_upg_o_health.stats.concealment = -1
+	self.parts.wpn_fps_upg_o_health.stats.magnification = 1.25
+	
+
 	--Advanced Combat Sight
 	self.parts.wpn_fps_upg_o_bmg.stats.spread = 1
 	self.parts.wpn_fps_upg_o_bmg.stats.recoil = 1
-	self.parts.wpn_fps_upg_o_bmg.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_bmg.stats.concealment = -2
 	self.parts.wpn_fps_upg_o_bmg.stats.magnification = 3
+	
+
+	--CASSIAN Sharp Sight
+	self.parts.wpn_fps_upg_o_atibal.stats.spread = 1
+	self.parts.wpn_fps_upg_o_atibal.stats.recoil = 1
+	self.parts.wpn_fps_upg_o_atibal.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_atibal.stats.magnification = 2
+	self.parts.wpn_fps_upg_o_atibal_reddot.stats.gadget_magnification = 1.5
 	
 
 	--Z5 Owl Glass Universal Scope
 	self.parts.wpn_fps_upg_o_poe.stats.spread = 1
 	self.parts.wpn_fps_upg_o_poe.stats.recoil = 1
-	self.parts.wpn_fps_upg_o_poe.stats.concealment = -3
+	self.parts.wpn_fps_upg_o_poe.stats.concealment = -2
 	self.parts.wpn_fps_upg_o_poe.stats.magnification = 2.75
 
 	-- Pistols
@@ -1883,6 +1916,7 @@ end
 function WeaponFactoryTweakData:_init_attachments_oryo()
 	self:_init_barrel_extensions_oryo()
 	self:_init_gadgets_oryo()
+	self:_init_second_sights_oryo()
 	self:_init_sights_oryo()
 	self:_init_AK_attachments_oryo()
 	self:_init_CAR_attachments_oryo()
@@ -1979,10 +2013,8 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 	--T5 Shotguns-----------------------------------------------------------
 			
 			--Breaker 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_boot", ammo_override.shotgun.t5)
 		
 			--Joceline O/U 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_b682", ammo_override.shotgun.double_barrel)
 			
 					--Stocks
 
@@ -1992,28 +2024,21 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 							self.parts.wpn_fps_shot_b682_s_ammopouch.stats.concealment = -1
 		
 			--Mosconi 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_huntsman", ammo_override.shotgun.double_barrel)
 			
 			--Claire 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_coach", ammo_override.shotgun.double_barrel)
 			
 			--GSPS 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_m37", ammo_override.shotgun.t5)
 
 	
 	--T4 Shotguns-----------------------------------------------------------
 			
 			--Mosconi 12G Tactical Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_m590", ammo_override.shotgun.pump_action)
 		
 			--Raven Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_ksg", ammo_override.shotgun.pump_action)
 			
 			--Reinfeld 88 Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_m1897", ammo_override.shotgun.pump_action)
 
 			--Reinfeld 880 Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_r870", ammo_override.shotgun.pump_action)
 
 					--Stocks
 
@@ -2033,27 +2058,22 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 							self.parts.wpn_fps_shot_r870_s_solid_big.stats.concealment = -2
 			
 			--The Judge Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_pis_judge", ammo_override.shotgun.t4)
 			self.wpn_fps_pis_judge.override.wpn_fps_upg_a_custom.custom_stats.rays = 9
 			self.wpn_fps_pis_judge.override.wpn_fps_upg_a_custom_free.custom_stats.rays = 9
 			self.wpn_fps_pis_judge.override.wpn_fps_upg_a_dragons_breath.custom_stats.rays = 12
 			self.wpn_fps_pis_judge.override.wpn_fps_upg_a_piercing.custom_stats.rays = 12
 			
 			--Akimbo Judge Shotguns
-			-- self:insert_ammo_overrides("wpn_fps_pis_x_judge", ammo_override.shotgun.t4)
 			self.wpn_fps_pis_x_judge.override.wpn_fps_upg_a_custom.custom_stats.rays = 7
 			self.wpn_fps_pis_x_judge.override.wpn_fps_upg_a_custom_free.custom_stats.rays = 7
 			self.wpn_fps_pis_x_judge.override.wpn_fps_upg_a_dragons_breath.custom_stats.rays = 9
 			self.wpn_fps_pis_x_judge.override.wpn_fps_upg_a_piercing.custom_stats.rays = 9
 			
 			--Goliath 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_rota", ammo_override.shotgun.t4)
 			
 			--Akimbo Goliath 12G Shotguns
-			-- self:insert_ammo_overrides("wpn_fps_sho_x_rota", ammo_override.shotgun.t4)
 			
 			--Locomotive 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_serbu", ammo_override.shotgun.pump_action)
 
 					--Stocks
 
@@ -2073,13 +2093,11 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 							self.parts.wpn_fps_shot_shorty_s_nostock_short.stats.concealment = 3
 			
 			--Argos III Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_ultima", ammo_override.shotgun.t4)
 
 
 	--T3 Shotguns-----------------------------------------------------------
 			
 			--M1014 Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_ben", ammo_override.shotgun.t3)
 					
 					--Barrels
 
@@ -2091,7 +2109,6 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 							self.parts.wpn_fps_sho_ben_b_short.stats.concealment = 6
 		
 			--Predator 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_spas12", ammo_override.shotgun.t3)
 					
 					--Stocks
 
@@ -2111,26 +2128,21 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 							self.parts.wpn_fps_sho_s_spas12_nostock.stats.concealment = 6
 			
 			--Street Sweeper Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_striker", ammo_override.shotgun.t3)
 
 
 	--T2 Shotguns-----------------------------------------------------------
 
 			--Izhma 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_shot_saiga", ammo_override.shotgun.t2)
 
 			
 			--Steakout 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_aa12", ammo_override.shotgun.t2)
 
 	
 	--T1 Shotguns-----------------------------------------------------------
 			
 			--Grimm 12G Shotgun
-			-- self:insert_ammo_overrides("wpn_fps_sho_basset", ammo_override.shotgun.t2)
 		
 			--Brothers Grimm 12G Shotguns
-			-- self:insert_ammo_overrides("wpn_fps_sho_x_basset", ammo_override.shotgun.t2)
 end
 
 function WeaponFactoryTweakData:_init_assault_rifle_attachments_oryo()
@@ -3030,8 +3042,60 @@ function WeaponFactoryTweakData:_init_lmg_attachments_oryo()
 							self.parts.wpn_fps_lmg_hk21_fg_short.stats.concealment = 3
 end
 
+function WeaponFactoryTweakData:_init_sniper_sight_overrides_oryo()
+	local sight_ids = {
+		"wpn_fps_upg_o_eotech",		--Holographic Sight
+		"wpn_fps_upg_o_t1micro",	--The Professional's Choice Sight
+		"wpn_fps_upg_o_docter",		--Surgeon Sight
+		"wpn_fps_upg_o_acog",		--Acough Optic Scope
+		"wpn_fps_upg_o_aimpoint",	--Military Red Dot Sight
+		"wpn_fps_upg_o_specter",	--Milspec Scope
+		"wpn_fps_upg_o_cmore",		--See More Sight
+		"wpn_fps_upg_o_cs",			--Combat Sight
+		"wpn_fps_upg_o_eotech_xps",	--Compact Holosight
+		"wpn_fps_upg_o_reflex",		--Speculator Sight
+		"wpn_fps_upg_o_rx01",		--Trigonom Sight
+		"wpn_fps_upg_o_rx30",		--Solar Sight
+		"wpn_fps_upg_o_leupold",	--Theia Magnified Scope
+		"wpn_fps_upg_o_box",		--Box Buddy Sight
+		"wpn_fps_upg_o_spot",		--Reconnaissance Sight
+		"wpn_fps_upg_o_tf90",		--Compact Tactical Box Sight
+		"wpn_fps_upg_o_mbus_pro",	--CASSIAN Iron Sights
+		"wpn_fps_upg_o_fc1",		--Compact Profile Sight
+		"wpn_fps_upg_o_uh",			--Maelstrom Sight
+		"wpn_fps_upg_o_hamr",		--CASSIAN Elite Scope
+		"wpn_fps_upg_o_health",		--Biometric Analyzer
+		"wpn_fps_upg_o_bmg",		--Advanced Combat Sight
+		"wpn_fps_upg_o_atibal",		--CASSIAN Sharp Sight
+		"wpn_fps_upg_o_poe"			--Z5 Owl Glass Universal Scope
+	}
+
+	for tier, weapons in pairs(self.weapon_index.snp) do
+		for _, weapon in ipairs(weapons) do 
+			if self[weapon] then
+				self[weapon].override = self[weapon].override or {}
+				for _, sight in ipairs(sight_ids) do
+					self[weapon].override[sight] = self[weapon].override[sight] or deep_clone(self.parts[sight])
+					self[weapon].override[sight].stats = self[weapon].override[sight].stats or {
+						spread = 0,
+						recoil = 0,
+						concealment = 0
+					}
+					self[weapon].override[sight].stats.spread = self[weapon].override[sight].stats.spread - 1
+					self[weapon].override[sight].stats.recoil = self[weapon].override[sight].stats.recoil - 1
+					self[weapon].override[sight].stats.concealment = self[weapon].override[sight].stats.concealment + 2
+				end
+			end
+		end
+	end
+end
+
 function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
-	--T4 Snipers----------------------------------------------------------
+
+	self:_init_sniper_sight_overrides_oryo()
+	
+
+	--T5 Snipers----------------------------------------------------------
 							
 			--Thanatos
 			
@@ -3047,7 +3111,9 @@ function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 						self.parts.wpn_fps_snp_m95_barrel_suppressed.stats.damage = 0
 						self.parts.wpn_fps_snp_m95_barrel_suppressed.stats.recoil = -3
 
-							
+
+	--T3 Snipers----------------------------------------------------------		
+						
 			--Repeater 1874
 			
 					--Sights
@@ -3057,6 +3123,52 @@ function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 							self.parts.wpn_fps_upg_winchester_o_classic.stats.recoil = 1
 							self.parts.wpn_fps_upg_winchester_o_classic.stats.concealment = -3
 							self.parts.wpn_fps_upg_winchester_o_classic.stats.magnification = 3.5
+						
+			--Platypus
+			
+					--Sights
+
+							--Iron Sight
+							self.parts.wpn_fps_snp_model70_iron_sight.stats.spread = 0
+							self.parts.wpn_fps_snp_model70_iron_sight.stats.recoil = -2
+							self.parts.wpn_fps_snp_model70_iron_sight.stats.concealment = 4
+							self.parts.wpn_fps_snp_model70_iron_sight.stats.magnification = 1
+						
+			--Nagant
+			
+					--Sights
+
+							--Iron Sight
+							self.parts.wpn_fps_snp_mosin_iron_sight.stats.spread = 0
+							self.parts.wpn_fps_snp_mosin_iron_sight.stats.recoil = -2
+							self.parts.wpn_fps_snp_mosin_iron_sight.stats.concealment = 4
+							self.parts.wpn_fps_snp_mosin_iron_sight.stats.magnification = 1
+
+
+	--T2 Snipers----------------------------------------------------------		
+						
+			--Bernetti Rangehitter
+			
+					--Sights
+
+							--Iron Sight
+							self.parts.wpn_fps_snp_sbl_o_standard.stats.spread = 0
+							self.parts.wpn_fps_snp_sbl_o_standard.stats.recoil = -2
+							self.parts.wpn_fps_snp_sbl_o_standard.stats.concealment = 4
+							self.parts.wpn_fps_snp_sbl_o_standard.stats.magnification = 1
+
+
+	--T1 Snipers----------------------------------------------------------		
+						
+			--Grom
+			
+					--Sights
+
+							--Iron Sight
+							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.spread = 0
+							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.recoil = -2
+							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.concealment = 4
+							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.magnification = 1
 end
 
 function WeaponFactoryTweakData:_init_smg_attachments_oryo()

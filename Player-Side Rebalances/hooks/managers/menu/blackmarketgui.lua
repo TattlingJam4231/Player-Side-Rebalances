@@ -1117,17 +1117,37 @@ function BlackMarketGui:update_info_text()
 		updated_texts[1].text = slot_data.name_localized
 
 		if not self._slot_data.unlocked then
-			updated_texts[3].text = managers.localization:to_upper_text(slot_data.level == 0 and (slot_data.skill_name or "bm_menu_skilltree_locked") or "bm_menu_level_req", {
+			local text_id = nil
+
+			if slot_data.dlc_locked then
+				text_id = slot_data.dlc_locked
+			elseif slot_data.level == 0 then
+				text_id = slot_data.skill_name or "bm_menu_skilltree_locked"
+			else
+				text_id = "bm_menu_level_req"
+			end
+
+			updated_texts[3].text = managers.localization:to_upper_text(text_id, {
 				level = slot_data.level,
 				SKILL = slot_data.name
 			})
 			updated_texts[3].text = updated_texts[3].text .. "\n"
 		end
 
-		updated_texts[4].text = managers.localization:text(tweak_data.blackmarket.deployables[slot_data.name].desc_id, {
+		updated_texts[4].resource_color = {}
+		local desc_text = managers.localization:text(tweak_data.blackmarket.deployables[slot_data.name].desc_id, {
 			BTN_INTERACT = managers.localization:btn_macro("interact", true),
 			BTN_USE_ITEM = managers.localization:btn_macro("use_item", true)
 		})
+		updated_texts[4].text = desc_text .. "\n"
+
+		if slot_data.global_value and slot_data.global_value ~= "normal" then
+			updated_texts[4].text = updated_texts[4].text .. "##" .. managers.localization:to_upper_text(tweak_data.lootdrop.global_values[slot_data.global_value].desc_id) .. "##"
+
+			table.insert(updated_texts[4].resource_color, tweak_data.lootdrop.global_values[slot_data.global_value].color)
+		end
+
+		updated_texts[4].below_stats = true
 	elseif identifier == self.identifiers.character then
 		updated_texts[1].text = slot_data.name_localized
 

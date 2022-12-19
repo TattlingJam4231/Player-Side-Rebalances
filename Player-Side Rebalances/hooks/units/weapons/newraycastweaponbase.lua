@@ -82,9 +82,10 @@ function NewRaycastWeaponBase:zoom(...)
 		local base_fov = 63
 		local focal_length = width / math.tan(base_fov / 2)
 
-		if self:is_second_sight_on() then
-			local gadget_magnification = tweak_data.weapon.factory.parts[self._second_sight_data.part_id].stats.gadget_magnification
-			local gadget_magnification_mul = tweak_data.weapon.factory.parts[self._second_sight_data.part_id].stats.gadget_magnification_mul
+		local second_sight = self:get_active_second_sight()
+		if second_sight then
+			local gadget_magnification = tweak_data.weapon.factory.parts[second_sight.part_id].stats.gadget_magnification
+			local gadget_magnification_mul = tweak_data.weapon.factory.parts[second_sight.part_id].stats.gadget_magnification_mul
 
 			if gadget_magnification_mul then
 				magnification = 2 * math.atan(width / (focal_length * magnification * gadget_magnification_mul))
@@ -371,8 +372,8 @@ function NewRaycastWeaponBase:stance_mod_oryo() -- contents of "stance_mod" tran
 		return nil
 	end
 
-	local using_second_sight = self:is_second_sight_on()
+	local second_sight_data = self:get_active_second_sight()
 
-	return managers.weapon_factory:get_stance_mod(self._factory_id, self._blueprint, using_second_sight)
+	return managers.weapon_factory:get_stance_mod(self._factory_id, self._blueprint, second_sight_data and second_sight_data.part_id)
 end
 -- Player-Side Rebalances>

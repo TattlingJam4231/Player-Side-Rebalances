@@ -948,63 +948,73 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 				variance = {
 					{
 						index = 1,
-						v = {-0.25,-0.25},
-						h = {-0.05,0.05}
+						v = {-0.3,-0.2},
+						h = {-0.1,0.1}
 					},
 					{
 						index = 3,
-						v = {-0.25,-0.25},
-						h = {-0.05,0.05}
+						v = {-0.3,-0.2},
+						h = {-0.1,0.1}
 					},
 					{
-						index = 12,
-						v = {0,0},
-						h = {-0.15,0.15}
+						index = 8,
+						v = {0.1,0.3},
+						h = {-0.2,0.2}
 					},
 					{
 						index = 20,
 						v = {-0.55,-0.45},
-						h = {-0.35,0.35}
+						h = {-0.5,0.5}
 					},
 					{
 						index = 30,
 						v = {-0.8,-0.7},
-						h = {-0.45,0.45}
+						h = {-0.8,0.8}
 					}
 				},
 				loop_last = 4,
 				kicks = {
-					{0.75,0.15},
-					{0.75,0.2},
-					{0.75,0.22},
-					{0.75,0.23},
-					{0.75,0.15},
-					{0.75,0.05},
-					{0.75,-0.05},
-					{0.75,-0.2},
-					{0.75,-0.3},
-					{0.75,0},
-					{0.75,0.1},
-					{0.75,-0.2},
-					{0.75,-0.28},
-					{0.75,-0.1},
-					{0.75,0},
-					{0.75,0},
-					{0.75,0},
-					{0.75,0.2},
-					{0.75,0.4},
-					{0.75,0.5},
-					{0.75,-0.5},
-					{0.75,-0.3},
-					{0.75,0.1},
-					{0.75,0.2},
-					{0.75,-0.7},
-					{0.75,0.3},
-					{0.75,0.5},
-					{0.75,0.2},
-					{0.75,-0.15},
-					{0.75,-0.35}
+				{
+					index = 1,
+					kick = {0.75,0.25}
+				},
+				{
+					index = 4,
+					kick = {0.75,0.25}
+				},
+				{
+					index = 8,
+					kick = {0.75,-0.1}
+				},
+				{
+					index = 10,
+					kick = {0.75,-0.2}
+				},
+				{
+					index = 12,
+					kick = {0.75,0}
+				},
+				{
+					index = 16,
+					kick = {0.75,-0.25}
+				},
+				{
+					index = 20,
+					kick = {0.75,0}
+				},
+				{
+					index = 25,
+					kick = {0.75,0.5}
+				},
+				{
+					index = 28,
+					kick = {0.75,-0.2}
+				},
+				{
+					index = 30,
+					kick = {0.75,0.5}
 				}
+			}
 			}
 			
 			-- Gewehr 3 Rifle
@@ -1906,6 +1916,76 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.hajk.kick.crouching = self.hajk.kick.standing
 			self.hajk.kick.steelsight = self:kick_steelsight_oryo(self.hajk.kick.standing)
+			self.hajk.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {-0.35,0.35},
+						h = {0,0}
+					},
+					{
+						index = 5,
+						v = {-0.35,0.35},
+						h = {-0.1,0.1}
+					},
+					{
+						index = 10,
+						v = {-0.25,0.25},
+						h = {-0.45,0.45}
+					}
+				},
+				loop_last = 6,
+				kicks = {
+					{
+						index = 1,
+						kick = {0.95,0.1}
+					},
+					{
+						index = 3,
+						kick = {0.35,0.65}
+					},
+					{
+						index = 4,
+						kick = {0.85,0.2}
+					},
+					{
+						index = 7,
+						kick = {0.45,-0.45}
+					},
+					{
+						index = 10,
+						kick = {0.75,-0.3}
+					},
+					{
+						index = 11,
+						kick = {-0.55,-0.75}
+					},
+					{
+						index = 12,
+						kick = {0.9,0.5}
+					},
+					{
+						index = 13,
+						kick = {0.55,-0.5}
+					},
+					{
+						index = 14,
+						kick = {-0.9,0.3}
+					},
+					{
+						index = 15,
+						kick = {-0.75,0.45}
+					}
+				}
+			}
 			
 					-- Akimbo CR 805B Submachine Guns
 					self.x_hajk.AMMO_MAX = self.hajk.AMMO_MAX
@@ -1931,6 +2011,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.schakal.kick.crouching = self.schakal.kick.standing
 			self.schakal.kick.steelsight = self:kick_steelsight_oryo(self.schakal.kick.standing)
+			self.schakal.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.55,0.9},
+						h = {-0.5,0.5}
+					},
+					{
+						index = 5,
+						v = {0.55,0.9},
+						h = {-0.95,0.95}
+					},
+					{
+						index = 10,
+						v = {-0.25,0.25},
+						h = {-1.15,1.15}
+					}
+				}
+			}
 			
 					-- Akimbo Jackal Submachine Guns
 					self.x_schakal.AMMO_MAX = self.schakal.AMMO_MAX
@@ -1956,6 +2063,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.akmsu.kick.crouching = self.akmsu.kick.standing
 			self.akmsu.kick.steelsight = self:kick_steelsight_oryo(self.akmsu.kick.standing)
+			self.akmsu.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.9,1},
+						h = {0,0}
+					},
+					{
+						index = 5,
+						v = {0.9,1},
+						h = {-0.1,0.15}
+					},
+					{
+						index = 10,
+						v = {-0.4,0.4},
+						h = {-0.5,0.75}
+					}
+				}
+			}
 			
 					-- Akimbo Krinkov Submachine Gun
 					self.x_akmsu.AMMO_MAX = self.akmsu.AMMO_MAX
@@ -1981,6 +2115,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.erma.kick.crouching = self.erma.kick.standing
 			self.erma.kick.steelsight = self:kick_steelsight_oryo(self.erma.kick.standing)
+			self.erma.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.3,0.9},
+						h = {-0.1,0.1}
+					},
+					{
+						index = 5,
+						v = {0.3,0.9},
+						h = {-0.3,0.3}
+					},
+					{
+						index = 10,
+						v = {-0.35,0.35},
+						h = {-0.75,0.75}
+					}
+				}
+			}
 			
 					-- Akimbo MP40 Submachine Guns
 					self.x_erma.AMMO_MAX = self.erma.AMMO_MAX
@@ -2010,6 +2171,33 @@ function WeaponTweakData:_init_smgs_oryo()
 				fire_multiplier = 1,
 				fire_steelsight_multiplier = -1
 			}
+			self.sterling.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.8,1.1},
+						h = {-0.2,-0.1}
+					},
+					{
+						index = 5,
+						v = {0.8,1.1},
+						h = {-0.6,0.1}
+					},
+					{
+						index = 10,
+						v = {-0.2,0.2},
+						h = {-0.9,0.5}
+					}
+				}
+			}
 			
 					-- Akimbo Patchett L2A1 Submachine Guns
 					self.x_sterling.AMMO_MAX = self.sterling.AMMO_MAX
@@ -2035,6 +2223,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.m45.kick.crouching = self.m45.kick.standing
 			self.m45.kick.steelsight = self:kick_steelsight_oryo(self.m45.kick.standing)
+			self.m45.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.2,0.8},
+						h = {-0.25,0.25}
+					},
+					{
+						index = 5,
+						v = {0.2,0.8},
+						h = {-0.5,0.5}
+					},
+					{
+						index = 10,
+						v = {-0.4,0.4},
+						h = {-0.85,0.85}
+					}
+				}
+			}
 			
 					-- Akimbo Swedish K Submachine Guns
 					self.x_m45.AMMO_MAX = self.m45.AMMO_MAX
@@ -2060,6 +2275,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.coal.kick.crouching = self.coal.kick.standing
 			self.coal.kick.steelsight = self:kick_steelsight_oryo(self.coal.kick.standing)
+			self.coal.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.75,1.15},
+						h = {0.3,0.3}
+					},
+					{
+						index = 5,
+						v = {0.75,1.15},
+						h = {-0.1,0.4}
+					},
+					{
+						index = 10,
+						v = {-0.45,0.45},
+						h = {-0.55,0.9}
+					}
+				}
+			}
 			
 					-- Akimbo Tatonka Submachine Guns
 					self.x_coal.AMMO_MAX = self.coal.AMMO_MAX
@@ -2076,6 +2318,7 @@ function WeaponTweakData:_init_smgs_oryo()
 			
 			-- AK Gen 21 Tactical Submachine Gun
 			self.vityaz.AMMO_MAX = 150
+			self.vityaz.AMMO_PICKUP = {6 / 1.35, 8 / 1.35}
 			self.vityaz.stats.damage = 72
 			self.vityaz.stats.spread = 17
 			self.vityaz.stats.recoil = 18
@@ -2087,6 +2330,60 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.vityaz.kick.crouching = self.vityaz.kick.standing
 			self.vityaz.kick.steelsight = self:kick_steelsight_oryo(self.vityaz.kick.standing)
+			self.vityaz.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {-0.1,0.15},
+						h = {-0.07,0.2}
+					},
+					{
+						index = 5,
+						v = {-0.1,0.15},
+						h = {-0.4,0.5}
+					},
+					{
+						index = 10,
+						v = {-0.2,0.2},
+						h = {-0.7,0.7}
+					}
+				},
+				loop_last = 4,
+				kicks = {
+					{
+						index = 1,
+						kick = {1.05,0.12}
+					},
+					{
+						index = 5,
+						kick = {1.05,0.17}
+					},
+					{
+						index = 10,
+						kick = {0,0.65}
+					},
+					{
+						index = 11,
+						kick = {0,-0.85}
+					},
+					{
+						index = 12,
+						kick = {0,0.9}
+					},
+					{
+						index = 13,
+						kick = {0,-0.75}
+					}
+				}
+			}
 			
 					-- Akimbo AK Gen 21 Tactical SMGs
 					self.x_vityaz.AMMO_MAX = self.vityaz.AMMO_MAX
@@ -2112,6 +2409,42 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.m1928.kick.crouching = self.m1928.kick.standing
 			self.m1928.kick.steelsight = self:kick_steelsight_oryo(self.m1928.kick.standing)
+			self.m1928.spread = {
+				standing = 5,
+				crouching = 4,
+				steelsight = 1.5,
+				moving_standing = 5,
+				moving_crouching = 5,
+				moving_steelsight = 1.5,
+				bipod = 2.5
+			}
+			self.m1928.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 1.4
+				},
+				scale_factor = 0.7,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.9,1},
+						h = {-0.45,0.45}
+					},
+					{
+						index = 5,
+						v = {0.9,1},
+						h = {-0.8,0.8}
+					},
+					{
+						index = 10,
+						v = {-0.2,0.2},
+						h = {-1.2,1.2}
+					}
+				}
+			}
 			
 					-- Akimbo Chicago Typewriter SMGs
 					self.x_m1928.AMMO_MAX = self.m1928.AMMO_MAX
@@ -2137,6 +2470,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.sr2.kick.crouching = self.sr2.kick.standing
 			self.sr2.kick.steelsight = self:kick_steelsight_oryo(self.sr2.kick.standing)
+			self.sr2.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.6,0.9},
+						h = {-0.3,0.3}
+					},
+					{
+						index = 5,
+						v = {0.6,0.9},
+						h = {-0.55,0.55}
+					},
+					{
+						index = 10,
+						v = {-0.15,0.15},
+						h = {-1,1}
+					}
+				}
+			}
 			
 					-- Akimbo Heather Submachine Guns
 					self.x_sr2.AMMO_MAX = self.sr2.AMMO_MAX
@@ -2162,6 +2522,56 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.cobray.kick.crouching = self.cobray.kick.standing
 			self.cobray.kick.steelsight = self:kick_steelsight_oryo(self.cobray.kick.standing)
+			self.cobray.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {-0.15,0.15},
+						h = {-0.15,0.15}
+					},
+					{
+						index = 5,
+						v = {-0.15,0.15},
+						h = {-0.15,0.15}
+					},
+					{
+						index = 10,
+						v = {-0.3,0.3},
+						h = {-1,1}
+					}
+				},
+				loop_last = 1,
+				kicks = {
+					{
+						index = 1,
+						kick = {1.2,0}
+					},
+					{
+						index = 5,
+						kick = {1.2,-0.8}
+					},
+					{
+						index = 7,
+						kick = {1,1}
+					},
+					{
+						index = 9,
+						kick = {0.2,0.5}
+					},
+					{
+						index = 10,
+						kick = {0,0.1}
+					}
+				}
+			}
 			
 					-- Akimbo Jacket's Piece
 					self.x_cobray.AMMO_MAX = self.cobray.AMMO_MAX
@@ -2187,6 +2597,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.p90.kick.crouching = self.p90.kick.standing
 			self.p90.kick.steelsight = self:kick_steelsight_oryo(self.p90.kick.standing)
+			self.p90.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.6,0.9},
+						h = {-0.35,0.2}
+					},
+					{
+						index = 5,
+						v = {0.6,0.9},
+						h = {-0.65,0.4}
+					},
+					{
+						index = 10,
+						v = {-0.15,0.15},
+						h = {-1.1,0.9}
+					}
+				}
+			}
 			
 					-- Akimbo Kobus 90 Submachine Guns
 					self.x_p90.AMMO_MAX = self.p90.AMMO_MAX
@@ -2212,6 +2649,49 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.polymer.kick.crouching = self.polymer.kick.standing
 			self.polymer.kick.steelsight = self:kick_steelsight_oryo(self.polymer.kick.standing)
+			self.polymer.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {-0.3,0.3},
+						h = {-0.4,0.4}
+					},
+					{
+						index = 5,
+						v = {-0.3,0.3},
+						h = {-0.6,0.6}
+					},
+					{
+						index = 10,
+						v = {-0.3,0.3},
+						h = {-0.75,0.75}
+					}
+				},
+				loop_last = 4,
+				kicks = {
+					{1.5,0},
+					{-1,0},
+					{1.5,0},
+					{-1,0},
+					{1.5,0},
+					{-1,0},
+					{1.5,0},
+					{-1,0},
+					{1,0},
+					{-0.9,0},
+					{1,0},
+					{-0.95,0},
+					{0.85,0}
+				}
+			}
 			
 					-- Akimbo Kross Vertex Submachine Guns
 					self.x_polymer.AMMO_MAX = self.polymer.AMMO_MAX
@@ -2237,6 +2717,56 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.mac10.kick.crouching = self.mac10.kick.standing
 			self.mac10.kick.steelsight = self:kick_steelsight_oryo(self.mac10.kick.standing)
+			self.mac10.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {-0.2,0.2},
+						h = {-0.2,0.2}
+					},
+					{
+						index = 5,
+						v = {-0.2,0.2},
+						h = {-0.2,0.2}
+					},
+					{
+						index = 10,
+						v = {-0.2,0.2},
+						h = {-1.2,1.2}
+					}
+				},
+				loop_last = 1,
+				kicks = {
+					{
+						index = 1,
+						kick = {0.9,0}
+					},
+					{
+						index = 5,
+						kick = {0.9,-0.6}
+					},
+					{
+						index = 7,
+						kick = {0.75,0.6}
+					},
+					{
+						index = 9,
+						kick = {0.15,0.2}
+					},
+					{
+						index = 10,
+						kick = {0,0.1}
+					}
+				}
+			}
 			
 					-- Akimbo Mark 10 Submachine Guns
 					self.x_mac10.AMMO_MAX = self.mac10.AMMO_MAX
@@ -2262,6 +2792,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.pm9.kick.crouching = self.pm9.kick.standing
 			self.pm9.kick.steelsight = self:kick_steelsight_oryo(self.pm9.kick.standing)
+			self.pm9.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.5,0.8},
+						h = {-0.25,0.25}
+					},
+					{
+						index = 5,
+						v = {0.5,0.8},
+						h = {-0.45,0.45}
+					},
+					{
+						index = 10,
+						v = {-0.25,0.25},
+						h = {-0.9,0.9}
+					}
+				}
+			}
 			
 					-- Akimbo Miyaka 10 Special SMGs
 					self.x_pm9.AMMO_MAX = self.pm9.AMMO_MAX
@@ -2287,6 +2844,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.olympic.kick.crouching = self.olympic.kick.standing
 			self.olympic.kick.steelsight = self:kick_steelsight_oryo(self.olympic.kick.standing)
+			self.olympic.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.85,1},
+						h = {-0.3,0.3}
+					},
+					{
+						index = 5,
+						v = {0.85,1},
+						h = {-0.5,0.5}
+					},
+					{
+						index = 10,
+						v = {-0.35,0.35},
+						h = {-0.75,0.75}
+					}
+				}
+			}
 			
 					-- Akimbo Para Submachine Guns
 					self.x_olympic.AMMO_MAX = self.olympic.AMMO_MAX
@@ -2366,6 +2950,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.tec9.kick.crouching = self.tec9.kick.standing
 			self.tec9.kick.steelsight = self:kick_steelsight_oryo(self.tec9.kick.standing)
+			self.tec9.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.5,1},
+						h = {-0.2,0.2}
+					},
+					{
+						index = 5,
+						v = {0.5,1},
+						h = {-0.4,0.4}
+					},
+					{
+						index = 10,
+						v = {-0.3,0.3},
+						h = {-0.8,0.8}
+					}
+				}
+			}
 			
 					-- Akimbo Blaster 9mm Submachine Guns
 					self.x_tec9.AMMO_MAX = self.tec9.AMMO_MAX
@@ -2391,6 +3002,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.mp9.kick.crouching = self.mp9.kick.standing
 			self.mp9.kick.steelsight = self:kick_steelsight_oryo(self.mp9.kick.standing)
+			self.mp9.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.65,0.85},
+						h = {-0.4,0.4}
+					},
+					{
+						index = 5,
+						v = {0.65,0.85},
+						h = {-0.8,0.8}
+					},
+					{
+						index = 10,
+						v = {-0.2,0.2},
+						h = {-1.2,1.2}
+					}
+				}
+			}
 				
 					-- Akimbo CMP Submachine Guns
 					self.x_mp9.AMMO_MAX = self.mp9.AMMO_MAX
@@ -2417,6 +3055,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.scorpion.kick.crouching = self.scorpion.kick.standing
 			self.scorpion.kick.steelsight = self:kick_steelsight_oryo(self.scorpion.kick.standing)
+			self.scorpion.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.4,0.8},
+						h = {-0.6,0.6}
+					},
+					{
+						index = 5,
+						v = {0.4,0.8},
+						h = {-0.9,0.9}
+					},
+					{
+						index = 10,
+						v = {-0.35,0.35},
+						h = {-1.2,1.2}
+					}
+				}
+			}
 				
 					-- Akimbo Cobra Submachine Guns
 					self.x_scorpion.AMMO_MAX = self.scorpion.AMMO_MAX
@@ -2443,6 +3108,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.new_mp5.kick.crouching = self.new_mp5.kick.standing
 			self.new_mp5.kick.steelsight = self:kick_steelsight_oryo(self.new_mp5.kick.standing)
+			self.new_mp5.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.6,0.9},
+						h = {-0.35,0.35}
+					},
+					{
+						index = 5,
+						v = {0.6,0.9},
+						h = {-0.6,0.6}
+					},
+					{
+						index = 10,
+						v = {-0.25,0.25},
+						h = {-0.9,0.9}
+					}
+				}
+			}
 				
 					-- Akimbo Compact-5 Submachine Guns
 					self.x_mp5.AMMO_MAX = self.new_mp5.AMMO_MAX
@@ -2469,6 +3161,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.baka.kick.crouching = self.baka.kick.standing
 			self.baka.kick.steelsight = self:kick_steelsight_oryo(self.baka.kick.standing)
+			self.baka.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.5,1},
+						h = {-0.45,0.45}
+					},
+					{
+						index = 5,
+						v = {0.5,1},
+						h = {-0.85,0.85}
+					},
+					{
+						index = 10,
+						v = {-0.3,0.3},
+						h = {-1,1}
+					}
+				}
+			}
 				
 					-- Akimbo Micro Uzi Submachine Guns
 					self.x_baka.AMMO_MAX = self.baka.AMMO_MAX
@@ -2495,6 +3214,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.shepheard.kick.crouching = self.shepheard.kick.standing
 			self.shepheard.kick.steelsight = self:kick_steelsight_oryo(self.shepheard.kick.standing)
+			self.shepheard.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.4,0.8},
+						h = {-0.4,0.4}
+					},
+					{
+						index = 5,
+						v = {0.4,0.8},
+						h = {-0.7,0.7}
+					},
+					{
+						index = 10,
+						v = {-0.2,0.2},
+						h = {-1,1}
+					}
+				}
+			}
 				
 					-- Akimbo Signature Submachine Guns
 					self.x_shepheard.AMMO_MAX = self.shepheard.AMMO_MAX
@@ -2521,6 +3267,33 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 			self.uzi.kick.crouching = self.uzi.kick.standing
 			self.uzi.kick.steelsight = self:kick_steelsight_oryo(self.uzi.kick.standing)
+			self.uzi.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {0.8,1},
+						h = {-0.4,0.36}
+					},
+					{
+						index = 5,
+						v = {0.8,1},
+						h = {-0.8,0.72}
+					},
+					{
+						index = 10,
+						v = {-0.3,0.3},
+						h = {-1,0.9}
+					}
+				}
+			}
 				
 					-- Akimbo Uzi Submachine Guns
 					self.x_uzi.AMMO_MAX = self.uzi.AMMO_MAX
@@ -2535,6 +3308,33 @@ function WeaponTweakData:_init_smgs_oryo()
 
 			
 			-- Wasp-DS SMG fmg9
+			self.fmg9.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 1,
+						v = {1,2},
+						h = {-0.5,0.5}
+					},
+					{
+						index = 3,
+						v = {1,2},
+						h = {-1,1}
+					},
+					{
+						index = 6,
+						v = {-0.5,0.5},
+						h = {-1.4,1.4}
+					}
+				}
+			}
 end
 
 function WeaponTweakData:_init_pistols_oryo()

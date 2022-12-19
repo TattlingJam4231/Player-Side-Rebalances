@@ -261,6 +261,8 @@ function DOTManager:create_dot_data(dot_info)
 
 	if dot_info.custom_data then
 		local custom_data = dot_info.custom_data
+
+		dot_data.use_weapon_damage_falloff = custom_data.use_weapon_damage_falloff or dot_data.use_weapon_damage_falloff or false
 		
 		dot_data.variant = dot_info.type
 		dot_data.dot_trigger_chance = custom_data.dot_trigger_chance or 100

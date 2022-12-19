@@ -1,36 +1,40 @@
-function RaycastWeaponBase:_collect_hits(from, to, user_unit)
+function RaycastWeaponBase.collect_hits(from, to, setup_data)
+	setup_data = setup_data or {}
 	local ray_hits = nil
 	local hit_enemy = false
-	local can_shoot_through_wall = self:can_shoot_through_wall()
-	local can_shoot_through_shield = self:can_shoot_through_shield()
-	local can_shoot_through_enemy = self:can_shoot_through_enemy()
+	local can_shoot_through_wall = setup_data.can_shoot_through_wall
+	local can_shoot_through_shield = setup_data.can_shoot_through_shield
+	local can_shoot_through_enemy = setup_data.can_shoot_through_enemy
+	local bullet_slotmask = setup_data.bullet_slotmask or managers.slot:get_mask("bullet_impact_targets")
 	local enemy_mask = managers.slot:get_mask("enemies")
 	local wall_mask = managers.slot:get_mask("world_geometry", "vehicles")
 	local shield_mask = managers.slot:get_mask("enemy_shield_check")
 	local ai_vision_ids = Idstring("ai_vision")
 	local bulletproof_ids = Idstring("bulletproof")
+	local ignore_unit = setup_data.ignore_units or {}
 	
 	local units_hit = {}
 	local unique_hits = {}
 
 
 	-- <Player-Side Rebalances
-	local weapon_unit = self._unit
-	local armor_piercing = weapon_unit:base()._use_armor_piercing or nil
+	local weapon_unit = setup_data.weapon_unit
+	local armor_piercing =  setup_data.armor_piercing
 	local pierce_armor = armor_piercing
+	local armor_pierce_value = setup_data.armor_pierce_value
 
-	local can_shoot_through_armor_plating = self._can_shoot_through_armor_plating
+	local can_shoot_through_armor_plating = setup_data.can_shoot_through_armor_plating
 
-	local max_enemy_penetration_distance = self._max_enemy_penetration_distance or self._max_penetration_distance
-	local enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss
+	local max_enemy_penetration_distance = setup_data.max_enemy_penetration_distance
+	local enemy_pen_energy_loss = setup_data._enemy_pen_energy_loss
 	
-	local max_wall_penetration_distance = self.max_wall_penetration_distance or self._max_penetration_distance
-	local wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss
+	local max_wall_penetration_distance = setup_data.max_wall_penetration_distance
+	local wall_pen_energy_loss = setup_data._enemy_pen_energy_loss
 	
-	local max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance
-	local shield_pen_energy_loss = self._shield_pen_energy_loss or self._pen_energy_loss
+	local max_shield_penetration_distance = setup_data._max_shield_penetration_distance
+	local shield_pen_energy_loss = setup_data._shield_pen_energy_loss
 	
-	local max_penetrations = self._max_penetrations
+	local max_penetrations = setup_data._max_penetrations
 	
 	local penetrations = 0
 	local enemy_penetrations = 0
@@ -40,8 +44,7 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	local energy_loss = 0
 
 	if can_shoot_through_armor_plating then
-
-		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
+		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
 		
 		for i, hit in ipairs(ray_hits) do
 			if not units_hit[hit.unit:key()] then
@@ -56,14 +59,14 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 			end
 		end
 
-		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
+		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
 	-- Player-Side Rebalances>
 
 
 	elseif can_shoot_through_wall then
-		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units, "thickness", 40, "thickness_mask", wall_mask)
+		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
 	else
-		ray_hits = World:raycast_all("ray", from, to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
+		ray_hits = World:raycast_all("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit)
 	end
 	
 	for i, hit in ipairs(ray_hits) do
@@ -77,34 +80,6 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 			if hit.body:name() == Idstring("body_plate") then
 				if not armor_piercing then
 					local armor_pierce_roll = math.rand(1)
-					local armor_pierce_value = 0
-
-					if user_unit == managers.player:player_unit() and not weapon_unit:base().thrower_unit then
-						armor_pierce_value = armor_pierce_value + weapon_unit:base():armor_piercing_chance()
-						armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("player", "armor_piercing_chance", 0)
-						armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance", 0)
-						armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_2", 0)
-
-						if weapon_unit:base():got_silencer() then
-							armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_silencer", 0)
-						end
-
-						if weapon_unit:base():is_category("saw") then
-							armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("saw", "armor_piercing_chance", 0)
-						end
-					elseif user_unit:base() and user_unit:base().sentry_gun then
-						local owner = user_unit:base():get_owner()
-
-						if alive(owner) then
-							if owner == managers.player:player_unit() then
-								armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance", 0)
-								armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance_2", 0)
-							else
-								armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance") or 0)
-								armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance_2") or 0)
-							end
-						end
-					end
 
 					if armor_pierce_value > armor_pierce_roll then
 						pierce_armor = true
@@ -201,6 +176,73 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	return unique_hits, hit_enemy
 end
 
+function RaycastWeaponBase:_collect_hits(from, to, user_unit)
+	local setup_data = {
+		can_shoot_through_wall = self:can_shoot_through_wall(),
+		can_shoot_through_shield = self:can_shoot_through_shield(),
+		can_shoot_through_enemy = self:can_shoot_through_enemy(),
+		bullet_slotmask = self._bullet_slotmask,
+		ignore_units = self._setup.ignore_units,
+		
+		
+		-- <Player-Side Rebalances
+		weapon_unit = self._unit,
+		armor_piercing = self._unit:base()._use_armor_piercing or nil,
+
+		can_shoot_through_armor_plating = self._can_shoot_through_armor_plating,
+
+		max_enemy_penetration_distance = self._max_enemy_penetration_distance or self._max_penetration_distance,
+		enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
+	
+		max_wall_penetration_distance = self.max_wall_penetration_distance or self._max_penetration_distance,
+		wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
+	
+		max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance,
+		shield_pen_energy_loss = self._shield_pen_energy_loss or self._pen_energy_loss,
+	
+		max_penetrations = self._max_penetrations
+		-- Player-Side Rebalances>
+	}
+
+	-- <Player-Side Rebalances
+	local armor_pierce_value = 0
+	if not setup_data.armor_piercing then
+		local weapon_unit = setup_data.weapon_unit
+		if user_unit == managers.player:player_unit() and not weapon_unit:base().thrower_unit then
+			armor_pierce_value = armor_pierce_value + weapon_unit:base():armor_piercing_chance()
+			armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("player", "armor_piercing_chance", 0)
+			armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance", 0)
+			armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_2", 0)
+
+			if weapon_unit:base():got_silencer() then
+				armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("weapon", "armor_piercing_chance_silencer", 0)
+			end
+
+			if weapon_unit:base():is_category("saw") then
+				armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("saw", "armor_piercing_chance", 0)
+			end
+		elseif user_unit:base() and user_unit:base().sentry_gun then
+			local owner = user_unit:base():get_owner()
+
+			if alive(owner) then
+				if owner == managers.player:player_unit() then
+					armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance", 0)
+					armor_pierce_value = armor_pierce_value + managers.player:upgrade_value("sentry_gun", "armor_piercing_chance_2", 0)
+				else
+					armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance") or 0)
+					armor_pierce_value = armor_pierce_value + (owner:base():upgrade_value("sentry_gun", "armor_piercing_chance_2") or 0)
+				end
+			end
+		end
+	end
+
+	setup_data.armor_pierce_value = armor_pierce_value
+	-- Player-Side Rebalances>
+	
+
+	return RaycastWeaponBase.collect_hits(from, to, setup_data)
+end
+
 function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul)
 	if self:gadget_overrides_weapon_functions() then
 		return self:gadget_function_override("_fire_raycast", self, user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul)
@@ -265,6 +307,7 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 	local hit_through_wall = false
 	local hit_through_shield = false
 	local hit_result = nil
+	local extra_collisions = self.extra_collisions and self:extra_collisions()
 
 	for _, hit in ipairs(ray_hits) do
 		damage = self:get_damage_falloff(base_damage, hit, user_unit)
@@ -272,6 +315,14 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 
 		if damage > 0 then
 			hit_result = self._bullet_class:on_collision(hit, self._unit, user_unit, damage)
+
+			if extra_collisions then
+				for idx, extra_col_data in ipairs(extra_collisions) do
+					if alive(hit.unit) then
+						extra_col_data.bullet_class:on_collision(hit, self._unit, user_unit, damage * (extra_col_data.dmg_mul or 1))
+					end
+				end
+			end
 		end
 
 		if hit_result and hit_result.type == "death" then
@@ -516,85 +567,104 @@ function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
 end
 
 function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage, blank, no_sound)
-
-	local MIN_KNOCK_BACK = 200
-	local KNOCK_BACK_CHANCE = 0.8
-
 	local hit_unit = col_ray.unit
-	local shield_knock = false
-	local is_shield = hit_unit:in_slot(8) and alive(hit_unit:parent())
+	user_unit = alive(user_unit) and user_unit or nil
 
-	if is_shield and not hit_unit:parent():character_damage():is_immune_to_shield_knockback() and weapon_unit then
-		shield_knock = weapon_unit:base()._shield_knock
-		local dmg_ratio = math.min(damage, MIN_KNOCK_BACK)
-		dmg_ratio = dmg_ratio / MIN_KNOCK_BACK + 1
-		local rand = math.random() * dmg_ratio
-
-		if KNOCK_BACK_CHANCE < rand then
-			local enemy_unit = hit_unit:parent()
-
-			if shield_knock and enemy_unit:character_damage() then
-				local damage_info = {
-					damage = 0,
-					type = "shield_knock",
-					variant = "melee",
-					col_ray = col_ray,
-					result = {
-						variant = "melee",
-						type = "shield_knock"
-					}
-				}
-
-				enemy_unit:character_damage():_call_listeners(damage_info)
-			end
-		end
+	if user_unit and self:chk_friendly_fire(hit_unit, user_unit) then
+		return "friendly_fire"
 	end
 
-	local play_impact_flesh = not hit_unit:character_damage() or not hit_unit:character_damage()._no_blood
+	weapon_unit = alive(weapon_unit) and weapon_unit or nil
+	local endurance_alive_chk = false
 
-	if hit_unit:damage() and managers.network:session() and col_ray.body:extension() and col_ray.body:extension().damage then
-		local sync_damage = not blank and hit_unit:id() ~= -1
-		local network_damage = math.ceil(damage * 163.84)
-		damage = network_damage / 163.84
+	if hit_unit:damage() then
+		local body_dmg_ext = col_ray.body:extension() and col_ray.body:extension().damage
 
-		if sync_damage then
-			local normal_vec_yaw, normal_vec_pitch = self._get_vector_sync_yaw_pitch(col_ray.normal, 128, 64)
-			local dir_vec_yaw, dir_vec_pitch = self._get_vector_sync_yaw_pitch(col_ray.ray, 128, 64)
+		if body_dmg_ext then
+			local sync_damage = not blank and hit_unit:id() ~= -1
+			local network_damage = math.ceil(damage * 163.84)
+			local body_damage = network_damage / 163.84
 
-			managers.network:session():send_to_peers_synched("sync_body_damage_bullet", col_ray.unit:id() ~= -1 and col_ray.body or nil, user_unit:id() ~= -1 and user_unit or nil, normal_vec_yaw, normal_vec_pitch, col_ray.position, dir_vec_yaw, dir_vec_pitch, math.min(16384, network_damage))
-		end
+			if sync_damage and managers.network:session() then
+				local normal_vec_yaw, normal_vec_pitch = self._get_vector_sync_yaw_pitch(col_ray.normal, 128, 64)
+				local dir_vec_yaw, dir_vec_pitch = self._get_vector_sync_yaw_pitch(col_ray.ray, 128, 64)
 
-		local local_damage = not blank or hit_unit:id() == -1
+				managers.network:session():send_to_peers_synched("sync_body_damage_bullet", col_ray.unit:id() ~= -1 and col_ray.body or nil, user_unit and user_unit:id() ~= -1 and user_unit or nil, normal_vec_yaw, normal_vec_pitch, col_ray.position, dir_vec_yaw, dir_vec_pitch, math.min(16384, network_damage))
+			end
 
-		if local_damage then
-			col_ray.body:extension().damage:damage_bullet(user_unit, col_ray.normal, col_ray.position, col_ray.ray, 1)
-			col_ray.body:extension().damage:damage_damage(user_unit, col_ray.normal, col_ray.position, col_ray.ray, damage)
+			local local_damage = not blank or hit_unit:id() == -1
 
-			if alive(weapon_unit) and weapon_unit:base().categories and weapon_unit:base():categories() then
-				for _, category in ipairs(weapon_unit:base():categories()) do
-					col_ray.body:extension().damage:damage_bullet_type(category, user_unit, col_ray.normal, col_ray.position, col_ray.ray, 1)
+			if local_damage then
+				endurance_alive_chk = true
+				local weap_cats = weapon_unit and weapon_unit:base().categories and weapon_unit:base():categories()
+
+				body_dmg_ext:damage_bullet(user_unit, col_ray.normal, col_ray.position, col_ray.ray, 1)
+
+				if hit_unit:alive() then
+					body_dmg_ext:damage_damage(user_unit, col_ray.normal, col_ray.position, col_ray.ray, body_damage)
+				end
+
+				if weap_cats and hit_unit:alive() then
+					for _, category in ipairs(weap_cats) do
+						body_dmg_ext:damage_bullet_type(category, user_unit, col_ray.normal, col_ray.position, col_ray.ray, 1)
+					end
 				end
 			end
 		end
 	end
 
-	local result = nil
+	if endurance_alive_chk and not hit_unit:alive() then
+		return
+	end
 
-	if alive(weapon_unit) and hit_unit:character_damage() and hit_unit:character_damage().damage_bullet then
-		local is_alive = not hit_unit:character_damage():dead()
-		local knock_down = weapon_unit:base()._knock_down and weapon_unit:base()._knock_down > 0 and math.random() < weapon_unit:base()._knock_down
-		result = self:give_impact_damage(col_ray, weapon_unit, user_unit, damage, col_ray.armor_piercing --[[ Player-Side Rebalances: changed from weapon_unit:base()._use_armor_piercing ]], false, knock_down, weapon_unit:base()._stagger, weapon_unit:base()._variant)
+	local do_shotgun_push, result, do_push, push_mul = nil
+	local hit_dmg_ext = hit_unit:character_damage()
+	local play_impact_flesh = not hit_dmg_ext or not hit_dmg_ext._no_blood
 
-		if result ~= "friendly_fire" then
-			local is_dead = hit_unit:character_damage():dead()
-			local push_multiplier = self:_get_character_push_multiplier(weapon_unit, is_alive and is_dead)
+	if not blank and weapon_unit then
+		local weap_base = weapon_unit:base()
 
-			managers.game_play_central:physics_push(col_ray, push_multiplier)
+		if weap_base and weap_base.chk_shield_knock then
+			weap_base:chk_shield_knock(hit_unit, col_ray, weapon_unit, user_unit, damage)
+		end
+
+		if hit_dmg_ext and hit_dmg_ext.damage_bullet then
+			local was_alive = not hit_dmg_ext:dead()
+			local armor_piercing, knock_down, stagger, variant = nil
+
+			if weap_base then
+				armor_piercing = col_ray.armor_piercing --[[ Player-Side Rebalances: changed from {weap_base.has_armor_piercing and weap_base:has_armor_piercing()} ]]
+				knock_down = weap_base.is_knock_down and weap_base:is_knock_down()
+				stagger = weap_base.is_stagger and weap_base:is_stagger()
+				variant = weap_base.variant and weap_base:variant()
+			end
+
+			result = self:give_impact_damage(col_ray, weapon_unit, user_unit, damage, armor_piercing, false, knock_down, stagger, variant)
+
+			if result ~= "friendly_fire" then
+				local has_died = hit_dmg_ext:dead()
+				do_push = true
+				push_mul = self:_get_character_push_multiplier(weapon_unit, was_alive and has_died)
+
+				if weap_base and result and result.type == "death" and weap_base.should_shotgun_push and weap_base:should_shotgun_push() then
+					do_shotgun_push = true
+				end
+			else
+				play_impact_flesh = false
+			end
 		else
-			play_impact_flesh = false
+			do_push = true
 		end
 	else
-		managers.game_play_central:physics_push(col_ray)
+		do_push = true
+	end
+
+	if do_push then
+		managers.game_play_central:physics_push(col_ray, push_mul)
+	end
+
+	if do_shotgun_push then
+		managers.game_play_central:do_shotgun_push(col_ray.unit, col_ray.position, col_ray.ray, col_ray.distance, user_unit)
 	end
 
 	if play_impact_flesh then
