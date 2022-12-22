@@ -112,7 +112,8 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"wa2000",			-- Lebensauger .308 Sniper Rifle
 				"tti",				-- Contractor .308 Sniper Rifle
 				"siltstone",		-- Grom Sniper Rifle
-				"qbu88"				-- Kang Arms X1 Sniper Rifle
+				"qbu88",			-- Kang Arms X1 Sniper Rifle
+				"victor"			-- North Star Sniper Rifle
 			}
 		},
 		smg = {
@@ -568,24 +569,24 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 		},
 		snp = {
 			tier_5 = {
-				flat = 0.05,
-				curve = 0.35
+				flat = 0.3,
+				curve = 0.3
 			},
 			tier_4 = {
-				flat = 0.1,
-				curve = 0.4
+				flat = 0.3,
+				curve = 0.25
 			},
 			tier_3 = {
-				flat = 0.05,
-				curve = 0.4
+				flat = 0.45,
+				curve = 0.35
 			},
-			tier_1 = {
-				flat = 0,
+			tier_2 = {
+				flat = 0.65,
 				curve = 0.5
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 0.5
+				flat = 1.1,
+				curve = 0.8
 			}
 		},
 		smg = {
@@ -1832,35 +1833,163 @@ function WeaponTweakData:_init_snipers_oryo()
 			-- thanatos
 			self.m95.stats_modifiers = {damage = 1}
 			self.m95.stats.damage = 3500
+			self.m95.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,3.8},
+						h = {-0.5,0.5}
+					}
+				}
+			}
 
 	--t4 snipers----------------------------------------------------------------
 		
 			-- nagant
 			-- self.mosin
+			self.mosin.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 			
 			-- desertfox
 			-- self.desertfox
+			self.desertfox.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 			
 			-- r93
 			-- self.r93
+			self.r93.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,3.8},
+						h = {-0.1,0.1}
+					}
+				}
+			}
 			
 			-- platypus
 			-- self.model70
+			self.model70.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.66
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 	
 	--t3 snipers----------------------------------------------------------------
 		
 			-- rattlesnake
 			self.msr.fire_mode_data.fire_rate = 0.75
 			self.msr.single.fire_rate = 0.75
+			self.msr.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 			
 			-- repeater
 			self.winchester1874.fire_mode_data.fire_rate = 0.566
 			self.winchester1874.single.fire_rate = 0.566
 			self.winchester1874.stats.reload = 13
+			self.winchester1874.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 			
 			-- r700
 			self.r700.fire_mode_data.fire_rate = 0.632
 			self.r700.single.fire_rate = 0.632
+			self.r700.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
+			
+			-- pronghorn
+			self.scout.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {3,4.8},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 	
 	--t2 snipers----------------------------------------------------------------
 			
@@ -1869,6 +1998,20 @@ function WeaponTweakData:_init_snipers_oryo()
 			self.sbl.stats_modifiers = {damage = 1}
 			self.sbl.stats.damage = 198
 			self.sbl.stats.reload = 13
+			self.sbl.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				variance = {
+					{
+						index = 1,
+						v = {2,3},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 	
 	--t1 snipers----------------------------------------------------------------
 		
@@ -1878,26 +2021,105 @@ function WeaponTweakData:_init_snipers_oryo()
 			-- self.wa2000.stats.damage = 198
 			self.wa2000.stats.recoil = 14
 			self.wa2000.stats.reload = 15
+			self.wa2000.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				scale_factor = 0.8,
+				variance = {
+					{
+						index = 1,
+						v = {2,2.5},
+						h = {-0.2,0.2}
+					}
+				}
+			}
 			
 			-- contractor
 			-- self.tti.stats.damage = 198
 			self.tti.stats.recoil = 5
+			self.tti.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				scale_factor = 0.8,
+				variance = {
+					{
+						index = 1,
+						v = {1.5,2},
+						h = {-0.3,0.3}
+					}
+				}
+			}
 			
 			-- grom
 			self.siltstone.fire_mode_data.fire_rate = 0.364 --0.333
 			self.siltstone.single.fire_rate = 0.364 --0.333
 			self.siltstone.recoil_wait = {
-				flat = 0.3,
-				curve = 0.5
+				flat = 1.2,
+				curve = 0.9
 			}
 			-- self.siltstone.stats.damage = 198
 			self.siltstone.stats.spread = 17
 			self.siltstone.stats.reload = 13
+			self.siltstone.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				scale_factor = 0.8,
+				variance = {
+					{
+						index = 1,
+						v = {1.5,2},
+						h = {-0.4,0.4}
+					}
+				}
+			}
 			
 			-- kang arms x1
 			-- self.qbu88.stats.damage = 198
 			self.qbu88.stats.recoil = 10
 			self.qbu88.stats.reload = 8
+			self.qbu88.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				scale_factor = 0.8,
+				variance = {
+					{
+						index = 1,
+						v = {1.5,2},
+						h = {-0.4,0.4}
+					}
+				}
+			}
+
+			-- north star
+			self.victor.AMMO_MAX = 30
+			self.victor.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.67
+				},
+				scale_factor = 0.8,
+				variance = {
+					{
+						index = 1,
+						v = {2,2.5},
+						h = {-0.5,0.5}
+					}
+				}
+			}
+
 end
 
 function WeaponTweakData:_init_smgs_oryo()
