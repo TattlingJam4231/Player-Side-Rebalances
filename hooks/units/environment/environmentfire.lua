@@ -16,23 +16,27 @@ function EnvironmentFire:on_spawn(data, normal, user_unit, added_time, range_mul
 	self._range_multiplier = range_multiplier
 	self._user_unit = user_unit
 	self._burn_duration = data.burn_duration + added_time
-    self._burn_duration_destroy = (data.fire_dot_data and data.fire_dot_data.dot_length or 0) + 1
+	self._burn_duration_destroy = (data.fire_dot_data and data.fire_dot_data.dot_length or 0) + 1
 	self._burn_tick_counter = 0
 	self._burn_tick_period = data.burn_tick_period
 	self._range = data.range * range_multiplier
 	self._curve_pow = data.curve_pow
 	self._damage = data.damage
 	self._player_damage = data.player_damage
-    self._fire_dot_data = data.fire_dot_data and deep_clone(data.fire_dot_data)
+	self._fire_dot_data = data.fire_dot_data and deep_clone(data.fire_dot_data)
 	self._fire_alert_radius = data.fire_alert_radius
+	self._no_fire_alert = data.no_fire_alert
 	self._is_molotov = data.is_molotov
 	self._hexes = data.hexes or 6
+	self._damage_slotmask = data.slotmask or managers.slot:get_mask("explosion_targets")
+	local detonated_position = self._unit:position()
 	local range = self._range
     self._hexes = range > 100 and self._hexes * 3 or self._hexes
-	self._damage_slotmask = data.slotmask or managers.slot:get_mask("explosion_targets")
+	local single_effect_radius = range
+	local diagonal_distance = math.sqrt(math.pow(single_effect_radius * 2, 2) - math.pow(single_effect_radius, 2))
 	local raycast = nil
 	local slotmask = managers.slot:get_mask("molotov_raycasts")
-	local vector = nil
+	local vector, effect_id = nil
 
 	if normal == nil or mvector3.length(normal) < 0.1 then
 		normal = Vector3(0, 0, 1)
