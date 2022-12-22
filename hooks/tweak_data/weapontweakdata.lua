@@ -2016,6 +2016,7 @@ function WeaponTweakData:_init_snipers_oryo()
 	--t1 snipers----------------------------------------------------------------
 		
 			-- lebensauger
+			self.wa2000.AMMO_MAX = 45
 			-- self.wa2000.fire_mode_data.fire_rate = 0.364
 			-- self.wa2000.single.fire_rate = 0.364
 			-- self.wa2000.stats.damage = 198
@@ -2039,7 +2040,7 @@ function WeaponTweakData:_init_snipers_oryo()
 			
 			-- contractor
 			-- self.tti.stats.damage = 198
-			self.tti.stats.recoil = 5
+			self.tti.stats.recoil = 7
 			self.tti.kick_table = {
 				state_mul = {
 					standing = 1,
@@ -2057,6 +2058,7 @@ function WeaponTweakData:_init_snipers_oryo()
 			}
 			
 			-- grom
+			self.siltstone.AMMO_MAX = 50
 			self.siltstone.fire_mode_data.fire_rate = 0.364 --0.333
 			self.siltstone.single.fire_rate = 0.364 --0.333
 			self.siltstone.recoil_wait = {
@@ -2065,6 +2067,7 @@ function WeaponTweakData:_init_snipers_oryo()
 			}
 			-- self.siltstone.stats.damage = 198
 			self.siltstone.stats.spread = 17
+			self.siltstone.stats.recoil = 8
 			self.siltstone.stats.reload = 13
 			self.siltstone.kick_table = {
 				state_mul = {
@@ -2083,6 +2086,7 @@ function WeaponTweakData:_init_snipers_oryo()
 			}
 			
 			-- kang arms x1
+			self.qbu88.AMMO_MAX = 50
 			-- self.qbu88.stats.damage = 198
 			self.qbu88.stats.recoil = 10
 			self.qbu88.stats.reload = 8
@@ -2104,6 +2108,14 @@ function WeaponTweakData:_init_snipers_oryo()
 
 			-- north star
 			self.victor.AMMO_MAX = 30
+			self.victor.stats.spread = 16
+			self.victor.stats.recoil = 9
+			self.victor.kick.standing = {
+				2,
+				2.5,
+				-0.5,
+				0.5
+			}
 			self.victor.kick_table = {
 				state_mul = {
 					standing = 1,
