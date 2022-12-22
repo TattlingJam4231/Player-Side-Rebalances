@@ -111,7 +111,8 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"wpn_fps_snp_wa2000",			-- Lebensauger .308 Sniper Rifle
 				"wpn_fps_snp_tti",				-- Contractor .308 Sniper Rifle
 				"wpn_fps_snp_siltstone",		-- Grom Sniper Rifle
-				"wpn_fps_snp_qbu88"				-- Kang Arms X1 Sniper Rifle
+				"wpn_fps_snp_qbu88",			-- Kang Arms X1 Sniper Rifle
+				"wpn_fps_snp_victor"			-- North Star Sniper Rifle
 			}
 		},
 		smg = {
@@ -3143,6 +3144,25 @@ function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 							self.parts.wpn_fps_snp_mosin_iron_sight.stats.recoil = -2
 							self.parts.wpn_fps_snp_mosin_iron_sight.stats.concealment = 4
 							self.parts.wpn_fps_snp_mosin_iron_sight.stats.magnification = 1
+						
+			--Pronghorn
+			
+					--Sights
+
+							--Iron Sight
+							self.parts.wpn_fps_snp_scout_o_iron_up.stats.spread = 0
+							self.parts.wpn_fps_snp_scout_o_iron_up.stats.recoil = -2
+							self.parts.wpn_fps_snp_scout_o_iron_up.stats.concealment = 4
+							self.parts.wpn_fps_snp_scout_o_iron_up.stats.magnification = 1
+							self.parts.wpn_fps_snp_scout_o_iron_up.forbids = {
+								"wpn_fps_snp_scout_o_iron_down",
+								"wpn_fps_upg_o_45iron",
+								"wpn_fps_upg_o_45rds",
+								"wpn_fps_upg_o_45rds_v2",
+								"wpn_fps_upg_o_xpsg33_magnifier",
+								"wpn_fps_upg_o_sig",
+								"wpn_fps_upg_o_45steel"
+							}
 
 
 	--T2 Snipers----------------------------------------------------------		
@@ -3169,6 +3189,16 @@ function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.recoil = -2
 							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.concealment = 4
 							self.parts.wpn_fps_snp_siltstone_iron_sight.stats.magnification = 1
+						
+			--North Star
+			
+					--Sights
+
+							--Cynosura Iron Sights
+							self.parts.wpn_fps_snp_victor_o_standard.stats.spread = -1
+							self.parts.wpn_fps_snp_victor_o_standard.stats.recoil = -2
+							self.parts.wpn_fps_snp_victor_o_standard.stats.concealment = 4
+							self.parts.wpn_fps_snp_victor_o_standard.stats.magnification = 1
 end
 
 function WeaponFactoryTweakData:_init_smg_attachments_oryo()
