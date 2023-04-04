@@ -2,7 +2,7 @@
 "name" : "Player-Side Rebalances",
 "description" : "",
 "author" : "Oryo",
-"version" : "0.6.0",
+"version" : "0.8.1",
 "priority" : 800,
 "blt_version" : 2
 "image" : "icon.png",

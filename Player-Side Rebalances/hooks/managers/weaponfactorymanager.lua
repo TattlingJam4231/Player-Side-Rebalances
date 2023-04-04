@@ -111,10 +111,11 @@ end
 function WeaponFactoryManager:get_ammo_data_from_weapon(factory_id, blueprint)
 	local factory = tweak_data.weapon.factory
 	local t = {}
+	local override = self:_get_override_parts(factory_id, blueprint)
 
 	for _, id in ipairs(self:get_assembled_blueprint(factory_id, blueprint)) do
 		if factory.parts[id].type == "ammo" then
-			local part = self:get_part_data_oryo(id, factory_id, blueprint) -- Player-Side Rebalances: replaced _part_data function with own
+			local part = self:get_part_data_oryo(id, factory_id, blueprint, override) -- Player-Side Rebalances: replaced _part_data function with own
 			t = part.custom_stats
 		end
 	end
