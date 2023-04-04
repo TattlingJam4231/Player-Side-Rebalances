@@ -364,7 +364,9 @@ function PlayerStandard:_find_pickups(t)
 			if may_find_grenade then
 				local data = managers.player:upgrade_value("player", "regain_throwable_from_ammo", {chance = 0.02, chance_inc = 0}) -- Player-Side Rebalances: small chance to obtain throwables from ammo boxes by default
 				
-				managers.player:add_coroutine("regain_throwable_from_ammo", PlayerAction.FullyLoaded, managers.player, data.chance, data.chance_inc)
+				if data and not managers.player:got_max_grenades() then
+					managers.player:add_coroutine("regain_throwable_from_ammo", PlayerAction.FullyLoaded, managers.player, data.chance, data.chance_inc)
+				end
 			end
 
 			for id, weapon in pairs(self._unit:inventory():available_selections()) do

@@ -28,34 +28,37 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 	local enemy_mask = managers.slot:get_mask("enemies")
 
 	for _, hit in ipairs(result.rays) do
-		local is_turret = hit.unit:in_slot(sentry_mask)
-		local is_ally = hit.unit:in_slot(ally_mask)
+		if alive(hit.unit) then
+			local is_turret = hit.unit:in_slot(sentry_mask)
+			local is_ally = hit.unit:in_slot(ally_mask)
+			local is_valid_hit = hit.damage_result and hit.damage_result.attack_data and true or false
 
-		if not is_turret and not is_ally and hit.damage_result then
-			local result = hit.damage_result
-			local attack_data = result.attack_data
-			local clamp = attack_data and attack_data.hit_unit_max_health or 0
-			local headshot = attack_data and attack_data.headshot
-			local headshot_kill = attack_data and attack_data.headshot and result.type == "death" or result.type == "healed"
-			local damage_mul = upgrade_value.damage_factor
+			if not is_turret and not is_ally and is_valid_hit then
+				local result = hit.damage_result
+				local attack_data = result.attack_data
+				local clamp = attack_data and attack_data.hit_unit_max_health or 0
+				local headshot = attack_data and attack_data.headshot
+				local headshot_kill = attack_data and attack_data.headshot and result.type == "death" or result.type == "healed"
+				local damage_mul = upgrade_value.damage_factor
 
-			if weapon_unit:base():is_category("snp") then
-				damage_mul = headshot_kill and upgrade_value.damage_factor_headshot_kill or damage_mul
-			else
-				damage_mul = headshot and upgrade_value.damage_factor_headshot or damage_mul
+				if weapon_unit:base():is_category("snp") then
+					damage_mul = headshot_kill and upgrade_value.damage_factor_headshot_kill or damage_mul
+				else
+					damage_mul = headshot and upgrade_value.damage_factor_headshot or damage_mul
+				end
+
+				local damage = attack_data and attack_data.raw_damage * damage_mul or 0
+				damage = math.min(damage, clamp)
+
+				if best_damage < damage then
+					best_damage = damage
+				end
+
+				enemies_hit[hit.unit:key()] = {
+					unit = hit.unit,
+					position = hit.position
+				}
 			end
-
-			local damage = attack_data and attack_data.raw_damage * damage_mul or 0
-			damage = math.min(damage, clamp)
-
-			if best_damage < damage then
-				best_damage = damage
-			end
-			
-			enemies_hit[hit.unit:key()] = {
-				unit = hit.unit,
-				position = hit.position
-			}
 		end
 	end
 
@@ -94,6 +97,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 				variant = "graze",
 				damage = best_damage,
 				attacker_unit = managers.player:player_unit(),
+				weapon_unit = weapon_unit,
 				pos = hit.position,
 				attack_dir = -hit.normal
 			})
@@ -114,6 +118,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 						variant = "graze",
 						damage = best_damage,
 						attacker_unit = managers.player:player_unit(),
+						weapon_unit = weapon_unit,
 						pos = hit_position,
 						attack_dir = hit_position - hit.position
 					})

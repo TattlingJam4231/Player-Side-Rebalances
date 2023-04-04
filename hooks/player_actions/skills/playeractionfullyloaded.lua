@@ -36,5 +36,8 @@ PlayerAction.FullyLoaded = {
 		end
 
 		player_manager:unregister_message(Message.OnAmmoPickup, co)
+	end,
+	Function_Force_Remove = function (co)
+		managers.player:unregister_message(Message.OnAmmoPickup, co)
 	end
 }

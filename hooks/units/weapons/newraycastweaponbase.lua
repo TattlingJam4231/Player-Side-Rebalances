@@ -40,7 +40,7 @@ end)
 
 local reload_interuptable_original = NewRaycastWeaponBase.reload_interuptable
 function NewRaycastWeaponBase:reload_interuptable()
-	if self._use_shotgun_reload then
+	if self._use_shotgun_reload and not self._skip_reload_shotgun_shell then
 		if self._reload_interupt_grace and self._reload_interupt_grace < managers.player:player_timer():time() then
 			return true
 		else
@@ -168,7 +168,7 @@ function NewRaycastWeaponBase:_fix_damage_falloff_modify_oryo()
 end
 -- Player-Side Rebalances>
 
-Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWeaponBase _update_stats_values", function(self, disallow_replenish)
+Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWeaponBase _update_stats_values", function(self, disallow_replenish, ammo_data)
 
 	self:_fix_damage_falloff_modify_oryo() -- Player-Side Rebalances: bug fix, see above
 
@@ -197,7 +197,7 @@ Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWea
 		self._magnification = parts_stats.magnification
 	end
 
-	if not disallow_replenish then
+	if not disallow_replenish  and managers.weapon_factory:get_factory_id_by_weapon_id(self._name_id) then
 		self:replenish()
 	end
 	self._spread_multiplier = spread_multiplier or	self._spread_multiplier
