@@ -91,7 +91,7 @@ Hooks:PostHook(FPCameraPlayerBase, "start_shooting", "Oryo FPCameraPlayerBase st
 end)
 
 Hooks:PostHook(FPCameraPlayerBase, "stop_shooting", "Oryo FPCameraPlayerBase stop_shooting", function(self)
-	self._recoil_wait = type(self._recoil_wait) == "number" and {flat = 0, curve = 0} or self._recoil_wait
+	self._recoil_wait = type(self._recoil_wait) == "number" and {pause = 0, accel = 0} or self._recoil_wait
 	self._reduce_kick_indices = true -- Player-Side Rebalances
 	self._kick_indices_timer = kick_indices_timer -- Player-Side Rebalances
 end)
@@ -271,16 +271,15 @@ function FPCameraPlayerBase:update_recoil_kick_oryo(t, dt)
 		end
 
 	elseif self._recoil_wait then
-		self._recoil_wait.flat = self._recoil_wait.flat - dt
 
-		if self._recoil_wait.flat > 0 then
-			--nothing
-		elseif self._recoil_wait.curve > 0 then
-			self._recoil_wait.curve = self._recoil_wait.curve - dt
+		if self._recoil_wait.pause > 0 then
+			self._recoil_wait.pause = self._recoil_wait.pause - dt
+		elseif self._recoil_wait.accel > 0 then
+			self._recoil_wait.accel = self._recoil_wait.accel - dt
 
 			if self._recoil_kick.to_reduce then
 				self._recoil_kick.current = nil
-				local n = math.lerp(math.max(self._recoil_kick.to_reduce, 0), 0, (9 / (1 + 10 * self._recoil_wait.curve)) * dt)
+				local n = math.lerp(math.max(self._recoil_kick.to_reduce, 0), 0, (9 / (1 + 10 * self._recoil_wait.accel)) * dt)
 				r_value_v = -(math.max(self._recoil_kick.to_reduce, 0) - n)
 				self._recoil_kick.to_reduce = n
 
@@ -290,7 +289,7 @@ function FPCameraPlayerBase:update_recoil_kick_oryo(t, dt)
 			end
 			if self._recoil_kick.h.to_reduce then
 				self._recoil_kick.h.current = nil
-				local n = math.lerp(self._recoil_kick.h.to_reduce, 0, (5 / (1 + self._recoil_wait.curve)) * dt)
+				local n = math.lerp(self._recoil_kick.h.to_reduce, 0, (5 / (1 + self._recoil_wait.accel)) * dt)
 				r_value_h = -(self._recoil_kick.h.to_reduce - n)
 				self._recoil_kick.h.to_reduce = n
 
@@ -301,7 +300,7 @@ function FPCameraPlayerBase:update_recoil_kick_oryo(t, dt)
 			if self._kick_indices and self._reduce_kick_indices then
 				for weapon, index in pairs(self._kick_indices) do
 					-- self._kick_indices[weapon] = math.lerp(0,index,(self._kick_indices_timer-dt)/kick_indices_timer)
-					local n = math.lerp(math.max(self._kick_indices[weapon], 0), 0, (9 / (1 + 10 * self._recoil_wait.curve)) * dt)
+					local n = math.lerp(math.max(self._kick_indices[weapon], 0), 0, (9 / (1 + 10 * self._recoil_wait.accel)) * dt)
 					self._kick_indices[weapon] = self._kick_indices[weapon] - n
 				end
 			end

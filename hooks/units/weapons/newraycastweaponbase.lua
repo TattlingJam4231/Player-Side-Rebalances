@@ -60,13 +60,13 @@ Hooks:PostHook(NewRaycastWeaponBase, "on_reload_stop", "Oryo NewRaycastWeaponBas
 end)
 
 function NewRaycastWeaponBase:recoil_wait() -- Player-Side Rebalances: rewritten
-	local recoil_wait = self:weapon_tweak_data().recoil_wait or {flat = 1, curve = 1}
-	local multiplier_flat = recoil_wait.flat or 0
-	local multiplier_curve = recoil_wait.curve or 0
+	local recoil_wait = self:weapon_tweak_data().recoil_wait or {pause = 1, accel = 1}
+	local multiplier_pause = recoil_wait.pause or 0
+	local multiplier_accel = recoil_wait.accel or 0
 	local fire_rate = self:weapon_tweak_data().fire_mode_data.fire_rate
 	local wait = {
-		flat = fire_rate * multiplier_flat,
-		curve = fire_rate * multiplier_curve
+		pause = fire_rate * multiplier_pause,
+		accel = fire_rate * multiplier_accel
 	}
 	return wait
 end

@@ -515,120 +515,120 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 	self.recoil_wait = {
 		assault_rifle = {
 			tier_4 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			},
 			tier_3 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			},
 			tier_2 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			},
 			tier_1 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			}
 		},
 		shotgun = {
 			tier_4 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			pump_action = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			tier_3 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			tier_2 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			}
 		},
 		lmg = {
 			tier_3 = {
-				flat = 0.5,
-				curve = 1
+				pause = 0.5,
+				accel = 1
 			},
 			tier_2 = {
-				flat = 0.5,
-				curve = 1
+				pause = 0.5,
+				accel = 1
 			},
 			tier_1 = {
-				flat = 0.5,
-				curve = 1
+				pause = 0.5,
+				accel = 1
 			}
 		},
 		snp = {
 			tier_5 = {
-				flat = 0.3,
-				curve = 0.3
+				pause = 0.3,
+				accel = 0.3
 			},
 			tier_4 = {
-				flat = 0.3,
-				curve = 0.25
+				pause = 0.3,
+				accel = 0.25
 			},
 			tier_3 = {
-				flat = 0.45,
-				curve = 0.35
+				pause = 0.45,
+				accel = 0.35
 			},
 			tier_2 = {
-				flat = 0.65,
-				curve = 0.5
+				pause = 0.65,
+				accel = 0.5
 			},
 			tier_1 = {
-				flat = 1.1,
-				curve = 0.8
+				pause = 1.1,
+				accel = 0.65 --0.8
 			}
 		},
 		smg = {
 			tier_3 = {
-				flat = 2,
-				curve = 0.5
+				pause = 2,
+				accel = 0.5
 			},
 			tier_2 = {
-				flat = 2,
-				curve = 0.5
+				pause = 2,
+				accel = 0.5
 			},
 			tier_1 = {
-				flat = 2,
-				curve = 0.5
+				pause = 2,
+				accel = 0.5
 			}
 		},
 		pistol = {
 			tier_4 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_3 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_2 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			}
 		},
 		gl = {
 			tier_2 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			}
 		}
 	}
@@ -2062,8 +2062,8 @@ function WeaponTweakData:_init_snipers_oryo()
 			self.siltstone.fire_mode_data.fire_rate = 0.364 --0.333
 			self.siltstone.single.fire_rate = 0.364 --0.333
 			self.siltstone.recoil_wait = {
-				flat = 1.2,
-				curve = 0.9
+				pause = 1.2,
+				accel = 0.9
 			}
 			-- self.siltstone.stats.damage = 198
 			self.siltstone.stats.spread = 17
@@ -2110,6 +2110,10 @@ function WeaponTweakData:_init_snipers_oryo()
 			self.victor.AMMO_MAX = 30
 			self.victor.stats.spread = 16
 			self.victor.stats.recoil = 9
+			-- self.victor.recoil_wait = {
+			-- 	pause = 0,
+			-- 	accel = 0
+			-- }
 			self.victor.kick.standing = {
 				2,
 				2.5,
@@ -2122,12 +2126,12 @@ function WeaponTweakData:_init_snipers_oryo()
 					crouching = 1,
 					steelsight = 0.67
 				},
-				scale_factor = 0.8,
+				scale_factor = 0.4, --0.8
 				variance = {
 					{
 						index = 1,
-						v = {2,2.5},
-						h = {-0.5,0.5}
+						v = {2.15,2.35}, -- 2, 2.5
+						h = {-0.35,0.35} -- -0.5, 0.5
 					}
 				}
 			}
