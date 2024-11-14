@@ -1,6 +1,6 @@
 PlayerAction.AmmoEfficiency = {
 	Priority = 1,
-	Function = function (player_manager, target_headshots, bullet_refund, target_time)
+	Function = function(player_manager, target_headshots, bullet_refund, target_time)
 		local co = coroutine.running()
 		local time = Application:time()
 		local headshots = 1
@@ -15,13 +15,14 @@ PlayerAction.AmmoEfficiency = {
 			end
 		end
 
+
 		player_manager:register_message(Message.OnHeadShot, co, on_headshot)
 
 		while time < target_time do
 			time = Application:time()
 			local weapon_unit = player_manager:equipped_weapon_unit()
 
-			if weapon_unit and (weapon_unit:base():fire_mode() == "auto" or not weapon_unit:base():is_category("smg", "assault_rifle", "snp")) then -- Player-Side Rebalances: burst marker
+			if weapon_unit and (weapon_unit:base():fire_mode() == "auto" or not weapon_unit:base():is_category("smg", "assault_rifle", "snp")) then -- oryo: burst marker
 				break
 			end
 
@@ -30,4 +31,5 @@ PlayerAction.AmmoEfficiency = {
 
 		player_manager:unregister_message(Message.OnHeadShot, co)
 	end
+
 }

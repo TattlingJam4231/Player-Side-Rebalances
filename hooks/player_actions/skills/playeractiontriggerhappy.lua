@@ -1,10 +1,10 @@
 PlayerAction.TriggerHappy = {
 	Priority = 1,
-	Function = function (player_manager, damage_bonus, max_stacks, max_time, duration)
+	Function = function(player_manager, damage_bonus, max_stacks, max_time, duration)
 		local co = coroutine.running()
 		local current_time = Application:time()
 		local current_stacks = 1
-        local data = self:upgrade_value("pistol", "stacking_hit_damage_multiplier", 0)
+		local data = self:upgrade_value("pistol", "stacking_hit_damage_multiplier", 0)
 
 		local function on_hit(unit, attack_data)
 			local attacker_unit = attack_data.attacker_unit
@@ -16,10 +16,11 @@ PlayerAction.TriggerHappy = {
 					player_manager:mul_to_property("trigger_happy", damage_bonus)
 				end
 
+				-- <oryo
 				if current_stacks >= max_stacks then
-
-                    max_time = current_time + data.max_time
+					max_time = current_time + data.max_time
 				end
+				-- oryo>
 			end
 		end
 

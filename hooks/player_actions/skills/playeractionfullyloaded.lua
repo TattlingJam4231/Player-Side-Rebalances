@@ -17,9 +17,10 @@ local function on_ammo_pickup(unit, pickup_chance, increase)
 	return gained_throwable, chance
 end
 
+
 PlayerAction.FullyLoaded = {
 	Priority = 1,
-	Function = function (player_manager, pickup_chance, increase)
+	Function = function(player_manager, pickup_chance, increase)
 		local co = coroutine.running()
 		local gained_throwable = false
 		local chance = pickup_chance
@@ -27,6 +28,7 @@ PlayerAction.FullyLoaded = {
 		local function on_ammo_pickup_message(unit)
 			gained_throwable, chance = on_ammo_pickup(unit, chance, increase)
 		end
+
 
 		player_manager:register_message(Message.OnAmmoPickup, co, on_ammo_pickup_message)
 		player_manager:register_message(Message.OnAmmoPickup, co, on_ammo_pickup)
@@ -36,8 +38,10 @@ PlayerAction.FullyLoaded = {
 		end
 
 		player_manager:unregister_message(Message.OnAmmoPickup, co)
-	end,
-	Function_Force_Remove = function (co)
+	end
+,
+	Function_Force_Remove = function(co)
 		managers.player:unregister_message(Message.OnAmmoPickup, co)
 	end
+
 }

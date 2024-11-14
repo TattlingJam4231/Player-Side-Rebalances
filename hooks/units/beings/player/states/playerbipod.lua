@@ -1,3 +1,3 @@
 function PlayerBipod:get_movement_state()
-	return "bipod"
+	return "bipod" -- oryo
 end
