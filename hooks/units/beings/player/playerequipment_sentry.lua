@@ -10,7 +10,7 @@ function PlayerEquipment:_can_place(eq_id)
 		local inventory = self._unit:inventory()
 
 		for _, weapon in pairs(inventory:available_selections()) do
-			if weapon == inventory._available_selections[inventory._equipped_selection] then
+			if weapon == inventory._available_selections[inventory._equipped_selection] then -- oryo: only use ammo from currently equipped weapon
 				if weapon.unit:base():get_ammo_ratio() < min_ammo_cost then
 					managers.hint:show_hint("sentry_not_enough_ammo_to_place")
 
@@ -22,6 +22,7 @@ function PlayerEquipment:_can_place(eq_id)
 
 	return true
 end
+
 
 function PlayerEquipment:_sentry_gun_ammo_cost(sentry_uid)
 	local equipment_data = managers.player:selected_equipment()
@@ -46,13 +47,13 @@ function PlayerEquipment:_sentry_gun_ammo_cost(sentry_uid)
 	}
 
 	for index, weapon in pairs(inventory:available_selections()) do
-		if weapon == inventory._available_selections[inventory._equipped_selection] then
-			local ammo_taken = weapon.unit:base():get_ammo_max() * (1 - deployement_cost)
-			
-			
+		if weapon == inventory._available_selections[inventory._equipped_selection] then -- oryo: only use ammo from currently equipped weapon
+
 			local max_ammo = weapon.unit:base():get_ammo_max()
 			local total_ammo = weapon.unit:base():get_ammo_total()
-			local ammo = total_ammo - math.floor(max_ammo * (1 - deployement_cost))
+
+			local ammo_taken = max_ammo * (1 - deployement_cost) -- oryo: ammo consumed based on max ammo intsead of current
+			local ammo = total_ammo - math.floor(ammo_taken)
 
 			weapon.unit:base():set_ammo_total(ammo)
 
@@ -61,8 +62,7 @@ function PlayerEquipment:_sentry_gun_ammo_cost(sentry_uid)
 			if weapon.unit:base():get_ammo_total() < ammo_in_clip then
 				weapon.unit:base():set_ammo_remaining_in_clip(ammo)
 			end
-			
-			
+
 			self._sentry_ammo_cost[sentry_uid][index] = ammo_taken
 		else
 			local ammo_taken = 0
@@ -71,3 +71,4 @@ function PlayerEquipment:_sentry_gun_ammo_cost(sentry_uid)
 		hud:set_ammo_amount(index, weapon.unit:base():ammo_info())
 	end
 end
+

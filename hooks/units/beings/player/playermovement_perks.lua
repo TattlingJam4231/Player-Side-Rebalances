@@ -1,18 +1,23 @@
-Hooks:PostHook(PlayerMovement, "update", "Oryo PlayerMovement update", function(self)
-    self:upd_meat_shield_oryo()
-end)
+Hooks:PostHook(
+		PlayerMovement, "update", "Oryo PlayerMovement update", function(self)
+			self:upd_meat_shield_oryo()
+		end
+)
 
--- Player-Side Rebalances: Muscle
+-- oryo: Muscle
 function PlayerMovement:upd_meat_shield_oryo()
-    if not managers.player:has_category_upgrade("temporary", "meat_shield_dmg_dampener") then return end
+	if not managers.player:has_category_upgrade("temporary", "meat_shield_dmg_dampener") then
+		return
+	end
 
-    local my_pos = self._m_pos
-    local player_mask = managers.slot:get_mask("players")
-    local radius = 1000
-    
-    local players_near = World:find_units("intersect", "sphere", my_pos, radius, player_mask)
+	local my_pos = self._m_pos
+	local player_mask = managers.slot:get_mask("players")
+	local radius = 1000
 
-    if #players_near >= 1 then
-        managers.player:activate_temporary_upgrade("temporary", "meat_shield_dmg_dampener")
-    end
+	local players_near = World:find_units("intersect", "sphere", my_pos, radius, player_mask)
+
+	if #players_near >= 1 then
+		managers.player:activate_temporary_upgrade("temporary", "meat_shield_dmg_dampener")
+	end
 end
+

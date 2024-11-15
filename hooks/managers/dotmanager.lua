@@ -43,7 +43,8 @@ end
 
 function DOTManager:update_damage_table_oryo(existing_var_info, dot_data)
 	if existing_var_info.dot_can_stack == "extend" then
-		table.insert(existing_var_info.damage_table, {dot_data.add_ticks or dot_data.damage_ticks, dot_data.dot_damage})
+        local damage = dot_data.damage and dot_data.damage / 10 or dot_data.dot_damage
+		table.insert(existing_var_info.damage_table, {dot_data.add_ticks or dot_data.damage_ticks, damage})
 
 	else
 		if existing_var_info.damage_table[1][1] > dot_data.damage_ticks then
@@ -58,7 +59,7 @@ function DOTManager:update_damage_table_oryo(existing_var_info, dot_data)
 				existing_var_info.damage_table[stack] = existing_var_info.damage_table[stack] or {}
 				existing_var_info.damage_table[stack][1] = existing_var_info.damage_table[stack][1] or ticks
 				existing_var_info.damage_table[stack][2] = existing_var_info.damage_table[stack][2] and
-						                                           existing_var_info.damage_table[stack][2] + damage or damage
+				existing_var_info.damage_table[stack][2] + damage or damage
 				ticks = ticks - existing_var_info.damage_table[stack][1]
 				stack = stack + 1
 			end

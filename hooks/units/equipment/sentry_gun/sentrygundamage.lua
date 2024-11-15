@@ -29,10 +29,10 @@ function SentryGunDamage:die(attacker_unit, variant, options)
 		print("JA22_01: Sentrygun not a car")
 	end
 	
-	-- <Player-Side Rebalances
+	-- <oryo
 	local weapon = self._unit:weapon()
 	weapon._ammo_total = 0
-	-- Player-Side Rebalances>
+	-- oryo>
 	
 	self._health = 0
 	self._dead = true
@@ -42,9 +42,16 @@ function SentryGunDamage:die(attacker_unit, variant, options)
 	self._unit:brain():set_active(false)
 	self._unit:movement():set_active(false)
 	self._unit:movement():on_death()
-	managers.groupai:state():on_criminal_neutralized(self._unit)
+
+	if managers.groupai:state():criminal_record(self._unit:key()) then
+		managers.groupai:state():on_criminal_neutralized(self._unit)
+	end
+
 	self._unit:base():on_death()
-	self._unit:sound_source():post_event(self._breakdown_snd_event)
+
+	if self._breakdown_snd_event then
+		self._unit:sound_source():post_event(self._breakdown_snd_event)
+	end
 	
 	self._shield_smoke_level = 0
 
@@ -54,9 +61,7 @@ function SentryGunDamage:die(attacker_unit, variant, options)
 		self._unit:damage():run_sequence_simple(sequence_death)
 	end
 
-	local turret_units = managers.groupai:state():turrets()
-
-	if turret_units and table.contains(turret_units, self._unit) then
+	if managers.groupai:state():is_unit_turret(self._unit) then
 		if global_event then
 			managers.mission:call_global_event("turret_destroyed")
 		end

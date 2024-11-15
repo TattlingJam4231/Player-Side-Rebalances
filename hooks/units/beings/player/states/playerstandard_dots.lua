@@ -1,27 +1,72 @@
-function PlayerStandard:_check_melee_dot_damage(col_ray, defense_data, melee_entry, charge_lerp_value)
+function PlayerStandard:_check_melee_special_damage(col_ray, character_unit, defense_data, melee_entry, charge_lerp_value) -- oryo: added charge_lerp_value
 	if not defense_data or defense_data.type == "death" then
 		return
 	end
 
-	local dot_data = tweak_data.blackmarket.melee_weapons[melee_entry].dot_data
+	local melee_tweak = tweak_data.blackmarket.melee_weapons[melee_entry]
+	local char_damage = character_unit:character_damage()
 
-	if not dot_data then
-		return
+	if melee_tweak.random_special_effects then
+		local selector = WeightedSelector:new()
+
+		for _, effect in pairs(melee_tweak.random_special_effects) do
+			selector:add(effect, effect.weight)
+		end
+
+		melee_tweak = selector:select()
 	end
 
-	local data = managers.dot:create_dot_data(self:lerp_melee_dot_data_oryo(dot_data, charge_lerp_value))
-	local damage_class = CoreSerialize.string_to_classtable(data.damage_class)
+	if melee_tweak.dot_data_name and char_damage.damage_dot and defense_data and defense_data ~= "friendly_fire" and (not char_damage.dead or not char_damage:dead()) then
+		local data = tweak_data.dot:get_dot_data(melee_tweak.dot_data_name)
+        data = self:lerp_melee_dot_data_oryo(data, charge_lerp_value) -- oryo
 
-	damage_class:start_dot_damage(col_ray, nil, nil, data, melee_entry)
+		local damage_class = CoreSerialize.string_to_classtable(data.damage_class)
+
+		if damage_class then
+			damage_class:start_dot_damage(col_ray, nil, data, melee_entry, self._unit, defense_data)
+		else
+			Application:error("[PlayerStandard:_check_melee_special_damage] No '" .. tostring(data.damage_class) .. "' class found for dot tweak with name '" .. tostring(melee_tweak.dot_data_name) .. "'.")
+		end
+	end
+
+	if melee_tweak.tase_data and char_damage.damage_tase then
+		local action_data = {
+			variant = melee_tweak.tase_data.tase_strength,
+			damage = 0,
+			attacker_unit = self._unit,
+			col_ray = col_ray
+		}
+
+		char_damage:damage_tase(action_data)
+	end
+
+	if melee_tweak.instant_kill and char_damage.damage_mission then
+		local action_data = {
+			variant = "melee",
+			attacker_unit = self._unit,
+			col_ray = col_ray,
+			name_id = melee_entry,
+			damage = char_damage._HEALTH_INIT,
+			damage_effect = 1
+		}
+
+		char_damage:damage_melee(action_data)
+	end
 end
 
 function PlayerStandard:lerp_melee_dot_data_oryo(dot_data, lerp_value)
+    if not dot_data then
+        return
+    end
 	local dot_data = deep_clone(dot_data)
-	if dot_data.custom_data and dot_data.custom_data.max_values then
-		local custom_data = dot_data.custom_data
-		local max_values = custom_data.max_values
-		for stat, _ in pairs(custom_data) do
-			custom_data[stat] = max_values[stat] and math.lerp(custom_data[stat], max_values[stat], lerp_value) or custom_data[stat]
+	if dot_data and dot_data.max_values then
+		local max_values = dot_data.max_values
+		for stat, _ in pairs(dot_data) do
+            if stat == "dot_damage" and max_values.damage then
+                dot_data[stat] = max_values.damage and math.lerp(dot_data[stat], max_values.damage, lerp_value) or dot_data[stat]
+            else
+			    dot_data[stat] = max_values[stat] and math.lerp(dot_data[stat], max_values[stat], lerp_value) or dot_data[stat]
+            end
 		end
 	end
 	return dot_data
@@ -133,6 +178,10 @@ function PlayerStandard:_do_melee_damage(t, bayonet_melee, melee_hit_ray, melee_
 
 			dmg_multiplier = dmg_multiplier * managers.player:upgrade_value("player", "melee_" .. tostring(tweak_data.blackmarket.melee_weapons[melee_entry].stats.weapon_type) .. "_damage_multiplier", 1)
 
+            if character_unit:base() and character_unit:base().char_tweak and character_unit:base():char_tweak().priority_shout then
+                dmg_multiplier = dmg_multiplier * (tweak_data.blackmarket.melee_weapons[melee_entry].stats.special_damage_multiplier or 1)
+            end
+
 			if managers.player:has_category_upgrade("melee", "stacking_hit_damage_multiplier") then
 				self._state_data.stacking_dmg_mul = self._state_data.stacking_dmg_mul or {}
 				self._state_data.stacking_dmg_mul.melee = self._state_data.stacking_dmg_mul.melee or {
@@ -152,8 +201,7 @@ function PlayerStandard:_do_melee_damage(t, bayonet_melee, melee_hit_ray, melee_
 			local damage_health_ratio = managers.player:get_damage_health_ratio(health_ratio, "melee")
 
 			if damage_health_ratio > 0 then
-				local damage_ratio = damage_health_ratio
-				dmg_multiplier = dmg_multiplier * (1 + managers.player:upgrade_value("player", "melee_damage_health_ratio_multiplier", 0) * damage_ratio)
+				dmg_multiplier = dmg_multiplier * (1 + self._damage_health_ratio_mul_melee * damage_health_ratio)
 			end
 
 			dmg_multiplier = dmg_multiplier * managers.player:temporary_upgrade_value("temporary", "berserker_damage_multiplier", 1)
@@ -205,31 +253,8 @@ function PlayerStandard:_do_melee_damage(t, bayonet_melee, melee_hit_ray, melee_
 
 			local defense_data = character_unit:character_damage():damage_melee(action_data)
 
-			self:_check_melee_dot_damage(col_ray, defense_data, melee_entry, charge_lerp_value)	--added charge_lerp_value
+			self:_check_melee_special_damage(col_ray, character_unit, defense_data, melee_entry, charge_lerp_value)	-- oryo: added charge_lerp_value
 			self:_perform_sync_melee_damage(hit_unit, col_ray, action_data.damage)
-
-			if tweak_data.blackmarket.melee_weapons[melee_entry].tase_data and character_unit:character_damage().damage_tase then
-				local action_data = {
-					variant = tweak_data.blackmarket.melee_weapons[melee_entry].tase_data.tase_strength,
-					damage = 0,
-					attacker_unit = self._unit,
-					col_ray = col_ray
-				}
-
-				character_unit:character_damage():damage_tase(action_data)
-			end
-
-			if tweak_data.blackmarket.melee_weapons[melee_entry].fire_dot_data and character_unit:character_damage().damage_fire then
-				local action_data = {
-					variant = "fire",
-					damage = 0,
-					attacker_unit = self._unit,
-					col_ray = col_ray,
-					fire_dot_data = tweak_data.blackmarket.melee_weapons[melee_entry].fire_dot_data
-				}
-
-				character_unit:character_damage():damage_fire(action_data)
-			end
 
 			return defense_data
 		else

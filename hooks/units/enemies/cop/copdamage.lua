@@ -31,7 +31,7 @@ end
 -- 	return unit
 -- end
 
--- <Player-Side Rebalances
+-- <oryo
 local damage_fire_original = CopDamage.damage_fire
 function CopDamage:damage_fire(attack_data)
 
@@ -50,9 +50,9 @@ function CopDamage:damage_fire(attack_data)
 
 	return damage_fire_original(self, attack_data)
 end
--- Player-Side Rebalances>
+-- oryo>
 
--- <Player-Side Rebalances
+-- <oryo
 local damage_dot_original = CopDamage.damage_dot
 function CopDamage:damage_dot(attack_data)
 	
@@ -80,9 +80,9 @@ function CopDamage:damage_dot(attack_data)
 
 	return result
 end
--- Player-Side Rebalances>
+-- oryo>
 
--- <Player-Side Rebalances
+-- <oryo
 local damage_bullet_original = CopDamage.damage_bullet
 function CopDamage:damage_bullet(attack_data)
 	attack_data.hit_unit_max_health = self._HEALTH_INIT
@@ -105,7 +105,7 @@ function CopDamage:damage_bullet(attack_data)
 
 	return result
 end
--- Player-Side Rebalances>
+-- oryo>
 
 function CopDamage:roll_critical_hit(attack_data, damage)
 	damage = damage or attack_data.damage
