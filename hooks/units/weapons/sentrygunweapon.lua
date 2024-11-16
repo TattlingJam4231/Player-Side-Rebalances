@@ -4,6 +4,7 @@ function SentryGunWeapon:_set_fire_mode(use_armor_piercing)
 	self._current_damage_mul = self._use_armor_piercing and 3.5 or 1
 
 	self:flip_fire_sound()
+    self._unit:base():set_use_armor_piercing(use_armor_piercing)
 end
 
 function SentryGunWeapon:fire(blanks, expend_ammo, shoot_player, target_unit)

@@ -3946,33 +3946,9 @@ function WeaponTweakData:_init_specials_oryo()
 		
 			--Flamethrower
 				self.flamethrower_mk2.AMMO_PICKUP = {20, 30}
-				self.flamethrower_mk2.fire_dot_data = nil
-				self.flamethrower_mk2.dot_data = {
-					type = "fire",
-					custom_data = {
-						damage = 18,
-						dot_length = 3.6,
-						dot_trigger_max_distance = 3000,
-						dot_tick_period = 0.5,
-						scale_tick_period = 0.015,
-						dot_can_crit = true
-					}
-				}
 			
 			--MA-17 Flamethrower
 				self.system.AMMO_PICKUP = {15, 25}
-				self.system.fire_dot_data = nil
-				self.system.dot_data = {
-					type = "fire",
-					custom_data = {
-						damage = 18,
-						dot_length = 3.6,
-						dot_trigger_max_distance = 3000,
-						dot_tick_period = 0.5,
-						scale_tick_period = 0.01,
-						dot_can_crit = true
-					}
-				}
 end
 
 Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(self)

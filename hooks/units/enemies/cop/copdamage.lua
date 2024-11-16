@@ -31,25 +31,26 @@ end
 -- 	return unit
 -- end
 
--- <oryo
-local damage_fire_original = CopDamage.damage_fire
-function CopDamage:damage_fire(attack_data)
+-- <oryo: no longer needed?
+-- local damage_fire_original = CopDamage.damage_fire
+-- function CopDamage:damage_fire(attack_data)
 
-	local flammable = nil
-	local char_tweak = tweak_data.character[self._unit:base()._tweak_table]
-	flammable = char_tweak.flammable == nil and true or char_tweak.flammable
+--
+-- 	local flammable = nil
+-- 	local char_tweak = tweak_data.character[self._unit:base()._tweak_table]
+-- 	flammable = char_tweak.flammable == nil and true or char_tweak.flammable
 
-	if flammable then
-		attack_data.fire_dot_data = attack_data.fire_dot_data or {
-			dot_trigger_max_distance = 3000,
-			dot_trigger_chance = 100,
-			dot_length = 0,
-			dot_damage = 0
-		}
-	end
+-- 	if flammable then
+-- 		attack_data.fire_dot_data = attack_data.fire_dot_data or {
+-- 			dot_trigger_max_distance = 3000,
+-- 			dot_trigger_chance = 100,
+-- 			dot_length = 0,
+-- 			dot_damage = 0
+-- 		}
+-- 	end
 
-	return damage_fire_original(self, attack_data)
-end
+-- 	return damage_fire_original(self, attack_data)
+-- end
 -- oryo>
 
 -- <oryo
@@ -66,16 +67,44 @@ function CopDamage:damage_dot(attack_data)
 		end
 	end
 
-	if attack_data.variant == "fire" then
-		attack_data.fire_dot_data = {}
-		attack_data.fire_dot_data.start_dot_dance_antimation = true
-	end
+	-- if attack_data.variant == "fire" then
+	-- 	attack_data.fire_dot_data = {}
+	-- 	attack_data.fire_dot_data.start_dot_dance_antimation = true
+	-- end
 
 	local result = damage_dot_original(self, attack_data)
+
+    attack_data.weapon_unit = attack_data.dot_info.last_weapon_unit
 
 	local is_civilian = CopDamage.is_civilian(self._unit:base()._tweak_table)
 	if result and result.type == "death" and not is_civilian and managers.player:has_category_upgrade("temporary", "overkill_damage_multiplier") and attack_data.attacker_unit == managers.player:player_unit() and alive(attack_data.weapon_unit) and not attack_data.weapon_unit:base().thrower_unit and attack_data.weapon_unit:base().is_category and attack_data.weapon_unit:base():is_category("shotgun", "saw") then
 		managers.player:activate_temporary_upgrade("temporary", "overkill_damage_multiplier")
+        log("test")
+	end
+
+	if attack_data.variant == "fire" then
+        local target_base_ext = attack_data.col_ray.unit:base()
+        local char_tweak = target_base_ext and target_base_ext.char_tweak and target_base_ext:char_tweak()
+
+        if char_tweak and char_tweak.use_animation_on_fire_damage ~= false then
+            local last_fire_t = self:get_last_time_unit_got_fire_damage()
+            local t = TimerManager:game():time()
+
+            if not last_fire_t or t - last_fire_t > (--[[ char_tweak.fire_animation_cooldown or ]] 2.5) then
+                local result_type = "fire_hurt"
+                attack_data.type = result_type
+                attack_data.pos = attack_data.col_ray.unit:position()
+                result = {
+                    type = result_type,
+                    variant = attack_data.variant
+                }
+                local data = {
+                    result = result,
+                    weapon_unit = attack_data.dot_info.last_weapon_unit
+                }
+                self:force_hurt(data)
+            end
+        end
 	end
 
 	return result
@@ -94,14 +123,14 @@ function CopDamage:damage_bullet(attack_data)
 
 	local result = damage_bullet_original(self, attack_data)
 
-	local bullet_class = attack_data.weapon_unit:base()._ammo_data and attack_data.weapon_unit:base()._ammo_data.bullet_class
-	if bullet_class == "FireBulletBase" or bullet_class == "FlameBulletBase" then
-		result_type = "fire_hurt"
-		result = {
-			type = result_type,
-			variant = attack_data.variant
-		}
-	end
+	-- local bullet_class = attack_data.weapon_unit:base()._ammo_data and attack_data.weapon_unit:base()._ammo_data.bullet_class
+	-- if bullet_class == "FireBulletBase" or bullet_class == "FlameBulletBase" then
+	-- 	result_type = "fire_hurt"
+	-- 	result = {
+	-- 		type = result_type,
+	-- 		variant = attack_data.variant
+	-- 	}
+	-- end
 
 	return result
 end

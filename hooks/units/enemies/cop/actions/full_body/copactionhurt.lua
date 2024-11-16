@@ -21,7 +21,7 @@ function CopActionHurt:init(action_desc, common_data)
 	if action_type == "knock_down" then
 		action_type = "heavy_hurt"
 	end
-
+    
 	if action_type == "fatal" then
 		redir_res = self._ext_movement:play_redirect("fatal")
 
@@ -62,8 +62,6 @@ function CopActionHurt:init(action_desc, common_data)
 			return
 		end
 
-		-- managers.fire:cop_hurt_fire_prediction(self._unit) -- oryo: disabled, no longer needed?
-        --[[ if last_fire_recieved == nil or t - last_fire_recieved > 6 --[[ oryo ]-] then ]] --no longer needed?
 		local dir_str = nil
 		local fwd_dot = action_desc.direction_vec:dot(common_data.fwd)
 

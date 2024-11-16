@@ -165,9 +165,10 @@ function ExplosionManager:get_explosion_falloff_oryo(damage, range, curve_pow, d
 		falloff_start = range.falloff_start
 		range = range.max
 	end
-	return math.max(damage *
-			                math.pow(math.clamp(1 - (distance - falloff_start) / (math.max(range - falloff_start, 1)), 0, 1),
-					curve_pow), 1)
+    
+    local damage = math.max(damage * math.pow(math.clamp(1 - ((distance - falloff_start) / (math.max(range - falloff_start, 1))), 0, 1), curve_pow), 1)
+	
+    return damage
 end
 -- oryo>
 

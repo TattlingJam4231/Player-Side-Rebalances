@@ -1,4 +1,4 @@
-function EnvironmentFire:on_spawn(data, normal, user_unit, weapon_unit, added_time, range_multiplier) -- Player-Side Rebalances: ground fires are now always oriented vertically, fire aoe on trip mines is offset so as to maximise area covered
+function EnvironmentFire:on_spawn(data, normal, user_unit, weapon_unit, added_time, range_multiplier) -- oryo: ground fires are now always oriented vertically, fire aoe on trip mines is offset so as to maximise area covered
 	local custom_params = {
 		camera_shake_max_mul = 4,
 		sound_muffle_effect = true,
@@ -17,6 +17,7 @@ function EnvironmentFire:on_spawn(data, normal, user_unit, weapon_unit, added_ti
     local dot_data = data.dot_data_name and tweak_data.dot:get_dot_data(data.dot_data_name)
 	self._dot_data = dot_data and deep_clone(dot_data)
 	self._user_unit = user_unit
+    self._weapon_unit = weapon_unit
 	self._burn_duration = data.burn_duration + added_time
 	self._burn_duration_destroy = (self._dot_data and self._dot_data.dot_length or 0) + 1
 	self._burn_tick_counter = 0

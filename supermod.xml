@@ -17,7 +17,6 @@
                 <post :hook_id="snipergrazedamage"                              :script_path="snipergrazedamage.lua"/>
             </group>
             
-		    <post :hook_id="blackmarketmanager"                             :script_path="blackmarketmanager.lua"/>
             <post :hook_id="dotmanager"                                     :script_path="dotmanager.lua"/>
 		    <post :hook_id="explosionmanager"                               :script_path="explosionmanager.lua"/>
             <post :hook_id="hudmanagerpd2"							        :script_path="hudmanagerpd2_perks.lua"/>
@@ -40,6 +39,7 @@
                 <post :hook_id="projectilestweakdata"                           :script_path="projectilestweakdata.lua"/>
             </group>
 
+            <post :hook_id="dottweakdata"								    :script_path="dottweakdata.lua"/>
             <post :hook_id="playertweakdata"								:script_path="playertweakdata.lua"/>
             <post :hook_id="skilltreetweakdata"								:script_path="skilltreetweakdata_perks.lua"/>
 		    <post :hook_id="skilltreetweakdata"                             :script_path="skilltreetweakdata_skills.lua"/>

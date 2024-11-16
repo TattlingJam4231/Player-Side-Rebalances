@@ -348,6 +348,7 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 	var_info.dot_length = data.modified_length or dot_data.dot_length
 	var_info.damage_ticks = dot_data.damage_ticks
 	var_info.add_ticks = dot_data.add_ticks
+	var_info.dot_damage_received_time = t
 
 	if dot_data.reset_dot_length == nil then
 		var_info.reset_dot_length = true

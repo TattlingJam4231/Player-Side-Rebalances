@@ -238,104 +238,23 @@ Hooks:PostHook(BlackMarketTweakData, "_init_melee_weapons", "Oryo BlackMarketTwe
 	-- Kunai Knife
 	self.melee_weapons.cqc.stats.min_damage = 1.5
 	self.melee_weapons.cqc.stats.max_damage = 6
-	self.melee_weapons.cqc.dot_data = {
-		type = "poison",
-		custom_data = {
-			damage = 15,
-			dot_tick_period = 0.5,
-			damage_ticks = 3,
-			dot_can_stack = "extend",
-			dot_can_crit = true,
-			hurt_animation_chance = 0.3,
-			max_values = {
-				damage = 45,
-				dot_tick_period = 0.1,
-				hurt_animation_chance = 1
-			}
-		}
-	}
 
 	-- Stainless Steel Syringe
 	self.melee_weapons.fear.stats.min_damage = 1.5
 	self.melee_weapons.fear.stats.max_damage = 6
-	self.melee_weapons.fear.dot_data = {
-		type = "poison",
-		custom_data = {
-			damage = 15,
-			dot_tick_period = 0.5,
-			damage_ticks = 3,
-			dot_can_stack = "extend",
-			dot_can_crit = true,
-			hurt_animation_chance = 0.3,
-			max_values = {
-				damage = 45,
-				dot_tick_period = 0.1,
-				hurt_animation_chance = 1
-			}
-		}
-	}
 
 	-- The Motherforker	
 	self.melee_weapons.fork.stats.min_damage = 3
 	self.melee_weapons.fork.stats.max_damage = 6
-	self.melee_weapons.fork.dot_data = {
-		type = "fire",
-		custom_data = {
-			damage = 10,
-			dot_tick_period = 0.5,
-			damage_ticks = 3,
-			add_ticks = 1,
-			dot_can_stack = "extend",
-			dot_can_crit = true,
-			dot_trigger_chance = 30,
-			max_values = {
-				damage_ticks = 9,
-				add_ticks = 3,
-				dot_trigger_chance = 70
-			}
-		}
-	}
+    self.melee_weapons.fork.dot_data_name = "melee_fork"
 
 	-- Spatula
 	self.melee_weapons.spatula.stats.min_damage = 3
 	self.melee_weapons.spatula.stats.max_damage = 3
-	self.melee_weapons.spatula.dot_data = {
-		type = "fire",
-		custom_data = {
-			damage = 10,
-			dot_tick_period = 0.5,
-			damage_ticks = 3,
-			add_ticks = 2,
-			dot_can_stack = "extend",
-			dot_can_crit = true,
-			dot_trigger_chance = 50,
-			max_values = {
-				damage_ticks = 9,
-				add_ticks = 6,
-				dot_trigger_chance = 100
-			}
-		}
-	}
+    self.melee_weapons.spatula.dot_data_name = "melee_spatula"
 
 	-- You're Mine
 	self.melee_weapons.branding_iron.stats.min_damage = 4
 	self.melee_weapons.branding_iron.stats.max_damage = 10
-	self.melee_weapons.branding_iron.dot_data = {
-		type = "fire",
-		custom_data = {
-			damage = 40,
-			dot_tick_period = 0.5,
-			damage_ticks = 1,
-			add_ticks = 1,
-			dot_can_stack = "extend",
-			dot_can_crit = true,
-			dot_trigger_chance = 50,
-			max_values = {
-				damage = 60,
-				damage_ticks = 2,
-				add_ticks = 2,
-				dot_trigger_chance = 100
-			}
-		}
-	}
+    self.melee_weapons.branding_iron.dot_data_name = "melee_branding_iron"
 end)

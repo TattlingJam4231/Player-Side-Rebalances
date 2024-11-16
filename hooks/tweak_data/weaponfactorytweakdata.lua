@@ -905,17 +905,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
 						ammo_pickup_max_mul = 0.533,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 20,
-								dot_tick_period = 0.5,
-								damage_ticks = 12,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+                        dot_data_name = "ammo_dragons_breath_4",
 						armor_piercing_add = 1, 
 						ignore_statistic = true,  
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath",
@@ -935,17 +925,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					custom_stats = {
 						ammo_pickup_min_mul = 0.75,
 						ammo_pickup_max_mul = 0.7,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 13,
-								dot_tick_period = 0.5,
-								damage_ticks = 12,
-								dot_trigger_max_distance = 2700,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+                        dot_data_name = "ammo_dragons_breath_pump",
 						armor_piercing_add = 1, 
 						ignore_statistic = true,  
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
@@ -965,17 +945,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					custom_stats = {
 						ammo_pickup_min_mul = 0.75,
 						ammo_pickup_max_mul = 0.7,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 13,
-								dot_tick_period = 0.5,
-								damage_ticks = 12,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+                        dot_data_name = "ammo_dragons_breath_3",
 						armor_piercing_add = 1, 
 						ignore_statistic = true,  
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
@@ -994,17 +964,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					custom_stats = {
 						ammo_pickup_min_mul = 0.5,
 						ammo_pickup_max_mul = 0.6,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 12,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+                        dot_data_name = "ammo_dragons_breath_2",
 						armor_piercing_add = 1, 
 						ignore_statistic = true,  
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
@@ -1023,17 +983,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 					custom_stats = {
 						ammo_pickup_min_mul = 0.583,
 						ammo_pickup_max_mul = 0.625,
-						dot_data = {
-							type = "fire",
-							custom_data = {
-								damage = 10,
-								dot_tick_period = 0.5,
-								damage_ticks = 10,
-								dot_trigger_max_distance = 2000,
-								dot_can_stack = true,
-								dot_can_crit = true
-							}
-						},
+                        dot_data_name = "ammo_dragons_breath_1",
 						armor_piercing_add = 1, 
 						ignore_statistic = true,  
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 

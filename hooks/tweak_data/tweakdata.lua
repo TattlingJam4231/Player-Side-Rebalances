@@ -1,4 +1,4 @@
-if not wr_tweakstats then
+if not oryo_tweakstats then
 	if not tweak_data then return end
 
 	-- Sicario Smoke Grenade
@@ -190,5 +190,5 @@ if not wr_tweakstats then
 	-- 	sounds = {}
 	-- }
 
-	wr_tweakstats = true
+	oryo_tweakstats = true
 end
