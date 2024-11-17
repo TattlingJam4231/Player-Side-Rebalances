@@ -3,28 +3,31 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 
 	-- Flamethrower DoT
 	self.dot_entries.fire.weapon_flamethrower_mk2 = {
-        damage = 18,
-        dot_length = 3.6,
-        dot_trigger_max_distance = 3000,
+        dot_trigger_chance = 1,
+        dot_grace_period = 0,
+        dot_damage = 1.0,
         dot_tick_period = 0.5,
-        scale_tick_period = 0.015,
+        damage_ticks = 3,
+        dot_can_stack = true,
         dot_can_crit = true
 	}
 
 	-- MA-17 Flamethrower DoT
 	self.dot_entries.fire.weapon_system  = {
-        damage = 18,
-        dot_length = 3.6,
-        dot_trigger_max_distance = 3000,
+        dot_trigger_chance = 1,
+        dot_grace_period = 0,
+        dot_damage = 0.8,
         dot_tick_period = 0.5,
-        scale_tick_period = 0.01,
+        damage_ticks = 3,
+        dot_can_stack = true,
         dot_can_crit = true
 	}
 
 
     self.dot_entries.fire.ammo_dragons_breath_4 = {
         dot_trigger_chance = 1,
-        damage = 20,
+        dot_grace_period = 0,
+        dot_damage = 5.0,
         dot_tick_period = 0.5,
         damage_ticks = 12,
         dot_trigger_max_distance = 2000,
@@ -33,8 +36,8 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
     }
     self.dot_entries.fire.ammo_dragons_breath_pump = {
         dot_trigger_chance = 1,
-        hurt_animation_chance = 1,
-        damage = 13,
+        dot_grace_period = 0,
+        dot_damage = 4.0,
         dot_tick_period = 0.5,
         damage_ticks = 12,
         dot_trigger_max_distance = 2700,
@@ -43,7 +46,8 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
     }
     self.dot_entries.fire.ammo_dragons_breath_3 = {
         dot_trigger_chance = 1,
-        damage = 13,
+        dot_grace_period = 0,
+        dot_damage = 4.0,
         dot_tick_period = 0.5,
         damage_ticks = 12,
         dot_trigger_max_distance = 2000,
@@ -52,7 +56,8 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
     }
     self.dot_entries.fire.ammo_dragons_breath_2 = {
         dot_trigger_chance = 1,
-        damage = 10,
+        dot_grace_period = 0,
+        dot_damage = 2.5,
         dot_tick_period = 0.5,
         damage_ticks = 12,
         dot_trigger_max_distance = 2000,
@@ -61,9 +66,10 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
     }
     self.dot_entries.fire.ammo_dragons_breath_1 = {
         dot_trigger_chance = 1,
-        damage = 10,
+        dot_grace_period = 0,
+        dot_damage = 2.0,
         dot_tick_period = 0.5,
-        damage_ticks = 10,
+        damage_ticks = 12,
         dot_trigger_max_distance = 2000,
         dot_can_stack = true,
         dot_can_crit = true
@@ -71,13 +77,14 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 
 	-- The Motherforker DoT
     self.dot_entries.fire.melee_fork = {
-        damage = 10,
+        dot_trigger_chance = 0.3,
+        dot_grace_period = 0,
+        dot_damage = 1.0,
         dot_tick_period = 0.5,
         damage_ticks = 3,
         add_ticks = 1,
         dot_can_stack = "extend",
         dot_can_crit = true,
-        dot_trigger_chance = 0.3,
         max_values = {
             damage_ticks = 9,
             add_ticks = 3,
@@ -87,13 +94,14 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 
 	-- Spatula DoT
     self.dot_entries.fire.melee_spatula = {
-        damage = 10,
+        dot_trigger_chance = 0.5,
+        dot_grace_period = 0,
+        dot_damage = 1.0,
         dot_tick_period = 0.5,
         damage_ticks = 3,
         add_ticks = 2,
         dot_can_stack = "extend",
         dot_can_crit = true,
-        dot_trigger_chance = 0.5,
         max_values = {
             damage_ticks = 9,
             add_ticks = 6,
@@ -103,13 +111,14 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 
 	-- You're Mine DoT
     self.dot_entries.fire.melee_branding_iron = {
-        damage = 40,
+        dot_trigger_chance = 0.5,
+        dot_grace_period = 0,
+        dot_damage = 4.0,
         dot_tick_period = 0.5,
         damage_ticks = 1,
         add_ticks = 1,
         dot_can_stack = "extend",
         dot_can_crit = true,
-        dot_trigger_chance = 0.5,
         max_values = {
             damage = 60,
             damage_ticks = 2,
@@ -125,7 +134,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 
 	-- Kunai Knife DoT
     self.dot_entries.poison.melee_cqc = {
-        damage = 15,
+        dot_damage = 1.5,
         dot_tick_period = 0.5,
         damage_ticks = 3,
         dot_can_stack = "extend",
@@ -140,7 +149,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 
 	-- Stainless Steel Syringe DoT
     self.dot_entries.poison.melee_fear = {
-        damage = 15,
+        dot_damage = 1.5,
         dot_tick_period = 0.5,
         damage_ticks = 3,
         dot_can_stack = "extend",
@@ -159,9 +168,9 @@ end)
 -- function DOTTweakData:get_dot_data(tweak_name)
 -- 	for variant, dot_entries in pairs(self.dot_entries) do
 -- 		if dot_entries[tweak_name] then
+--             Utils.PrintTable(dot_entries[tweak_name])
 -- 			return dot_entries[tweak_name]
 -- 		end
 -- 	end
-
 -- 	return nil
 -- end

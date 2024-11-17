@@ -56,7 +56,7 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 			tier_3 = {
 				"wpn_fps_pis_judge",			-- The Judge Shotgun
 				"wpn_fps_pis_x_judge",			-- Akimbo Judge Shotguns
-				"rotwpn_fps_sho_rotaa",			-- Goliath 12G Shotgun
+				"wpn_fps_sho_rota",			    -- Goliath 12G Shotgun
 				"wpn_fps_sho_x_rota",			-- Akimbo Goliath 12G Shotguns
 				"wpn_fps_sho_ultima"			-- Argos III Shotgun
 			},
@@ -898,7 +898,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 				tier_4 = {
 					stats = {
 						value = 5, 
-						damage = -40,
+						damage = -80,
 						total_ammo_mod = 0,
 						spread = -3
 					},
@@ -911,14 +911,17 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath",
 						far_falloff_mul = 0.7,
 						can_shoot_through_shield = true, 
+						can_headshot = true,
 						bullet_class = "FlameBulletBase",
 						rays = 12
 					}
 				},
 				pump_action = {
+                    muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath",
+                    hit_effect = "dragonsbreath",
 					stats = {
 						value = 5, 
-						damage = -30,
+						damage = -50,
 						total_ammo_mod = 0,
 						spread = -3
 					},
@@ -930,7 +933,8 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						ignore_statistic = true,  
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
 						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
+						can_shoot_through_shield = true,
+						can_headshot = true,
 						bullet_class = "FlameBulletBase",
 						rays = 12
 					}
@@ -938,7 +942,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 				tier_3 = {
 					stats = {
 						value = 5, 
-						damage = -30,
+						damage = -50,
 						total_ammo_mod = 0,
 						spread = -3
 					},
@@ -951,6 +955,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
 						far_falloff_mul = 0.7,
 						can_shoot_through_shield = true, 
+						can_headshot = true,
 						bullet_class = "FlameBulletBase",
 						rays = 12
 					}
@@ -958,6 +963,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 				tier_2 = {
 					stats = {
 						value = 5, 
+						damage = -25,
 						total_ammo_mod = 0,
 						spread = -3
 					},
@@ -970,6 +976,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
 						far_falloff_mul = 0.7,
 						can_shoot_through_shield = true, 
+						can_headshot = true,
 						bullet_class = "FlameBulletBase",
 						rays = 12
 					}
@@ -977,6 +984,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 				tier_1 = {
 					stats = {
 						value = 5, 
+						damage = -15,
 						total_ammo_mod = 0,
 						spread = -3
 					},
@@ -989,6 +997,7 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
 						far_falloff_mul = 0.7,
 						can_shoot_through_shield = true, 
+						can_headshot = true,
 						bullet_class = "FlameBulletBase",
 						rays = 12
 					}
