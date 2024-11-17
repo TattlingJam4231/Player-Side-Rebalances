@@ -120,7 +120,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
         dot_can_stack = "extend",
         dot_can_crit = true,
         max_values = {
-            damage = 60,
+            dot_damage = 6.0,
             damage_ticks = 2,
             add_ticks = 2,
             dot_trigger_chance = 1
@@ -141,7 +141,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
         dot_can_crit = true,
         hurt_animation_chance = 0.3,
         max_values = {
-            damage = 45,
+            dot_damage = 4.5,
             dot_tick_period = 0.1,
             hurt_animation_chance = 1
         }
@@ -156,7 +156,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
         dot_can_crit = true,
         hurt_animation_chance = 0.3,
         max_values = {
-            damage = 45,
+            dot_damage = 4.5,
             dot_tick_period = 0.1,
             hurt_animation_chance = 1
         }

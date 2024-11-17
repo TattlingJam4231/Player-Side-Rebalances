@@ -62,11 +62,7 @@ function PlayerStandard:lerp_melee_dot_data_oryo(dot_data, lerp_value)
 	if dot_data and dot_data.max_values then
 		local max_values = dot_data.max_values
 		for stat, _ in pairs(dot_data) do
-            if stat == "dot_damage" and max_values.damage then
-                dot_data[stat] = max_values.damage and math.lerp(dot_data[stat], max_values.damage, lerp_value) or dot_data[stat]
-            else
-			    dot_data[stat] = max_values[stat] and math.lerp(dot_data[stat], max_values[stat], lerp_value) or dot_data[stat]
-            end
+			dot_data[stat] = max_values[stat] and math.lerp(dot_data[stat], max_values[stat], lerp_value) or dot_data[stat]
 		end
 	end
 	return dot_data
