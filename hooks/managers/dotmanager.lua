@@ -1,26 +1,27 @@
 function DOTManager:update_dot_info_oryo(existing_dot_info, existing_var_info, data, t, should_sync)
+    local dot_data = data.dot_data
 
-	if existing_var_info.damage_table and data.dot_data.damage_ticks then
-		self:update_damage_table_oryo(existing_var_info, data.dot_data)
-	elseif existing_var_info.scale_length and data.dot_data.scale_length then
-		self:update_dot_length_oryo(existing_var_info, data.dot_data, t)
+	if existing_var_info.damage_table and dot_data.damage_ticks then
+		self:update_damage_table_oryo(existing_var_info, dot_data)
+	elseif existing_var_info.scale_length and dot_data.scale_length then
+		self:update_dot_length_oryo(existing_var_info, dot_data, t)
 
 	elseif existing_var_info.reset_dot_length and existing_var_info.dot_damage_received_time + existing_var_info.dot_length <
-			t + data.dot_data.dot_length then
+			t + dot_data.dot_length then
 		existing_var_info.dot_damage_received_time = t
-		existing_var_info.dot_length = data.dot_data.dot_length
+		existing_var_info.dot_length = dot_data.dot_length
 
 	end
 
 	-- update dot_tick_period
-	if existing_var_info.scale_tick_period and data.dot_data.scale_tick_period then
-		existing_var_info.dot_tick_period = math.max(existing_var_info.dot_tick_period - data.dot_data.scale_tick_period,
-				existing_var_info.min_tick_period)
-	elseif existing_var_info.dot_tick_period > data.dot_data.dot_tick_period then
-		existing_var_info.dot_tick_period = data.dot_data.dot_tick_period
+	if existing_var_info.scale_tick_period and dot_data.scale_tick_period then
+		existing_var_info.dot_tick_period = math.max(existing_var_info.dot_tick_period - dot_data.scale_tick_period, existing_var_info.min_tick_period)
+        existing_var_info.dot_ticks_remaining = dot_data.damage_ticks or math.max(1, math.floor(var_info.dot_length / var_info.dot_tick_period))
+	elseif existing_var_info.dot_tick_period > dot_data.dot_tick_period then
+		existing_var_info.dot_tick_period = dot_data.dot_tick_period
 	end
 
-	existing_var_info.hurt_animation = existing_var_info.hurt_animation or data.dot_data.hurt_animation
+	existing_var_info.hurt_animation = existing_var_info.hurt_animation or dot_data.hurt_animation
 
 	--[[ _add_doted_enemy
     if existing_dot_info then ]]
@@ -43,17 +44,16 @@ end
 
 function DOTManager:update_damage_table_oryo(existing_var_info, dot_data)
 	if existing_var_info.dot_can_stack == "extend" then
-        local damage = dot_data.damage and dot_data.damage / 10 or dot_data.dot_damage
+        local damage = dot_data.dot_damage
 		table.insert(existing_var_info.damage_table, {dot_data.add_ticks or dot_data.damage_ticks, damage})
 
 	else
 		if existing_var_info.damage_table[1][1] > dot_data.damage_ticks then
 			existing_var_info.damage_table[1][1] = existing_var_info.damage_table[1][1] - dot_data.damage_ticks
-			table.insert(existing_var_info.damage_table, 1,
-					{dot_data.damage_ticks, existing_var_info.damage_table[1][2] + dot_data.dot_damage})
+			table.insert(existing_var_info.damage_table, 1, {dot_data.damage_ticks, existing_var_info.damage_table[1][2] + dot_data.dot_damage})
 		else
 			local ticks = dot_data.damage_ticks
-			local damage = dot_data.damage and dot_data.damage / 10 or dot_data.dot_damage
+			local damage = dot_data.dot_damage
 			local stack = 1
 			while ticks > 0 do
 				existing_var_info.damage_table[stack] = existing_var_info.damage_table[stack] or {}
@@ -330,17 +330,17 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 	var_info.dot_can_crit = dot_data.dot_can_crit
 
 	-- Damage Variables
-	var_info.dot_damage = dot_data.damage and dot_data.damage / 10 or dot_data.dot_damage
+	var_info.dot_damage = dot_data.dot_damage
 
 	if dot_data.scale_damage then
-		var_info.scale_damage = dot_data.scale_damage / 10
+		var_info.scale_damage = dot_data.scale_damage
 	end
 	if dot_data.damage_cap then
-		var_info.damage_cap = dot_data.damage_cap / 10
+		var_info.damage_cap = dot_data.damage_cap
 	end
 
 	-- Tick Period variables
-	var_info.dot_tick_period = dot_data.dot_tick_period --[[ or 0.5 ]]
+	var_info.dot_tick_period = dot_data.dot_tick_period
 	dot_data.scale_tick_period = dot_data.scale_tick_period
 	dot_data.min_tick_period = dot_data.min_tick_period or 0.1
 
@@ -359,8 +359,7 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 	var_info.diminish_scale_length = dot_data.diminish_scale_length
 
 	var_info.dot_grace_period = dot_data.dot_grace_period
-	var_info.dot_ticks_remaining = var_info.damage_ticks or
-			                               math.max(1, math.floor(var_info.dot_length / var_info.dot_tick_period))
+	var_info.dot_ticks_remaining = var_info.damage_ticks or math.max(1, math.floor(var_info.dot_length / var_info.dot_tick_period))
 	var_info.dot_counter = var_info.dot_tick_period - math.max(var_info.dot_tick_period, var_info.dot_grace_period)
 	--
 
@@ -426,8 +425,6 @@ function DOTManager:_add_doted_enemy(data)
 			should_sync = self:update_dot_info_oryo(existing_dot_info, existing_var_info, data, t, should_sync)
 		else
 			existing_var_info = self:_add_variant_data(existing_dot_info, data, t)
-
-			-- self:create_enemy_dot_info_oryo(col_ray, enemy_unit, dot_damage_received_time, weapon_unit, dot_data, weapon_id)
 
 			self:check_achievemnts()
 		end
@@ -538,7 +535,7 @@ function DOTManager:_damage_dot(dot_info, var_info)
 			end
 		end
 
-		-- Player Side Rebalances
+		-- <oryo
 		local action_data = {
 			dot_info = deep_clone(var_info),
 			damage = var_info.dot_damage,
@@ -548,7 +545,7 @@ function DOTManager:_damage_dot(dot_info, var_info)
 			weapon_id = var_info.last_weapon_id
 		}
 		local result = damage_class:give_damage_dot(action_data)
-		--
+		-- oryo>
 
 		if result and result ~= "friendly_fire" then
 			local base_ext = weapon_unit and weapon_unit:base()
@@ -572,89 +569,4 @@ function DOTManager:_damage_dot(dot_info, var_info)
 	end
 
 	return not alive(dot_info.unit) or dot_info.unit:character_damage().dead and dot_info.unit:character_damage():dead()
-end
-
--- Player-Side Rebalances: from firemanager
-
-function DOTManager:_remove_flame_effects_from_doted_unit(enemy_unit)
-	if self._doted_enemies then
-		for _, dot_info in ipairs(self._doted_enemies) do
-			if dot_info.fire_effects and dot_info.enemy_unit == enemy_unit then
-				for __, fire_effect_id in ipairs(dot_info.fire_effects) do
-					World:effect_manager():fade_kill(fire_effect_id)
-				end
-			end
-		end
-	end
-end
-
-function DOTManager:start_burn_body_sound(dot_info, delay)
-	local sound_loop_burn_body = SoundDevice:create_source("FireBurnBody")
-
-	sound_loop_burn_body:set_position(dot_info.enemy_unit:position())
-	sound_loop_burn_body:post_event("burn_loop_body")
-
-	dot_info.sound_source = sound_loop_burn_body
-
-	if delay then
-		managers.enemy:add_delayed_clbk("FireBurnBody", callback(self, self, "_stop_burn_body_sound", sound_loop_burn_body),
-				TimerManager:game():time() + delay - 0.5)
-	end
-end
-
-function DOTManager:_stop_burn_body_sound(sound_source)
-	sound_source:post_event("burn_loop_body_stop")
-	managers.enemy:add_delayed_clbk("FireBurnBodyFade", callback(self, self, "_release_sound_source", {
-		sound_source = sound_source
-	}), TimerManager:game():time() + 0.5)
-end
-
-function DOTManager:_release_sound_source(...)
-end
-
-local tmp_used_flame_objects = nil
-function DOTManager:_start_enemy_fire_effect(dot_info)
-	local num_objects = #tweak_data.fire.fire_bones
-	local num_effects = math.random(3, num_objects)
-
-	if not tmp_used_flame_objects then
-		tmp_used_flame_objects = {}
-
-		for _, effect in ipairs(tweak_data.fire.fire_bones) do
-			table.insert(tmp_used_flame_objects, false)
-		end
-	end
-
-	local idx = 1
-	local effect_id = nil
-	local effects_table = {}
-
-	for i = 1, num_effects do
-		while tmp_used_flame_objects[idx] do
-			idx = math.random(1, num_objects)
-		end
-
-		local fire_variant = alive(dot_info.weapon_unit) and
-				                     (tweak_data.weapon[dot_info.weapon_unit:base():get_name_id()] or tweak_data.weapon.amcar).fire_variant
-		local effect_prefix = fire_variant and fire_variant .. "_" or ""
-		local effect = tweak_data.fire.effects[effect_prefix .. "endless"][tweak_data.fire.effects_cost[i]]
-		local bone = dot_info.enemy_unit:get_object(Idstring(tweak_data.fire.fire_bones[idx]))
-
-		if bone then
-			effect_id = World:effect_manager():spawn({
-				effect = Idstring(effect),
-				parent = bone
-			})
-
-			table.insert(effects_table, effect_id)
-		end
-
-		tmp_used_flame_objects[idx] = true
-	end
-
-	dot_info.fire_effects = effects_table
-
-	for idx, _ in ipairs(tmp_used_flame_objects) do
-		tmp_used_flame_objects[idx] = false
-	end
 end
