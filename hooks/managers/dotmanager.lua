@@ -146,7 +146,7 @@ function DOTManager:update(t, dt)
 
 				if var_info.damage_table then
 
-					if var_info.dot_counter >= var_info.dot_tick_period then
+					if var_info.dot_counter >= (var_info.dot_tick_period * var_info.tick_period_salt) then
 						var_info.dot_damage = var_info.damage_table[1][2]
 
 						if var_info.variant == "bleed" then
@@ -165,7 +165,8 @@ function DOTManager:update(t, dt)
 							table.remove(var_info.damage_table, 1)
 						end
 
-						var_info.dot_counter = 0
+						var_info.dot_counter = var_info.dot_counter - (var_info.dot_tick_period * var_info.tick_period_salt)
+                        var_info.tick_period_salt = math.lerp(0.9, 1.1, math.random())
 					end
 
 					if not var_info.damage_table[1] then
@@ -183,9 +184,10 @@ function DOTManager:update(t, dt)
 				else
 					var_info.dot_counter = var_info.dot_counter + dt
 
-					if var_info.dot_tick_period <= var_info.dot_counter then
+					if (var_info.dot_tick_period * var_info.tick_period_salt) <= var_info.dot_counter then
 						var_info.dot_ticks_remaining = var_info.dot_ticks_remaining - 1
-						var_info.dot_counter = var_info.dot_counter - var_info.dot_tick_period
+						var_info.dot_counter = var_info.dot_counter - (var_info.dot_tick_period * var_info.tick_period_salt)
+                        var_info.tick_period_salt = math.lerp(0.9, 1.1, math.random())
 						local killed = self:_damage_dot(dot_info, var_info)
 
 						if killed then
@@ -341,6 +343,7 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 
 	-- Tick Period variables
 	var_info.dot_tick_period = dot_data.dot_tick_period
+	var_info.tick_period_salt = math.lerp(0.9, 1.1, math.random())
 	dot_data.scale_tick_period = dot_data.scale_tick_period
 	dot_data.min_tick_period = dot_data.min_tick_period or 0.1
 
