@@ -15,6 +15,7 @@ function NewRaycastWeaponBase:update_reloading(t, dt, time_left)
 	return update_reloading_original(self, t, dt, time_left)
 end
 
+
 local reload_expire_t_original = NewRaycastWeaponBase.reload_expire_t
 function NewRaycastWeaponBase:reload_expire_t(is_not_empty)
 
@@ -31,12 +32,14 @@ function NewRaycastWeaponBase:reload_expire_t(is_not_empty)
 	return reload_expire_t_original(self, is_not_empty)
 end
 
+
 Hooks:PostHook(NewRaycastWeaponBase, "start_reload", "Oryo NewRaycastWeaponBase start_reload", function(self)
 	if self._use_shotgun_reload then
 		local t = managers.player:player_timer():time()
 		self._reload_interupt_grace =  t + (self._next_shell_reloded_t - t) / self._current_reload_speed_multiplier * 0
 	end
 end)
+
 
 local reload_interuptable_original = NewRaycastWeaponBase.reload_interuptable
 function NewRaycastWeaponBase:reload_interuptable()
@@ -51,6 +54,7 @@ function NewRaycastWeaponBase:reload_interuptable()
 	return reload_interuptable_original
 end
 
+
 Hooks:PostHook(NewRaycastWeaponBase, "on_reload_stop", "Oryo NewRaycastWeaponBase on_reload_stop", function(self)
 	self._reload_interupt_grace = nil
 	
@@ -58,6 +62,7 @@ Hooks:PostHook(NewRaycastWeaponBase, "on_reload_stop", "Oryo NewRaycastWeaponBas
 		managers.player:get_current_state():empty_reload_interupt_queue_oryo()
 	end
 end)
+
 
 function NewRaycastWeaponBase:recoil_wait() -- oryo: rewritten
 	local recoil_wait = self:weapon_tweak_data().recoil_wait or {pause = 1, accel = 1}
@@ -70,6 +75,7 @@ function NewRaycastWeaponBase:recoil_wait() -- oryo: rewritten
 	}
 	return wait
 end
+
 
 local zoom_original = NewRaycastWeaponBase.zoom
 function NewRaycastWeaponBase:zoom(...)
@@ -102,6 +108,7 @@ function NewRaycastWeaponBase:zoom(...)
 	return zoom_original(self, ...)
 end
 
+
 -- <oryo: burst counts as single shot
 function NewRaycastWeaponBase:is_single_shot()
 	if self:gadget_overrides_weapon_functions() then
@@ -115,6 +122,7 @@ function NewRaycastWeaponBase:is_single_shot()
 	return self:fire_mode() == "single" or self:fire_mode() == "burst"
 end
 -- oryo>
+
 
 function NewRaycastWeaponBase:conditional_accuracy_multiplier(current_state)
 	local mul = 1
@@ -144,6 +152,7 @@ function NewRaycastWeaponBase:conditional_accuracy_multiplier(current_state)
 	return self:_convert_add_to_mul(mul)
 end
 
+
 local get_add_head_shot_mul_original = NewRaycastWeaponBase.get_add_head_shot_mul
 function NewRaycastWeaponBase:get_add_head_shot_mul(...)
 
@@ -156,17 +165,6 @@ function NewRaycastWeaponBase:get_add_head_shot_mul(...)
 	return get_add_head_shot_mul_original(self, ...)
 end
 
--- <oryo: fixed vanilla bug where weapon attachments modified unused "_near_multiplier" and "_far_multiplier" values instead of "_near_mul" and "_far_mul", no longer needed?
--- Hooks:PostHook(NewRaycastWeaponBase, "_default_damage_falloff", "Oryo NewRaycastWeaponBase _default_damage_falloff", function(self)
--- 	self._near_multiplier = self._near_mul
--- 	self._far_multiplier = self._far_mul
--- end)
-
--- function NewRaycastWeaponBase:_fix_damage_falloff_modify_oryo()
--- 	self._near_mul = self._near_multiplier
--- 	self._far_mul = self._far_multiplier
--- end
--- oryo>
 
 Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWeaponBase _update_stats_values", function(self, disallow_replenish, ammo_data)
 
@@ -204,6 +202,7 @@ Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWea
 	
 end)
 
+
 local replenish_original = NewRaycastWeaponBase.replenish
 function NewRaycastWeaponBase:replenish(...)
 	replenish_original(self, ...)
@@ -214,6 +213,7 @@ function NewRaycastWeaponBase:replenish(...)
 	self:set_ammo_max(ammo_max)
 	self:set_ammo_total(ammo_max)
 end
+
 
 function NewRaycastWeaponBase:_get_penetration_stats_oryo()
 
@@ -232,6 +232,7 @@ function NewRaycastWeaponBase:_get_penetration_stats_oryo()
 	self._pen_energy_loss = tweak_data.weapon[self._name_id].pen_energy_loss
 
 end
+
 
 function NewRaycastWeaponBase:_update_penetration_stats_oryo()
 	if self._ammo_data then
@@ -278,6 +279,7 @@ function NewRaycastWeaponBase:_update_penetration_stats_oryo()
 	end
 end
 
+
 function NewRaycastWeaponBase:_update_fire_mode_data_oryo()
 	local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
 
@@ -305,12 +307,25 @@ function NewRaycastWeaponBase:_update_fire_mode_data_oryo()
 	self._fire_mode_index = self._fire_mode_index or 1
 end
 
+
+function NewRaycastWeaponBase:can_headshot_oryo()
+    
+    local ammo_data = self._ammo_data
+    if ammo_data and ammo_data.can_headshot then
+        return ammo_data.can_headshot
+    end
+
+    return self.can_headshot
+end
+
+
 local can_toggle_firemode_original = NewRaycastWeaponBase.can_toggle_firemode
 function NewRaycastWeaponBase:can_toggle_firemode(...)
 	local can_toggle_firemode = self._restricted_fire_modes or can_toggle_firemode_original(self, ...)
 
 	return can_toggle_firemode
 end
+
 
 local toggle_firemode_original = NewRaycastWeaponBase.toggle_firemode
 function NewRaycastWeaponBase:toggle_firemode(skip_post_event)
@@ -349,6 +364,7 @@ function NewRaycastWeaponBase:toggle_firemode(skip_post_event)
 	return toggle_firemode_original(self, skip_post_event)
 end
 
+
 function NewRaycastWeaponBase:stop_shooting()
 	NewRaycastWeaponBase.super.stop_shooting(self)
 	
@@ -365,9 +381,11 @@ function NewRaycastWeaponBase:stop_shooting()
 	end
 end
 
+
 -- <oryo: guns always reset to default position when moving from ads to hip-fire while sight gadget is enabled
 function NewRaycastWeaponBase:stance_mod() -- where else is this function being used? i hope emptying it doesn't break something else
 end
+
 
 function NewRaycastWeaponBase:stance_mod_oryo() -- contents of "stance_mod" transferred to here
 	if not self._blueprint or not self._factory_id then
