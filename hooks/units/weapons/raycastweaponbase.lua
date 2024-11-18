@@ -246,7 +246,7 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 		max_enemy_penetration_distance = self._max_enemy_penetration_distance or self._max_penetration_distance,
 		enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
 	
-		max_wall_penetration_distance = self.max_wall_penetration_distance or self._max_penetration_distance,
+		max_wall_penetration_distance = self._max_wall_penetration_distance or self._max_penetration_distance,
 		wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
 	
 		max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance,
