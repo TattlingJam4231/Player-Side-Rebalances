@@ -317,8 +317,8 @@ function PlayerManager:damage_reduction_skill_multiplier(damage_type)
 	local damage = self:get_current_incoming_damage_oryo() * multiplier
 
 	multiplier = multiplier * self:armorer_damage_reduction_oryo(damage)
-	self:get_current_incoming_damage_oryo(0)
-
+	self:get_current_incoming_damage_oryo()
+    
 	return multiplier
 end
 
@@ -385,6 +385,9 @@ end
 
 -- oryo: Armorer
 function PlayerManager:armorer_damage_reduction_oryo(damage)
+    if damage == 0 then
+        return 1
+    end
 	local raw_damage = damage
 	local damage_reduction_1 = self:upgrade_value("player", "armorer_damage_reduction_1", 0)
 	local damage_threshold_1 = self:upgrade_value("player", "armorer_damage_reduction_threshold_1", 0)
@@ -402,14 +405,14 @@ function PlayerManager:armorer_damage_reduction_oryo(damage)
 						         damage_reduction_2) +
 				         (math.max(math.min(damage_threshold_2 - damage_threshold_1, damage - damage_threshold_1), 0) *
 						         damage_reduction_1) + math.min(damage_threshold_1, damage)
-
+        
 	elseif damage_reduction_2 ~= 0 then
 		damage = math.max(damage - damage_threshold_4, 0) +
 				         (math.max(math.min(damage_threshold_4 - damage_threshold_2, damage - damage_threshold_2), 0) *
 						         damage_reduction_2) +
 				         (math.max(math.min(damage_threshold_2 - damage_threshold_1, damage - damage_threshold_1), 0) *
 						         damage_reduction_1) + math.min(damage_threshold_1, damage)
-
+        
 	elseif damage_reduction_1 ~= 0 then
 		damage = math.max(damage - damage_threshold_4, 0) +
 				         (math.max(math.min(damage_threshold_4 - damage_threshold_1, damage - damage_threshold_1), 0) *
