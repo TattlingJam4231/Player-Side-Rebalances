@@ -39,6 +39,7 @@
                 <post :hook_id="projectilestweakdata"                           :script_path="projectilestweakdata.lua"/>
             </group>
 
+            <post :hook_id="charactertweakdata"								:script_path="charactertweakdata.lua"/>
             <post :hook_id="dottweakdata"								    :script_path="dottweakdata.lua"/>
             <post :hook_id="playertweakdata"								:script_path="playertweakdata.lua"/>
             <post :hook_id="skilltreetweakdata"								:script_path="skilltreetweakdata_perks.lua"/>
