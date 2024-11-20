@@ -16,6 +16,7 @@ local tmp_vec1 = Vector3()
 local tmp_vec2 = Vector3()
 local tmp_rot1 = Rotation()
 
+
 function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	setup_data = setup_data or {}
 	local ray_hits = nil
@@ -24,7 +25,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	local enemy_mask = setup_data.enemy_mask --[[ managers.slot:get_mask("enemies") ]]
 	local bullet_slotmask = setup_data.bullet_slotmask or managers.slot:get_mask("bullet_impact_targets")
 
-    if setup_data.stop_on_impact then
+	if setup_data.stop_on_impact then
 		ray_hits = {}
 		local hit = World:raycast("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit)
 
@@ -38,7 +39,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 			[hit.unit:key()] = hit.unit
 		} or nil
 	end
-    
+	
 	local can_shoot_through_wall = setup_data.can_shoot_through_wall
 	local can_shoot_through_shield = setup_data.can_shoot_through_shield
 	local can_shoot_through_enemy = setup_data.can_shoot_through_enemy
@@ -57,15 +58,15 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	local can_shoot_through_armor_plating = setup_data.can_shoot_through_armor_plating
 
 	local max_enemy_penetration_distance = setup_data.max_enemy_penetration_distance
-	local enemy_pen_energy_loss = setup_data._enemy_pen_energy_loss
+	local enemy_pen_energy_loss = setup_data.enemy_pen_energy_loss
 	
 	local max_wall_penetration_distance = setup_data.max_wall_penetration_distance
-	local wall_pen_energy_loss = setup_data._enemy_pen_energy_loss
+	local wall_pen_energy_loss = setup_data.wall_pen_energy_loss
 	
-	local max_shield_penetration_distance = setup_data._max_shield_penetration_distance
-	local shield_pen_energy_loss = setup_data._shield_pen_energy_loss
+	local max_shield_penetration_distance = setup_data.max_shield_penetration_distance
+	local shield_pen_energy_loss = setup_data.shield_pen_energy_loss
 	
-	local max_penetrations = setup_data._max_penetrations
+	local max_penetrations = setup_data.max_penetrations
 	
 	local penetrations = 0
 	local enemy_penetrations = 0
@@ -109,7 +110,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	local has_ray_type_func = Body.has_ray_type
 
 	for i, hit in ipairs(ray_hits) do
-        unit = hit.unit
+		unit = hit.unit
 		u_key = unit:key()
 
 		if not units_hit[u_key] then
@@ -118,6 +119,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 
 			-- <oryo
 			hit.distance = hit.distance + energy_loss
+			log('distance: ' .. hit.distance)
 
 			if hit.body:name() == Idstring("body_plate") then
 				if not armor_piercing then
@@ -135,7 +137,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 			unique_hits[#unique_hits + 1] = hit
 			hit.hit_position = hit.position
 			hit_enemy = hit_enemy or hit.unit:in_slot(enemy_mask)
-            is_enemy = in_slot_func(unit, enemy_mask)
+			is_enemy = in_slot_func(unit, enemy_mask)
 
 			if is_enemy then
 				enemies_hit[u_key] = unit
@@ -165,7 +167,9 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 				end
 				if enemy_pen_energy_loss then
 					energy_loss = energy_loss + enemy_pen_energy_loss
+					log('energy_loss: ' .. energy_loss)
 				end
+				log('enemy pened')
 			elseif in_slot_func(unit, wall_mask) and weak_body then
 				if not can_shoot_through_wall then
 					break
@@ -224,14 +228,15 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	return unique_hits, hit_enemy, hit_enemy and enemies_hit or nil
 end
 
+
 function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	local setup_data = {
-        stop_on_impact = self:bullet_class().stop_on_impact,
+		stop_on_impact = self:bullet_class().stop_on_impact,
 		can_shoot_through_wall = self:can_shoot_through_wall(),
 		can_shoot_through_shield = self:can_shoot_through_shield(),
 		can_shoot_through_enemy = self:can_shoot_through_enemy(),
 		bullet_slotmask = self._bullet_slotmask,
-        enemy_mask = self.enemy_mask,
+		enemy_mask = self.enemy_mask,
 		wall_mask = self.wall_vehicle_mask,
 		shield_mask = self.shield_mask,
 		ignore_units = self._setup.ignore_units,
@@ -247,7 +252,7 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 		enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
 	
 		max_wall_penetration_distance = self._max_wall_penetration_distance or self._max_penetration_distance,
-		wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
+		wall_pen_energy_loss = self._wall_pen_energy_loss or self._pen_energy_loss,
 	
 		max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance,
 		shield_pen_energy_loss = self._shield_pen_energy_loss or self._pen_energy_loss,
@@ -295,6 +300,7 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	return RaycastWeaponBase.collect_hits(from, to, setup_data)
 end
 
+
 local mvec_to = Vector3()
 local mvec_right_ax = Vector3()
 local mvec_up_ay = Vector3()
@@ -307,26 +313,26 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 		return self:gadget_function_override("_fire_raycast", self, user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul)
 	end
 	local result = {}
-    local ray_distance = self:weapon_range()
+	local ray_distance = self:weapon_range()
 	local spread_x, spread_y = self:_get_spread(user_unit)
-    spread_y = spread_y or spread_x
-    spread_mul = spread_mul or 1
+	spread_y = spread_y or spread_x
+	spread_mul = spread_mul or 1
 
-    mvector3.cross(mvec_right_ax, direction, math.UP)
-    mvec3_norm(mvec_right_ax)
-    mvector3.cross(mvec_up_ay, direction, mvec_right_ax)
-    mvec3_norm(mvec_up_ay)
-    mvec3_set(mvec_spread_direction, direction)
+	mvector3.cross(mvec_right_ax, direction, math.UP)
+	mvec3_norm(mvec_right_ax)
+	mvector3.cross(mvec_up_ay, direction, mvec_right_ax)
+	mvec3_norm(mvec_up_ay)
+	mvec3_set(mvec_spread_direction, direction)
 
-    local theta = math.random() * 360
+	local theta = math.random() * 360
 
-    mvec3_mul(mvec_right_ax, math.rad(math.sin(theta) * math.random() * spread_x * spread_mul))
-    mvec3_mul(mvec_up_ay, math.rad(math.cos(theta) * math.random() * spread_y * spread_mul))
-    mvec3_add(mvec_spread_direction, mvec_right_ax)
-    mvec3_add(mvec_spread_direction, mvec_up_ay)
-    mvec3_set(mvec_to, mvec_spread_direction)
-    mvec3_mul(mvec_to, ray_distance)
-    mvec3_add(mvec_to, from_pos)
+	mvec3_mul(mvec_right_ax, math.rad(math.sin(theta) * math.random() * spread_x * spread_mul))
+	mvec3_mul(mvec_up_ay, math.rad(math.cos(theta) * math.random() * spread_y * spread_mul))
+	mvec3_add(mvec_spread_direction, mvec_right_ax)
+	mvec3_add(mvec_spread_direction, mvec_up_ay)
+	mvec3_set(mvec_to, mvec_spread_direction)
+	mvec3_mul(mvec_to, ray_distance)
+	mvec3_add(mvec_to, from_pos)
 
 	local ray_hits, hit_enemy, enemies_hit = self:_collect_hits(from_pos, mvec_to, user_unit) -- oryo: added user_unit
 
@@ -354,24 +360,24 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 					mvec3_mul(mvec_to, ray_distance)
 					mvec3_add(mvec_to, from_pos)
 
-				    ray_hits, hit_enemy, enemies_hit = self:_collect_hits(from_pos, mvec_to, user_unit) -- oryo: added user_unit
-                end
+					ray_hits, hit_enemy, enemies_hit = self:_collect_hits(from_pos, mvec_to, user_unit) -- oryo: added user_unit
+				end
 			end
 
-            if hit_enemy then
-                self._autohit_current = (self._autohit_current + weight) / (1 + weight)
-            elseif auto_hit_candidate then
-                self._autohit_current = self._autohit_current / (1 + weight)
-            end
-        end
+			if hit_enemy then
+				self._autohit_current = (self._autohit_current + weight) / (1 + weight)
+			elseif auto_hit_candidate then
+				self._autohit_current = self._autohit_current / (1 + weight)
+			end
+		end
 	end
 
 	local hit_count = 0
-    local hit_anyone = false
+	local hit_anyone = false
 	local cop_kill_count = 0
 	local hit_through_wall = false
 	local hit_through_shield = false
-    local is_civ_f = CopDamage.is_civilian
+	local is_civ_f = CopDamage.is_civilian
 	local damage = self:_get_current_damage(dmg_mul)
 
 	for _, hit in ipairs(ray_hits) do
@@ -451,6 +457,7 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 	return result
 end
 
+
 function RaycastWeaponBase:update_next_shooting_time()
 	if self:gadget_overrides_weapon_functions() then
 		local gadget_func = self:gadget_function_override("update_next_shooting_time")
@@ -485,43 +492,40 @@ function RaycastWeaponBase:update_next_shooting_time()
 	end
 end
 
+
 function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
-    local pickup_mul = managers.player:upgrade_value("player", "pick_up_ammo_multiplier", 1)
-    pickup_mul = pickup_mul * managers.player:upgrade_value("player", "pick_up_ammo_multiplier_2", 1) -- oryo: fully loaded aced stacks multiplicatively with walk-in closet
-    pickup_mul = pickup_mul * managers.player:crew_ability_upgrade_value("crew_scavenge", 1) -- oryo: sharpeyed stacks multiplicatively
+	local pickup_mul = managers.player:upgrade_value("player", "pick_up_ammo_multiplier", 1)
+	pickup_mul = pickup_mul * managers.player:upgrade_value("player", "pick_up_ammo_multiplier_2", 1) -- oryo: fully loaded aced stacks multiplicatively with walk-in closet
+	pickup_mul = pickup_mul * managers.player:crew_ability_upgrade_value("crew_scavenge", 1) -- oryo: sharpeyed stacks multiplicatively
 
 	local function _add_ammo(ammo_base, ratio, add_amount_override)
 		if ammo_base:get_ammo_max() == ammo_base:get_ammo_total() then
 			return false, 0
 		end
 		local picked_up = true
-        local stored_pickup_ammo = nil
+		local stored_pickup_ammo = nil
 		local add_amount = add_amount_override
 
 		if not add_amount then
 
 
-            -- <oryo
-            local multiplier_min = 1
-            local multiplier_max = 1
+			-- <oryo
+			local multiplier_min = 1
+			local multiplier_max = 1
 
-            if ammo_base._ammo_data then 
-                multiplier_min = pickup_mul * (ammo_base._ammo_data.ammo_pickup_min_mul or multiplier_min)
-                multiplier_max = pickup_mul * (ammo_base._ammo_data.ammo_pickup_max_mul or multiplier_max)
-            end
+			if ammo_base._ammo_data then 
+				multiplier_min = pickup_mul * (ammo_base._ammo_data.ammo_pickup_min_mul or multiplier_min)
+				multiplier_max = pickup_mul * (ammo_base._ammo_data.ammo_pickup_max_mul or multiplier_max)
+			end
 
 			local min_ammo_pickup = ammo_base._ammo_pickup[1]
 			local max_ammo_pickup = ammo_base._ammo_pickup[2]
 			local rng_ammo = 0
 
-			if max_ammo_pickup < 1 and (min_ammo_pickup + 0.5) == max_ammo_pickup then -- oryo: exception for very low pickup values
-				add_amount = math.lerp(min_ammo_pickup * multiplier_min, (max_ammo_pickup - 0.5) * multiplier_max + 0.5 * (multiplier_max == 0 and 0 or 1), math.random())
-			else
-                add_amount = math.lerp(min_ammo_pickup * multiplier_min, max_ammo_pickup * multiplier_max, math.random())
-			end
+			add_amount = math.lerp(min_ammo_pickup * multiplier_min, max_ammo_pickup * multiplier_max, math.random())
 			-- oryo>
 
-            
+			
 			picked_up = add_amount > 0
 			add_amount = add_amount * (ratio or 1)
 			stored_pickup_ammo = ammo_base:get_stored_pickup_ammo()
@@ -537,17 +541,17 @@ function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
 		local new_ammo = ammo_base:get_ammo_total() + rounded_amount
 		local max_allowed_ammo = ammo_base:get_ammo_max()
 
-        if not add_amount_override and new_ammo < max_allowed_ammo then
+		if not add_amount_override and new_ammo < max_allowed_ammo then
 			local leftover_ammo = add_amount - rounded_amount
-
+			
 			if leftover_ammo > 0 then
 				ammo_base:store_pickup_ammo(leftover_ammo)
 			end
 		end
 
-        ammo_base:set_ammo_total(math.clamp(new_ammo, 0, max_allowed_ammo))
+		ammo_base:set_ammo_total(math.clamp(new_ammo, 0, max_allowed_ammo))
 
-        if stored_pickup_ammo then
+		if stored_pickup_ammo then
 			add_amount = math.floor(add_amount - stored_pickup_ammo)
 		else
 			add_amount = rounded_amount
@@ -585,9 +589,10 @@ function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
 	end
 	-- oryo>
 
-    
+	
 	return picked_up, add_amount
 end
+
 
 function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage, blank, no_sound)
 	local hit_unit = col_ray.unit
@@ -700,6 +705,7 @@ function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage,
 
 	return result
 end
+
 
 if not he_stats then
 	InstantExplosiveBulletBase.CURVE_POW = 1 -- oryo: Changed from 0.5
