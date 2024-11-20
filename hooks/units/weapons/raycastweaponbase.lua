@@ -119,7 +119,6 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 
 			-- <oryo
 			hit.distance = hit.distance + energy_loss
-			log('distance: ' .. hit.distance)
 
 			if hit.body:name() == Idstring("body_plate") then
 				if not armor_piercing then
@@ -167,9 +166,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 				end
 				if enemy_pen_energy_loss then
 					energy_loss = energy_loss + enemy_pen_energy_loss
-					log('energy_loss: ' .. energy_loss)
 				end
-				log('enemy pened')
 			elseif in_slot_func(unit, wall_mask) and weak_body then
 				if not can_shoot_through_wall then
 					break
