@@ -16,6 +16,21 @@ function CopDamage:add_crit_chance_oryo(attack_data)
 end
 
 
+function CopDamage:get_real_damage_oryo(damage)
+	local damage_percent = math.ceil(math.clamp(damage / self._HEALTH_INIT_PRECENT, 1, self._HEALTH_GRANULARITY))
+	local real_damage = damage_percent * self._HEALTH_INIT_PRECENT
+
+	return real_damage
+end
+
+
+function CopDamage:is_headshot_oryo(col_ray)
+	local headshot = self._head_body_name and col_ray.body and col_ray.body:name() == self._ids_head_body_name
+
+	return headshot
+end
+
+
 function CopDamage:damage_fire(attack_data)
 	if self._dead or self._invulnerable then
 		return
@@ -36,7 +51,7 @@ function CopDamage:damage_fire(attack_data)
 	local headshot_multiplier = 1
 
 
-    -- <oryo
+	-- <oryo
 	if attack_data.attacker_unit == managers.player:player_unit() then
 		local damage_scale = nil
 
@@ -54,12 +69,12 @@ function CopDamage:damage_fire(attack_data)
 		if attack_data.weapon_unit and attack_data.variant ~= "stun" then
 			if critical_hit then
 				managers.hud:on_crit_confirmed(damage_scale)
-            else
-                managers.hud:on_hit_confirmed(damage_scale)
-            end
+			else
+				managers.hud:on_hit_confirmed(damage_scale)
+			end
 		end
 
-        headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
+		headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
 
 		if managers.groupai:state():is_enemy_special(self._unit) then
 			damage = damage * managers.player:upgrade_value("weapon", "special_damage_taken_multiplier", 1)
@@ -74,10 +89,10 @@ function CopDamage:damage_fire(attack_data)
 		end
 	end
 
-    local can_headshot = false
-    if alive(attack_data.weapon_unit) and attack_data.weapon_unit:base() and attack_data.weapon_unit:base().can_headshot_oryo then
-        can_headshot = attack_data.weapon_unit:base():can_headshot_oryo()
-    end
+	local can_headshot = false
+	if alive(attack_data.weapon_unit) and attack_data.weapon_unit:base() and attack_data.weapon_unit:base().can_headshot_oryo then
+		can_headshot = attack_data.weapon_unit:base():can_headshot_oryo()
+	end
 
 	if can_headshot and not self._char_tweak.ignore_headshot and not self._damage_reduction_multiplier and head then
 		if self._char_tweak.headshot_dmg_mul then
@@ -100,7 +115,7 @@ function CopDamage:damage_fire(attack_data)
 			end
 		end
 	end
-    -- oryo>
+	-- oryo>
 
 
 	damage = self:_apply_damage_reduction(damage)
@@ -223,47 +238,51 @@ function CopDamage:damage_dot(attack_data)
 		end
 	end
 
-	-- if attack_data.variant == "fire" then
-	-- 	attack_data.fire_dot_data = {}
-	-- 	attack_data.fire_dot_data.start_dot_dance_antimation = true
-	-- end
-
 	local result = damage_dot_original(self, attack_data)
 
-    attack_data.weapon_unit = attack_data.dot_info.last_weapon_unit
+	attack_data.weapon_unit = attack_data.dot_info.last_weapon_unit
 
 	local is_civilian = CopDamage.is_civilian(self._unit:base()._tweak_table)
 	if result and result.type == "death" and not is_civilian and managers.player:has_category_upgrade("temporary", "overkill_damage_multiplier") and attack_data.attacker_unit == managers.player:player_unit() and alive(attack_data.weapon_unit) and not attack_data.weapon_unit:base().thrower_unit and attack_data.weapon_unit:base().is_category and attack_data.weapon_unit:base():is_category("shotgun", "saw") then
 		managers.player:activate_temporary_upgrade("temporary", "overkill_damage_multiplier")
-        log("test")
 	end
 
 	if attack_data.variant == "fire" then
-        local target_base_ext = attack_data.col_ray.unit:base()
-        local char_tweak = target_base_ext and target_base_ext.char_tweak and target_base_ext:char_tweak()
+		local target_base_ext = attack_data.col_ray.unit:base()
+		local char_tweak = target_base_ext and target_base_ext.char_tweak and target_base_ext:char_tweak()
 
-        if char_tweak and char_tweak.use_animation_on_fire_damage ~= false then
-            local last_fire_t = self:get_last_time_unit_got_fire_damage()
-            local t = TimerManager:game():time()
+		if char_tweak and char_tweak.use_animation_on_fire_damage ~= false then
+			local last_fire_t = self:get_last_time_unit_got_fire_damage()
+			local t = TimerManager:game():time()
 
-            if not last_fire_t or t - last_fire_t > (--[[ char_tweak.fire_animation_cooldown or ]] 2.5) then
-                local result_type = "fire_hurt"
-                attack_data.type = result_type
-                attack_data.pos = attack_data.col_ray.unit:position()
-                result = {
-                    type = result_type,
-                    variant = attack_data.variant
-                }
-                local data = {
-                    result = result,
-                    weapon_unit = attack_data.dot_info.last_weapon_unit
-                }
-                self:force_hurt(data)
-            end
-        end
+			if not last_fire_t or t - last_fire_t > (--[[ char_tweak.fire_animation_cooldown or ]] 2.5) then
+				local result_type = "fire_hurt"
+				attack_data.type = result_type
+				attack_data.pos = attack_data.col_ray.unit:position()
+				result = {
+					type = result_type,
+					variant = attack_data.variant
+				}
+				local data = {
+					result = result,
+					weapon_unit = attack_data.dot_info.last_weapon_unit
+				}
+				self:force_hurt(data)
+			end
+		end
 	end
 
 	return result
+end
+-- oryo>
+
+
+-- <oryo
+local damage_bullet_original = CopDamage.damage_bullet
+function CopDamage:damage_bullet(attack_data)
+	attack_data.hit_unit_max_health = self._HEALTH_INIT -- used for graze damage
+
+	return damage_bullet_original(self, attack_data)
 end
 -- oryo>
 
@@ -295,4 +314,21 @@ function CopDamage:roll_critical_hit(attack_data, damage)
 	end
 
 	return critical_hit, damage
+end
+
+
+function CopDamage:check_medic_heal()
+	local unit = self._unit
+
+	if unit:base():has_tag("medic") then -- oryo
+		return false
+	end
+
+	if unit:anim_data().act then
+		return false
+	end
+
+	local medic = managers.enemy:get_nearby_medic(unit)
+
+	return medic and medic:character_damage():heal_unit(unit)
 end
