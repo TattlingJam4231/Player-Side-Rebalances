@@ -257,11 +257,13 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"groza_underbarrel"	-- KETCHNOV Byk-1 Underbarrel
 			},
 			tier_1 = {
-				"arbiter"			-- Arbiter
+				"arbiter",			-- Arbiter
+				"ms3gl"			    -- Basilisk 3V
 			}
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_damage_oryo()
 	self.damage = {
@@ -280,6 +282,7 @@ function WeaponTweakData:_init_damage_oryo()
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_spread_oryo()
 	self.default_spread = {
@@ -301,6 +304,7 @@ function WeaponTweakData:_init_spread_oryo()
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_falloff_oryo()
 	self.falloff = {
@@ -511,6 +515,7 @@ function WeaponTweakData:_init_falloff_oryo()
 	}
 end
 
+
 function WeaponTweakData:_init_recoil_wait_oryo()
 	self.recoil_wait = {
 		assault_rifle = {
@@ -634,6 +639,7 @@ function WeaponTweakData:_init_recoil_wait_oryo()
 	}
 end
 
+
 function WeaponTweakData:_init_ammo_pickup_oryo()
 	self.ammo_pickup = {
 		assault_rifle = {
@@ -673,11 +679,12 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = {8		/1.35, 13	/1.35}
 		},
 		gl = {
-			tier_2 = {0.045, 0.545},
-			tier_1 = {0.08, 0.58}
+			tier_2 = {0.15	/1.35, 0.18	/1.35},
+			tier_1 = {0.26	/1.35, 0.31 /1.35}
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_burst_count()
 	self.burst_count = {
@@ -688,11 +695,11 @@ function WeaponTweakData:_init_burst_count()
 			tier_1 = 5
 		},
 		shotgun = {
-			tier_4 = 		2,
-			pump_action = 	2,
-			tier_3 = 		2,
-			tier_2 = 		2,
-			tier_1 = 		3
+			tier_4 = 2,
+			pump_action = 2,
+			tier_3 = 2,
+			tier_2 = 2,
+			tier_1 = 3
 		},
 		lmg = {
 			tier_3 = 3,
@@ -718,10 +725,11 @@ function WeaponTweakData:_init_burst_count()
 		},
 		gl = {
 			tier_2 = 1,
-			tier_1 = 2
+			tier_1 = 3
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_default_stats_oryo()
 
@@ -734,7 +742,7 @@ function WeaponTweakData:_init_default_stats_oryo()
 
 	for category, tiers in pairs(self.weapon_index) do
 		for tier, weapons in pairs(tiers) do
-			for _, weapon in ipairs(weapons) do 
+			for _, weapon in ipairs(weapons) do
 				if self[weapon] then
 					self[weapon].AMMO_PICKUP = self.ammo_pickup[category] and self.ammo_pickup[category][tier] or self[weapon].AMMO_PICKUP
 					self[weapon].damage_falloff = self.falloff[category] and self.falloff[category][tier] or self.falloff[category] or self[weapon].damage_falloff
@@ -749,6 +757,7 @@ function WeaponTweakData:_init_default_stats_oryo()
 	end
 end
 
+
 function WeaponTweakData:kick_steelsight_oryo(original_kick)
 	local v_kick_mul = 0.75
 	local h_kick_mul = 0.75
@@ -761,6 +770,7 @@ function WeaponTweakData:kick_steelsight_oryo(original_kick)
 	return new_kick
 end
 
+
 function WeaponTweakData:kick_akimbo_oryo(original_kick)
 	local v_kick_mul = 2
 	local h_kick_mul = 1.25
@@ -772,6 +782,7 @@ function WeaponTweakData:kick_akimbo_oryo(original_kick)
 	}
 	return new_kick
 end
+
 
 function WeaponTweakData:_init_assault_rifles_oryo()
 	--T4 Assault Rifles---------------------------------------------------------
@@ -1311,6 +1322,7 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 			self.asval.kick.steelsight = self:kick_steelsight_oryo(self.asval.kick.standing)
 end
 
+
 function WeaponTweakData:_init_shotguns_oryo()
 	--Double Barrel Shotguns----------------------------------------------------
 
@@ -1548,6 +1560,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			
 
 end
+
 
 function WeaponTweakData:_init_lmgs_oryo()
 	--t3 lmgs-------------------------------------------------------------------
@@ -1826,6 +1839,7 @@ function WeaponTweakData:_init_lmgs_oryo()
 				}
 			}
 end
+
 
 function WeaponTweakData:_init_snipers_oryo()
 	--t5 snipers----------------------------------------------------------------
@@ -2137,6 +2151,7 @@ function WeaponTweakData:_init_snipers_oryo()
 			}
 
 end
+
 
 function WeaponTweakData:_init_smgs_oryo()
 	--T3 SMGs-------------------------------------------------------------------
@@ -3575,6 +3590,7 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 end
 
+
 function WeaponTweakData:_init_pistols_oryo()
 	--t4 pistols----------------------------------------------------------------
 					
@@ -3850,6 +3866,7 @@ function WeaponTweakData:_init_pistols_oryo()
 					self.x_beer.stats.damage = self.beer.stats.damage
 end
 
+
 function WeaponTweakData:_init_specials_oryo()
 	
 	--Hailstorm Mk5
@@ -3890,7 +3907,7 @@ function WeaponTweakData:_init_specials_oryo()
 			--t1 gls--------------------------------------------------------------------
 
 					--Basilisk 3V Grenade Launcher
-					self.ms3gl.AMMO_PICKUP = {0.13, 0.63}
+					self.ms3gl.AMMO_PICKUP = {0.36	/1.35, 0.44 /1.35}
 					self.ms3gl.AMMO_MAX = 15
 					
 					--Arbiter Grenade Launcher
@@ -3950,6 +3967,7 @@ function WeaponTweakData:_init_specials_oryo()
 			--MA-17 Flamethrower
 				self.system.AMMO_PICKUP = {15, 25}
 end
+
 
 Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(self)
 
