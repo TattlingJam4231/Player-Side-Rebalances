@@ -69,21 +69,29 @@
                 <post :hook_id="fpcameraplayerbase"							    :script_path="fpcameraplayerbase.lua"/>
             </group>
 
-            <group :hook_id="enemies/cop/"                                  :script_path="enemies/cop/">
+            <group :hook_id="enemies/"                                  :script_path="enemies/">
 
-                <group :hook_id="actions/"                                      :script_path="actions/">
+            	<group :hook_id="cop/"                                  :script_path="cop/">
 
-                    <group :hook_id="full_body/"                                    :script_path="full_body/">
-                        <post :hook_id="copactionhurt"                                  :script_path="copactionhurt.lua"/>
-                    </group>
+					<group :hook_id="actions/"                                      :script_path="actions/">
 
-                    <group :hook_id="upper_body/"                                   :script_path="upper_body/">
-                        <post :hook_id="copactionshoot"                                 :script_path="copactionshoot.lua"/>
-                    </group>
+						<group :hook_id="full_body/"                                    :script_path="full_body/">
+							<post :hook_id="copactionhurt"                                  :script_path="copactionhurt.lua"/>
+						</group>
 
-                </group>
+						<group :hook_id="upper_body/"                                   :script_path="upper_body/">
+							<post :hook_id="copactionshoot"                                 :script_path="copactionshoot.lua"/>
+						</group>
 
-                <post :hook_id="copdamage"                                      :script_path="copdamage.lua"/>
+					</group>
+
+                	<post :hook_id="copdamage"                                      :script_path="copdamage.lua"/>
+				</group>
+
+            	<group :hook_id="medic/"                                  :script_path="medic/">
+
+                	<post :hook_id="medicdamage"                                    :script_path="medicdamage.lua"/>
+				</group>
             </group>
 
             <group :hook_id="environment/"                                  :script_path="environment/">
