@@ -11,7 +11,7 @@ function WeaponFactoryManager:_get_forbidden_parts(factory_id, blueprint)
 				local part_forbidden = true
 
 				for _, other_part_id in ipairs(blueprint) do
-					local other_part = self:get_part_data_oryo(other_part_id, factory_id, blueprint, override) -- Player-Side Rebalances: replaced _part_data function with own
+					local other_part = self:get_part_data_oryo(other_part_id, factory_id, blueprint, override) -- oryo: replaced _part_data function with own
 
 					if part.depends_on == other_part.type then
 						part_forbidden = false
@@ -19,15 +19,13 @@ function WeaponFactoryManager:_get_forbidden_parts(factory_id, blueprint)
 						break
 					end
 
-
-					-- <Player-Side Rebalances
+					-- <oryo
 					if part.depends_on == other_part.name_id then
 						part_forbidden = false
 
 						break
 					end
-					-- Player-Side Rebalances>
-
+					-- oryo>
 
 				end
 
@@ -59,6 +57,7 @@ function WeaponFactoryManager:_get_forbidden_parts(factory_id, blueprint)
 	return forbidden
 end
 
+
 function WeaponFactoryManager:get_stats(factory_id, blueprint)
 	local factory = tweak_data.weapon.factory
 	local forbidden = self:_get_forbidden_parts(factory_id, blueprint)
@@ -66,7 +65,7 @@ function WeaponFactoryManager:get_stats(factory_id, blueprint)
 	local stats = {}
 	for _, part_id in ipairs(blueprint) do
 		if not forbidden[part_id] and factory.parts[part_id].stats then
-			local part = self:get_part_data_oryo(part_id, factory_id, blueprint) -- Player-Side Rebalances: replaced _part_data function with own
+			local part = self:get_part_data_oryo(part_id, factory_id, blueprint) -- oryo: replaced _part_data function with own
 
 			for stat_type, value in pairs(part.stats) do
 				if type(value) == "number" then
@@ -87,18 +86,20 @@ function WeaponFactoryManager:get_stats(factory_id, blueprint)
 	return stats
 end
 
+
 function WeaponFactoryManager:get_part_data_by_part_id_from_weapon(part_id, factory_id, blueprint, equipped_mods)
 	local override = self:_get_override_parts(factory_id, blueprint)
 
-	return self:get_part_data_oryo(part_id, factory_id, equipped_mods, override) -- Player-Side Rebalances: replaced _part_data function with own
+	return self:get_part_data_oryo(part_id, factory_id, equipped_mods, override) -- oryo: replaced _part_data function with own
 end
+
 
 function WeaponFactoryManager:get_custom_stats_from_weapon(factory_id, blueprint)
 	local factory = tweak_data.weapon.factory
 	local t = {}
 
 	for _, id in ipairs(self:get_assembled_blueprint(factory_id, blueprint)) do
-		local part = self:get_part_data_oryo(id, factory_id, blueprint) -- Player-Side Rebalances: replaced _part_data function with own
+		local part = self:get_part_data_oryo(id, factory_id, blueprint) -- oryo: replaced _part_data function with own
 
 		if part.custom_stats then
 			t[id] = part.custom_stats
@@ -108,6 +109,7 @@ function WeaponFactoryManager:get_custom_stats_from_weapon(factory_id, blueprint
 	return t
 end
 
+
 function WeaponFactoryManager:get_ammo_data_from_weapon(factory_id, blueprint)
 	local factory = tweak_data.weapon.factory
 	local t = {}
@@ -115,13 +117,14 @@ function WeaponFactoryManager:get_ammo_data_from_weapon(factory_id, blueprint)
 
 	for _, id in ipairs(self:get_assembled_blueprint(factory_id, blueprint)) do
 		if factory.parts[id].type == "ammo" then
-			local part = self:get_part_data_oryo(id, factory_id, blueprint, override) -- Player-Side Rebalances: replaced _part_data function with own
+			local part = self:get_part_data_oryo(id, factory_id, blueprint, override) -- oryo: replaced _part_data function with own
 			t = part.custom_stats
 		end
 	end
 
 	return t
 end
+
 
 function WeaponFactoryManager:get_part_data_oryo(part_id, factory_id, equipped_mods, override)
 	local part = deep_clone(self:_part_data(part_id, factory_id, override))
@@ -135,3 +138,5 @@ function WeaponFactoryManager:get_part_data_oryo(part_id, factory_id, equipped_m
 	end
 	return part
 end
+
+

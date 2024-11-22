@@ -1,4 +1,4 @@
-function EnvironmentFire:on_spawn(data, normal, user_unit, added_time, range_multiplier) -- Player-Side Rebalances: ground fires are now always oriented vertically, fire aoe on trip mines is offset so as to maximise area covered
+function EnvironmentFire:on_spawn(data, normal, user_unit, weapon_unit, added_time, range_multiplier) -- oryo: ground fires are now always oriented vertically, fire aoe on trip mines is offset so as to maximise area covered
 	local custom_params = {
 		camera_shake_max_mul = 4,
 		sound_muffle_effect = true,
@@ -14,16 +14,18 @@ function EnvironmentFire:on_spawn(data, normal, user_unit, added_time, range_mul
 	self._normal = normal
 	self._added_time = added_time
 	self._range_multiplier = range_multiplier
+    local dot_data = data.dot_data_name and tweak_data.dot:get_dot_data(data.dot_data_name)
+	self._dot_data = dot_data and deep_clone(dot_data)
 	self._user_unit = user_unit
+    self._weapon_unit = weapon_unit
 	self._burn_duration = data.burn_duration + added_time
-	self._burn_duration_destroy = (data.fire_dot_data and data.fire_dot_data.dot_length or 0) + 1
+	self._burn_duration_destroy = (self._dot_data and self._dot_data.dot_length or 0) + 1
 	self._burn_tick_counter = 0
 	self._burn_tick_period = data.burn_tick_period
 	self._range = data.range * range_multiplier
 	self._curve_pow = data.curve_pow
 	self._damage = data.damage
 	self._player_damage = data.player_damage
-	self._fire_dot_data = data.fire_dot_data and deep_clone(data.fire_dot_data)
 	self._fire_alert_radius = data.fire_alert_radius
 	self._no_fire_alert = data.no_fire_alert
 	self._is_molotov = data.is_molotov

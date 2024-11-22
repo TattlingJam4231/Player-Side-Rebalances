@@ -1,8 +1,8 @@
-if not wr_tweakstats then
+if not oryo_tweakstats then
 	if not tweak_data then return end
 
 	-- Sicario Smoke Grenade
-    tweak_data.blackmarket.projectiles.smoke_screen_grenade = {
+	tweak_data.blackmarket.projectiles.smoke_screen_grenade = {
 		name_id = "bm_grenade_smoke_screen_grenade",
 		desc_id = "bm_grenade_smoke_screen_grenade_desc",
 		unit = "units/pd2_dlc_max/weapons/wpn_fps_smoke_screen_grenade/wpn_third_smoke_screen_grenade",
@@ -65,19 +65,6 @@ if not wr_tweakstats then
 		mass_look_up_modifier = 1,
 		sound_event = "gl_explode",
 		name_id = "bm_launcher_frag"
-		}
-	
-	--Basilisk Grenade
-	tweak_data.projectiles.launcher_frag_ms3gl = {
-		damage = 32,
-		launch_speed = 1250,
-		curve_pow = 0,
-		player_damage = 3,
-		range = 350,
-		init_timer = 2.5,
-		mass_look_up_modifier = 1,
-		sound_event = "gl_explode",
-		name_id = "bm_launcher_frag"
 	}
 
 	-- Arbiter Grenade
@@ -94,6 +81,182 @@ if not wr_tweakstats then
 		mass_look_up_modifier = 1,
 		sound_event = "gl_explode",
 		name_id = "bm_launcher_frag"
+	}
+	
+	--Basilisk 3V Grenade
+	tweak_data.projectiles.launcher_frag_ms3gl = {
+		damage = 32,
+		launch_speed = 1250,
+		curve_pow = 0,
+		player_damage = 3,
+		range = 350,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_explode",
+		name_id = "bm_launcher_frag"
+	}
+	
+	-- Arbiter Incendiary Grenade
+	-- tweak_data.projectiles.launcher_incendiary_arbiter = {
+	-- 	damage = 10,
+	-- 	launch_speed = 7000,
+	-- 	curve_pow = 0.1,
+	-- 	player_damage = 2,
+	-- 	dot_data_name = "proj_launcher_incendiary_arbiter",
+	-- 	range = 350,
+	-- 	init_timer = 2.5,
+	-- 	mass_look_up_modifier = 1,
+	-- 	sound_event = "gl_explode",
+	-- 	sound_event_impact_duration = 1,
+	-- 	effect_name = "effects/payday2/particles/explosions/grenade_incendiary_explosion",
+	-- 	name_id = "bm_launcher_incendiary",
+	-- 	burn_duration = 3,
+	-- 	burn_tick_period = 0.5
+	-- }
+	
+	-- Basilisk 3V Incendiary Grenade
+	tweak_data.projectiles.launcher_incendiary_ms3gl = {
+		damage = 1,
+		launch_speed = 1250,
+		curve_pow = 0,
+		player_damage = 2,
+		dot_data_name = "proj_launcher_incendiary_arbiter",
+		range = 350,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_explode",
+		sound_event_impact_duration = 1,
+		effect_name = "effects/payday2/particles/explosions/grenade_incendiary_explosion",
+		name_id = "bm_launcher_incendiary",
+		burn_duration = 3,
+		burn_tick_period = 0.5
+	}
+
+	-- Viper Grenade
+	tweak_data.projectiles.poison_gas_grenade = {
+		damage = 25,
+		player_damage = 0,
+		curve_pow = 0.1,
+		range = 200,
+		name_id = "bm_poison_gas_grenade",
+		poison_gas_range = 800,
+		poison_gas_duration = 20,
+		poison_gas_fade_time = 2,
+		poison_gas_tick_time = 0.3,
+		poison_gas_dot_data_name = "proj_gas_grenade_cloud"
+	}
+
+	-- Basilisk 3V Viper Grenade
+	tweak_data.projectiles.launcher_poison = {
+		damage = 8,
+		launch_speed = 1250,
+		projectile_trail = true,
+		curve_pow = 0,
+		player_damage = 0,
+		range = 300,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_electric_explode",
+		name_id = "bm_launcher_frag",
+		poison_gas_range = 400,
+		poison_gas_duration = 15,
+		poison_gas_fade_time = 2,
+		poison_gas_tick_time = 0.3,
+		poison_gas_dot_data_name = "proj_launcher_arbiter_cloud",
+		poison_gas_effect = "effects/particles/explosions/poison_gas"
+	}
+
+	-- Basilisk 3V Conversion Grenade
+	tweak_data.projectiles.launcher_poison_ms3gl_conversion = {
+		damage = 12,
+		launch_speed = 1250,
+		projectile_trail = true,
+		curve_pow = 0.1,
+		player_damage = 0,
+		range = 300,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_electric_explode",
+		name_id = "bm_launcher_frag",
+		poison_gas_range = 600,
+		poison_gas_duration = 20,
+		poison_gas_fade_time = 2,
+		poison_gas_tick_time = 0.3,
+		poison_gas_dot_data_name = "proj_launcher_arbiter_cloud",
+		poison_gas_effect = "effects/particles/explosions/poison_gas"
+	}
+
+	-- GL40 Viper Grenade
+	tweak_data.projectiles.launcher_poison_gre_m79 = {
+		damage = 32.5,
+		launch_speed = 1250,
+		projectile_trail = true,
+		curve_pow = 0.1,
+		player_damage = 0,
+		range = 600,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_electric_explode",
+		name_id = "bm_launcher_frag",
+		poison_gas_range = 600,
+		poison_gas_duration = 20,
+		poison_gas_fade_time = 2,
+		poison_gas_tick_time = 0.3,
+		poison_gas_dot_data_name = "proj_launcher_cloud",
+		poison_gas_effect = "effects/particles/explosions/poison_gas"
+	}
+
+	-- Piglet Viper Grenade
+	tweak_data.projectiles.launcher_poison_m32 = deep_clone(tweak_data.projectiles.launcher_poison_gre_m79)
+
+	-- Compact 40 Viper Grenade
+	tweak_data.projectiles.launcher_poison_slap = deep_clone(tweak_data.projectiles.launcher_poison_gre_m79)
+
+	-- China Puff Viper Grenade
+	tweak_data.projectiles.launcher_poison_china = {
+		damage = 24,
+		launch_speed = 1250,
+		projectile_trail = true,
+		curve_pow = 0,
+		player_damage = 0,
+		range = 300,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_electric_explode",
+		name_id = "bm_launcher_frag",
+		poison_gas_range = 600,
+		poison_gas_duration = 15,
+		poison_gas_fade_time = 2,
+		poison_gas_tick_time = 0.3,
+		poison_gas_dot_data_name = "proj_launcher_cloud",
+		poison_gas_effect = "effects/particles/explosions/poison_gas"
+	}
+
+	-- KETCHNOV Byk-1 Viper Grenade
+	tweak_data.projectiles.launcher_poison_groza = deep_clone(tweak_data.projectiles.launcher_poison_china)
+
+	-- Little Friend 7.62 Viper Grenade
+	tweak_data.projectiles.launcher_poison_contraband = deep_clone(tweak_data.projectiles.launcher_poison_china)
+
+
+	-- Arbiter Viper Grenade
+	tweak_data.projectiles.launcher_poison_arbiter = {
+		damage = 12,
+		launch_speed = 7000,
+		projectile_trail = true,
+		curve_pow = 0.2,
+		player_damage = 0,
+		range = 300,
+		init_timer = 2.5,
+		mass_look_up_modifier = 1,
+		sound_event = "gl_electric_explode",
+		name_id = "bm_launcher_frag",
+		poison_gas_range = 400,
+		poison_gas_duration = 15,
+		poison_gas_fade_time = 2,
+		poison_gas_tick_time = 0.3,
+		poison_gas_dot_data_name = "proj_launcher_arbiter_cloud",
+		poison_gas_effect = "effects/particles/explosions/poison_gas"
 	}
 
 	-- tweak_data.projectiles.launcher_m203 = {
@@ -146,19 +309,6 @@ if not wr_tweakstats then
 	-- 		dot_tick_period = 0.5
 	-- }
 	
-	-- tweak_data.projectiles.launcher_incendiary_arbiter = {
-	-- 	damage = 10,
-	-- 	launch_speed = 7000,
-	-- 	curve_pow = 0.1,
-	-- 	player_damage = 2,
-	-- 	fire_dot_data = {
-	-- 		dot_trigger_chance = 35,
-	-- 		dot_damage = 25,
-	-- 		dot_length = 6.1,
-	-- 		dot_trigger_max_distance = 3000,
-	-- 		dot_tick_period = 0.5
-	-- }
-	
 	-- tweak_data.projectiles.fir_com = {
 	-- 	damage = 3,
 	-- 	curve_pow = 0.1,
@@ -190,5 +340,5 @@ if not wr_tweakstats then
 	-- 	sounds = {}
 	-- }
 
-	wr_tweakstats = true
+	oryo_tweakstats = true
 end

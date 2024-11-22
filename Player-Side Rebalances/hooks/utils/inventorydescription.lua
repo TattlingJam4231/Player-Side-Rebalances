@@ -34,7 +34,7 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 		local part_data = nil
 
 		for _, mod in ipairs(equipped_mods) do
-			part_data = managers.weapon_factory:get_part_data_by_part_id_from_weapon(mod, factory_id, default_blueprint, equipped_mods) -- Player-Side Rebalances: added equipped_mods
+			part_data = managers.weapon_factory:get_part_data_by_part_id_from_weapon(mod, factory_id, default_blueprint, equipped_mods) -- oryo: added equipped_mods
 
 			if part_data then
 				for _, stat in pairs(WeaponDescription._stats_shown) do
@@ -69,8 +69,7 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 					end
 				end
 
-
-				-- <Player-Side Rebalances
+				-- <oryo
 				if part_data.stats then
 					if part_data.stats.magazine_add then
 						mods_stats.magazine.value = mods_stats.magazine.value + math.floor(part_data.stats.magazine_add)
@@ -80,8 +79,7 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 						mods_stats.totalammo.value = mods_stats.totalammo.value + math.floor(part_data.stats.total_ammo_add)
 					end
 				end
-				-- Player-Side Rebalances>
-
+				-- oryo>
 
 			end
 		end
@@ -178,6 +176,7 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 	return mods_stats
 end
 
+
 function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_stats, mods_stats, equipped_mods)
 	local tweak_stats = tweak_data.weapon.stats
 	local tweak_factory = tweak_data.weapon.factory.parts
@@ -220,7 +219,7 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 					stats = tweak_data.economy.bonuses[tweak_data.blackmarket.weapon_skins[mod.name].bonus].stats
 				}
 			else
-				part_data = managers.weapon_factory:get_part_data_by_part_id_from_weapon(mod.name, factory_id, default_blueprint, equipped_mods) -- Player-Side Rebalances: added equipped_mods
+				part_data = managers.weapon_factory:get_part_data_by_part_id_from_weapon(mod.name, factory_id, default_blueprint, equipped_mods) -- oryo: added equipped_mods
 			end
 		end
 
@@ -229,18 +228,18 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 				if stat.name == "magazine" then
 					local ammo = part_data.stats.extra_ammo
 
-					local addend = part_data.stats.magazine_add or 0 -- Player-Side Rebalances
+					local addend = part_data.stats.magazine_add or 0 -- oryo
 
 					ammo = ammo and ammo + (tweak_data.weapon[weapon_name].stats.extra_ammo or 0)
 					mod[stat.name] = ammo and tweak_data.weapon.stats.extra_ammo[ammo] + addend or 0
-					
+
 					if part_data.custom_stats and part_data.custom_stats.ammo_offset then
 						mod[stat.name] = mod[stat.name] + part_data.custom_stats.ammo_offset
 					end
 				elseif stat.name == "totalammo" then
 					local chosen_index = part_data.stats.total_ammo_mod or 0
 
-					local addend = part_data.stats.total_ammo_add or 0 -- Player-Side Rebalances
+					local addend = part_data.stats.total_ammo_add or 0 -- oryo
 
 					chosen_index = math.clamp(base_stats[stat.name].index + chosen_index, 1, #tweak_stats.total_ammo_mod)
 					mod[stat.name] = base_stats[stat.name].value * tweak_stats.total_ammo_mod[chosen_index] + addend
@@ -256,7 +255,8 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 						mod[stat.name] = base_stats[stat.name].value * (part_data.custom_stats.fire_rate_multiplier - 1)
 					end
 				elseif stat.name == "damage" and part_data.custom_stats and part_data.custom_stats.launcher_grenade then
-					local projectile_type = weapon_tweak.projectile_types and weapon_tweak.projectile_types[part_data.custom_stats.launcher_grenade] or part_data.custom_stats.launcher_grenade
+					local projectile_type = weapon_tweak.projectile_types and weapon_tweak.projectile_types[part_data.custom_stats.launcher_grenade] or
+							                        part_data.custom_stats.launcher_grenade
 					local modifier = modifier_stats and modifier_stats[stat.name] or 1
 					local projectile_tweak = tweak_data.projectiles[projectile_type]
 					mod[stat.name] = projectile_tweak.damage * modifier - base_stats[stat.name].value
@@ -291,7 +291,8 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 						end
 
 						if stat.revert then
-							local max_stat = math.max(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) * tweak_data.gui.stats_present_multiplier
+							local max_stat = math.max(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) *
+									                 tweak_data.gui.stats_present_multiplier
 
 							if stat.revert then
 								max_stat = max_stat - offset
@@ -351,7 +352,8 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 	return mod_stats
 end
 
-function WeaponDescription.get_weapon_ammo_info(weapon_id, extra_ammo, total_ammo_mod, total_ammo_add) -- Player-Side Rebalances: added total_ammo_add
+
+function WeaponDescription.get_weapon_ammo_info(weapon_id, extra_ammo, total_ammo_mod, total_ammo_add) -- oryo: added total_ammo_add
 	local weapon_tweak_data = tweak_data.weapon[weapon_id]
 	local ammo_max_multiplier = managers.player:upgrade_value("player", "extra_ammo_multiplier", 1)
 	local primary_category = weapon_tweak_data.categories[1]
@@ -384,6 +386,7 @@ function WeaponDescription.get_weapon_ammo_info(weapon_id, extra_ammo, total_amm
 			return table.contains(weapon_tweak_data.upgrade_blocks[category], upgrade)
 		end
 
+
 		local clip_base = weapon_tweak_data.CLIP_AMMO_MAX
 		local clip_mod = extra_ammo and tweak_data.weapon.stats.extra_ammo[extra_ammo] or 0
 		local clip_skill = managers.player:upgrade_value(weapon_id, "clip_ammo_increase")
@@ -403,7 +406,7 @@ function WeaponDescription.get_weapon_ammo_info(weapon_id, extra_ammo, total_amm
 
 	local ammo_max_per_clip = get_ammo_max_per_clip(weapon_id)
 	local ammo_max = tweak_data.weapon[weapon_id].AMMO_MAX
-	local ammo_from_mods = ammo_max * (total_ammo_mod and tweak_data.weapon.stats.total_ammo_mod[total_ammo_mod] or 0) + total_ammo_add -- Player-Side Rebalances: added total_ammo_add
+	local ammo_from_mods = ammo_max * (total_ammo_mod and tweak_data.weapon.stats.total_ammo_mod[total_ammo_mod] or 0) + total_ammo_add -- oryo: added total_ammo_add
 	ammo_max = (ammo_max + ammo_from_mods + managers.player:upgrade_value(weapon_id, "clip_amount_increase") * ammo_max_per_clip) * ammo_max_multiplier
 	ammo_max_per_clip = math.min(ammo_max_per_clip, ammo_max)
 	local ammo_data = {
@@ -415,6 +418,7 @@ function WeaponDescription.get_weapon_ammo_info(weapon_id, extra_ammo, total_amm
 
 	return ammo_max_per_clip, ammo_max, ammo_data
 end
+
 
 function WeaponDescription._get_stats(name, category, slot, blueprint)
 	local equipped_mods = nil

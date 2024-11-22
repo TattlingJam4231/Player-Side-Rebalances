@@ -4,11 +4,11 @@ PlayerAction.UnseenStrike = {
 		local co = coroutine.running()
 		local current_time = Application:time()
 		local target_time = Application:time() + min_time
-		local end_time = nil
+		local end_time = nil -- oryo
 		local can_activate = true
 
 		local function on_damage_taken()
-			target_time = end_time and end_time + min_time or Application:time() + min_time
+			target_time = end_time and end_time + min_time or Application:time() + min_time -- oryo
 		end
 
 		player_manager:register_message(Message.OnPlayerDamage, co, on_damage_taken)
@@ -18,7 +18,7 @@ PlayerAction.UnseenStrike = {
 
 			if target_time <= current_time then
 				managers.player:activate_temporary_upgrade("temporary", "unseen_strike")
-				end_time = current_time + max_duration
+				end_time = current_time + max_duration -- oryo
 			end
 
 			coroutine.yield(co)

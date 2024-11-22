@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+<head>
+<title>Player-Side Rebalances v0.8.1 - Patch Notes</title>
+<link rel="stylesheet" type="text/css" href="https://fragtrane.github.io/SuperBLT-Update-Demo/style.css">
+<style type="text/css">
+body, html {
+	background-color: #cfcfcf;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#mainContainer {
+	background-color: #ffffff;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	width: 900px;
+	border-color: #afafaf;
+	border-style: solid;
+	border-width: 1px;
+	padding: 40px;
+}
+</style>
+</head>
+<body>
+<div id="mainContainer" class="markdown-body">
+<h2>Player-Side Rebalances v0.9.0 - Patch Notes</h2>
+<ul>
+	<li><b>NOTE: anything marked with <FONT COLOR="BLUE">[V]</FONT> is a vanilla value/mechanic that is being changed</b></li>
+	<li><b>NOTE: assume walk-in closet for ammo pickup values</b></li>
+	<li>updated for <b>Update 240.7</b></li>
+	<li>fixed viper grenade splash damage healing players and removing armor</li>
+	<li>DoT Changes:</li>
+	<ul>
+		<li><FONT COLOR="BLUE">[V]</FONT> the tick period for DoTs is randomized for each tick between 90% and 110% of the base tick period</li>
+		<li><FONT COLOR="BLUE">[V]</FONT> grace period: <b>1s 🠊 <FONT COLOR="GREEN">0s</FONT></b></li>
+		<li>Poison:</li>
+		<ul>
+			<li><FONT COLOR="BLUE">[V]</FONT> damage normalized to <b>20</b></li>
+			<li><FONT COLOR="BLUE">[V]</FONT> base tick period: <b>0.5s 🠊 <FONT COLOR="RED">1s</FONT></b></li>
+			<li><FONT COLOR="BLUE">[V]</FONT> hurt animation is no longer rng, it plays every 10s when dot is lethal</li>
+			<li><FONT COLOR="BLUE">[V]</FONT> hurt animation(excluding dozers) and tick rate frequency increases based on the ratio between dot damage remaining and enemy health remaining</li>
+			<li><FONT COLOR="BLUE">[V]</FONT> multiple dot applications now stack their duration</b></li>
+		</ul>
+		<li>Fire:</li>
+		<ul>
+			<li><FONT COLOR="BLUE">[V]</FONT> multiple dot applications now stack their damage</b></li>
+		</ul>
+	</ul>
+	<li>Weapon Changes:</li>
+	<ul>
+		<li>fixed penetration stats not functioning properly</li>
+		<li>Shotguns:</li>
+		<ul>
+			<li>Ammo:</li>
+			<ul>
+				<li>Dragon's Breath:</li>
+				<ul>
+					<li>Tier 4:</li>
+					<ul>
+						<li>damage: <b>-40 🠊 <FONT COLOR="RED">-79</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li>damage: <b>20 🠊 <FONT COLOR="GREEN">79</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Pump:</li>
+					<ul>
+						<li>damage: <b>-30 🠊 <FONT COLOR="RED">-56</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li>damage: <b>13 🠊 <FONT COLOR="GREEN">56</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Tier 3:</li>
+					<ul>
+						<li>damage: <b>-30 🠊 <FONT COLOR="RED">-56</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li>damage: <b>13 🠊 <FONT COLOR="GREEN">56</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Tier 2:</li>
+					<ul>
+						<li>damage: <b>0 🠊 <FONT COLOR="RED">-28</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li>damage: <b>10 🠊 <FONT COLOR="GREEN">28</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Tier 1:</li>
+					<ul>
+						<li>damage: <b>0 🠊 <FONT COLOR="RED">-22</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li>damage: <b>10 🠊 <FONT COLOR="GREEN">22</FONT></b></li>
+						</ul>
+					</ul>
+				</ul>
+				<li>Tombstone Slug:</li>
+				<ul>
+					<li><FONT COLOR="BLUE">[V]</FONT> rays: <b>12 🠊 <FONT COLOR="RED">1</FONT></b></li>
+					<li><FONT COLOR="BLUE">[V]</FONT> spread: <b>1 🠊 <FONT COLOR="GREEN">10</FONT></b></li>
+					<li><FONT COLOR="BLUE">[V]</FONT> total ammo mod: <b>-7 🠊 <FONT COLOR="GREEN">0</FONT></b></li>
+					<li><FONT COLOR="BLUE">[V]</FONT> can now penetrate enemies</li>
+					<li><FONT COLOR="BLUE">[V]</FONT> loses 6m of energy on penetration</li>
+					<li><FONT COLOR="BLUE">[V]</FONT> DoT length increased by headshot multipliers</li>
+					<li>Tier 4:</li>
+					<ul>
+						<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>-4 🠊 <FONT COLOR="RED">-79</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>10 ticks 🠊 <FONT COLOR="GREEN">25 ticks</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Pump:</li>
+					<ul>
+						<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>-4 🠊 <FONT COLOR="RED">-56</FONT></b></li>
+						<li><FONT COLOR="BLUE">[V]</FONT> loses 4m of energy on penetration</li>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>10 ticks 🠊 <FONT COLOR="GREEN">18 ticks</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Tier 3:</li>
+					<ul>
+						<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>-4 🠊 <FONT COLOR="RED">-56</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>10 ticks 🠊 <FONT COLOR="GREEN">18 ticks</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Tier 2:</li>
+					<ul>
+						<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>-4 🠊 <FONT COLOR="RED">-28</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>10 ticks 🠊 <FONT COLOR="RED">9 ticks</FONT></b></li>
+						</ul>
+					</ul>
+					<li>Tier 1:</li>
+					<ul>
+						<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>-4 🠊 <FONT COLOR="RED">-22</FONT></b></li>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>10 ticks 🠊 <FONT COLOR="RED">7 ticks</FONT></b></li>
+						</ul>
+					</ul>
+				</ul>
+			</ul>
+		</ul>
+		<li>Snipers:</li>
+		<ul>
+			<li>Tier 5:</li>
+			<ul>
+				<li>ammo pickup:</li>
+				<ul>
+					<li>min: <b>0.05 🠊 <FONT COLOR="GREEN">0.09</FONT></b></li>
+					<li>max: <b>0.55 🠊 <FONT COLOR="RED">0.13</FONT></b></li>
+				</ul>
+			</ul>
+		</ul>
+		<li>Genade Launchers:</li>
+		<ul>
+			<li>Tier 2:</li>
+			<ul>
+				<li>ammo pickup:</li>
+				<ul>
+					<li>min: <b>0.06 🠊 <FONT COLOR="GREEN">0.15</FONT></b></li>
+					<li>max: <b>0.56 🠊 <FONT COLOR="RED">0.18</FONT></b></li>
+				</ul>
+			</ul>
+			<li>Tier 1:</li>
+			<ul>
+				<li>ammo pickup:</li>
+				<ul>
+					<li>min: <b>0.08 🠊 <FONT COLOR="GREEN">0.26</FONT></b></li>
+					<li>max: <b>0.58 🠊 <FONT COLOR="RED">0.31</FONT></b></li>
+				</ul>
+				<li>Basilisk 3V:</li>
+				<ul>
+					<li>ammo pickup:</li>
+					<ul>
+						<li>min: <b>0.08 🠊 <FONT COLOR="GREEN">0.36</FONT></b></li>
+						<li>max: <b>0.58 🠊 <FONT COLOR="RED">0.44</FONT></b></li>
+					</ul>
+				</ul>
+			</ul>
+			<li>Ammo:</li>
+			<ul>
+				<li>Incendiary Grenade:</li>
+				<ul>
+					<li><FONT COLOR="BLUE">[V]</FONT> ground fire dot trigger chance: <b>35% 🠊 <FONT COLOR="GREEN">100%</FONT></b></li>
+					<li>Projectile:</li>
+					<ul>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>210 🠊 <FONT COLOR="RED">80</FONT></b></li>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>12 ticks 🠊 <FONT COLOR="RED">6 ticks</FONT></b></li>
+							<li>Arbiter:</li>
+							<ul>
+								<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>210 🠊 <FONT COLOR="RED">80</FONT></b></li>
+								<li><FONT COLOR="BLUE">[V]</FONT> length: <b>6 ticks 🠊 <FONT COLOR="RED">3 ticks</FONT></b></li>
+							</ul>
+							<li>Basilisk 3V:</li>
+							<ul>
+								<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>210 🠊 <FONT COLOR="RED">80</FONT></b></li>
+								<li><FONT COLOR="BLUE">[V]</FONT> length: <b>12 ticks 🠊 <FONT COLOR="RED">3 ticks</FONT></b></li>
+							</ul>
+						</ul>
+					</ul>
+					<li>Ground Fire:</li>
+					<ul>
+						<li>dot:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> dot trigger chance: <b>35% 🠊 <FONT COLOR="GREEN">100%</FONT></b></li>
+							<li><FONT COLOR="BLUE">[V]</FONT> added 1.5 second dot re-application period</b></li>
+							<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>130 🠊 <FONT COLOR="RED">80</FONT></b></li>
+						</ul>
+					</ul>
+				</ul>
+				<li>Viper Grenade:</li>
+				<ul>
+					<li>Projectile:</li>
+					<ul>
+						<li><FONT COLOR="BLUE">[V]</FONT> damage modifier: <b>-100 🠊 <FONT COLOR="RED">-75%</FONT></b></li>
+					</ul>
+					<li>Gas Cloud:</li>
+					<ul>
+						<li>DoT:</li>
+						<ul>
+							<li><FONT COLOR="BLUE">[V]</FONT> added 1 second dot re-application period</b></li>
+							<li><FONT COLOR="BLUE">[V]</FONT> length: <b>60 ticks 🠊 <FONT COLOR="RED">32 ticks</FONT></b></li>
+							<li>Arbiter:</li>
+							<ul>
+								<li><FONT COLOR="BLUE">[V]</FONT> damage: <b>8 🠊 <FONT COLOR="GREEN">10</FONT></b></li>
+								<li><FONT COLOR="BLUE">[V]</FONT> length: <b>20 ticks 🠊 <FONT COLOR="RED">16 ticks</FONT></b></li>
+							</ul>
+							<li>Basilisk 3V:</li>
+							<ul>
+								<li><FONT COLOR="BLUE">[V]</FONT> length: <b>60 ticks 🠊 <FONT COLOR="RED">16 ticks</FONT></b></li>
+							</ul>
+						</ul>
+					</ul>
+				</ul>
+			</ul>
+		</ul>
+		<li>Rocket Launchers:</li>
+		<ul>
+			<li>Commando 101:</li>
+			<ul>
+				<li>ammo pickup:</li>
+				<ul>
+					<li>min: <b>0.02 🠊 <FONT COLOR="GREEN">0.03</FONT></b></li>
+					<li>max: <b>0.52 🠊 <FONT COLOR="RED">0.05</FONT></b></li>
+				</ul>
+			</ul>
+			<li>HRL-7:</li>
+			<ul>
+				<li>ammo pickup:</li>
+				<ul>
+					<li>max: <b>0.51 🠊 <FONT COLOR="RED">0.03</FONT></b></li>
+				</ul>
+			</ul>
+		</ul>
+		<li>Melee:</li>
+		<ul>
+			<li>The Motherforker:</li>
+			<ul>
+				<li>damage: <b>30 🠊 <FONT COLOR="RED">15</FONT></b></li>
+				<li>DoT:</li>
+				<ul>
+					<li>DoT trigger chance: <b>30% 🠊 <FONT COLOR="GREEN">50%</FONT></b></li>
+					<li>length: <b>3 ticks 🠊 <FONT COLOR="GREEN">6 ticks</FONT></b></li>
+					<li>multiple applications no longer stack their duration</b></li>
+					<li>charged stats:</li>
+					<ul>
+						<li>DoT trigger chance: <b>70% 🠊 <FONT COLOR="GREEN">100%</FONT></b></li>
+						<li>damage: <b>10 🠊 <FONT COLOR="GREEN">40</FONT></b></li>
+					</ul>
+				</ul>
+			</ul>
+			<li>Spatula:</li>
+			<ul>
+				<li>damage: <b>30 🠊 <FONT COLOR="RED">15</FONT></b></li>
+				<li>charged damage: <b>30 🠊 <FONT COLOR="RED">15</FONT></b></li>
+				<li>DoT:</li>
+				<ul>
+					<li>DoT trigger chance: <b>50% 🠊 <FONT COLOR="GREEN">100%</FONT></b></li>
+					<li>damage: <b>10 🠊 <FONT COLOR="GREEN">15</FONT></b></li>
+					<li>length: <b>3 ticks 🠊 <FONT COLOR="RED">2 ticks</FONT></b></li>
+					<li>multiple applications no longer stack their duration</b></li>
+					<li>charged stats:</li>
+					<ul>
+						<li>damage: <b>10 🠊 <FONT COLOR="GREEN">50</FONT></b></li>
+						<li>length: <b>9 ticks 🠊 <FONT COLOR="RED">2 ticks</FONT></b></li>
+					</ul>
+				</ul>
+			</ul>
+			<li>You're Mine:</li>
+			<ul>
+				<li>DoT:</li>
+				<ul>
+					<li>DoT trigger chance: <b>50% 🠊 <FONT COLOR="GREEN">100%</FONT></b></li>
+					<li>damage: <b>40 🠊 <FONT COLOR="GREEN">10</FONT></b></li>
+					<li>length: <b>1 tick 🠊 <FONT COLOR="RED">2 ticks</FONT></b></li>
+					<li>multiple applications no longer stack their duration</b></li>
+					<li>charged stats:</li>
+					<ul>
+						<li>damage: <b>60 🠊 <FONT COLOR="GREEN">35</FONT></b></li>
+						<li>length: <b>2 ticks 🠊 <FONT COLOR="RED">4 ticks</FONT></b></li>
+					</ul>
+				</ul>
+			</ul>
+			<li>Kunai Knife:</li>
+			<ul>
+				<li>damage: <b>15 🠊 <FONT COLOR="RED">20</FONT></b></li>
+				<li>charged damage: <b>60 🠊 <FONT COLOR="RED">80</FONT></b></li>
+				<li>DoT:</li>
+				<ul>
+					<li>length: <b>3 tick 🠊 <FONT COLOR="RED">2 ticks</FONT></b></li>
+					<li>charged length: <b>3 ticks 🠊 <FONT COLOR="RED">8 ticks</FONT></b></li>
+				</ul>
+			</ul>
+			<li>Stainless Steel Syringe:</li>
+			<ul>
+				<li>damage: <b>15 🠊 <FONT COLOR="RED">20</FONT></b></li>
+				<li>charged damage: <b>60 🠊 <FONT COLOR="RED">80</FONT></b></li>
+				<li>DoT:</li>
+				<ul>
+					<li>length: <b>3 tick 🠊 <FONT COLOR="RED">2 ticks</FONT></b></li>
+					<li>charged length: <b>3 ticks 🠊 <FONT COLOR="RED">8 ticks</FONT></b></li>
+				</ul>
+			</ul>
+		</ul>
+		<li>Throwables:</li>
+		<ul>
+			<li>Viper Grenade:</li>
+			<ul>
+				<li>damage: <b>1000 🠊 <FONT COLOR="RED">250</FONT></b></li>
+				<li>DoT:</li>
+				<ul>
+					<li>length: <b>60 ticks 🠊 <FONT COLOR="RED">12 ticks</FONT></b></li>
+				</ul>
+			</ul>
+		</ul>
+		<li>Flamethrower:</li>
+		<ul>
+			<li>DoT:</li>
+			<ul>
+				<li>damage: <b>18 🠊 <FONT COLOR="RED">10</FONT></b></li>
+				<li>length: <b>3.5s 🠊 <FONT COLOR="RED">1.5s</FONT></b></li>
+				<li>no longer speeds up tick rate with more applications</b></li>
+			</ul>
+		</ul>
+		<li>MA-17 Flamethrower:</li>
+		<ul>
+			<li>DoT:</li>
+			<ul>
+				<li>damage: <b>18 🠊 <FONT COLOR="RED">8</FONT></b></li>
+				<li>length: <b>3.5s 🠊 <FONT COLOR="RED">1.5s</FONT></b></li>
+				<li>no longer speeds up tick rate with more applications</b></li>
+			</ul>
+		</ul>
+	</ul>
+	<li>Enemy Changes:</li>
+	<ul>
+		<li>Medic:</li>
+		<ul>
+			<li><FONT COLOR="BLUE">[V]</FONT> can no longer heal other medics</li>
+			<li><FONT COLOR="BLUE">[V]</FONT> heal now requires line of sight</li>
+			<li><FONT COLOR="BLUE">[V]</FONT> no longer immune to the poison hurt animation</li>
+		</ul>
+		<li>FBI Heavy Swat:</li>
+		<ul>
+			<li><FONT COLOR="BLUE">[V]</FONT> removed explosion resistance</li>
+		</ul>
+		<li>Dozer:</li>
+		<ul>
+			<li><FONT COLOR="BLUE">[V]</FONT> no longer immune to the poison hurt animation</li>
+		</ul>
+	</ul>
+</ul>
+<p><i>2024-11-22 - Update 240.7 - <a href="https://tattlingjam4231.github.io/Player-Side-Rebalances/patchnotes/v0.8.1.html">previous</a> - <a href="https://tattlingjam4231.github.io/Player-Side-Rebalances/patchnotes/changelog.html">changelog</a></i></p>
+</div>
+</body>
+</html>

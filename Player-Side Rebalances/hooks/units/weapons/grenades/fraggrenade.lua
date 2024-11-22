@@ -5,12 +5,12 @@ function FragGrenade:_setup_from_tweak_data()
 	self._mass_look_up_modifier = tweak_entry.mass_look_up_modifier
     self._range = tweak_entry.range
 
-    -- <Player-Side Rebalances: check for falloff start to prevent using table instead of number
+    -- <oryo: check for falloff start to prevent using table instead of number
     local range = self._range
     if type(range) == "table" then
         range = range.max
     end
-    -- Player-Side Rebalances>
+    -- oryo>
 
 	self._effect_name = tweak_entry.effect_name or "effects/payday2/particles/explosions/grenade_explosion"
 	self._curve_pow = tweak_entry.curve_pow or 3

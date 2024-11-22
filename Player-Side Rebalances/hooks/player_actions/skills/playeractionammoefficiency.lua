@@ -21,7 +21,7 @@ PlayerAction.AmmoEfficiency = {
 			time = Application:time()
 			local weapon_unit = player_manager:equipped_weapon_unit()
 
-			if weapon_unit and (weapon_unit:base():fire_mode() == "auto" or not weapon_unit:base():is_category("smg", "assault_rifle", "snp")) then -- Player-Side Rebalances: burst marker
+			if weapon_unit and (weapon_unit:base():fire_mode() == "auto" or not weapon_unit:base():is_category("smg", "assault_rifle", "snp")) then -- oryo: burst marker
 				break
 			end
 

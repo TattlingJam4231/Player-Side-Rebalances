@@ -39,7 +39,7 @@ function ExplosionManager:_damage_characters(detect_results, params, variant, da
 
 	local dir, len, type, count_table, hit_body = nil
 
-    local units_hit = {}
+	local units_hit = {}
 	for key, unit in pairs(detect_results.characters_hit) do
 		hit_body = get_first_body_hit(detect_results.bodies_hit[key])
 		dir = hit_body and hit_body:center_of_mass() or alive(unit) and unit:position()
@@ -57,7 +57,7 @@ function ExplosionManager:_damage_characters(detect_results, params, variant, da
 				}
 
 				if damage > 0 then
-                    action_data.damage = self:get_explosion_falloff_oryo(damage, range, curve_pow, len) -- Player-Side Rebalances: falloff start
+					action_data.damage = self:get_explosion_falloff_oryo(damage, range, curve_pow, len) -- oryo: falloff start
 				else
 					action_data.damage = 0
 				end
@@ -125,7 +125,7 @@ function ExplosionManager:_damage_bodies(detect_results, params)
 			if apply_dmg then
 				local dir = hit_body:center_of_mass()
 				local len = mvector3.direction(dir, hit_pos, dir)
-				local prop_damage = self:get_explosion_falloff_oryo(damage, range, curve_pow, len) -- Player-Side Rebalances: falloff start
+				local prop_damage = self:get_explosion_falloff_oryo(damage, range, curve_pow, len) -- oryo: falloff start
 				prop_damage = math.max(prop_damage, math.min(damage, 1))
 
 				self:_apply_body_damage(true, hit_body, user_unit, dir, prop_damage)
@@ -147,7 +147,7 @@ function ExplosionManager:client_damage_and_push(position, normal, user_unit, dm
 		if apply_dmg then
 			dir = hit_body:center_of_mass()
 			len = mvector3.direction(dir, position, dir)
-			damage = self:get_explosion_falloff_oryo(dmg, range, curve_pow, len) -- Player-Side Rebalances: falloff start
+			damage = self:get_explosion_falloff_oryo(dmg, range, curve_pow, len) -- oryo: falloff start
 			damage = math.max(damage, math.min(dmg, 1))
 
 			self:_apply_body_damage(false, hit_body, user_unit, dir, damage)
@@ -157,41 +157,43 @@ function ExplosionManager:client_damage_and_push(position, normal, user_unit, dm
 	self:units_to_push(units_to_push, position, range)
 end
 
--- <Player-Side Rebalances: added new explosion functionality, can set a range at which falloff starts with range.falloff_start
+-- <oryo: added new explosion functionality, can set a range at which falloff starts with range.falloff_start
 function ExplosionManager:get_explosion_falloff_oryo(damage, range, curve_pow, distance)
-    local falloff_start = 0
-    if type(range) == "table" then
-        falloff_start = range.falloff_start
-        range = range.max
-    end
-    return math.max(damage * math.pow(math.clamp(1 - (distance - falloff_start)/ (math.max(range - falloff_start, 1)), 0, 1), curve_pow), 1)
+	local falloff_start = 0
+	if type(range) == "table" then
+		falloff_start = range.falloff_start
+		range = range.max
+	end
+    
+    local damage = math.max(damage * math.pow(math.clamp(1 - ((distance - falloff_start) / (math.max(range - falloff_start, 1))), 0, 1), curve_pow), 1)
+	
+    return damage
 end
--- Player-Side Rebalances>
+-- oryo>
 
-
--- <Player-Side Rebalances: check for falloff start to prevent using table instead of number
+-- <oryo: check for falloff start to prevent using table instead of number
 local units_to_push_original = ExplosionManager.units_to_push
 function ExplosionManager:units_to_push(units_to_push, hit_pos, range)
-    if type(range) == "table" then
-        range = range.max
-    end
-    units_to_push_original(self, units_to_push, hit_pos, range)
+	if type(range) == "table" then
+		range = range.max
+	end
+	units_to_push_original(self, units_to_push, hit_pos, range)
 end
 
 local player_feedback_original = ExplosionManager.player_feedback
 function ExplosionManager:player_feedback(position, normal, range, custom_params)
-    if type(range) == "table" then
-        range = range.max
-    end
-    player_feedback_original(self, position, normal, range, custom_params)
+	if type(range) == "table" then
+		range = range.max
+	end
+	player_feedback_original(self, position, normal, range, custom_params)
 end
 
 local _detect_hits_original = ExplosionManager._detect_hits
 function ExplosionManager:_detect_hits(params)
-    local params = deep_clone(params)
-    if type(params.range) == "table" then
-        params.range = params.range.max
-    end
-    return _detect_hits_original(self, params)
+	local params = deep_clone(params)
+	if type(params.range) == "table" then
+		params.range = params.range.max
+	end
+	return _detect_hits_original(self, params)
 end
--- Player-Side Rebalances>
+-- oryo>

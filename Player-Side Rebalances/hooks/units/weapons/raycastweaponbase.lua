@@ -1,23 +1,55 @@
+local mvec3_set = mvector3.set
+local mvec3_add = mvector3.add
+local mvec3_dot = mvector3.dot
+local mvec3_sub = mvector3.subtract
+local mvec3_mul = mvector3.multiply
+local mvec3_norm = mvector3.normalize
+local mvec3_dir = mvector3.direction
+local mvec3_set_l = mvector3.set_length
+local mvec3_len = mvector3.length
+local mvec3_len_sq = mvector3.length_sq
+local math_clamp = math.clamp
+local math_lerp = math.lerp
+local math_acos = math.acos
+local math_pow = math.pow
+local tmp_vec1 = Vector3()
+local tmp_vec2 = Vector3()
+local tmp_rot1 = Rotation()
+
+
 function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	setup_data = setup_data or {}
 	local ray_hits = nil
 	local hit_enemy = false
+	local ignore_unit = setup_data.ignore_units or {}
+	local enemy_mask = setup_data.enemy_mask --[[ managers.slot:get_mask("enemies") ]]
+	local bullet_slotmask = setup_data.bullet_slotmask or managers.slot:get_mask("bullet_impact_targets")
+
+	if setup_data.stop_on_impact then
+		ray_hits = {}
+		local hit = World:raycast("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit)
+
+		if hit then
+			table.insert(ray_hits, hit)
+
+			hit_enemy = hit.unit:in_slot(enemy_mask)
+		end
+
+		return ray_hits, hit_enemy, hit_enemy and {
+			[hit.unit:key()] = hit.unit
+		} or nil
+	end
+	
 	local can_shoot_through_wall = setup_data.can_shoot_through_wall
 	local can_shoot_through_shield = setup_data.can_shoot_through_shield
 	local can_shoot_through_enemy = setup_data.can_shoot_through_enemy
-	local bullet_slotmask = setup_data.bullet_slotmask or managers.slot:get_mask("bullet_impact_targets")
-	local enemy_mask = managers.slot:get_mask("enemies")
-	local wall_mask = managers.slot:get_mask("world_geometry", "vehicles")
-	local shield_mask = managers.slot:get_mask("enemy_shield_check")
+	local wall_mask = setup_data.wall_mask --[[ managers.slot:get_mask("world_geometry", "vehicles") ]]
+	local shield_mask = setup_data.shield_mask --[[ managers.slot:get_mask("enemy_shield_check") ]]
 	local ai_vision_ids = Idstring("ai_vision")
 	local bulletproof_ids = Idstring("bulletproof")
-	local ignore_unit = setup_data.ignore_units or {}
-	
-	local units_hit = {}
-	local unique_hits = {}
 
 
-	-- <Player-Side Rebalances
+	-- <oryo
 	local weapon_unit = setup_data.weapon_unit
 	local armor_piercing =  setup_data.armor_piercing
 	local pierce_armor = armor_piercing
@@ -26,15 +58,15 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	local can_shoot_through_armor_plating = setup_data.can_shoot_through_armor_plating
 
 	local max_enemy_penetration_distance = setup_data.max_enemy_penetration_distance
-	local enemy_pen_energy_loss = setup_data._enemy_pen_energy_loss
+	local enemy_pen_energy_loss = setup_data.enemy_pen_energy_loss
 	
 	local max_wall_penetration_distance = setup_data.max_wall_penetration_distance
-	local wall_pen_energy_loss = setup_data._enemy_pen_energy_loss
+	local wall_pen_energy_loss = setup_data.wall_pen_energy_loss
 	
-	local max_shield_penetration_distance = setup_data._max_shield_penetration_distance
-	local shield_pen_energy_loss = setup_data._shield_pen_energy_loss
+	local max_shield_penetration_distance = setup_data.max_shield_penetration_distance
+	local shield_pen_energy_loss = setup_data.shield_pen_energy_loss
 	
-	local max_penetrations = setup_data._max_penetrations
+	local max_penetrations = setup_data.max_penetrations
 	
 	local penetrations = 0
 	local enemy_penetrations = 0
@@ -60,7 +92,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 		end
 
 		ray_hits = World:raycast_wall("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit, "thickness", 40, "thickness_mask", wall_mask)
-	-- Player-Side Rebalances>
+	-- oryo>
 
 
 	elseif can_shoot_through_wall then
@@ -69,12 +101,23 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 		ray_hits = World:raycast_all("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit)
 	end
 	
+	
+	local unique_hits = {}
+	local enemies_hit = {}
+	local unit, u_key, is_enemy = nil
+	local units_hit = {}
+	local in_slot_func = Unit.in_slot
+	local has_ray_type_func = Body.has_ray_type
+
 	for i, hit in ipairs(ray_hits) do
-		if not units_hit[hit.unit:key()] then
-			units_hit[hit.unit:key()] = true
+		unit = hit.unit
+		u_key = unit:key()
+
+		if not units_hit[u_key] then
+			units_hit[u_key] = true
 
 
-			-- <Player-Side Rebalances
+			-- <oryo
 			hit.distance = hit.distance + energy_loss
 
 			if hit.body:name() == Idstring("body_plate") then
@@ -87,17 +130,23 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 				end
 				hit.armor_piercing = pierce_armor
 			end
-			-- Player-Side Rebalances>
+			-- oryo>
 
 
 			unique_hits[#unique_hits + 1] = hit
 			hit.hit_position = hit.position
 			hit_enemy = hit_enemy or hit.unit:in_slot(enemy_mask)
-			local weak_body = hit.body:has_ray_type(ai_vision_ids)
-			weak_body = weak_body or hit.body:has_ray_type(bulletproof_ids)
+			is_enemy = in_slot_func(unit, enemy_mask)
+
+			if is_enemy then
+				enemies_hit[u_key] = unit
+				hit_enemy = true
+			end
+			local weak_body = has_ray_type_func(hit.body, ai_vision_ids)
+			weak_body = weak_body or has_ray_type_func(hit.body, bulletproof_ids)
 			
 
-			-- <Player-Side Rebalances
+			-- <oryo
 			if can_shoot_through_armor_plating then
 				--nothing
 			elseif hit_enemy then
@@ -118,7 +167,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 				if enemy_pen_energy_loss then
 					energy_loss = energy_loss + enemy_pen_energy_loss
 				end
-			elseif hit.unit:in_slot(wall_mask) and weak_body then
+			elseif in_slot_func(unit, wall_mask) and weak_body then
 				if not can_shoot_through_wall then
 					break
 				elseif max_wall_penetration_distance and max_wall_penetration_distance < hit.distance then
@@ -150,7 +199,7 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 				if wall_pen_energy_loss then
 					energy_loss = energy_loss + wall_pen_energy_loss
 				end
-			elseif hit.unit:in_slot(shield_mask) then
+			elseif in_slot_func(unit, shield_mask) then
 				if not can_shoot_through_shield then
 					break
 				elseif max_shield_penetration_distance and max_shield_penetration_distance < hit.distance then
@@ -167,25 +216,30 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 					energy_loss = energy_loss + shield_pen_energy_loss
 				end
 			end
-			-- Player-Side Rebalances>
+			-- oryo>
 
 
 		end
 	end
 
-	return unique_hits, hit_enemy
+	return unique_hits, hit_enemy, hit_enemy and enemies_hit or nil
 end
+
 
 function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	local setup_data = {
+		stop_on_impact = self:bullet_class().stop_on_impact,
 		can_shoot_through_wall = self:can_shoot_through_wall(),
 		can_shoot_through_shield = self:can_shoot_through_shield(),
 		can_shoot_through_enemy = self:can_shoot_through_enemy(),
 		bullet_slotmask = self._bullet_slotmask,
+		enemy_mask = self.enemy_mask,
+		wall_mask = self.wall_vehicle_mask,
+		shield_mask = self.shield_mask,
 		ignore_units = self._setup.ignore_units,
 		
 		
-		-- <Player-Side Rebalances
+		-- <oryo
 		weapon_unit = self._unit,
 		armor_piercing = self._unit:base()._use_armor_piercing or nil,
 
@@ -194,17 +248,17 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 		max_enemy_penetration_distance = self._max_enemy_penetration_distance or self._max_penetration_distance,
 		enemy_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
 	
-		max_wall_penetration_distance = self.max_wall_penetration_distance or self._max_penetration_distance,
-		wall_pen_energy_loss = self._enemy_pen_energy_loss or self._pen_energy_loss,
+		max_wall_penetration_distance = self._max_wall_penetration_distance or self._max_penetration_distance,
+		wall_pen_energy_loss = self._wall_pen_energy_loss or self._pen_energy_loss,
 	
 		max_shield_penetration_distance = self._max_shield_penetration_distance or self._max_penetration_distance,
 		shield_pen_energy_loss = self._shield_pen_energy_loss or self._pen_energy_loss,
 	
 		max_penetrations = self._max_penetrations
-		-- Player-Side Rebalances>
+		-- oryo>
 	}
 
-	-- <Player-Side Rebalances
+	-- <oryo
 	local armor_pierce_value = 0
 	if not setup_data.armor_piercing then
 		local weapon_unit = setup_data.weapon_unit
@@ -237,189 +291,121 @@ function RaycastWeaponBase:_collect_hits(from, to, user_unit)
 	end
 
 	setup_data.armor_pierce_value = armor_pierce_value
-	-- Player-Side Rebalances>
+	-- oryo>
 	
 
 	return RaycastWeaponBase.collect_hits(from, to, setup_data)
 end
+
+
+local mvec_to = Vector3()
+local mvec_right_ax = Vector3()
+local mvec_up_ay = Vector3()
+local mvec_ax = Vector3()
+local mvec_ay = Vector3()
+local mvec_spread_direction = Vector3()
 
 function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul)
 	if self:gadget_overrides_weapon_functions() then
 		return self:gadget_function_override("_fire_raycast", self, user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul)
 	end
 	local result = {}
-	local spread_x, spread_y = self:_get_spread(user_unit)
 	local ray_distance = self:weapon_range()
-	local right = direction:cross(Vector3(0, 0, 1)):normalized()
-	local up = direction:cross(right):normalized()
+	local spread_x, spread_y = self:_get_spread(user_unit)
+	spread_y = spread_y or spread_x
+	spread_mul = spread_mul or 1
+
+	mvector3.cross(mvec_right_ax, direction, math.UP)
+	mvec3_norm(mvec_right_ax)
+	mvector3.cross(mvec_up_ay, direction, mvec_right_ax)
+	mvec3_norm(mvec_up_ay)
+	mvec3_set(mvec_spread_direction, direction)
+
 	local theta = math.random() * 360
-	local ax = math.sin(theta) * math.random() * spread_x * (spread_mul or 1)
-	local ay = math.cos(theta) * math.random() * spread_y * (spread_mul or 1)
 
-	local mvec_to = Vector3()
-	local mvec_spread_direction = Vector3()
-	mvector3.set(mvec_spread_direction, direction)
-	mvector3.add(mvec_spread_direction, right * math.rad(ax))
-	mvector3.add(mvec_spread_direction, up * math.rad(ay))
-	mvector3.set(mvec_to, mvec_spread_direction)
-	mvector3.multiply(mvec_to, ray_distance)
-	mvector3.add(mvec_to, from_pos)
+	mvec3_mul(mvec_right_ax, math.rad(math.sin(theta) * math.random() * spread_x * spread_mul))
+	mvec3_mul(mvec_up_ay, math.rad(math.cos(theta) * math.random() * spread_y * spread_mul))
+	mvec3_add(mvec_spread_direction, mvec_right_ax)
+	mvec3_add(mvec_spread_direction, mvec_up_ay)
+	mvec3_set(mvec_to, mvec_spread_direction)
+	mvec3_mul(mvec_to, ray_distance)
+	mvec3_add(mvec_to, from_pos)
 
-	local base_damage = self:_get_current_damage(dmg_mul)
-	local damage = 0
-	local ray_hits, hit_enemy = self:_collect_hits(from_pos, mvec_to, user_unit) -- Player-Side Rebalances: added user_unit
-	local hit_anyone = false
-	local auto_hit_candidate, suppression_enemies = self:check_autoaim(from_pos, direction)
+	local ray_hits, hit_enemy, enemies_hit = self:_collect_hits(from_pos, mvec_to, user_unit) -- oryo: added user_unit
 
-	if suppression_enemies and self._suppression then
-		result.enemies_in_cone = suppression_enemies
-	end
-
-	if self._autoaim then
+	if self._autoaim and self._autohit_data then
 		local weight = 0.1
-
-		if auto_hit_candidate and not hit_enemy then
-			local autohit_chance = 1 - math.clamp((self._autohit_current - self._autohit_data.MIN_RATIO) / (self._autohit_data.MAX_RATIO - self._autohit_data.MIN_RATIO), 0, 1)
-
-			if autohit_mul then
-				autohit_chance = autohit_chance * autohit_mul
-			end
-
-			if math.random() < autohit_chance then
-				self._autohit_current = (self._autohit_current + weight) / (1 + weight)
-
-				mvector3.set(mvec_to, from_pos)
-				mvector3.add_scaled(mvec_to, auto_hit_candidate.ray, ray_distance)
-
-				ray_hits, hit_enemy = self:_collect_hits(from_pos, mvec_to, user_unit) -- Player-Side Rebalances: added user_unit
-			end
-		end
 
 		if hit_enemy then
 			self._autohit_current = (self._autohit_current + weight) / (1 + weight)
-		elseif auto_hit_candidate then
-			self._autohit_current = self._autohit_current / (1 + weight)
+		else
+			local auto_hit_candidate, enemies_to_suppress = self:check_autoaim(from_pos, direction, nil, nil, nil, true)
+			result.enemies_in_cone = enemies_to_suppress or false
+
+			if auto_hit_candidate then
+				local autohit_chance = self:get_current_autohit_chance_for_roll()
+
+				if autohit_mul then
+					autohit_chance = autohit_chance * autohit_mul
+				end
+
+				if math.random() < autohit_chance then
+					self._autohit_current = (self._autohit_current + weight) / (1 + weight)
+
+					mvec3_set(mvec_spread_direction, auto_hit_candidate.ray)
+					mvec3_set(mvec_to, mvec_spread_direction)
+					mvec3_mul(mvec_to, ray_distance)
+					mvec3_add(mvec_to, from_pos)
+
+					ray_hits, hit_enemy, enemies_hit = self:_collect_hits(from_pos, mvec_to, user_unit) -- oryo: added user_unit
+				end
+			end
+
+			if hit_enemy then
+				self._autohit_current = (self._autohit_current + weight) / (1 + weight)
+			elseif auto_hit_candidate then
+				self._autohit_current = self._autohit_current / (1 + weight)
+			end
 		end
 	end
 
 	local hit_count = 0
+	local hit_anyone = false
 	local cop_kill_count = 0
 	local hit_through_wall = false
 	local hit_through_shield = false
-	local hit_result = nil
-	local extra_collisions = self.extra_collisions and self:extra_collisions()
+	local is_civ_f = CopDamage.is_civilian
+	local damage = self:_get_current_damage(dmg_mul)
 
 	for _, hit in ipairs(ray_hits) do
-		damage = self:get_damage_falloff(base_damage, hit, user_unit)
-		hit_result = nil
+		local dmg = self:get_damage_falloff(damage, hit, user_unit)
 
-		if damage > 0 then
-			hit_result = self._bullet_class:on_collision(hit, self._unit, user_unit, damage)
+		if dmg > 0 then
+			local hit_result = self:bullet_class():on_collision(hit, self._unit, user_unit, dmg)
+			hit_through_wall = hit_through_wall or hit.unit:in_slot(self.wall_mask)
+			hit_through_shield = hit_through_shield or hit.unit:in_slot(self.shield_mask) and alive(hit.unit:parent())
 
-			if extra_collisions then
-				for idx, extra_col_data in ipairs(extra_collisions) do
-					if alive(hit.unit) then
-						extra_col_data.bullet_class:on_collision(hit, self._unit, user_unit, damage * (extra_col_data.dmg_mul or 1))
+			if hit_result then
+				hit.damage_result = hit_result
+				hit_anyone = true
+				hit_count = hit_count + 1
+
+				if hit_result.type == "death" then
+					local unit_base = hit.unit:base()
+					local unit_type = unit_base and unit_base._tweak_table
+					local is_civilian = unit_type and is_civ_f(unit_type)
+
+					if not is_civilian then
+						cop_kill_count = cop_kill_count + 1
 					end
-				end
-			end
-		end
 
-		if hit_result and hit_result.type == "death" then
-			local unit_type = hit.unit:base() and hit.unit:base()._tweak_table
-			local is_civilian = unit_type and CopDamage.is_civilian(unit_type)
-
-			if not is_civilian then
-				cop_kill_count = cop_kill_count + 1
-			end
-
-			if self:is_category(tweak_data.achievement.easy_as_breathing.weapon_type) and not is_civilian then
-				self._kills_without_releasing_trigger = (self._kills_without_releasing_trigger or 0) + 1
-
-				if tweak_data.achievement.easy_as_breathing.count <= self._kills_without_releasing_trigger then
-					managers.achievment:award(tweak_data.achievement.easy_as_breathing.award)
-				end
-			end
-		end
-
-		if hit_result then
-			hit.damage_result = hit_result
-			hit_anyone = true
-			hit_count = hit_count + 1
-		end
-
-		if hit.unit:in_slot(managers.slot:get_mask("world_geometry")) then
-			hit_through_wall = true
-		elseif hit.unit:in_slot(managers.slot:get_mask("enemy_shield_check")) then
-			hit_through_shield = hit_through_shield or alive(hit.unit:parent())
-		end
-
-		if hit_result and hit_result.type == "death" and cop_kill_count > 0 then
-			local unit_type = hit.unit:base() and hit.unit:base()._tweak_table
-			local multi_kill, enemy_pass, obstacle_pass, weapon_pass, weapons_pass, weapon_type_pass = nil
-
-			for achievement, achievement_data in pairs(tweak_data.achievement.sniper_kill_achievements) do
-				multi_kill = not achievement_data.multi_kill or cop_kill_count == achievement_data.multi_kill
-				enemy_pass = not achievement_data.enemy or unit_type == achievement_data.enemy
-				obstacle_pass = not achievement_data.obstacle or achievement_data.obstacle == "wall" and hit_through_wall or achievement_data.obstacle == "shield" and hit_through_shield
-				weapon_pass = not achievement_data.weapon or self._name_id == achievement_data.weapon
-				weapons_pass = not achievement_data.weapons or table.contains(achievement_data.weapons, self._name_id)
-				weapon_type_pass = not achievement_data.weapon_type or self:is_category(achievement_data.weapon_type)
-
-				if multi_kill and enemy_pass and obstacle_pass and weapon_pass and weapons_pass and weapon_type_pass then
-					if achievement_data.stat then
-						managers.achievment:award_progress(achievement_data.stat)
-					elseif achievement_data.award then
-						managers.achievment:award(achievement_data.award)
-					elseif achievement_data.challenge_stat then
-						managers.challenge:award_progress(achievement_data.challenge_stat)
-					elseif achievement_data.trophy_stat then
-						managers.custom_safehouse:award(achievement_data.trophy_stat)
-					elseif achievement_data.challenge_award then
-						managers.challenge:award(achievement_data.challenge_award)
-					end
+					self:_check_kill_achievements(cop_kill_count, unit_base, unit_type, is_civilian, hit_through_wall, hit_through_shield)
 				end
 			end
 		end
 	end
 
-	if not tweak_data.achievement.tango_4.difficulty or table.contains(tweak_data.achievement.tango_4.difficulty, Global.game_settings.difficulty) then
-		local second_sight_index, has_second_sight = nil
-
-		for index, data in ipairs(self._second_sights or {}) do
-			if data.part_id == "wpn_fps_upg_o_45rds" then
-				second_sight_index = index
-				has_second_sight = true
-
-				break
-			end
-		end
-
-		if has_second_sight and cop_kill_count > 0 and managers.player:player_unit():movement():current_state():in_steelsight() then
-			local second_sight_on = self._second_sight_on and self._second_sight_on > 0 and self._second_sight_on
-			if self._tango_4_data then
-				local is_correct_sight = second_sight_on ~= self._tango_4_data.last_second_sight_state and (not second_sight_on or second_sight_on == second_sight_index)
-
-				if is_correct_sight then
-					self._tango_4_data.last_second_sight_state = second_sight_on
-					self._tango_4_data.count = self._tango_4_data.count + 1
-				else
-					self._tango_4_data = nil
-				end
-
-				if self._tango_4_data and tweak_data.achievement.tango_4.count <= self._tango_4_data.count then
-					managers.achievment:_award_achievement(tweak_data.achievement.tango_4, "tango_4")
-				end
-			else
-				self._tango_4_data = {
-					count = 1,
-					last_second_sight_state = second_sight_on
-				}
-			end
-		elseif self._tango_4_data then
-			self._tango_4_data = nil
-		end
-	end
+	self:_check_tango_achievements(cop_kill_count)
 
 	result.hit_enemy = hit_anyone
 
@@ -427,21 +413,37 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 		self._shot_fired_stats_table.hit = hit_anyone
 		self._shot_fired_stats_table.hit_count = hit_count
 
-		if (not self._ammo_data or not self._ammo_data.ignore_statistic) and not self._rays then
+		if not self._ammo_data or not self._ammo_data.ignore_statistic then
 			managers.statistics:shot_fired(self._shot_fired_stats_table)
 		end
 	end
 
 	local furthest_hit = ray_hits[#ray_hits]
 
-	if (furthest_hit and furthest_hit.distance > 600 or not furthest_hit) and alive(self._obj_fire) then
+	if (not furthest_hit or furthest_hit.distance > 600) and alive(self._obj_fire) then
 		self._obj_fire:m_position(self._trail_effect_table.position)
-		mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
+		mvec3_set(self._trail_effect_table.normal, mvec_spread_direction)
 
 		local trail = World:effect_manager():spawn(self._trail_effect_table)
 
 		if furthest_hit then
-			World:effect_manager():set_remaining_lifetime(trail, math.clamp((furthest_hit.distance - 600) / 10000, 0, furthest_hit.distance))
+			World:effect_manager():set_remaining_lifetime(trail, math_clamp((furthest_hit.distance - 600) / 10000, 0, furthest_hit.distance))
+		end
+	end
+
+	if result.enemies_in_cone == nil then
+		result.enemies_in_cone = self._suppression and self:check_suppression(from_pos, direction, enemies_hit) or nil
+	elseif enemies_hit and self._suppression then
+		result.enemies_in_cone = result.enemies_in_cone or {}
+		local all_enemies = managers.enemy:all_enemies()
+
+		for u_key, enemy in pairs(enemies_hit) do
+			if all_enemies[u_key] then
+				result.enemies_in_cone[u_key] = {
+					error_mul = 1,
+					unit = enemy
+				}
+			end
 		end
 	end
 
@@ -451,6 +453,7 @@ function RaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul
 
 	return result
 end
+
 
 function RaycastWeaponBase:update_next_shooting_time()
 	if self:gadget_overrides_weapon_functions() then
@@ -486,70 +489,76 @@ function RaycastWeaponBase:update_next_shooting_time()
 	end
 end
 
+
 function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
+	local pickup_mul = managers.player:upgrade_value("player", "pick_up_ammo_multiplier", 1)
+	pickup_mul = pickup_mul * managers.player:upgrade_value("player", "pick_up_ammo_multiplier_2", 1) -- oryo: fully loaded aced stacks multiplicatively with walk-in closet
+	pickup_mul = pickup_mul * managers.player:crew_ability_upgrade_value("crew_scavenge", 1) -- oryo: sharpeyed stacks multiplicatively
 
 	local function _add_ammo(ammo_base, ratio, add_amount_override)
 		if ammo_base:get_ammo_max() == ammo_base:get_ammo_total() then
 			return false, 0
 		end
-
-		local multiplier = 1
-		local multiplier_min = 1
-		local multiplier_max = 1
-
-
-		-- <Player-Side Rebalances
-		multiplier = managers.player:upgrade_value("player", "pick_up_ammo_multiplier", 1)
-		multiplier = multiplier * managers.player:upgrade_value("player", "pick_up_ammo_multiplier_2", 1) -- Player-Side Rebalances: fully loaded aced stacks multiplicatively with walk-in closet
-		multiplier = multiplier * managers.player:crew_ability_upgrade_value("crew_scavenge", 1) -- Player-Side Rebalances: sharpeyed stacks multiplicatively
-
-		if ammo_base._ammo_data and ammo_base._ammo_data.ammo_pickup_min_mul then
-			multiplier_min = multiplier * ammo_base._ammo_data.ammo_pickup_min_mul -- Player-Side Rebalances: pick up modifiers from attachments don't negate pick up modifiers from skills and perks, stacks multiplicatively
-		else
-			multiplier_min = multiplier
-		end
-
-		if ammo_base._ammo_data and ammo_base._ammo_data.ammo_pickup_max_mul then
-			multiplier_max = multiplier * ammo_base._ammo_data.ammo_pickup_max_mul
-		else
-			multiplier_max = multiplier
-		end
-		-- Player-Side Rebalances>
-
-
-		local add_amount = add_amount_override
 		local picked_up = true
+		local stored_pickup_ammo = nil
+		local add_amount = add_amount_override
 
 		if not add_amount then
 
 
-			-- <Player-Side Rebalances
+			-- <oryo
+			local multiplier_min = 1
+			local multiplier_max = 1
+
+			if ammo_base._ammo_data then 
+				multiplier_min = pickup_mul * (ammo_base._ammo_data.ammo_pickup_min_mul or multiplier_min)
+				multiplier_max = pickup_mul * (ammo_base._ammo_data.ammo_pickup_max_mul or multiplier_max)
+			end
+
 			local min_ammo_pickup = ammo_base._ammo_pickup[1]
 			local max_ammo_pickup = ammo_base._ammo_pickup[2]
 			local rng_ammo = 0
 
-			if max_ammo_pickup < 1 and (min_ammo_pickup + 0.5) == max_ammo_pickup then -- Player-Side Rebalances: exception for very low pickup values
-				rng_ammo = math.lerp(min_ammo_pickup * multiplier_min, (max_ammo_pickup - 0.5) * multiplier_max + 0.5 * (multiplier_max == 0 and 0 or 1), math.random())
-			else
-			-- Player-Side Rebalances>
+			add_amount = math.lerp(min_ammo_pickup * multiplier_min, max_ammo_pickup * multiplier_max, math.random())
+			-- oryo>
 
+			
+			picked_up = add_amount > 0
+			add_amount = add_amount * (ratio or 1)
+			stored_pickup_ammo = ammo_base:get_stored_pickup_ammo()
 
-				rng_ammo = math.lerp(min_ammo_pickup * multiplier_min, max_ammo_pickup * multiplier_max, math.random())
+			if stored_pickup_ammo then
+				add_amount = add_amount + stored_pickup_ammo
+
+				ammo_base:remove_pickup_ammo()
 			end
-			picked_up = rng_ammo > 0
-			add_amount = math.max(0, math.round(rng_ammo))
 		end
 
-		add_amount = math.floor(add_amount * (ratio or 1))
+		local rounded_amount = math.floor(add_amount)
+		local new_ammo = ammo_base:get_ammo_total() + rounded_amount
+		local max_allowed_ammo = ammo_base:get_ammo_max()
 
-		ammo_base:set_ammo_total(math.clamp(ammo_base:get_ammo_total() + add_amount, 0, ammo_base:get_ammo_max()))
+		if not add_amount_override and new_ammo < max_allowed_ammo then
+			local leftover_ammo = add_amount - rounded_amount
+			
+			if leftover_ammo > 0 then
+				ammo_base:store_pickup_ammo(leftover_ammo)
+			end
+		end
+
+		ammo_base:set_ammo_total(math.clamp(new_ammo, 0, max_allowed_ammo))
+
+		if stored_pickup_ammo then
+			add_amount = math.floor(add_amount - stored_pickup_ammo)
+		else
+			add_amount = rounded_amount
+		end
 
 		return picked_up, add_amount
 	end
 
 
-
-	-- <Player-Side Rebalances
+	-- <oryo
 	local gadget_ammo = nil
 	for _, gadget in ipairs(self:get_all_override_weapon_gadgets()) do
 		if gadget and gadget.ammo_base then
@@ -562,7 +571,7 @@ function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
 
 	local picked_up, add_amount = nil
 
-	if math.random() > main_ammo_ratio or gadget_ammo_ratio >= 1 then -- Player-Side Rebalances: underbarrels no longer roll for ammo pickup simultaneously with main gun
+	if math.random() > main_ammo_ratio or gadget_ammo_ratio >= 1 then -- oryo: underbarrels no longer roll for ammo pickup simultaneously with main gun
 		picked_up, add_amount = _add_ammo(self, ratio, add_amount_override)
 
 		if self.AKIMBO then
@@ -575,10 +584,12 @@ function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
 	else
 		picked_up, add_amount = _add_ammo(gadget_ammo, ratio, add_amount_override)
 	end
-	-- Player-Side Rebalances>
+	-- oryo>
 
+	
 	return picked_up, add_amount
 end
+
 
 function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage, blank, no_sound)
 	local hit_unit = col_ray.unit
@@ -647,7 +658,7 @@ function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage,
 			local armor_piercing, knock_down, stagger, variant = nil
 
 			if weap_base then
-				armor_piercing = col_ray.armor_piercing --[[ Player-Side Rebalances: changed from {weap_base.has_armor_piercing and weap_base:has_armor_piercing()} ]]
+				armor_piercing = col_ray.armor_piercing --[[ oryo: changed from {weap_base.has_armor_piercing and weap_base:has_armor_piercing()} ]]
 				knock_down = weap_base.is_knock_down and weap_base:is_knock_down()
 				stagger = weap_base.is_stagger and weap_base:is_stagger()
 				variant = weap_base.variant and weap_base:variant()
@@ -692,10 +703,11 @@ function InstantBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage,
 	return result
 end
 
+
 if not he_stats then
-	InstantExplosiveBulletBase.CURVE_POW = 1 -- Player-Side Rebalances: Changed from 0.5
+	InstantExplosiveBulletBase.CURVE_POW = 1 -- oryo: Changed from 0.5
 	-- InstantExplosiveBulletBase.PLAYER_DMG_MUL = 0.1
-	InstantExplosiveBulletBase.RANGE = {max = 200, falloff_start = 100} -- Player-Side Rebalances: added falloff_start
+	InstantExplosiveBulletBase.RANGE = {max = 200, falloff_start = 100} -- oryo: added falloff_start
 
 	he_stats = true
 end

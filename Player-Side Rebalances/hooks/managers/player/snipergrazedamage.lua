@@ -3,10 +3,10 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 		return
 	end
 
-	if not weapon_unit:base():is_category("snp", "assault_rifle", "smg") or weapon_unit:base():fire_mode() == "auto" then -- Player-Side Rebalances: burst marker
+	if not weapon_unit:base():is_category("snp", "assault_rifle", "smg") or weapon_unit:base():fire_mode() == "auto" then -- oryo: burst marker
 		return
 	end
-	
+
 	if weapon_unit ~= managers.player:equipped_weapon_unit() then
 		return
 	end
@@ -67,7 +67,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 	end
 
 	local radius = 100
-	
+
 	if weapon_unit:base():is_category("snp") then
 		local from = mvector3.copy(furthest_hit.position)
 		local stopped_by_geometry = furthest_hit.unit:in_slot(managers.slot:get_mask("world_geometry"))
@@ -94,12 +94,12 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 
 		for _, hit in pairs(hits) do
 			hit.unit:character_damage():damage_simple({
-				variant = "graze",
-				damage = best_damage,
-				attacker_unit = managers.player:player_unit(),
-				weapon_unit = weapon_unit,
-				pos = hit.position,
-				attack_dir = -hit.normal
+						variant = "graze",
+						damage = best_damage,
+						attacker_unit = managers.player:player_unit(),
+						weapon_unit = weapon_unit,
+						pos = hit.position,
+						attack_dir = -hit.normal
 			})
 		end
 	else
@@ -107,20 +107,20 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 		local unit_damaged = {}
 		for i, hit in pairs(enemies_hit) do
 			local hits = World:find_units("intersect", "sphere", hit.position, radius, enemy_mask)
-			
+
 			for i, unit in ipairs(hits) do
 				local key = unit:key()
-				if not enemies_hit[key] and not unit_damaged[key]then
+				if not enemies_hit[key] and not unit_damaged[key] then
 					local hit_position = Vector3()
-					mvector3.set(hit_position,unit:movement():m_head_pos())
+					mvector3.set(hit_position, unit:movement():m_head_pos())
 
 					unit:character_damage():damage_simple({
-						variant = "graze",
-						damage = best_damage,
-						attacker_unit = managers.player:player_unit(),
-						weapon_unit = weapon_unit,
-						pos = hit_position,
-						attack_dir = hit_position - hit.position
+								variant = "graze",
+								damage = best_damage,
+								attacker_unit = managers.player:player_unit(),
+								weapon_unit = weapon_unit,
+								pos = hit_position,
+								attack_dir = hit_position - hit.position
 					})
 					unit_damaged[key] = unit
 				end

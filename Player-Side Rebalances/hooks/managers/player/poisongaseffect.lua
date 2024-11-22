@@ -11,8 +11,8 @@ function PoisonGasEffect:update(t, dt)
 		if self._timer <= 0 then
 			self._timer = nil
 
-			if alive(self._grenade_unit) and Network:is_server() then
-				managers.enemy:add_delayed_clbk("PoisonGasEffect", callback(PoisonGasEffect, PoisonGasEffect, "remove_grenade_unit"), TimerManager:game():time() + self._dot_data.dot_length)
+			if alive(self._grenade_unit) and (Network:is_server() or self._grenade_unit:id() == -1) then
+				managers.enemy:add_delayed_clbk("PoisonGasEffect" .. tostring(self._grenade_unit:key()), callback(PoisonGasEffect, PoisonGasEffect, "remove_grenade_unit"), TimerManager:game():time() + self._dot_data.dot_length + 1)
 			end
 		end
 
@@ -24,20 +24,23 @@ function PoisonGasEffect:update(t, dt)
 				local nearby_units = World:find_units_quick("sphere", self._position, self._range, managers.slot:get_mask("enemies"))
 
 				for _, unit in ipairs(nearby_units) do
-					if not table.contains(self._unit_list, unit) then
+					if not self._unit_list[unit:key()] then
+						-- self._unit_list[unit:key()] = true -- oryo: allow multiple applications
+						local data = {
+							unit = unit,
+							dot_data = self._dot_data,
+							hurt_animation = not self._dot_data.hurt_animation_chance or math.rand(1) < self._dot_data.hurt_animation_chance,
+							weapon_id = self._grenade_id,
+							weapon_unit = alive(self._grenade_unit) and self._grenade_unit or nil,
+							attacker_unit = alive(self._user_unit) and self._user_unit or nil
+						}
 
-						-- <Player-Side Rebalances: edited to work with dot manager changes
-						self._dot_data.hurt_animation = not self._dot_data.hurt_animation_chance or math.rand(1) < self._dot_data.hurt_animation_chance
-
-						self._dot_data.apply_hurt_once = true
-						self._dot_data.variant = "poison"
-
-						managers.dot:add_doted_enemy(nil, unit, TimerManager:game():time(), self._grenade_unit, self._dot_data, self._grenade_id)
-						table.insert(self._unit_list, unit)
-						-- Player-Side Rebalances>
+						managers.dot:add_doted_enemy(data)
 					end
 				end
 			end
 		end
 	end
 end
+
+

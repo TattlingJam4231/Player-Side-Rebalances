@@ -17,6 +17,7 @@ local function on_ammo_pickup(unit, pickup_chance, increase)
 	return gained_throwable, chance
 end
 
+
 PlayerAction.FullyLoaded = {
 	Priority = 1,
 	Function = function (player_manager, pickup_chance, increase)

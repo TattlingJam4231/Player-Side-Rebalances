@@ -257,11 +257,13 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"groza_underbarrel"	-- KETCHNOV Byk-1 Underbarrel
 			},
 			tier_1 = {
-				"arbiter"			-- Arbiter
+				"arbiter",			-- Arbiter
+				"ms3gl"			    -- Basilisk 3V
 			}
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_damage_oryo()
 	self.damage = {
@@ -280,6 +282,7 @@ function WeaponTweakData:_init_damage_oryo()
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_spread_oryo()
 	self.default_spread = {
@@ -301,6 +304,7 @@ function WeaponTweakData:_init_spread_oryo()
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_falloff_oryo()
 	self.falloff = {
@@ -511,128 +515,130 @@ function WeaponTweakData:_init_falloff_oryo()
 	}
 end
 
+
 function WeaponTweakData:_init_recoil_wait_oryo()
 	self.recoil_wait = {
 		assault_rifle = {
 			tier_4 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			},
 			tier_3 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			},
 			tier_2 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			},
 			tier_1 = {
-				flat = 2.1,
-				curve = 1
+				pause = 2.1,
+				accel = 1
 			}
 		},
 		shotgun = {
 			tier_4 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			pump_action = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			tier_3 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			tier_2 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			}
 		},
 		lmg = {
 			tier_3 = {
-				flat = 0.5,
-				curve = 1
+				pause = 0.5,
+				accel = 1
 			},
 			tier_2 = {
-				flat = 0.5,
-				curve = 1
+				pause = 0.5,
+				accel = 1
 			},
 			tier_1 = {
-				flat = 0.5,
-				curve = 1
+				pause = 0.5,
+				accel = 1
 			}
 		},
 		snp = {
 			tier_5 = {
-				flat = 0.3,
-				curve = 0.3
+				pause = 0.3,
+				accel = 0.3
 			},
 			tier_4 = {
-				flat = 0.3,
-				curve = 0.25
+				pause = 0.3,
+				accel = 0.25
 			},
 			tier_3 = {
-				flat = 0.45,
-				curve = 0.35
+				pause = 0.45,
+				accel = 0.35
 			},
 			tier_2 = {
-				flat = 0.65,
-				curve = 0.5
+				pause = 0.65,
+				accel = 0.5
 			},
 			tier_1 = {
-				flat = 1.1,
-				curve = 0.8
+				pause = 1.1,
+				accel = 0.65 --0.8
 			}
 		},
 		smg = {
 			tier_3 = {
-				flat = 2,
-				curve = 0.5
+				pause = 2,
+				accel = 0.5
 			},
 			tier_2 = {
-				flat = 2,
-				curve = 0.5
+				pause = 2,
+				accel = 0.5
 			},
 			tier_1 = {
-				flat = 2,
-				curve = 0.5
+				pause = 2,
+				accel = 0.5
 			}
 		},
 		pistol = {
 			tier_4 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_3 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_2 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 2
+				pause = 0,
+				accel = 2
 			}
 		},
 		gl = {
 			tier_2 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			},
 			tier_1 = {
-				flat = 0,
-				curve = 0.5
+				pause = 0,
+				accel = 0.5
 			}
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_ammo_pickup_oryo()
 	self.ammo_pickup = {
@@ -655,7 +661,7 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = {15	/1.35, 25	/1.35}
 		},
 		snp = {
-			tier_5 = {0.04, 0.54},
+			tier_5 = {0.09	/1.35, 0.13	/1.35},
 			tier_4 = {0.1	/1.35, 1	/1.35},
 			tier_3 = {1		/1.35, 1	/1.35},
 			tier_2 = {1		/1.35, 1.75	/1.35},
@@ -673,11 +679,12 @@ function WeaponTweakData:_init_ammo_pickup_oryo()
 			tier_1 = {8		/1.35, 13	/1.35}
 		},
 		gl = {
-			tier_2 = {0.045, 0.545},
-			tier_1 = {0.08, 0.58}
+			tier_2 = {0.15	/1.35, 0.18	/1.35},
+			tier_1 = {0.26	/1.35, 0.31 /1.35}
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_burst_count()
 	self.burst_count = {
@@ -688,11 +695,11 @@ function WeaponTweakData:_init_burst_count()
 			tier_1 = 5
 		},
 		shotgun = {
-			tier_4 = 		2,
-			pump_action = 	2,
-			tier_3 = 		2,
-			tier_2 = 		2,
-			tier_1 = 		3
+			tier_4 = 2,
+			pump_action = 2,
+			tier_3 = 2,
+			tier_2 = 2,
+			tier_1 = 3
 		},
 		lmg = {
 			tier_3 = 3,
@@ -718,10 +725,11 @@ function WeaponTweakData:_init_burst_count()
 		},
 		gl = {
 			tier_2 = 1,
-			tier_1 = 2
+			tier_1 = 3
 		}
 	}
 end
+
 
 function WeaponTweakData:_init_default_stats_oryo()
 
@@ -734,7 +742,7 @@ function WeaponTweakData:_init_default_stats_oryo()
 
 	for category, tiers in pairs(self.weapon_index) do
 		for tier, weapons in pairs(tiers) do
-			for _, weapon in ipairs(weapons) do 
+			for _, weapon in ipairs(weapons) do
 				if self[weapon] then
 					self[weapon].AMMO_PICKUP = self.ammo_pickup[category] and self.ammo_pickup[category][tier] or self[weapon].AMMO_PICKUP
 					self[weapon].damage_falloff = self.falloff[category] and self.falloff[category][tier] or self.falloff[category] or self[weapon].damage_falloff
@@ -749,6 +757,7 @@ function WeaponTweakData:_init_default_stats_oryo()
 	end
 end
 
+
 function WeaponTweakData:kick_steelsight_oryo(original_kick)
 	local v_kick_mul = 0.75
 	local h_kick_mul = 0.75
@@ -761,6 +770,7 @@ function WeaponTweakData:kick_steelsight_oryo(original_kick)
 	return new_kick
 end
 
+
 function WeaponTweakData:kick_akimbo_oryo(original_kick)
 	local v_kick_mul = 2
 	local h_kick_mul = 1.25
@@ -772,6 +782,7 @@ function WeaponTweakData:kick_akimbo_oryo(original_kick)
 	}
 	return new_kick
 end
+
 
 function WeaponTweakData:_init_assault_rifles_oryo()
 	--T4 Assault Rifles---------------------------------------------------------
@@ -1311,6 +1322,7 @@ function WeaponTweakData:_init_assault_rifles_oryo()
 			self.asval.kick.steelsight = self:kick_steelsight_oryo(self.asval.kick.standing)
 end
 
+
 function WeaponTweakData:_init_shotguns_oryo()
 	--Double Barrel Shotguns----------------------------------------------------
 
@@ -1548,6 +1560,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 			
 
 end
+
 
 function WeaponTweakData:_init_lmgs_oryo()
 	--t3 lmgs-------------------------------------------------------------------
@@ -1827,6 +1840,7 @@ function WeaponTweakData:_init_lmgs_oryo()
 			}
 end
 
+
 function WeaponTweakData:_init_snipers_oryo()
 	--t5 snipers----------------------------------------------------------------
 					
@@ -2062,8 +2076,8 @@ function WeaponTweakData:_init_snipers_oryo()
 			self.siltstone.fire_mode_data.fire_rate = 0.364 --0.333
 			self.siltstone.single.fire_rate = 0.364 --0.333
 			self.siltstone.recoil_wait = {
-				flat = 1.2,
-				curve = 0.9
+				pause = 1.2,
+				accel = 0.9
 			}
 			-- self.siltstone.stats.damage = 198
 			self.siltstone.stats.spread = 17
@@ -2133,6 +2147,7 @@ function WeaponTweakData:_init_snipers_oryo()
 			}
 
 end
+
 
 function WeaponTweakData:_init_smgs_oryo()
 	--T3 SMGs-------------------------------------------------------------------
@@ -3571,6 +3586,7 @@ function WeaponTweakData:_init_smgs_oryo()
 			}
 end
 
+
 function WeaponTweakData:_init_pistols_oryo()
 	--t4 pistols----------------------------------------------------------------
 					
@@ -3846,6 +3862,7 @@ function WeaponTweakData:_init_pistols_oryo()
 					self.x_beer.stats.damage = self.beer.stats.damage
 end
 
+
 function WeaponTweakData:_init_specials_oryo()
 	
 	--Hailstorm Mk5
@@ -3886,7 +3903,7 @@ function WeaponTweakData:_init_specials_oryo()
 			--t1 gls--------------------------------------------------------------------
 
 					--Basilisk 3V Grenade Launcher
-					self.ms3gl.AMMO_PICKUP = {0.13, 0.63}
+					self.ms3gl.AMMO_PICKUP = {0.36	/1.35, 0.44 /1.35}
 					self.ms3gl.AMMO_MAX = 15
 					
 					--Arbiter Grenade Launcher
@@ -3895,12 +3912,12 @@ function WeaponTweakData:_init_specials_oryo()
 			
 	--RLs-----------------------------------------------------------------------------------------------------------------------------------------------------
 		
-			--Commander 101
-				self.ray.AMMO_PICKUP = {0.02 / 1.35, 0.5 + 0.02 / 1.35}
+			--Commando 101
+				self.ray.AMMO_PICKUP = {0.03	/1.35, 0.05	/1.35}
 				self.ray.stats.damage = 55
 			
 			--HRL-7
-				self.rpg7.AMMO_PICKUP = {0.01 / 1.35, 0.5 + 0.01 / 1.35}
+				self.rpg7.AMMO_PICKUP = {0.01	/1.35, 0.03	/1.35}
 				self.rpg7.stats.damage = 110
 			
 	--Miniguns------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3942,34 +3959,11 @@ function WeaponTweakData:_init_specials_oryo()
 		
 			--Flamethrower
 				self.flamethrower_mk2.AMMO_PICKUP = {20, 30}
-				self.flamethrower_mk2.fire_dot_data = nil
-				self.flamethrower_mk2.dot_data = {
-					type = "fire",
-					custom_data = {
-						damage = 18,
-						dot_length = 3.6,
-						dot_trigger_max_distance = 3000,
-						dot_tick_period = 0.5,
-						scale_tick_period = 0.015,
-						dot_can_crit = true
-					}
-				}
 			
 			--MA-17 Flamethrower
 				self.system.AMMO_PICKUP = {15, 25}
-				self.system.fire_dot_data = nil
-				self.system.dot_data = {
-					type = "fire",
-					custom_data = {
-						damage = 18,
-						dot_length = 3.6,
-						dot_trigger_max_distance = 3000,
-						dot_tick_period = 0.5,
-						scale_tick_period = 0.01,
-						dot_can_crit = true
-					}
-				}
 end
+
 
 Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(self)
 

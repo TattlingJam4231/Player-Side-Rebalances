@@ -11,6 +11,7 @@ function PlayerManager:_on_enter_trigger_happy_event(unit, attack_data)
 	end
 end
 
+
 function PlayerManager:_on_enter_ammo_efficiency_event()
 	if not self._coroutine_mgr:is_running("ammo_efficiency") then
 		local weapon_unit = self:equipped_weapon_unit()
@@ -21,6 +22,7 @@ function PlayerManager:_on_enter_ammo_efficiency_event()
 	end
 end
 
+
 function PlayerManager:_on_activate_aggressive_reload_event(attack_data)
 	if attack_data and attack_data.variant ~= "projectile" then
 		local weapon_unit = self:equipped_weapon_unit()
@@ -28,7 +30,7 @@ function PlayerManager:_on_activate_aggressive_reload_event(attack_data)
 		if weapon_unit then
 			local weapon = weapon_unit:base()
 
-			if weapon and weapon:fire_mode() ~= "auto" and weapon:is_category("smg", "assault_rifle", "snp") then -- Player-Side Rebalances: burst marker
+			if weapon and weapon:fire_mode() ~= "auto" and weapon:is_category("smg", "assault_rifle", "snp") then -- oryo: burst marker
 				self:activate_temporary_upgrade("temporary", "single_shot_fast_reload")
 			end
 		end

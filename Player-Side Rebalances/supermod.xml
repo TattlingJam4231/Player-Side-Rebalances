@@ -1,139 +1,147 @@
 <?xml version="1.0"?>
 <mod>
 
-    <hooks hook_id="lib/" script_path="hooks/">
-        <group :hook_id="managers/"                                     :script_path="managers/">
+	<hooks hook_id="lib/" script_path="hooks/">
+		<group :hook_id="managers/"										:script_path="managers/">
 
-            <group :hook_id="hud/"                                          :script_path="hud/">
-                <post :hook_id="hudteammate"						            :script_path="hudteammate_perks.lua"/>
-            </group>
+			<group :hook_id="hud/"											:script_path="hud/">
+				<post :hook_id="hudteammate"									:script_path="hudteammate_perks.lua"/>
+			</group>
 
-            <group :hook_id="menu/"                                         :script_path="menu/">
-                <post :hook_id="blackmarketgui"						            :script_path="blackmarketgui.lua"/>
-            </group>
-            
-            <group :hook_id="player/"                                       :script_path="player/">
-                <post :hook_id="poisongaseffect"                                :script_path="poisongaseffect.lua"/>
-                <post :hook_id="snipergrazedamage"                              :script_path="snipergrazedamage.lua"/>
-            </group>
-            
-		    <post :hook_id="blackmarketmanager"                             :script_path="blackmarketmanager.lua"/>
-            <post :hook_id="dotmanager"                                     :script_path="dotmanager.lua"/>
-		    <post :hook_id="explosionmanager"                               :script_path="explosionmanager.lua"/>
-            <post :hook_id="hudmanagerpd2"							        :script_path="hudmanagerpd2_perks.lua"/>
-            <post :hook_id="playermanager"								    :script_path="playermanager_perks.lua"/>
-		    <post :hook_id="playermanager"                                  :script_path="playermanager_skills.lua"/>
-            <post :hook_id="weaponfactorymanager"                           :script_path="weaponfactorymanager.lua"/>
-        </group>
-        
-        <group :hook_id="player_actions/skills/"                        :script_path="player_actions/skills/">
-		    <post :hook_id="playeractionammoefficiency"                     :script_path="playeractionammoefficiency.lua"/>
-		    <post :hook_id="playeractionfullyloaded"                        :script_path="playeractionfullyloaded.lua"/>
-		    <post :hook_id="playeractiontriggerhappy"                       :script_path="playeractiontriggerhappy.lua"/>
-		    <post :hook_id="playeractionunseenstrike"                       :script_path="playeractionunseenstrike.lua"/>
-        </group>
+			<group :hook_id="menu/"											:script_path="menu/">
+				<post :hook_id="blackmarketgui"									:script_path="blackmarketgui.lua"/>
+			</group>
+			
+			<group :hook_id="player/"										:script_path="player/">
+				<post :hook_id="poisongaseffect"								:script_path="poisongaseffect.lua"/>
+				<post :hook_id="snipergrazedamage"								:script_path="snipergrazedamage.lua"/>
+			</group>
+			
+			<post :hook_id="dotmanager"										:script_path="dotmanager.lua"/>
+			<post :hook_id="explosionmanager"								:script_path="explosionmanager.lua"/>
+			<post :hook_id="hudmanagerpd2"									:script_path="hudmanagerpd2_perks.lua"/>
+			<post :hook_id="playermanager"									:script_path="playermanager_perks.lua"/>
+			<post :hook_id="playermanager"									:script_path="playermanager_skills.lua"/>
+			<post :hook_id="weaponfactorymanager"							:script_path="weaponfactorymanager.lua"/>
+		</group>
+		
+		<group :hook_id="player_actions/skills/"						:script_path="player_actions/skills/">
+			<post :hook_id="playeractionammoefficiency"						:script_path="playeractionammoefficiency.lua"/>
+			<post :hook_id="playeractionfullyloaded"						:script_path="playeractionfullyloaded.lua"/>
+			<post :hook_id="playeractiontriggerhappy"						:script_path="playeractiontriggerhappy.lua"/>
+			<post :hook_id="playeractionunseenstrike"						:script_path="playeractionunseenstrike.lua"/>
+		</group>
 
-        <group :hook_id="tweak_data/"                                   :script_path="tweak_data/">
+		<group :hook_id="tweak_data/"									:script_path="tweak_data/">
 
-            <group :hook_id="blackmarket/"                                  :script_path="blackmarket/">
-                <post :hook_id="meleeweaponstweakdata"                          :script_path="meleeweaponstweakdata.lua"/>
-                <post :hook_id="projectilestweakdata"                           :script_path="projectilestweakdata.lua"/>
-            </group>
+			<group :hook_id="blackmarket/"									:script_path="blackmarket/">
+				<post :hook_id="meleeweaponstweakdata"							:script_path="meleeweaponstweakdata.lua"/>
+				<post :hook_id="projectilestweakdata"							:script_path="projectilestweakdata.lua"/>
+			</group>
 
-            <post :hook_id="playertweakdata"								:script_path="playertweakdata.lua"/>
-            <post :hook_id="skilltreetweakdata"								:script_path="skilltreetweakdata_perks.lua"/>
-		    <post :hook_id="skilltreetweakdata"                             :script_path="skilltreetweakdata_skills.lua"/>
-            <post :hook_id="tweakdata"										:script_path="tweakdata.lua"/>
-            <post :hook_id="upgradestweakdata"								:script_path="upgradestweakdata.lua"/>
-            <post :hook_id="weaponfactorytweakdata"                         :script_path="weaponfactorytweakdata.lua"/>
-            <post :hook_id="weapontweakdata"                                :script_path="weapontweakdata.lua"/>
-        </group>
-        
-        <group :hook_id="units/"                                        :script_path="units/">
+			<post :hook_id="charactertweakdata"								:script_path="charactertweakdata.lua"/>
+			<post :hook_id="dottweakdata"									:script_path="dottweakdata.lua"/>
+			<post :hook_id="playertweakdata"								:script_path="playertweakdata.lua"/>
+			<post :hook_id="skilltreetweakdata"								:script_path="skilltreetweakdata_perks.lua"/>
+			<post :hook_id="skilltreetweakdata"								:script_path="skilltreetweakdata_skills.lua"/>
+			<post :hook_id="tweakdata"										:script_path="tweakdata.lua"/>
+			<post :hook_id="upgradestweakdata"								:script_path="upgradestweakdata.lua"/>
+			<post :hook_id="weaponfactorytweakdata"							:script_path="weaponfactorytweakdata.lua"/>
+			<post :hook_id="weapontweakdata"								:script_path="weapontweakdata.lua"/>
+		</group>
+		
+		<group :hook_id="units/"										:script_path="units/">
 
-            <group :hook_id="beings/player/"                                :script_path="beings/player/">
+			<group :hook_id="beings/player/"								:script_path="beings/player/">
 
-                <group :hook_id="states/"                                       :script_path="states/">
-                    <post :hook_id="playerbipod"                                    :script_path="playerbipod.lua"/>
-                    <post :hook_id="playerstandard"                                 :script_path="playerstandard_dots.lua"/>
-                    <post :hook_id="playerstandard"                                 :script_path="playerstandard.lua"/>
-                </group>
+				<group :hook_id="states/"										:script_path="states/">
+					<post :hook_id="playerbipod"									:script_path="playerbipod.lua"/>
+					<post :hook_id="playerstandard"									:script_path="playerstandard_dots.lua"/>
+					<post :hook_id="playerstandard"									:script_path="playerstandard.lua"/>
+				</group>
 
-                <post :hook_id="playerdamage"		                            :script_path="playerdamage.lua"/>
-                <post :hook_id="playerequipment"                                :script_path="playerequipment_sentry.lua"/>
-                <post :hook_id="playermovement"			                        :script_path="playermovement_perks.lua"/>
-            </group>
+				<post :hook_id="playerdamage"									:script_path="playerdamage.lua"/>
+				<post :hook_id="playerequipment"								:script_path="playerequipment_sentry.lua"/>
+				<post :hook_id="playermovement"									:script_path="playermovement_perks.lua"/>
+			</group>
 
-            <group :hook_id="cameras/"                                      :script_path="cameras/">
-                <post :hook_id="fpcameraplayerbase"							    :script_path="fpcameraplayerbase.lua"/>
-            </group>
+			<group :hook_id="cameras/"										:script_path="cameras/">
+				<post :hook_id="fpcameraplayerbase"								:script_path="fpcameraplayerbase.lua"/>
+			</group>
 
-            <group :hook_id="enemies/cop/"                                  :script_path="enemies/cop/">
+			<group :hook_id="enemies/"										:script_path="enemies/">
 
-                <group :hook_id="actions/"                                      :script_path="actions/">
+				<group :hook_id="cop/"											:script_path="cop/">
 
-                    <group :hook_id="full_body/"                                    :script_path="full_body/">
-                        <post :hook_id="copactionhurt"                                  :script_path="copactionhurt.lua"/>
-                    </group>
+					<group :hook_id="actions/"										:script_path="actions/">
 
-                    <group :hook_id="upper_body/"                                   :script_path="upper_body/">
-                        <post :hook_id="copactionshoot"                                 :script_path="copactionshoot.lua"/>
-                    </group>
+						<group :hook_id="full_body/"									:script_path="full_body/">
+							<post :hook_id="copactionhurt"									:script_path="copactionhurt.lua"/>
+						</group>
 
-                </group>
+						<group :hook_id="upper_body/"									:script_path="upper_body/">
+							<post :hook_id="copactionshoot"									:script_path="copactionshoot.lua"/>
+						</group>
 
-                <post :hook_id="copdamage"                                      :script_path="copdamage.lua"/>
-            </group>
+					</group>
 
-            <group :hook_id="environment/"                                  :script_path="environment/">
-                <post :hook_id="environmentfire"                                :script_path="environmentfire.lua"/>
-            </group>
+					<post :hook_id="copdamage"										:script_path="copdamage.lua"/>
+				</group>
 
-            <group :hook_id="equipment/sentry_gun/"                         :script_path="equipment/sentry_gun/">
-                <post :hook_id="sentrygunbase"                                  :script_path="sentrygunbase.lua"/>
-                <post :hook_id="sentrygundamage"                                :script_path="sentrygundamage.lua"/>
-            </group>
+				<group :hook_id="medic/"										:script_path="medic/">
+					<post :hook_id="medicdamage"									:script_path="medicdamage.lua"/>
+				</group>
+			</group>
 
-            <group :hook_id="interactions/"                                 :script_path="interactions/">
-                <post :hook_id="interactionext"								    :script_path="interactionext_perks.lua"/>
-            </group>
+			<group :hook_id="environment/"									:script_path="environment/">
+				<post :hook_id="environmentfire"								:script_path="environmentfire.lua"/>
+			</group>
 
-            <group :hook_id="pickups/"                                      :script_path="pickups/">
-                <post :hook_id="ammoclip"								        :script_path="ammoclip_perks.lua"/>
-            </group>
+			<group :hook_id="equipment/sentry_gun/"							:script_path="equipment/sentry_gun/">
+				<post :hook_id="sentrygunbase"									:script_path="sentrygunbase.lua"/>
+				<post :hook_id="sentrygundamage"								:script_path="sentrygundamage.lua"/>
+			</group>
 
-            <group :hook_id="weapons/"                                      :script_path="weapons/">
+			<group :hook_id="interactions/"									:script_path="interactions/">
+				<post :hook_id="interactionext"									:script_path="interactionext_perks.lua"/>
+			</group>
 
-                <group :hook_id="grenades/"                                     :script_path="grenades/">
-                    <post :hook_id="fraggrenade"                                    :script_path="fraggrenade.lua"/>
-                </group>
+			<group :hook_id="pickups/"										:script_path="pickups/">
+				<post :hook_id="ammoclip"										:script_path="ammoclip_perks.lua"/>
+			</group>
 
-                <group :hook_id="shotgun/"                                      :script_path="shotgun/">
-                    <post :hook_id="shotgunbase"                                    :script_path="shotgunbase.lua"/>
-                </group>
+			<group :hook_id="weapons/"										:script_path="weapons/">
 
-                <group :hook_id="trip_mine/"                                    :script_path="trip_mine/">
-                    <post :hook_id="tripminebase"                                   :script_path="tripminebase.lua"/>
-                </group>
+				<group :hook_id="grenades/"									:script_path="grenades/">
+					<post :hook_id="fraggrenade"									:script_path="fraggrenade.lua"/>
+				</group>
 
-                <post :hook_id="newraycastweaponbase"                           :script_path="newraycastweaponbase.lua"/>
-                <post :hook_id="raycastweaponbase"                              :script_path="raycastweaponbase_dots.lua"/>
-                <post :hook_id="raycastweaponbase"                              :script_path="raycastweaponbase.lua"/>
-                <post :hook_id="sentrygunweapon"                                :script_path="sentrygunweapon.lua"/>
-                <post :hook_id="weaponliongadget1"                              :script_path="weaponliongadget1_bipod.lua"/>
-            </group>
+				<group :hook_id="shotgun/"										:script_path="shotgun/">
+					<post :hook_id="shotgunbase"									:script_path="shotgunbase.lua"/>
+				</group>
 
-        </group>
-        
-        <group :hook_id="utils/"                                        :script_path="utils/">
-	        <post :hook_id="inventorydescription"                           :script_path="inventorydescription.lua"/>
-        </group>
-    </hooks>
-    
-    <hooks hook_id="lib/" script_path="loc/">
-		<post :hook_id="managers/localizationmanager"						    :script_path="localizationmanager_perks.lua" />
-		<post :hook_id="managers/localizationmanager"			                :script_path="localizationmanager_skills.lua" />
-		<post :hook_id="managers/localizationmanager"						    :script_path="localizationmanager_weapons.lua" />
-    </hooks>
-    
+				<group :hook_id="trip_mine/"									:script_path="trip_mine/">
+					<post :hook_id="tripminebase"									:script_path="tripminebase.lua"/>
+				</group>
+
+				<post :hook_id="newraycastweaponbase"							:script_path="newraycastweaponbase.lua"/>
+				<post :hook_id="raycastweaponbase"								:script_path="raycastweaponbase_dots.lua"/>
+				<post :hook_id="raycastweaponbase"								:script_path="raycastweaponbase.lua"/>
+				<post :hook_id="sentrygunweapon"								:script_path="sentrygunweapon.lua"/>
+				<post :hook_id="weaponliongadget1"								:script_path="weaponliongadget1_bipod.lua"/>
+			</group>
+
+		</group>
+		
+		<group :hook_id="utils/"										:script_path="utils/">
+			<post :hook_id="inventorydescription"							:script_path="inventorydescription.lua"/>
+		</group>
+	</hooks>
+	
+	<hooks hook_id="lib/" script_path="loc/">
+		<post :hook_id="managers/localizationmanager"							:script_path="localizationmanager_perks.lua" />
+		<post :hook_id="managers/localizationmanager"							:script_path="localizationmanager_skills.lua" />
+		<post :hook_id="managers/localizationmanager"							:script_path="localizationmanager_weapons.lua" />
+	</hooks>
+	
 </mod>
