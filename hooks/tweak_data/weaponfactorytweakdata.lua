@@ -246,766 +246,392 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 	}
 end
 
+
 function WeaponFactoryTweakData:_init_ammo_types_oryo()
-	--shotgun ammo
 	self.ammo = {
 		assault_rifle = {
-			wpn_upg_a_fmj = {
-				tier_4 = {
-					custom_stats = {
-						can_shoot_through_shield = false,
-						can_shoot_through_wall = false,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 2000,
-						enemy_pen_energy_loss = 1000,
-						optimal_distance_mul = 2000,
-						optimal_range_mul = 0,
-						near_falloff_mul = 0,
-						far_falloff_mul = 0,
-						near_damage_mul = 1,
-						far_damage_mul = 1.5,
-					}
-				},
-				tier_3 = {
-					custom_stats = {
-						can_shoot_through_shield = false,
-						can_shoot_through_wall = false,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 2000,
-						enemy_pen_energy_loss = 1000,
-						optimal_distance_mul = 2000,
-						optimal_range_mul = 0,
-						near_falloff_mul = 0,
-						far_falloff_mul = 0,
-						near_damage_mul = 1,
-						far_damage_mul = 1.2,
-					},
-					overrides = {
-						{
-							depends_on = "wpn_fps_upg_ass_ak_b_zastava",
-							custom_stats = {
-								can_shoot_through_shield = false,
-								can_shoot_through_wall = false,
-								can_shoot_through_enemy = 1,
-								max_enemy_penetration_distance = 2000,
-								enemy_pen_energy_loss = 1000,
-								optimal_distance_mul = 2000,
-								optimal_range_mul = 0,
-								near_falloff_mul = 0,
-								far_falloff_mul = 0,
-								near_damage_mul = 1,
-								far_damage_mul = 1.5,
-							}
-						},
-						{
-							depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
-							custom_stats = {
-								can_shoot_through_shield = false,
-								can_shoot_through_wall = false,
-								can_shoot_through_enemy = 1,
-								max_enemy_penetration_distance = 2000,
-								enemy_pen_energy_loss = 1000,
-								optimal_distance_mul = 2000,
-								optimal_range_mul = 0,
-								near_falloff_mul = 0,
-								far_falloff_mul = 0,
-								near_damage_mul = 1,
-								far_damage_mul = 1.5,
-							}
-						},
-						{
-							depends_on = "wpn_fps_ass_g3_b_sniper",
-							custom_stats = {
-								can_shoot_through_shield = false,
-								can_shoot_through_wall = false,
-								can_shoot_through_enemy = 1,
-								max_enemy_penetration_distance = 2000,
-								enemy_pen_energy_loss = 1000,
-								optimal_distance_mul = 2000,
-								optimal_range_mul = 0,
-								near_falloff_mul = 0,
-								far_falloff_mul = 0,
-								near_damage_mul = 1,
-								far_damage_mul = 1.5,
-							}
-						},
-						{
-							depends_on = "wpn_fps_ass_shak12_body_vks",
-							custom_stats = {
-								can_shoot_through_shield = false,
-								can_shoot_through_wall = false,
-								can_shoot_through_enemy = 1,
-								max_enemy_penetration_distance = 2000,
-								enemy_pen_energy_loss = 1000,
-								optimal_distance_mul = 2000,
-								optimal_range_mul = 0,
-								near_falloff_mul = 0,
-								far_falloff_mul = 0,
-								near_damage_mul = 1,
-								far_damage_mul = 1.5,
-							}
-						}
-					}
-				},
-				tier_2 = {
-					custom_stats = {
-						can_shoot_through_shield = false,
-						can_shoot_through_wall = false,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 2000,
-						enemy_pen_energy_loss = 1000,
-						optimal_distance_mul = 2000,
-						optimal_range_mul = 0,
-						near_falloff_mul = 0,
-						far_falloff_mul = 0,
-						near_damage_mul = 1,
-						far_damage_mul = 1.2,
-					},
-					overrides = {
-						{
-							depends_on = "wpn_fps_upg_ass_ak_b_zastava",
-							custom_stats = {
-								can_shoot_through_shield = false,
-								can_shoot_through_wall = false,
-								can_shoot_through_enemy = 1,
-								max_enemy_penetration_distance = 2000,
-								enemy_pen_energy_loss = 1000,
-								optimal_distance_mul = 2000,
-								optimal_range_mul = 0,
-								near_falloff_mul = 0,
-								far_falloff_mul = 0,
-								near_damage_mul = 1,
-								far_damage_mul = 1.5,
-							}
-						},
-						{
-							depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
-							custom_stats = {
-								can_shoot_through_shield = false,
-								can_shoot_through_wall = false,
-								can_shoot_through_enemy = 1,
-								max_enemy_penetration_distance = 2000,
-								enemy_pen_energy_loss = 1000,
-								optimal_distance_mul = 2000,
-								optimal_range_mul = 0,
-								near_falloff_mul = 0,
-								far_falloff_mul = 0,
-								near_damage_mul = 1,
-								far_damage_mul = 1.5,
-							}
-						}
-					}
-				},
-				tier_1 = {
-					custom_stats = {
-						can_shoot_through_shield = false,
-						can_shoot_through_wall = false,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 2000,
-						enemy_pen_energy_loss = 1000,
-						optimal_distance_mul = 2000,
-						optimal_range_mul = 0,
-						near_falloff_mul = 0,
-						far_falloff_mul = 0,
-						near_damage_mul = 1,
-						far_damage_mul = 1.2,
-					}
+			wpn_upg_a_fmj = {},
+			wpn_upg_a_ballistic_tip = {}
+		},
+		shotgun = {
+			wpn_fps_upg_a_custom = {},
+			wpn_fps_upg_a_slug = {},
+			wpn_fps_upg_a_explosive = {},
+			wpn_fps_upg_a_piercing = {},
+			wpn_fps_upg_a_dragons_breath = {},
+			wpn_fps_upg_a_rip = {}
+		}
+	}
+	-- Assault Rifle Ammo
+		-- FMJ
+			local fmj = {
+				custom_stats = {
+					can_shoot_through_shield = false,
+					can_shoot_through_wall = false,
+					can_shoot_through_enemy = 1,
+					max_enemy_penetration_distance = 2000,
+					enemy_pen_energy_loss = 1000,
+					optimal_distance_mul = 2000,
+					optimal_range_mul = 0,
+					near_falloff_mul = 0,
+					far_falloff_mul = 0,
+					near_damage_mul = 1,
+					far_damage_mul = 1.2,
 				}
-			},
-			wpn_upg_a_ballistic_tip = {
-				tier_4 = {
-					stats = {
-						value = 5,
-						damage = 80
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.667
-					}
+			}
+
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4 = deep_clone(fmj)
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats.far_damage_mul = 1.5
+
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_3 = deep_clone(fmj)
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_3.overrides = {
+				{
+					depends_on = "wpn_fps_upg_ass_ak_b_zastava",
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats)
 				},
-				tier_3 = {
-					stats = {
-						value = 5,
-						damage = 20
-					},
-					overrides = {
-						{
-							depends_on = "wpn_fps_upg_ass_ak_b_zastava",
-							stats = {
-								value = 5,
-								damage = 80
-							},
-							custom_stats = {
-								ammo_pickup_min_mul = 0.5,
-								ammo_pickup_max_mul = 0.667
-							}
-						},
-						{
-							depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
-							stats = {
-								value = 5,
-								damage = 80
-							},
-							custom_stats = {
-								ammo_pickup_min_mul = 0.5,
-								ammo_pickup_max_mul = 0.667
-							}
-						},
-						{
-							depends_on = "wpn_fps_ass_g3_b_sniper",
-							stats = {
-								value = 5,
-								damage = 80
-							},
-							custom_stats = {
-								ammo_pickup_min_mul = 0.5,
-								ammo_pickup_max_mul = 0.667
-							}
-						},
-						{
-							depends_on = "wpn_fps_ass_g3_b_short",
-							stats = {
-								value = 5,
-								damage = 12
-							}
-						},
-						{
-							depends_on = "wpn_fps_ass_shak12_body_vks",
-							stats = {
-								value = 5,
-								damage = 80
-							},
-							custom_stats = {
-								ammo_pickup_min_mul = 0.5,
-								ammo_pickup_max_mul = 0.667
-							}
-						}
-					}
+				{
+					depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats)
 				},
-				tier_2 = {
+				{
+					depends_on = "wpn_fps_ass_g3_b_sniper",
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats)
+				},
+				{
+					depends_on = "wpn_fps_ass_shak12_body_vks",
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats)
+				}
+			}
+
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_2 = deep_clone(fmj)
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_2.overrides = {
+				{
+					depends_on = "wpn_fps_upg_ass_ak_b_zastava",
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats)
+				},
+				{
+					depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_fmj.tier_4.custom_stats)
+				}
+			}
+
+			self.ammo.assault_rifle.wpn_upg_a_fmj.tier_1 = deep_clone(fmj)
+
+		-- Ballistic Tip
+			local ballistic_tip = {
+				stats = {
+					value = 5,
+					damage = 8
+				}
+			}
+
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4 = deep_clone(ballistic_tip)
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats.damage = 80
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats = {
+				ammo_pickup_min_mul = 0.5,
+				ammo_pickup_max_mul = 0.667
+			}
+
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_3 = deep_clone(ballistic_tip)
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_3.stats.damage = 20
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_3.overrides = {
+				{
+					depends_on = "wpn_fps_upg_ass_ak_b_zastava",
+					stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats),
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats)
+				},
+				{
+					depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
+					stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats),
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats)
+				},
+				{
+					depends_on = "wpn_fps_ass_g3_b_sniper",
+					stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats),
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats)
+				},
+				{
+					depends_on = "wpn_fps_ass_g3_b_short",
 					stats = {
 						value = 5,
 						damage = 12
-					},
-					overrides = {
-						{
-							depends_on = "wpn_fps_upg_ass_ak_b_zastava",
-							stats = {
-								value = 5,
-								damage = 80
-							},
-							custom_stats = {
-								ammo_pickup_min_mul = 0.5,
-								ammo_pickup_max_mul = 0.667
-							}
-						},
-						{
-							depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
-							stats = {
-								value = 5,
-								damage = 80
-							},
-							custom_stats = {
-								ammo_pickup_min_mul = 0.5,
-								ammo_pickup_max_mul = 0.667
-							}
-						}
 					}
 				},
-				tier_1 = {
-					stats = {
-						value = 5,
-						damage = 8
-					}
+				{
+					depends_on = "wpn_fps_ass_shak12_body_vks",
+					stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats),
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats)
 				}
 			}
-		},
-		shotgun = {
-			wpn_fps_upg_a_custom = {
-				tier_4 = {
-					stats = {
-						value = 5,
-						damage = 45,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 1400,
-						enemy_pen_energy_loss = 200,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 9
-					}
+
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_2 = deep_clone(ballistic_tip)
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_2.stats.damage = 12
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_2.overrides = {
+				{
+					depends_on = "wpn_fps_upg_ass_ak_b_zastava",
+					stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats),
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats)
 				},
-				pump_action = {
-					stats = {
-						value = 5,
-						damage = 25,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = 2,
-						max_enemy_penetration_distance = 1500,
-						enemy_pen_energy_loss = 200,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 9
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5,
-						damage = 25,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 1200,
-						enemy_pen_energy_loss = 200,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 9
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5,
-						damage = 20,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 1000,
-						enemy_pen_energy_loss = 200,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 9
-					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5,
-						damage = 16,
-						spread = nil
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						can_shoot_through_enemy = 1,
-						max_enemy_penetration_distance = 1000,
-						enemy_pen_energy_loss = 200,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 550,
-						wall_pen_energy_loss = 100,
-						rays = 9
-					}
-				}
-			},
-			wpn_fps_upg_a_slug = {
-				tier_4 = {
-					stats = {
-						value = 5,
-						damage = 74,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2,
-						far_damage_mul = 5,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 2400,
-						shield_pen_energy_loss = 600,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 2400,
-						wall_pen_energy_loss = 600,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 2400,
-						enemy_pen_energy_loss = 600,
-						rays = 1
-					}
-				},
-				pump_action = {
-					stats = {
-						value = 5,
-						damage = 61,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2,
-						far_damage_mul = 3,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 3000,
-						shield_pen_energy_loss = 400,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 3000,
-						wall_pen_energy_loss = 400,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 3000,
-						enemy_pen_energy_loss = 400,
-						rays = 1
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5,
-						damage = 61,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2,
-						far_damage_mul = 5,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 2400,
-						shield_pen_energy_loss = 600,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 2400,
-						wall_pen_energy_loss = 600,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 2400,
-						enemy_pen_energy_loss = 600,
-						rays = 1
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5,
-						damage = 32,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2,
-						far_damage_mul = 5,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 2000,
-						shield_pen_energy_loss = 500,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 2000,
-						wall_pen_energy_loss = 500,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 2000,
-						enemy_pen_energy_loss = 500,
-						rays = 1
-					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5,
-						damage = 30,
-						spread = 10
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						optimal_range_mul = 2,
-						far_damage_mul = 5,
-						armor_piercing_add = 1,
-						can_shoot_through_shield = true,
-						max_shield_penetration_distance = 2000,
-						shield_pen_energy_loss = 500,
-						can_shoot_through_wall = true,
-						max_wall_penetration_distance = 2000,
-						wall_pen_energy_loss = 500,
-						can_shoot_through_enemy = true,
-						max_enemy_penetration_distance = 2000,
-						enemy_pen_energy_loss = 500,
-						rays = 1
-					}
-				}
-			},
-			wpn_fps_upg_a_explosive = {
-				tier_4 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 128,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.5,
-						ignore_statistic = true,
-						falloff_override = {far_mul = 1},
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				},
-				pump_action = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 105,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.5,
-						ignore_statistic = true,
-						falloff_override = {far_mul = 1},
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 105,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.5,
-						ignore_statistic = true,
-						falloff_override = {far_mul = 1},
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 52,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.5,
-						ignore_statistic = true,
-						falloff_override = {far_mul = 1},
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5, 
-						total_ammo_mod = -5,
-						damage = 40,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.5,
-						ignore_statistic = true,
-						falloff_override = {far_mul = 1},
-						rays = 1, 
-						bullet_class = "InstantExplosiveBulletBase"
-					}
-				}
-			},
-			wpn_fps_upg_a_piercing = {
-				tier_4 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				pump_action = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.6,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5,
-						spread = 1
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = nil,
-						ammo_pickup_max_mul = nil,
-						add_head_shot_mul = 0.60,
-						optimal_range_mul = 1.33,
-						far_damage_mul = 2.5,
-						armor_piercing_add = 1, 
-						rays = 12
-					}
-				}
-			},
-			wpn_fps_upg_a_dragons_breath = {
-				tier_4 = {
-					stats = {
-						value = 5, 
-						damage = -80,
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.533,
-                        dot_data_name = "ammo_dragons_breath_4",
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath",
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						can_headshot = true,
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				pump_action = {
-                    muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath",
-                    hit_effect = "dragonsbreath",
-					stats = {
-						value = 5, 
-						damage = -50,
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.75,
-						ammo_pickup_max_mul = 0.7,
-                        dot_data_name = "ammo_dragons_breath_pump",
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true,
-						can_headshot = true,
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_3 = {
-					stats = {
-						value = 5, 
-						damage = -50,
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.75,
-						ammo_pickup_max_mul = 0.7,
-                        dot_data_name = "ammo_dragons_breath_3",
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						can_headshot = true,
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_2 = {
-					stats = {
-						value = 5, 
-						damage = -25,
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.5,
-						ammo_pickup_max_mul = 0.6,
-                        dot_data_name = "ammo_dragons_breath_2",
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						can_headshot = true,
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
-				},
-				tier_1 = {
-					stats = {
-						value = 5, 
-						damage = -15,
-						total_ammo_mod = 0,
-						spread = -3
-					},
-					custom_stats = {
-						ammo_pickup_min_mul = 0.583,
-						ammo_pickup_max_mul = 0.625,
-                        dot_data_name = "ammo_dragons_breath_1",
-						armor_piercing_add = 1, 
-						ignore_statistic = true,  
-						muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
-						far_falloff_mul = 0.7,
-						can_shoot_through_shield = true, 
-						can_headshot = true,
-						bullet_class = "FlameBulletBase",
-						rays = 12
-					}
+				{
+					depends_on = "wpn_fps_upg_ass_m4_b_beowulf",
+					stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.stats),
+					custom_stats = deep_clone(self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_4.custom_stats)
 				}
 			}
-		}
-	}
+
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_1 = deep_clone(ballistic_tip)
+			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_1.stats.damage = 8
+
+	-- Shotgun Ammo
+		-- Buckshot
+			local buckshot = {
+				stats = {
+					value = 5,
+					damage = 16,
+					spread = nil
+				},
+				custom_stats = {
+					ammo_pickup_min_mul = nil,
+					ammo_pickup_max_mul = nil,
+					can_shoot_through_enemy = 1,
+					max_enemy_penetration_distance = 1000,
+					enemy_pen_energy_loss = 200,
+					can_shoot_through_wall = true,
+					max_wall_penetration_distance = 550,
+					wall_pen_energy_loss = 100,
+					rays = 9
+				}
+			}
+
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_4 = deep_clone(buckshot)
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_4.stats.damage = 45
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_4.custom_stats.max_enemy_penetration_distance = 1400
+
+			self.ammo.shotgun.wpn_fps_upg_a_custom.pump_action = deep_clone(buckshot)
+			self.ammo.shotgun.wpn_fps_upg_a_custom.pump_action.stats.damage = 25
+			self.ammo.shotgun.wpn_fps_upg_a_custom.pump_action.custom_stats.max_enemy_penetration_distance = 1500
+
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_3 = deep_clone(buckshot)
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_3.stats.damage = 25
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_3.custom_stats.max_enemy_penetration_distance = 1200
+
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_2 = deep_clone(buckshot)
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_2.stats.damage = 20
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_2.custom_stats.max_enemy_penetration_distance = 1000
+
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_1 = deep_clone(buckshot)
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_1.stats.damage = 16
+			self.ammo.shotgun.wpn_fps_upg_a_custom.tier_1.custom_stats.max_enemy_penetration_distance = 1000
+
+		-- AP Slug
+			local ap_slug = {
+				stats = {
+					value = 5,
+					damage = 30,
+					spread = 10
+				},
+				custom_stats = {
+					ammo_pickup_min_mul = nil,
+					ammo_pickup_max_mul = nil,
+					optimal_range_mul = 2,
+					far_damage_mul = 5,
+					armor_piercing_add = 1,
+					can_shoot_through_shield = true,
+					can_shoot_through_wall = true,
+					can_shoot_through_enemy = true,
+					max_penetration_distance = 2000,
+					pen_energy_loss = 500,
+					rays = 1
+				}
+			}
+
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_4 = deep_clone(ap_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_4.stats.damage = 74
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_4.custom_stats.max_penetration_distance = 2400
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_4.custom_stats.pen_energy_loss = 600
+
+			self.ammo.shotgun.wpn_fps_upg_a_slug.pump_action = deep_clone(ap_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_slug.pump_action.stats.damage = 61
+			self.ammo.shotgun.wpn_fps_upg_a_slug.pump_action.custom_stats.far_damage_mul = 3
+			self.ammo.shotgun.wpn_fps_upg_a_slug.pump_action.custom_stats.max_penetration_distance = 3000
+			self.ammo.shotgun.wpn_fps_upg_a_slug.pump_action.custom_stats.pen_energy_loss = 400
+
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_3 = deep_clone(ap_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_3.stats.damage = 61
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_3.custom_stats.max_penetration_distance = 2400
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_3.custom_stats.pen_energy_loss = 600
+
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_2 = deep_clone(ap_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_2.stats.damage = 32
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_2.custom_stats.max_penetration_distance = 2000
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_2.custom_stats.pen_energy_loss = 500
+
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_1 = deep_clone(ap_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_1.stats.damage = 30
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_1.custom_stats.max_penetration_distance = 2000
+			self.ammo.shotgun.wpn_fps_upg_a_slug.tier_1.custom_stats.pen_energy_loss = 500
+
+		-- HE Round
+			local he_round = {
+				stats = {
+					value = 5, 
+					total_ammo_mod = -5,
+					damage = 40,
+					spread = -3
+				},
+				custom_stats = {
+					ammo_pickup_min_mul = 0.5,
+					ammo_pickup_max_mul = 0.5,
+					ignore_statistic = true,
+					falloff_override = {far_mul = 1},
+					rays = 1, 
+					bullet_class = "InstantExplosiveBulletBase"
+				}
+			}
+
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_4 = deep_clone(he_round)
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_4.stats.damage = 128
+
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.pump_action = deep_clone(he_round)
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.pump_action.stats.damage = 105
+
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_3 = deep_clone(he_round)
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_3.stats.damage = 105
+
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_2 = deep_clone(he_round)
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_2.stats.damage = 52
+
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_1 = deep_clone(he_round)
+			self.ammo.shotgun.wpn_fps_upg_a_explosive.tier_1.stats.damage = 40
+
+		-- Flechette
+			local flechette = {
+				stats = {
+					value = 5,
+					spread = 1
+				},
+				custom_stats = {
+					ammo_pickup_min_mul = nil,
+					ammo_pickup_max_mul = nil,
+					add_head_shot_mul = 0.60,
+					optimal_range_mul = 1.33,
+					far_damage_mul = 2.5,
+					armor_piercing_add = 1, 
+					rays = 12
+				}
+			}
+
+			self.ammo.shotgun.wpn_fps_upg_a_piercing.tier_4 = deep_clone(flechette)
+
+			self.ammo.shotgun.wpn_fps_upg_a_piercing.pump_action = deep_clone(flechette)
+
+			self.ammo.shotgun.wpn_fps_upg_a_piercing.tier_3 = deep_clone(flechette)
+
+			self.ammo.shotgun.wpn_fps_upg_a_piercing.tier_2 = deep_clone(flechette)
+
+			self.ammo.shotgun.wpn_fps_upg_a_piercing.tier_1 = deep_clone(flechette)
+
+		-- Dragon's Breath
+			local dragons_breath = {
+				stats = {
+					value = 5, 
+					damage = -15,
+					total_ammo_mod = 0,
+					spread = -3
+				},
+				custom_stats = {
+					ammo_pickup_min_mul = 0.583,
+					ammo_pickup_max_mul = 0.625,
+					dot_data_name = "ammo_dragons_breath_1",
+					armor_piercing_add = 1, 
+					ignore_statistic = true,  
+					muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
+					far_falloff_mul = 0.7,
+					can_shoot_through_shield = true, 
+					-- can_headshot = true,
+					bullet_class = "FlameBulletBase",
+					rays = 12
+				}
+			}
+
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_4 = deep_clone(dragons_breath)
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_4.stats.damage = -79
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_4.custom_stats.ammo_pickup_min_mul = 0.5
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_4.custom_stats.ammo_pickup_max_mul = 0.533
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_4.custom_stats.dot_data_name = "ammo_dragons_breath_4"
+
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.pump_action = deep_clone(dragons_breath)
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.pump_action.stats.damage = -56
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.pump_action.custom_stats.ammo_pickup_min_mul = 0.75
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.pump_action.custom_stats.ammo_pickup_max_mul = 0.7
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.pump_action.custom_stats.dot_data_name = "ammo_dragons_breath_pump"
+
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_3 = deep_clone(dragons_breath)
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_3.stats.damage = -56
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_3.custom_stats.ammo_pickup_min_mul = 0.75
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_3.custom_stats.ammo_pickup_max_mul = 0.7
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_3.custom_stats.dot_data_name = "ammo_dragons_breath_3"
+
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_2 = deep_clone(dragons_breath)
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_2.stats.damage = -28
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_2.custom_stats.ammo_pickup_min_mul = 0.5
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_2.custom_stats.ammo_pickup_max_mul = 0.6
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_2.custom_stats.dot_data_name = "ammo_dragons_breath_2"
+
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_1 = deep_clone(dragons_breath)
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_1.stats.damage = -22
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_1.custom_stats.ammo_pickup_min_mul = 0.583
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_1.custom_stats.ammo_pickup_max_mul = 0.625
+			self.ammo.shotgun.wpn_fps_upg_a_dragons_breath.tier_1.custom_stats.dot_data_name = "ammo_dragons_breath_1"
+
+		-- Tomstone Slug
+			local tombstone_slug = {
+				stats = {
+					value = 5,
+					total_ammo_mod = 0,
+					damage = -22,
+					spread = 10
+				},
+				custom_stats = {
+					armor_piercing_add = 1,
+					muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_rip",
+					dot_data_name = "ammo_rip_1",
+					damage_far_mul = 1,
+					damage_near_mul = 1,
+					can_shoot_through_enemy = true,
+					pen_energy_loss = 600, -- evaluate
+					bullet_class = "PoisonBulletBase",
+					rays = 1
+				}
+			}
+
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_4 = deep_clone(tombstone_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_4.stats.damage = -79
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_4.custom_stats.pen_energy_loss = 600 --evaluate
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_4.custom_stats.dot_data_name = "ammo_rip_4"
+
+			self.ammo.shotgun.wpn_fps_upg_a_rip.pump_action = deep_clone(tombstone_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_rip.pump_action.stats.damage = -56
+			self.ammo.shotgun.wpn_fps_upg_a_rip.pump_action.custom_stats.pen_energy_loss = 400 --evaluate
+			self.ammo.shotgun.wpn_fps_upg_a_rip.pump_action.custom_stats.dot_data_name = "ammo_rip_pump"
+
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_3 = deep_clone(tombstone_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_3.stats.damage = -56
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_3.custom_stats.pen_energy_loss = 600 --evaluate
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_3.custom_stats.dot_data_name = "ammo_rip_3"
+
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_2 = deep_clone(tombstone_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_2.stats.damage = -28
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_2.custom_stats.pen_energy_loss = 600 --evaluate
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_2.custom_stats.dot_data_name = "ammo_rip_2"
+
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_1 = deep_clone(tombstone_slug)
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_1.stats.damage = -22
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_1.custom_stats.pen_energy_loss = 600 --evaluate
+			self.ammo.shotgun.wpn_fps_upg_a_rip.tier_1.custom_stats.dot_data_name = "ammo_rip_1"
+
 end
+
 
 function WeaponFactoryTweakData:_init_ammo_overrides_oryo()
 	for category, tiers in pairs(self.weapon_index) do
@@ -1021,6 +647,7 @@ function WeaponFactoryTweakData:_init_ammo_overrides_oryo()
 	end
 end
 
+
 function WeaponFactoryTweakData:insert_ammo_overrides_oryo(factory_id, weapon_type, weapon_tier)
 	self[factory_id].override = self[factory_id].override or {}
 	for ammo_id, ammo_stats in pairs(self.ammo[weapon_type]) do
@@ -1030,6 +657,7 @@ function WeaponFactoryTweakData:insert_ammo_overrides_oryo(factory_id, weapon_ty
 		end
 	end
 end
+
 
 function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 	--AR/MG
@@ -1299,6 +927,7 @@ function WeaponFactoryTweakData:_init_barrel_extensions_oryo()
 		self.parts.wpn_fps_upg_ns_pis_typhoon.stats.suppression = 0
 end
 
+
 function WeaponFactoryTweakData:_init_gadgets_oryo()
 	--Assualt Light
 	self.parts.wpn_fps_upg_fl_ass_smg_sho_surefire.stats.recoil = 1
@@ -1351,6 +980,7 @@ function WeaponFactoryTweakData:_init_gadgets_oryo()
 		self.parts.wpn_fps_upg_fl_pis_m3x.stats.concealment = -1
 end
 
+
 function WeaponFactoryTweakData:_init_second_sights_oryo()
 	--Riktpunkt 45 Degree Sight
 	self.parts.wpn_fps_upg_o_45rds_v2.stats.spread = 1
@@ -1392,6 +1022,7 @@ function WeaponFactoryTweakData:_init_second_sights_oryo()
 	self.parts.wpn_fps_upg_o_sig.stats.concealment = -1
 	self.parts.wpn_fps_upg_o_sig.stats.gadget_magnification_mul = 2
 end
+
 
 function WeaponFactoryTweakData:_init_sights_oryo()
 	--[[ Zoom Levels:
@@ -1602,6 +1233,7 @@ function WeaponFactoryTweakData:_init_sights_oryo()
 
 end
 
+
 function WeaponFactoryTweakData:_init_AK_attachments_oryo()
 	--Barrels
 
@@ -1742,6 +1374,7 @@ function WeaponFactoryTweakData:_init_AK_attachments_oryo()
 		self.parts.wpn_fps_upg_ak_s_solidstock.stats.concealment = -4
 end
 
+
 function WeaponFactoryTweakData:_init_CAR_attachments_oryo()
 	--Barrels
 
@@ -1873,6 +1506,7 @@ function WeaponFactoryTweakData:_init_CAR_attachments_oryo()
 		self.parts.wpn_fps_upg_ass_m4_upper_reciever_core.stats.concealment = 0
 end
 
+
 function WeaponFactoryTweakData:_init_attachments_oryo()
 	self:_init_barrel_extensions_oryo()
 	self:_init_gadgets_oryo()
@@ -1968,6 +1602,7 @@ function WeaponFactoryTweakData:_init_attachments_oryo()
 							self.parts.wpn_fps_shot_r870_body_rack.stats.concealment = -2
 
 end
+
 
 function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 	--T5 Shotguns-----------------------------------------------------------
@@ -2104,6 +1739,7 @@ function WeaponFactoryTweakData:_init_shotgun_attachments_oryo()
 		
 			--Brothers Grimm 12G Shotguns
 end
+
 
 function WeaponFactoryTweakData:_init_assault_rifle_attachments_oryo()
 	--T4 ARs----------------------------------------------------------------
@@ -2635,15 +2271,15 @@ function WeaponFactoryTweakData:_init_assault_rifle_attachments_oryo()
 
 							--Light Foregrip
 							self.parts.wpn_fps_ass_galil_fg_sar.stats.damage = 1
-							self.parts.wpn_fps_ass_galil_fg_sar.stats.spread = 0
-							self.parts.wpn_fps_ass_galil_fg_sar.stats.recoil = 0
+							self.parts.wpn_fps_ass_galil_fg_sar.stats.spread = 1
+							self.parts.wpn_fps_ass_galil_fg_sar.stats.recoil = -1
 							self.parts.wpn_fps_ass_galil_fg_sar.stats.concealment = 1
 						
 							--Sniper Foregrip
-							self.parts.wpn_fps_ass_galil_fg_sniper.stats.damage = 1
+							self.parts.wpn_fps_ass_galil_fg_sniper.stats.damage = 2
 							self.parts.wpn_fps_ass_galil_fg_sniper.stats.spread = 3
-							self.parts.wpn_fps_ass_galil_fg_sniper.stats.recoil = -1
-							self.parts.wpn_fps_ass_galil_fg_sniper.stats.concealment = -2
+							self.parts.wpn_fps_ass_galil_fg_sniper.stats.recoil = -2
+							self.parts.wpn_fps_ass_galil_fg_sniper.stats.concealment = -1
 	
 					--Grips
 
@@ -2980,6 +2616,7 @@ function WeaponFactoryTweakData:_init_assault_rifle_attachments_oryo()
 							self.parts.wpn_fps_ass_asval_s_solid.stats.concealment = -6
 end
 
+
 function WeaponFactoryTweakData:_init_lmg_attachments_oryo()
 	--T2 LMGs----------------------------------------------------------
 							
@@ -3001,6 +2638,7 @@ function WeaponFactoryTweakData:_init_lmg_attachments_oryo()
 							self.parts.wpn_fps_lmg_hk21_fg_short.stats.recoil = 5
 							self.parts.wpn_fps_lmg_hk21_fg_short.stats.concealment = 3
 end
+
 
 function WeaponFactoryTweakData:_init_sniper_sight_overrides_oryo()
 	local sight_ids = {
@@ -3049,6 +2687,7 @@ function WeaponFactoryTweakData:_init_sniper_sight_overrides_oryo()
 		end
 	end
 end
+
 
 function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 
@@ -3159,6 +2798,7 @@ function WeaponFactoryTweakData:_init_sniper_attachments_oryo()
 							self.parts.wpn_fps_snp_victor_o_standard.stats.concealment = 4
 							self.parts.wpn_fps_snp_victor_o_standard.stats.magnification = 1
 end
+
 
 function WeaponFactoryTweakData:_init_smg_attachments_oryo()
 	--T3 SMGs----------------------------------------------------------
@@ -4064,6 +3704,7 @@ function WeaponFactoryTweakData:_init_smg_attachments_oryo()
 					--Akimbo Uzi Submachine Guns
 end
 
+
 function WeaponFactoryTweakData:_init_pistol_attachments_oryo()
 end
 
@@ -4071,6 +3712,7 @@ function WeaponFactoryTweakData:_init_special_attachments_oryo()
 	-- Basilisk 3V Incendiary Grenade
 	self.parts.wpn_fps_upg_a_grenade_launcher_incendiary_ms3gl.custom_stats.launcher_grenade = "launcher_incendiary_ms3gl"
 end
+
 
 Hooks:PostHook(WeaponFactoryTweakData, "init", "Oryo WeaponFactoryTweakData init", function(self)
 
