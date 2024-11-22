@@ -12,10 +12,7 @@ function PoisonGasEffect:update(t, dt)
 			self._timer = nil
 
 			if alive(self._grenade_unit) and (Network:is_server() or self._grenade_unit:id() == -1) then
-				managers.enemy:add_delayed_clbk(
-						"PoisonGasEffect" .. tostring(self._grenade_unit:key()), callback(PoisonGasEffect, PoisonGasEffect, "remove_grenade_unit"),
-								TimerManager:game():time() + self._dot_data.dot_length + 1
-				)
+				managers.enemy:add_delayed_clbk("PoisonGasEffect" .. tostring(self._grenade_unit:key()), callback(PoisonGasEffect, PoisonGasEffect, "remove_grenade_unit"), TimerManager:game():time() + self._dot_data.dot_length + 1)
 			end
 		end
 
@@ -28,14 +25,7 @@ function PoisonGasEffect:update(t, dt)
 
 				for _, unit in ipairs(nearby_units) do
 					if not self._unit_list[unit:key()] then
-						self._unit_list[unit:key()] = true
-
-						-- <oryo: not needed?
-						self._dot_data.hurt_animation = not self._dot_data.hurt_animation_chance or math.rand(1) < self._dot_data.hurt_animation_chance
-						self._dot_data.apply_hurt_once = true
-						self._dot_data.variant = "poison"
-						-- oryo>
-
+						-- self._unit_list[unit:key()] = true -- oryo: allow multiple applications
 						local data = {
 							unit = unit,
 							dot_data = self._dot_data,
