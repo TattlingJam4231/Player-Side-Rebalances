@@ -4068,6 +4068,8 @@ function WeaponFactoryTweakData:_init_pistol_attachments_oryo()
 end
 
 function WeaponFactoryTweakData:_init_special_attachments_oryo()
+	-- Basilisk 3V Incendiary Grenade
+	self.parts.wpn_fps_upg_a_grenade_launcher_incendiary_ms3gl.custom_stats.launcher_grenade = "launcher_incendiary_ms3gl"
 end
 
 Hooks:PostHook(WeaponFactoryTweakData, "init", "Oryo WeaponFactoryTweakData init", function(self)
