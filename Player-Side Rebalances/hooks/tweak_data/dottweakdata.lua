@@ -266,14 +266,3 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 	}
 
 end)
-
-
--- function DOTTweakData:get_dot_data(tweak_name)
--- 	for variant, dot_entries in pairs(self.dot_entries) do
--- 		if dot_entries[tweak_name] then
---             Utils.PrintTable(dot_entries[tweak_name])
--- 			return dot_entries[tweak_name]
--- 		end
--- 	end
--- 	return nil
--- end
