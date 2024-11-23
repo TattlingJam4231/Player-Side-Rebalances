@@ -22,6 +22,43 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_can_crit = true
 	}
 
+	-- Incendiary Grenade
+	self.dot_entries.fire.proj_fire_com = {
+		dot_trigger_chance = 1,
+		dot_grace_period = 0,
+		dot_damage = 8,
+		damage_ticks = 12,
+		dot_trigger_max_distance = false,
+		dot_can_stack = true,
+		dot_can_crit = true
+	}
+
+	-- Molotov
+	self.dot_entries.fire.proj_molotov = {
+		dot_trigger_chance = 1,
+		dot_grace_period = 0,
+		dot_application_period = 1.5,
+		dot_damage = 8,
+		dot_tick_period = 0.5,
+		damage_ticks = 10,
+		dot_trigger_max_distance = false,
+		dot_can_stack = true,
+		dot_can_crit = true,
+		is_molotov = true
+	}
+	self.dot_entries.fire.proj_molotov_groundfire = {
+		dot_trigger_chance = 1,
+		dot_grace_period = 0,
+		dot_application_period = 1.5,
+		dot_damage = 8,
+		dot_tick_period = 0.5,
+		damage_ticks = 12,
+		dot_trigger_max_distance = false,
+		dot_can_stack = true,
+		dot_can_crit = true,
+		is_molotov = true
+	}
+
 	-- Launcher Incendiary Grenade
 	self.dot_entries.fire.proj_launcher_incendiary = {
 		dot_trigger_chance = 1,
@@ -34,17 +71,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_can_stack = true,
 		dot_can_crit = true
 	}
-	self.dot_entries.fire.proj_launcher_incendiary_groundfire = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
-		dot_application_period = 1.5,
-		dot_damage = 8,
-		dot_tick_period = 0.5,
-		damage_ticks = 12,
-		dot_trigger_max_distance = false,
-		dot_can_stack = true,
-		dot_can_crit = true
-	}
+	self.dot_entries.fire.proj_launcher_incendiary_groundfire = deep_clone(self.dot_entries.fire.proj_molotov_groundfire)
 
 	-- Arbiter Incendiary Grenade
 	self.dot_entries.fire.proj_launcher_incendiary_arbiter = {
@@ -58,7 +85,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_can_stack = true,
 		dot_can_crit = true
 	}
-	self.dot_entries.fire.proj_launcher_incendiary_arbiter_groundfire = deep_clone(self.dot_entries.fire.proj_launcher_incendiary_groundfire)
+	self.dot_entries.fire.proj_launcher_incendiary_arbiter_groundfire = deep_clone(self.dot_entries.fire.proj_molotov_groundfire)
 
 	-- Dragon's Breath
 	local ammo_dragons_breath = {
@@ -239,3 +266,14 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 	}
 
 end)
+
+
+-- function DOTTweakData:get_dot_data(tweak_name)
+-- 	for variant, dot_entries in pairs(self.dot_entries) do
+-- 		if dot_entries[tweak_name] then
+--             Utils.PrintTable(dot_entries[tweak_name])
+-- 			return dot_entries[tweak_name]
+-- 		end
+-- 	end
+-- 	return nil
+-- end

@@ -13,5 +13,6 @@ end)
 Hooks:PostHook(CharacterTweakData, "_init_tank", "Oryo CharacterTweakData _init_tank", function(self, presets)
 
 	self.tank.damage.hurt_severity = presets.hurt_severities.only_poison_and_light_hurt -- oryo: allow poison hurt on dozer
+	self.tank_medic.damage.hurt_severity = presets.hurt_severities.only_poison_and_light_hurt
 		
 end)
