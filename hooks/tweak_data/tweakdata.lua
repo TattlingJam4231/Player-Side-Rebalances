@@ -95,6 +95,33 @@ if not oryo_tweakstats then
 		sound_event = "gl_explode",
 		name_id = "bm_launcher_frag"
 	}
+
+	-- Incendiary Grenade
+	-- self.projectiles.fir_com = {
+	-- 	damage = 3,
+	-- 	curve_pow = 0.1,
+	-- 	player_damage = 3,
+	-- 	dot_data_name = "proj_fire_com",
+	-- 	range = 500,
+	-- 	name_id = "bm_grenade_fir_com",
+	-- 	sound_event = "white_explosion",
+	-- 	effect_name = "effects/payday2/particles/explosions/grenade_incendiary_explosion"
+	-- }
+
+	-- Molotov Grenade
+	tweak_data.projectiles.molotov = {
+		damage = 3,
+		player_damage = 1,
+		dot_data_name = "proj_molotov",
+		range = 350,
+		burn_duration = 12,
+		burn_tick_period = 0.5,
+		sound_event = "molotov_impact",
+		sound_event_impact_duration = 0,
+		name_id = "bm_grenade_molotov",
+		alert_radius = 1500,
+		fire_alert_radius = 1500
+	}
 	
 	-- Arbiter Incendiary Grenade
 	-- tweak_data.projectiles.launcher_incendiary_arbiter = {
@@ -283,47 +310,6 @@ if not oryo_tweakstats then
 	-- 	sound_event = "gl_explode",
 	-- 	name_id = "bm_launcher_frag",
 	-- 	projectile_trail = true
-	-- }
-	
-	-- tweak_data.projectiles.molotov = {
-	-- 	damage = 3,
-	-- 	player_damage = 2,
-	-- 	fire_dot_data = {
-	-- 		dot_trigger_chance = 35,
-	-- 		dot_damage = 1,
-	-- 		dot_length = 3,
-	-- 		dot_trigger_max_distance = 3000,
-	-- 		dot_tick_period = 0.5
-	-- }
-	
-	-- tweak_data.projectiles.launcher_incendiary = {
-	-- 	damage = 10,
-	-- 	launch_speed = 1250,
-	-- 	curve_pow = 0.1,
-	-- 	player_damage = 2,
-	-- 	fire_dot_data = {
-	-- 		dot_trigger_chance = 35,
-	-- 		dot_damage = 25,
-	-- 		dot_length = 6.1,
-	-- 		dot_trigger_max_distance = 3000,
-	-- 		dot_tick_period = 0.5
-	-- }
-	
-	-- tweak_data.projectiles.fir_com = {
-	-- 	damage = 3,
-	-- 	curve_pow = 0.1,
-	-- 	player_damage = 3,
-	-- 	fire_dot_data = {
-	-- 		dot_trigger_chance = 100,
-	-- 		dot_damage = 25,
-	-- 		dot_length = 2.1,
-	-- 		dot_trigger_max_distance = 3000,
-	-- 		dot_tick_period = 0.5
-	-- 	},
-	-- 	range = 500,
-	-- 	name_id = "bm_grenade_fir_com",
-	-- 	sound_event = "white_explosion",
-	-- 	effect_name = "effects/payday2/particles/explosions/grenade_incendiary_explosion"
 	-- }
 
 	-- tweak_data.projectiles.wpn_prj_four = {
