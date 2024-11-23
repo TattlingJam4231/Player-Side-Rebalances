@@ -2271,15 +2271,15 @@ function WeaponFactoryTweakData:_init_assault_rifle_attachments_oryo()
 
 							--Light Foregrip
 							self.parts.wpn_fps_ass_galil_fg_sar.stats.damage = 1
-							self.parts.wpn_fps_ass_galil_fg_sar.stats.spread = 1
-							self.parts.wpn_fps_ass_galil_fg_sar.stats.recoil = -1
+							self.parts.wpn_fps_ass_galil_fg_sar.stats.spread = 0
+							self.parts.wpn_fps_ass_galil_fg_sar.stats.recoil = 0
 							self.parts.wpn_fps_ass_galil_fg_sar.stats.concealment = 1
 						
 							--Sniper Foregrip
-							self.parts.wpn_fps_ass_galil_fg_sniper.stats.damage = 2
+							self.parts.wpn_fps_ass_galil_fg_sniper.stats.damage = 1
 							self.parts.wpn_fps_ass_galil_fg_sniper.stats.spread = 3
-							self.parts.wpn_fps_ass_galil_fg_sniper.stats.recoil = -2
-							self.parts.wpn_fps_ass_galil_fg_sniper.stats.concealment = -1
+							self.parts.wpn_fps_ass_galil_fg_sniper.stats.recoil = -1
+							self.parts.wpn_fps_ass_galil_fg_sniper.stats.concealment = -2
 	
 					--Grips
 

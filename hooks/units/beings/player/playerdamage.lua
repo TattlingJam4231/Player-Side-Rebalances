@@ -64,29 +64,23 @@ function PlayerDamage:_calc_armor_damage(attack_data)
 end
 
 
-Hooks:PostHook(
-		PlayerDamage, "_regenerate_armor", "Oryo PlayerDamage _regenerate_armor", function(self)
+Hooks:PostHook(PlayerDamage, "_regenerate_armor", "Oryo PlayerDamage _regenerate_armor", function(self)
 			-- <oryo: Yakuza
 			managers.player:activate_shallow_grave_revive_oryo()
 			-- oryo>
-		end
-)
+end)
 
-Hooks:PostHook(
-		PlayerDamage, "_on_enter_swansong_event", "Oryo PlayerDamage _on_enter_swansong_event", function(self)
+Hooks:PostHook(PlayerDamage, "_on_enter_swansong_event", "Oryo PlayerDamage _on_enter_swansong_event", function(self)
 			-- <oryo: Yakuza
 			self._block_shallow_grave = true
 			-- oryo>
-		end
-)
+end)
 
-Hooks:PostHook(
-		PlayerDamage, "_on_revive_event", "Oryo PlayerDamage _on_revive_event", function(self)
+Hooks:PostHook(PlayerDamage, "_on_revive_event", "Oryo PlayerDamage _on_revive_event", function(self)
 			-- <oryo: Yakuza
 			self._block_shallow_grave = false
 			-- oryo>
-		end
-)
+end)
 
 local _calc_health_damage_original = PlayerDamage._calc_health_damage
 function PlayerDamage:_calc_health_damage(attack_data)
@@ -142,8 +136,7 @@ function PlayerDamage:_check_bleed_out(can_activate_berserker, ignore_movement_s
 		end
 
 		-- <oryo: Yakuza
-		if not self._block_shallow_grave and managers.player:has_category_upgrade("temporary", "shallow_grave") and
-				not managers.player:active_shallow_grave_oryo() then
+		if not self._block_shallow_grave and managers.player:has_category_upgrade("temporary", "shallow_grave") and not managers.player:active_shallow_grave_oryo() then
 
 			local attack_data = self:get_last_attack_oryo()
 			local health_subtracted = self:get_last_health_loss_oryo()
@@ -175,8 +168,8 @@ function PlayerDamage:consume_armor_stored_health(amount)
 		managers.hud:set_stored_health(self._armor_stored_health / self:_max_health())
 	end
 end
-
 -- oryo>
+
 
 local revive_original = PlayerDamage.revive
 function PlayerDamage:revive(silent)
@@ -189,9 +182,7 @@ function PlayerDamage:revive(silent)
 
 	if not self:arrested() then
 		-- oryo: Combat Medic and Up You Go work off of max health instead of revive health
-		local extra_revive_health = self:_max_health() *
-				                            ((self._revive_health_multiplier or 0) + managers.player:upgrade_value("player", "revived_health_regain", 0))
+		local extra_revive_health = self:_max_health() * ((self._revive_health_multiplier or 0) + managers.player:upgrade_value("player", "revived_health_regain", 0))
 		self:set_health((self:_max_health() * tweak_data.player.damage.REVIVE_HEALTH_STEPS[self._revive_health_i]) + extra_revive_health)
 	end
 end
-

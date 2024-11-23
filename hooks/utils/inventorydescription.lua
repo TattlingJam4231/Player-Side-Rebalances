@@ -61,8 +61,7 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 								mods_stats[stat.name].value = mods_stats[stat.name].value + part_data.custom_stats.fire_rate_multiplier - 1
 							end
 						elseif stat.name == "damage" and part_data.custom_stats and part_data.custom_stats.launcher_grenade then
-							local projectile_type = weapon_tweak.projectile_types and weapon_tweak.projectile_types[part_data.custom_stats.launcher_grenade] or
-									                        part_data.custom_stats.launcher_grenade
+							local projectile_type = weapon_tweak.projectile_types and weapon_tweak.projectile_types[part_data.custom_stats.launcher_grenade] or part_data.custom_stats.launcher_grenade
 							mods_stats[stat.name].projectile_type = projectile_type
 						else
 							mods_stats[stat.name].index = mods_stats[stat.name].index + (part_data.stats[stat.name] or 0)
@@ -109,16 +108,14 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 					end
 
 					mods_stats[stat.name].value = stat.index and index or tweak_stats[stat_name][index] * tweak_data.gui.stats_present_multiplier
-					local offset = math.min(tweak_stats[stat_name][1], tweak_stats[stat_name][#tweak_stats[stat_name]]) *
-							               tweak_data.gui.stats_present_multiplier
+					local offset = math.min(tweak_stats[stat_name][1], tweak_stats[stat_name][#tweak_stats[stat_name]]) * tweak_data.gui.stats_present_multiplier
 
 					if stat.offset then
 						mods_stats[stat.name].value = mods_stats[stat.name].value - offset
 					end
 
 					if stat.revert then
-						local max_stat = math.max(tweak_stats[stat_name][1], tweak_stats[stat_name][#tweak_stats[stat_name]]) *
-								                 tweak_data.gui.stats_present_multiplier
+						local max_stat = math.max(tweak_stats[stat_name][1], tweak_stats[stat_name][#tweak_stats[stat_name]]) * tweak_data.gui.stats_present_multiplier
 
 						if stat.offset then
 							max_stat = max_stat - offset
@@ -158,9 +155,7 @@ function WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonu
 					end
 
 					if stat.percent then
-						local max_stat = stat.index and #tweak_stats[stat.name] or
-								                 math.max(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) *
-								                 tweak_data.gui.stats_present_multiplier
+						local max_stat = stat.index and #tweak_stats[stat.name] or math.max(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) * tweak_data.gui.stats_present_multiplier
 
 						if stat.offset then
 							max_stat = max_stat - offset
@@ -219,8 +214,7 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 		part_data = nil
 
 		if mod.name then
-			if tweak_data.blackmarket.weapon_skins[mod.name] and tweak_data.blackmarket.weapon_skins[mod.name].bonus and
-					tweak_data.economy.bonuses[tweak_data.blackmarket.weapon_skins[mod.name].bonus] then
+			if tweak_data.blackmarket.weapon_skins[mod.name] and tweak_data.blackmarket.weapon_skins[mod.name].bonus and tweak_data.economy.bonuses[tweak_data.blackmarket.weapon_skins[mod.name].bonus] then
 				part_data = {
 					stats = tweak_data.economy.bonuses[tweak_data.blackmarket.weapon_skins[mod.name].bonus].stats
 				}
@@ -275,10 +269,7 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 						mod[stat.name] = stat.index and index or tweak_stats[stat.name][index] * tweak_data.gui.stats_present_multiplier
 
 						if wanted_index ~= index then
-							print(
-									"[WeaponDescription._get_weapon_mod_stats] index went out of bound, estimating value", "mod_name", mod_name, "stat.name",
-											stat.name, "wanted_index", wanted_index, "index", index
-							)
+							print("[WeaponDescription._get_weapon_mod_stats] index went out of bound, estimating value", "mod_name", mod_name, "stat.name", stat.name, "wanted_index", wanted_index, "index", index)
 
 							if stat.index then
 								index = wanted_index
@@ -293,8 +284,7 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 							end
 						end
 
-						local offset = math.min(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) *
-								               tweak_data.gui.stats_present_multiplier
+						local offset = math.min(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) * tweak_data.gui.stats_present_multiplier
 
 						if stat.offset then
 							mod[stat.name] = mod[stat.name] - offset
@@ -342,9 +332,7 @@ function WeaponDescription._get_weapon_mod_stats(mod_name, weapon_name, base_sta
 						end
 
 						if stat.percent then
-							local max_stat = stat.index and #tweak_stats[stat.name] or
-									                 math.max(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) *
-									                 tweak_data.gui.stats_present_multiplier
+							local max_stat = stat.index and #tweak_stats[stat.name] or math.max(tweak_stats[stat.name][1], tweak_stats[stat.name][#tweak_stats[stat.name]]) * tweak_data.gui.stats_present_multiplier
 
 							if stat.offset then
 								max_stat = max_stat - offset
@@ -416,20 +404,17 @@ function WeaponDescription.get_weapon_ammo_info(weapon_id, extra_ammo, total_amm
 		return clip_base + clip_mod + clip_skill
 	end
 
-
 	local ammo_max_per_clip = get_ammo_max_per_clip(weapon_id)
 	local ammo_max = tweak_data.weapon[weapon_id].AMMO_MAX
 	local ammo_from_mods = ammo_max * (total_ammo_mod and tweak_data.weapon.stats.total_ammo_mod[total_ammo_mod] or 0) + total_ammo_add -- oryo: added total_ammo_add
-	ammo_max = (ammo_max + ammo_from_mods + managers.player:upgrade_value(weapon_id, "clip_amount_increase") * ammo_max_per_clip) *
-			           ammo_max_multiplier
+	ammo_max = (ammo_max + ammo_from_mods + managers.player:upgrade_value(weapon_id, "clip_amount_increase") * ammo_max_per_clip) * ammo_max_multiplier
 	ammo_max_per_clip = math.min(ammo_max_per_clip, ammo_max)
 	local ammo_data = {
 		base = tweak_data.weapon[weapon_id].AMMO_MAX,
 		mod = ammo_from_mods + managers.player:upgrade_value(weapon_id, "clip_amount_increase") * ammo_max_per_clip
 	}
 	ammo_data.skill = (ammo_data.base + ammo_data.mod) * ammo_max_multiplier - ammo_data.base - ammo_data.mod
-	ammo_data.skill_in_effect = managers.player:has_category_upgrade("player", "extra_ammo_multiplier") or category_skill_in_effect or
-			                            managers.player:has_category_upgrade("player", "add_armor_stat_skill_ammo_mul")
+	ammo_data.skill_in_effect = managers.player:has_category_upgrade("player", "extra_ammo_multiplier") or category_skill_in_effect or managers.player:has_category_upgrade("player", "add_armor_stat_skill_ammo_mul")
 
 	return ammo_max_per_clip, ammo_max, ammo_data
 end
@@ -441,13 +426,11 @@ function WeaponDescription._get_stats(name, category, slot, blueprint)
 	local single_mod = false
 	local auto_mod = false
 	local factory_id = managers.weapon_factory:get_factory_id_by_weapon_id(name)
-	local blueprint = blueprint or slot and managers.blackmarket:get_weapon_blueprint(category, slot) or
-			                  managers.weapon_factory:get_default_blueprint_by_factory_id(factory_id)
+	local blueprint = blueprint or slot and managers.blackmarket:get_weapon_blueprint(category, slot) or managers.weapon_factory:get_default_blueprint_by_factory_id(factory_id)
 	local cosmetics = managers.blackmarket:get_weapon_cosmetics(category, slot)
 	local bonus_stats = {}
 
-	if cosmetics and cosmetics.id and cosmetics.bonus and not managers.job:is_current_job_competitive() and
-			not managers.weapon_factory:has_perk("bonus", factory_id, blueprint) then
+	if cosmetics and cosmetics.id and cosmetics.bonus and not managers.job:is_current_job_competitive() and not managers.weapon_factory:has_perk("bonus", factory_id, blueprint) then
 		bonus_stats = tweak_data:get_raw_value("economy", "bonuses", tweak_data.blackmarket.weapon_skins[cosmetics.id].bonus, "stats") or {}
 	end
 
@@ -465,12 +448,8 @@ function WeaponDescription._get_stats(name, category, slot, blueprint)
 
 	local base_stats = WeaponDescription._get_base_stats(name)
 	local mods_stats = WeaponDescription._get_mods_stats(name, base_stats, equipped_mods, bonus_stats)
-	local skill_stats = WeaponDescription._get_skill_stats(
-			name, category, slot, base_stats, mods_stats, silencer, single_mod, auto_mod, blueprint
-	)
-	local clip_ammo, max_ammo, ammo_data = WeaponDescription.get_weapon_ammo_info(
-			name, tweak_data.weapon[name].stats.extra_ammo, base_stats.totalammo.index + mods_stats.totalammo.index, mods_stats.totalammo.value
-	) -- oryo: added mods_stats.totalammo.value
+	local skill_stats = WeaponDescription._get_skill_stats(name, category, slot, base_stats, mods_stats, silencer, single_mod, auto_mod, blueprint)
+	local clip_ammo, max_ammo, ammo_data = WeaponDescription.get_weapon_ammo_info(name, tweak_data.weapon[name].stats.extra_ammo, base_stats.totalammo.index + mods_stats.totalammo.index, mods_stats.totalammo.value) -- Player-Side Rebalances: added mods_stats.totalammo.value
 	base_stats.totalammo.value = ammo_data.base
 	mods_stats.totalammo.value = ammo_data.mod
 	skill_stats.totalammo.value = ammo_data.skill
@@ -483,4 +462,3 @@ function WeaponDescription._get_stats(name, category, slot, blueprint)
 
 	return base_stats, mods_stats, skill_stats
 end
-

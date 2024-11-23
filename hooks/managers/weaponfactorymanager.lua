@@ -131,12 +131,8 @@ function WeaponFactoryManager:get_part_data_oryo(part_id, factory_id, equipped_m
 	if equipped_mods and part.overrides then
 		for _, override in ipairs(part.overrides) do
 			if override.depends_on and table.contains(equipped_mods, override.depends_on) then
-				if override.stats then
-					part.stats = override.stats
-				end
-				if override.custom_stats then
-					part.custom_stats = override.custom_stats
-				end
+				if override.stats then part.stats = override.stats end
+				if override.custom_stats then part.custom_stats = override.custom_stats end
 			end
 		end
 	end

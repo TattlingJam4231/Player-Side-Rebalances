@@ -71,4 +71,3 @@ function PlayerEquipment:_sentry_gun_ammo_cost(sentry_uid)
 		hud:set_ammo_amount(index, weapon.unit:base():ammo_info())
 	end
 end
-

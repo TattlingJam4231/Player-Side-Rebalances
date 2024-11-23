@@ -90,28 +90,19 @@ function FPCameraPlayerBase:_update_movement(t, dt)
 end
 
 
-Hooks:PostHook(
-		FPCameraPlayerBase, "start_shooting", "Oryo FPCameraPlayerBase start_shooting", function(self)
-			self._reduce_kick_indices = nil -- oryo
-		end
-)
+Hooks:PostHook(FPCameraPlayerBase, "start_shooting", "Oryo FPCameraPlayerBase start_shooting", function(self)
+	self._reduce_kick_indices = nil -- oryo
+end)
 
-Hooks:PostHook(
-		FPCameraPlayerBase, "stop_shooting", "Oryo FPCameraPlayerBase stop_shooting", function(self)
-			self._recoil_wait = type(self._recoil_wait) == "number" and {
-				pause = 0,
-				accel = 0
-			} or self._recoil_wait
-			self._reduce_kick_indices = true -- oryo
-			self._kick_indices_timer = kick_indices_timer -- oryo
-		end
-)
+Hooks:PostHook(FPCameraPlayerBase, "stop_shooting", "Oryo FPCameraPlayerBase stop_shooting", function(self)
+	self._recoil_wait = type(self._recoil_wait) == "number" and {pause = 0,accel = 0} or self._recoil_wait
+	self._reduce_kick_indices = true -- oryo
+	self._kick_indices_timer = kick_indices_timer -- oryo
+end)
 
-Hooks:PreHook(
-		FPCameraPlayerBase, "break_recoil", "Oryo FPCameraPlayerBase break_recoil", function(self)
-			self._kick_indices = {} -- oryo
-		end
-)
+Hooks:PreHook(FPCameraPlayerBase, "break_recoil", "Oryo FPCameraPlayerBase break_recoil", function(self)
+	self._kick_indices = {} -- oryo
+end)
 
 function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) -- added recoil_table
 
@@ -123,8 +114,7 @@ function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) -- 
 
 		local recoil_max = math.abs((self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated)))
 		local recoil_min = math.abs((self._recoil_kick.h.accumulated or 0) + h)
-		self._recoil_kick.h.accumulated = recoil_min < recoil_max and (self._recoil_kick.h.accumulated or 0) + h or
-				                                  (self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated))
+		self._recoil_kick.h.accumulated = recoil_min < recoil_max and (self._recoil_kick.h.accumulated or 0) + h or (self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated))
 
 	else -- original
 		if math.abs(self._recoil_kick.accumulated) < 100 --[[ oryo: changed to 100 from 20 ]] then
@@ -139,8 +129,7 @@ function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) -- 
 		-- <oryo
 		local recoil_max = math.abs((self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated)))
 		local recoil_min = math.abs((self._recoil_kick.h.accumulated or 0) + h)
-		self._recoil_kick.h.accumulated = recoil_min < recoil_max and (self._recoil_kick.h.accumulated or 0) + h or
-				                                  (self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated)) -- oryo: added multiplier to h of (5 / (5 + self._recoil_kick.accumulated)) if horizontal recoil would move camera away from center
+		self._recoil_kick.h.accumulated = recoil_min < recoil_max and (self._recoil_kick.h.accumulated or 0) + h or (self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated)) -- oryo: added multiplier to h of (5 / (5 + self._recoil_kick.accumulated)) if horizontal recoil would move camera away from center
 		-- oryo>
 	end
 
@@ -149,8 +138,7 @@ end
 
 function FPCameraPlayerBase:increment_kick_index_oryo(recoil_table)
 	self._kick_indices = self._kick_indices or {}
-	self._kick_indices[recoil_table.weapon_name_id] = self._kick_indices[recoil_table.weapon_name_id] and
-			                                                  self._kick_indices[recoil_table.weapon_name_id] + 1 or 1
+	self._kick_indices[recoil_table.weapon_name_id] = self._kick_indices[recoil_table.weapon_name_id] and self._kick_indices[recoil_table.weapon_name_id] + 1 or 1
 end
 
 
@@ -160,8 +148,7 @@ function FPCameraPlayerBase:get_loop_index_oryo(recoil_table)
 	local kick_index = math.ceil(self._kick_indices[recoil_table.weapon_name_id])
 	local loop_length = kick_table.loop_last or 1
 	local num_kicks = kick_table.kicks and (#kick_table.kicks and kick_table.kicks[#kick_table.kicks].index or #kick_table.kicks) or 1
-	kick_index = kick_index > num_kicks and kick_index - (loop_length * (math.floor((kick_index - num_kicks - 1) / loop_length) + 1)) or
-			             kick_index
+	kick_index = kick_index > num_kicks and kick_index - (loop_length * (math.floor((kick_index - num_kicks - 1) / loop_length) + 1)) or kick_index
 
 	return kick_index
 end
@@ -180,15 +167,15 @@ function FPCameraPlayerBase:get_kick_variance_oryo(kick_table, kick_index)
 		else
 			for i = 1, #kick_table.variance do
 				if kick_table.variance[i].index > kick_index then
-					if kick_table.variance[i - 1] then
-						local variance_index = math.clamp(math.inverse_lerp(kick_table.variance[i - 1].index, kick_table.variance[i].index, kick_index), 0, 1)
+					if kick_table.variance[i-1] then
+						local variance_index = math.clamp(math.inverse_lerp(kick_table.variance[i-1].index, kick_table.variance[i].index, kick_index),0,1)
 						variance.v = {
-							math.lerp(kick_table.variance[i - 1].v[1], kick_table.variance[i].v[1], variance_index),
-							math.lerp(kick_table.variance[i - 1].v[2], kick_table.variance[i].v[2], variance_index)
+							math.lerp(kick_table.variance[i-1].v[1], kick_table.variance[i].v[1], variance_index),
+							math.lerp(kick_table.variance[i-1].v[2], kick_table.variance[i].v[2], variance_index)
 						}
 						variance.h = {
-							math.lerp(kick_table.variance[i - 1].h[1], kick_table.variance[i].h[1], variance_index),
-							math.lerp(kick_table.variance[i - 1].h[2], kick_table.variance[i].h[2], variance_index)
+							math.lerp(kick_table.variance[i-1].h[1], kick_table.variance[i].h[1], variance_index),
+							math.lerp(kick_table.variance[i-1].h[2], kick_table.variance[i].h[2], variance_index)
 						}
 						break
 					else
@@ -202,14 +189,8 @@ function FPCameraPlayerBase:get_kick_variance_oryo(kick_table, kick_index)
 		end
 	else
 		variance = {
-			v = {
-				0,
-				0
-			},
-			h = {
-				0,
-				0
-			}
+			v = {0,0},
+			h = {0,0}
 		}
 	end
 	return variance
@@ -223,17 +204,16 @@ function FPCameraPlayerBase:get_base_kick_oryo(kick_table, loop_index)
 		if type(kick_table.kicks[1]) == "number" and type(kick_table.kicks[2]) == "number" then
 			v = kick_table.kicks[1]
 			h = kick_table.kicks[2]
-		elseif kick_table.kicks[loop_index] and type(kick_table.kicks[loop_index][1]) == "number" and type(kick_table.kicks[loop_index][2]) ==
-				"number" then
+		elseif kick_table.kicks[loop_index] and type(kick_table.kicks[loop_index][1]) == "number" and type(kick_table.kicks[loop_index][2]) == "number" then
 			v = kick_table.kicks[loop_index][1]
 			h = kick_table.kicks[loop_index][2]
 		else
 			for i = 1, #kick_table.kicks do
 				if kick_table.kicks[i].index > loop_index then
-					if kick_table.kicks[i - 1] then
-						local lerp_index = math.clamp(math.inverse_lerp(kick_table.kicks[i - 1].index, kick_table.kicks[i].index, loop_index), 0, 1)
-						v = math.lerp(kick_table.kicks[i - 1].kick[1], kick_table.kicks[i].kick[1], lerp_index)
-						h = math.lerp(kick_table.kicks[i - 1].kick[2], kick_table.kicks[i].kick[2], lerp_index)
+					if kick_table.kicks[i-1] then
+						local lerp_index = math.clamp(math.inverse_lerp(kick_table.kicks[i-1].index, kick_table.kicks[i].index, loop_index),0,1)
+						v = math.lerp(kick_table.kicks[i-1].kick[1], kick_table.kicks[i].kick[1], lerp_index)
+						h = math.lerp(kick_table.kicks[i-1].kick[2], kick_table.kicks[i].kick[2], lerp_index)
 						break
 					else
 						v = kick_table.kicks[i].kick[1]
@@ -286,9 +266,9 @@ function FPCameraPlayerBase:update_recoil_kick_oryo(t, dt)
 	local r_value_v = 0
 	local r_value_h = 0
 
-	if (self._recoil_kick.current and self._episilon < math.abs(self._recoil_kick.accumulated - self._recoil_kick.current) --[[ oryo: checks against absolute value of the difference ]] and
-			0 < self._recoil_kick.accumulated --[[ oryo: added check for recoil above 0 ]] ) or
-			(self._recoil_kick.h.current and self._episilon < math.abs(self._recoil_kick.h.accumulated - self._recoil_kick.h.current)) then
+	if (self._recoil_kick.current and self._episilon < math.abs(self._recoil_kick.accumulated - self._recoil_kick.current) --[[ oryo: checks against absolute value of the difference ]] and 0 < self._recoil_kick.accumulated --[[ oryo: added check for recoil above 0 ]] )
+	or (self._recoil_kick.h.current and self._episilon < math.abs(self._recoil_kick.h.accumulated - self._recoil_kick.h.current))
+	then
 		if self._recoil_kick.current and self._episilon < math.abs(self._recoil_kick.accumulated - self._recoil_kick.current) and 0 <
 				self._recoil_kick.accumulated then
 			local n = math.step(self._recoil_kick.current, self._recoil_kick.accumulated, 40 * dt)
@@ -370,4 +350,3 @@ function FPCameraPlayerBase:update_recoil_kick_oryo(t, dt)
 
 	return r_value_h, r_value_v
 end
-

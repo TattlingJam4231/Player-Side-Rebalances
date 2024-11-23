@@ -2124,10 +2124,6 @@ function WeaponTweakData:_init_snipers_oryo()
 			self.victor.AMMO_MAX = 30
 			self.victor.stats.spread = 16
 			self.victor.stats.recoil = 9
-			-- self.victor.recoil_wait = {
-			-- 	pause = 0,
-			-- 	accel = 0
-			-- }
 			self.victor.kick.standing = {
 				2,
 				2.5,
@@ -2140,12 +2136,12 @@ function WeaponTweakData:_init_snipers_oryo()
 					crouching = 1,
 					steelsight = 0.67
 				},
-				scale_factor = 0.4, --0.8
+				scale_factor = 0.8,
 				variance = {
 					{
 						index = 1,
-						v = {2.15,2.35}, -- 2, 2.5
-						h = {-0.35,0.35} -- -0.5, 0.5
+						v = {2,2.5},
+						h = {-0.5,0.5}
 					}
 				}
 			}

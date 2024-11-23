@@ -1,6 +1,6 @@
 PlayerAction.AmmoEfficiency = {
 	Priority = 1,
-	Function = function(player_manager, target_headshots, bullet_refund, target_time)
+	Function = function (player_manager, target_headshots, bullet_refund, target_time)
 		local co = coroutine.running()
 		local time = Application:time()
 		local headshots = 1
@@ -14,7 +14,6 @@ PlayerAction.AmmoEfficiency = {
 				target_time = time + player_manager._ammo_efficiency.time
 			end
 		end
-
 
 		player_manager:register_message(Message.OnHeadShot, co, on_headshot)
 
@@ -31,5 +30,4 @@ PlayerAction.AmmoEfficiency = {
 
 		player_manager:unregister_message(Message.OnHeadShot, co)
 	end
-
 }

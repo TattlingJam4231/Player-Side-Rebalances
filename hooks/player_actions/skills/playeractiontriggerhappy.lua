@@ -1,6 +1,6 @@
 PlayerAction.TriggerHappy = {
 	Priority = 1,
-	Function = function(player_manager, damage_bonus, max_stacks, max_time, duration)
+	Function = function (player_manager, damage_bonus, max_stacks, max_time, duration)
 		local co = coroutine.running()
 		local current_time = Application:time()
 		local current_stacks = 1

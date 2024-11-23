@@ -80,9 +80,7 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 
 		mvector3.add_scaled(to, furthest_hit.ray, distance)
 
-		local hits = World:raycast_all(
-				"ray", from, to, "sphere_cast_radius", radius, "disable_inner_ray", "slot_mask", managers.slot:get_mask("enemies")
-		)
+		local hits = World:raycast_all("ray", from, to, "sphere_cast_radius", radius, "disable_inner_ray", "slot_mask", managers.slot:get_mask("enemies"))
 
 		for i, hit in ipairs(hits) do
 			local key = hit.unit:key()
@@ -95,16 +93,14 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 		end
 
 		for _, hit in pairs(hits) do
-			hit.unit:character_damage():damage_simple(
-					{
+			hit.unit:character_damage():damage_simple({
 						variant = "graze",
 						damage = best_damage,
 						attacker_unit = managers.player:player_unit(),
 						weapon_unit = weapon_unit,
 						pos = hit.position,
 						attack_dir = -hit.normal
-					}
-			)
+			})
 		end
 	else
 		radius = 250
@@ -118,20 +114,17 @@ function SniperGrazeDamage:on_weapon_fired(weapon_unit, result)
 					local hit_position = Vector3()
 					mvector3.set(hit_position, unit:movement():m_head_pos())
 
-					unit:character_damage():damage_simple(
-							{
+					unit:character_damage():damage_simple({
 								variant = "graze",
 								damage = best_damage,
 								attacker_unit = managers.player:player_unit(),
 								weapon_unit = weapon_unit,
 								pos = hit_position,
 								attack_dir = hit_position - hit.position
-							}
-					)
+					})
 					unit_damaged[key] = unit
 				end
 			end
 		end
 	end
 end
-

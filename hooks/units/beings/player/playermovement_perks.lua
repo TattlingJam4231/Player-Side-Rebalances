@@ -1,14 +1,10 @@
-Hooks:PostHook(
-		PlayerMovement, "update", "Oryo PlayerMovement update", function(self)
+Hooks:PostHook(PlayerMovement, "update", "Oryo PlayerMovement update", function(self)
 			self:upd_meat_shield_oryo()
-		end
-)
+end)
 
 -- oryo: Muscle
 function PlayerMovement:upd_meat_shield_oryo()
-	if not managers.player:has_category_upgrade("temporary", "meat_shield_dmg_dampener") then
-		return
-	end
+	if not managers.player:has_category_upgrade("temporary", "meat_shield_dmg_dampener") then return end
 
 	local my_pos = self._m_pos
 	local player_mask = managers.slot:get_mask("players")
@@ -20,4 +16,3 @@ function PlayerMovement:upd_meat_shield_oryo()
 		managers.player:activate_temporary_upgrade("temporary", "meat_shield_dmg_dampener")
 	end
 end
-

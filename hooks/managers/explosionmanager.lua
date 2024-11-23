@@ -135,8 +135,7 @@ function ExplosionManager:_damage_bodies(detect_results, params)
 end
 
 function ExplosionManager:client_damage_and_push(position, normal, user_unit, dmg, range, curve_pow)
-	local bodies = World:find_bodies("intersect", "sphere", position, range,
-			managers.slot:get_mask("bullet_impact_targets"))
+	local bodies = World:find_bodies("intersect", "sphere", position, range, managers.slot:get_mask("bullet_impact_targets"))
 	local units_to_push = {}
 
 	for _, hit_body in ipairs(bodies) do
