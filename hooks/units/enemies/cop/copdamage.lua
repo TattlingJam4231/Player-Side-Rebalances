@@ -227,6 +227,10 @@ end
 -- <oryo
 local damage_dot_original = CopDamage.damage_dot
 function CopDamage:damage_dot(attack_data)
+
+	if not alive(attack_data.weapon_unit) then -- oryo: avoid access violation
+		attack_data.weapon_unit = nil
+	end
 	
 	if attack_data.attacker_unit == managers.player:player_unit() and attack_data.dot_can_crit and not attack_data.critical_hit then
 		local critical_hit, crit_damage = self:roll_critical_hit(attack_data, attack_data.damage)
@@ -237,6 +241,7 @@ function CopDamage:damage_dot(attack_data)
 			attack_data.critical_hit = false
 		end
 	end
+
 
 	local result = damage_dot_original(self, attack_data)
 
