@@ -1517,6 +1517,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			-- Predator 12G Shotgun
 			self.spas12.rays = 12
+			self.spas12.fire_mode_data.fire_rate = 0.1714
 			self.spas12.stats.spread = 9
 			self.spas12.stats.recoil = 14
 			self.spas12.stats.reload = 11
@@ -1525,6 +1526,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 
 			-- VD-12 Shotgun
+			self.sko12.fire_mode_data.fire_rate = 0.24
 			self.sko12.damage_falloff = {
 				optimal_distance = 0,
 				optimal_range = 1200,
