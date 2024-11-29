@@ -242,7 +242,6 @@ function CopDamage:damage_dot(attack_data)
 		end
 	end
 
-
 	local result = damage_dot_original(self, attack_data)
 
 	attack_data.weapon_unit = attack_data.dot_info.last_weapon_unit
