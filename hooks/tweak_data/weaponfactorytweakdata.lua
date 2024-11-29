@@ -43,6 +43,7 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 				"wpn_fps_shot_b682",			-- Joceline O/U 12G Shotgun
 				"wpn_fps_shot_huntsman",		-- Mosconi 12G Shotgun
 				"wpn_fps_sho_boot",				-- Breaker 12G Shotgun
+				"wpn_fps_sho_supernova",		-- Deimos Shotgun
 				"wpn_fps_shot_m37",				-- GSPS 12G Shotgun
 				"wpn_fps_sho_coach"				-- Claire 12G Shotgun
 			},
@@ -85,7 +86,8 @@ function WeaponFactoryTweakData:_init_weapon_index_oryo()
 			tier_1 = {
 				"m249",				-- KSP Light Machine Gun
 				"par",				-- KSP 58 Light Machine Gun
-				"mg42"				-- Buzzsaw 42 Light Machine Gun
+				"mg42",				-- Buzzsaw 42 Light Machine Gun
+				"kacchainsaw"		-- Campbell 74 LMG
 			}
 		},
 		snp = {
@@ -2620,7 +2622,7 @@ end
 function WeaponFactoryTweakData:_init_lmg_attachments_oryo()
 	--T2 LMGs----------------------------------------------------------
 							
-			--Brenner-21 Light Machine Gun
+			-- Brenner-21 Light Machine Gun
 			
 					--Barrels
 
@@ -3723,6 +3725,23 @@ end
 
 
 function WeaponFactoryTweakData:_init_pistol_attachments_oryo()
+			
+	-- Deagle
+	
+			--Magazines
+
+					--Extended Magazine
+					self.parts.wpn_fps_pis_deagle_m_extended.stats.extra_ammo = nil
+					self.parts.wpn_fps_pis_deagle_m_extended.stats.magazine_add = 2
+			
+	-- Akimbo Deagle
+	
+			--Magazines
+
+					--Extended Magazine
+					self.wpn_fps_x_deagle.override.wpn_fps_pis_deagle_m_extended.stats.extra_ammo = nil
+					self.wpn_fps_x_deagle.override.wpn_fps_pis_deagle_m_extended.stats.magazine_add = 4
+
 end
 
 function WeaponFactoryTweakData:_init_special_attachments_oryo()

@@ -43,6 +43,7 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"b682",				-- Joceline O/U 12G Shotgun
 				"huntsman",			-- Mosconi 12G Shotgun
 				"boot",				-- Breaker 12G Shotgun
+				"supernova",		-- Deimos Shotgun
 				"m37",				-- GSPS 12G Shotgun
 				"coach"				-- Claire 12G Shotgun
 			},
@@ -86,7 +87,8 @@ function WeaponTweakData:_init_weapon_index_oryo()
 			tier_1 = {
 				"m249",				-- KSP Light Machine Gun
 				"par",				-- KSP 58 Light Machine Gun
-				"mg42"				-- Buzzsaw 42 Light Machine Gun
+				"mg42",				-- Buzzsaw 42 Light Machine Gun
+				"kacchainsaw"		-- Campbell 74 LMG
 			}
 		},
 		snp = {
@@ -1372,6 +1374,22 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.boot.AMMO_MAX = 28
 			self.boot.rays = 12
 			self.boot.stats.concealment = 22
+
+			
+			-- Deimos Shotgun
+			-- self.supernova.alt_fire_data.fire_rate = 0.2
+			self.supernova.alt_fire_data.spread_mul = 1.35
+			self.supernova.alt_fire_data.damage_mul = 0.65
+			-- self.supernova.alt_fire_data.recoil_mul = 0.75
+			self.supernova.damage_falloff = {
+				optimal_distance = 0,
+				optimal_range = 1200,
+				near_falloff = 0,
+				far_falloff = 2250,
+				near_multiplier = 1,
+				far_multiplier = 0.1
+			}
+			self.supernova.stats.spread = 14
 
 			
 			-- GSPS 12G Shotgun
@@ -3654,7 +3672,8 @@ function WeaponTweakData:_init_pistols_oryo()
 
 			
 			--deagle
-			self.deagle.AMMO_MAX = 30
+			self.deagle.AMMO_MAX = 35
+			self.deagle.CLIP_AMMO_MAX = 7
 			self.deagle.fire_mode_data.fire_rate = 0.2
 			self.deagle.single.fire_rate = 0.2
 			self.deagle.stats.damage = 176
@@ -3664,7 +3683,8 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.deagle.has_description = true
 			
 					--akimbo deagle
-					self.x_deagle.AMMO_MAX = 30
+					self.x_deagle.AMMO_MAX = 35
+					self.x_deagle.CLIP_AMMO_MAX = 14
 					self.x_deagle.fire_mode_data.fire_rate = 0.2
 					self.x_deagle.single.fire_rate = 0.2
 					self.x_deagle.stats.damage = 176
