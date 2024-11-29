@@ -22,6 +22,17 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_can_crit = true
 	}
 
+	-- Infernal Flamethrower
+	self.dot_entries.fire.weapon_kacchainsaw_flamethrower  = {
+		dot_trigger_chance = 1,
+		dot_grace_period = 0,
+		dot_damage = 0.2,
+		dot_tick_period = 0.5,
+		damage_ticks = 3,
+		dot_can_stack = true,
+		dot_can_crit = true
+	}
+
 	-- Incendiary Grenade
 	self.dot_entries.fire.proj_fire_com = {
 		dot_trigger_chance = 1,
@@ -266,14 +277,3 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 	}
 
 end)
-
-
--- function DOTTweakData:get_dot_data(tweak_name)
--- 	for variant, dot_entries in pairs(self.dot_entries) do
--- 		if dot_entries[tweak_name] then
---             Utils.PrintTable(dot_entries[tweak_name])
--- 			return dot_entries[tweak_name]
--- 		end
--- 	end
--- 	return nil
--- end
