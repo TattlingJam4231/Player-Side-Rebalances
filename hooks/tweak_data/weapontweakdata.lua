@@ -4040,7 +4040,10 @@ Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(se
 	end
 	
 	--turret
-	self.swat_van_turret_module.BODY_DAMAGE_CLAMP = 40000
+	self.swat_van_turret_module.BODY_DAMAGE_CLAMP = nil
+	self.aa_turret_module.BODY_DAMAGE_CLAMP = nil
+	self.crate_turret_module.BODY_DAMAGE_CLAMP = nil
+	self.ceiling_turret_module.BODY_DAMAGE_CLAMP = nil
 	
 	--sentry
 	self.sentry_gun.DAMAGE = 4

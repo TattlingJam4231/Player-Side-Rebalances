@@ -48,6 +48,13 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	local ai_vision_ids = Idstring("ai_vision")
 	local bulletproof_ids = Idstring("bulletproof")
 
+	local unique_hits = {}
+	local enemies_hit = {}
+	local unit, u_key, is_enemy = nil
+	local units_hit = {}
+	local in_slot_func = Unit.in_slot
+	local has_ray_type_func = Body.has_ray_type
+
 
 	-- <oryo
 	local weapon_unit = setup_data.weapon_unit
@@ -100,14 +107,6 @@ function RaycastWeaponBase.collect_hits(from, to, setup_data)
 	else
 		ray_hits = World:raycast_all("ray", from, to, "slot_mask", bullet_slotmask, "ignore_unit", ignore_unit)
 	end
-	
-	
-	local unique_hits = {}
-	local enemies_hit = {}
-	local unit, u_key, is_enemy = nil
-	local units_hit = {}
-	local in_slot_func = Unit.in_slot
-	local has_ray_type_func = Body.has_ray_type
 
 	for i, hit in ipairs(ray_hits) do
 		unit = hit.unit
@@ -464,29 +463,31 @@ function RaycastWeaponBase:update_next_shooting_time()
 		end
 	end
 	
-	local fire_mode_data = tweak_data.weapon[self._name_id].fire_mode_data or {}
+	local next_fire = self:weapon_fire_rate() / self:fire_rate_multiplier()
+	self._next_fire_allowed = self._next_fire_allowed + next_fire
+end
+
+
+function RaycastWeaponBase:weapon_fire_rate()
+	local weapon_tweak_data = self:weapon_tweak_data()
+	local fire_mode_data = weapon_tweak_data.fire_mode_data
+
+	local fire_rate = fire_mode_data and fire_mode_data.fire_rate or 0
 
 	if self._fire_mode == Idstring("single") then
 		fire_mode_data = fire_mode_data and fire_mode_data.single or fire_mode_data
-		local fire_rate = fire_mode_data.fire_rate or 0
-		local next_fire = fire_rate / self:fire_rate_multiplier()
-		self._next_fire_allowed = self._next_fire_allowed + next_fire
+		fire_rate = fire_mode_data.fire_rate or 0
 
 	elseif self._fire_mode == Idstring("auto") then
 		fire_mode_data = fire_mode_data and fire_mode_data.auto or fire_mode_data
-		local fire_rate = fire_mode_data.fire_rate or 0
-		local next_fire = fire_rate / self:fire_rate_multiplier()
-		self._next_fire_allowed = self._next_fire_allowed + next_fire
+		fire_rate = fire_mode_data.fire_rate or 0
 
 	elseif self._fire_mode == Idstring("burst") then
 		fire_mode_data = fire_mode_data and fire_mode_data.burst or fire_mode_data
-		local fire_rate = fire_mode_data.fire_rate or 0
-		local next_fire = fire_rate / self:fire_rate_multiplier()
-		self._next_fire_allowed = self._next_fire_allowed + next_fire
-	else
-		local next_fire = (tweak_data.weapon[self._name_id].fire_mode_data.fire_rate or 0) / self:fire_rate_multiplier()
-		self._next_fire_allowed = self._next_fire_allowed + next_fire
+		fire_rate = fire_mode_data.fire_rate or 0
 	end
+
+	return fire_rate
 end
 
 
