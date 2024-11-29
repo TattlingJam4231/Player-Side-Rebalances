@@ -2637,6 +2637,23 @@ function WeaponFactoryTweakData:_init_lmg_attachments_oryo()
 							self.parts.wpn_fps_lmg_hk21_fg_short.stats.spread = -2
 							self.parts.wpn_fps_lmg_hk21_fg_short.stats.recoil = 5
 							self.parts.wpn_fps_lmg_hk21_fg_short.stats.concealment = 3
+
+	--T1 LMGs----------------------------------------------------------
+							
+			-- Campbell 74
+			
+					-- Underbarrels
+
+							-- Infernal Flamethrower
+							self.parts.wpn_fps_lmg_kacchainsaw_flamethrower.stats.total_ammo_mod = -5
+							-- self.parts.wpn_fps_lmg_kacchainsaw_flamethrower.stats.total_ammo_add = -20
+							-- self.parts.wpn_fps_lmg_kacchainsaw_flamethrower.stats = {
+							-- 		concealment = -8,
+							-- 		total_ammo_mod = -4,
+							-- 		spread = -3,
+							-- 		value = 1,
+							-- 		recoil = -2
+							-- }
 end
 
 
