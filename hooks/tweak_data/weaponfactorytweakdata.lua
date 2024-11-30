@@ -3747,6 +3747,18 @@ end
 function WeaponFactoryTweakData:_init_special_attachments_oryo()
 	-- Basilisk 3V Incendiary Grenade
 	self.parts.wpn_fps_upg_a_grenade_launcher_incendiary_ms3gl.custom_stats.launcher_grenade = "launcher_incendiary_ms3gl"
+
+
+	-- Flamthrower -- oryo: fixed not using correct DoT
+	self.parts.wpn_fps_fla_mk2_mag_welldone.type = "ammo"
+	self.parts.wpn_fps_fla_mk2_mag_rare.type = "ammo"
+	self.parts.wpn_fps_fla_mk2_mag.type = "ammo"
+
+
+	-- MA-17 Flamthrower -- oryo: fixed not using correct DoT
+	self.parts.wpn_fps_fla_system_m_high.type = "ammo"
+	self.parts.wpn_fps_fla_system_m_low.type = "ammo"
+	self.parts.wpn_fps_fla_system_m_standard.type = "ammo"
 end
 
 

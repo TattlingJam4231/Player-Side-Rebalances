@@ -1379,8 +1379,8 @@ function WeaponTweakData:_init_shotguns_oryo()
 			
 			-- Deimos Shotgun
 			-- self.supernova.alt_fire_data.fire_rate = 0.2
-			self.supernova.alt_fire_data.spread_mul = 1.35
 			self.supernova.alt_fire_data.damage_mul = 0.65
+			self.supernova.alt_fire_data.spread_mul = 1.35
 			-- self.supernova.alt_fire_data.recoil_mul = 0.75
 			self.supernova.damage_falloff = {
 				optimal_distance = 0,

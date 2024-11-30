@@ -1,113 +1,116 @@
 Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_dot_entries_fire", function(self, entries, tweak_data)
 
-	-- Flamethrower DoT
-	self.dot_entries.fire.weapon_flamethrower_mk2 = {
+
+	self.dot_entries.fire.default_fire = {
+		PROCESSED = true,
+		name = "default",
+		variant = "fire",
+		damage_class = "FlameBulletBase",
 		dot_trigger_chance = 1,
 		dot_grace_period = 0,
-		dot_damage = 1.0,
+		dot_damage = 4.0,
 		dot_tick_period = 0.5,
 		damage_ticks = 3,
+		dot_trigger_max_distance = 3000,
 		dot_can_stack = true,
 		dot_can_crit = true
+	}
+
+	-- Flamethrower DoT
+	self.dot_entries.fire.weapon_flamethrower_mk2 = {
+		dot_damage = 1.0,
+		damage_ticks = 3,
+		dot_trigger_max_distance = false
+	}
+	self.dot_entries.fire.ammo_flamethrower_mk2_rare = {
+		dot_damage = 1.2,
+		damage_ticks = 2,
+		dot_trigger_max_distance = false
+	}
+	self.dot_entries.fire.ammo_flamethrower_mk2_welldone = {
+		dot_damage = 0.9,
+		damage_ticks = 4,
+		dot_trigger_max_distance = false
 	}
 
 	-- MA-17 Flamethrower DoT
 	self.dot_entries.fire.weapon_system  = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_damage = 0.8,
-		dot_tick_period = 0.5,
 		damage_ticks = 3,
-		dot_can_stack = true,
-		dot_can_crit = true
+		dot_trigger_max_distance = false
+	}
+	self.dot_entries.fire.ammo_system_low = {
+		dot_damage = 0.6,
+		damage_ticks = 3,
+		dot_trigger_max_distance = false
+	}
+	self.dot_entries.fire.ammo_system_high = {
+		dot_damage = 1.0,
+		damage_ticks = 3,
+		dot_trigger_max_distance = false
+	}
+
+	-- Cash Blaster
+	self.dot_entries.fire.weapon_money = {
+		burn_sound_name = "no_sound",
+		fire_effect_variant = "endless_money",
+		dot_damage = 0.4,
+		damage_ticks = 2,
+		dot_trigger_max_distance = false,
 	}
 
 	-- Infernal Flamethrower
 	self.dot_entries.fire.weapon_kacchainsaw_flamethrower  = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_damage = 0.2,
-		dot_tick_period = 0.5,
-		damage_ticks = 3,
-		dot_can_stack = true,
-		dot_can_crit = true
+		damage_ticks = 3
 	}
 
 	-- Incendiary Grenade
 	self.dot_entries.fire.proj_fire_com = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_damage = 8,
 		damage_ticks = 12,
-		dot_trigger_max_distance = false,
-		dot_can_stack = true,
-		dot_can_crit = true
+		dot_trigger_max_distance = false
 	}
 
 	-- Molotov
 	self.dot_entries.fire.proj_molotov = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_application_period = 1.5,
 		dot_damage = 8,
-		dot_tick_period = 0.5,
 		damage_ticks = 10,
 		dot_trigger_max_distance = false,
-		dot_can_stack = true,
-		dot_can_crit = true,
 		is_molotov = true
 	}
 	self.dot_entries.fire.proj_molotov_groundfire = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_application_period = 1.5,
 		dot_damage = 8,
-		dot_tick_period = 0.5,
 		damage_ticks = 12,
 		dot_trigger_max_distance = false,
-		dot_can_stack = true,
-		dot_can_crit = true,
 		is_molotov = true
 	}
 
 	-- Launcher Incendiary Grenade
 	self.dot_entries.fire.proj_launcher_incendiary = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_application_period = 1.5,
 		dot_damage = 8,
-		dot_tick_period = 0.5,
 		damage_ticks = 6,
-		dot_trigger_max_distance = false,
-		dot_can_stack = true,
-		dot_can_crit = true
+		dot_trigger_max_distance = false
 	}
 	self.dot_entries.fire.proj_launcher_incendiary_groundfire = deep_clone(self.dot_entries.fire.proj_molotov_groundfire)
 
 	-- Arbiter Incendiary Grenade
 	self.dot_entries.fire.proj_launcher_incendiary_arbiter = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_application_period = 1.5,
 		dot_damage = 8,
-		dot_tick_period = 0.5,
 		damage_ticks = 3,
-		dot_trigger_max_distance = false,
-		dot_can_stack = true,
-		dot_can_crit = true
+		dot_trigger_max_distance = false
 	}
 	self.dot_entries.fire.proj_launcher_incendiary_arbiter_groundfire = deep_clone(self.dot_entries.fire.proj_molotov_groundfire)
 
 	-- Dragon's Breath
 	local ammo_dragons_breath = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_damage = 2.2,
-		dot_tick_period = 0.5,
 		damage_ticks = 12,
-		dot_trigger_max_distance = 2000,
-		dot_can_stack = true,
-		dot_can_crit = true
+		dot_trigger_max_distance = 2000
 	}
 
 	self.dot_entries.fire.ammo_dragons_breath_4 = deep_clone(ammo_dragons_breath)
@@ -176,12 +179,23 @@ end)
 
 Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _init_dot_entries_poison", function(self, entries)
 
-	-- Viper Grenade
-	self.dot_entries.poison.proj_gas_grenade_cloud = {
+
+	self.dot_entries.poison.default_poison = {
+		PROCESSED = true,
+		name = "default",
+		variant = "poison",
+		damage_class = "PoisonBulletBase",
 		dot_grace_period = 0,
-		dot_application_period = 1,
 		dot_damage = 2,
 		dot_tick_period = 1,
+		dot_can_stack = "extend",
+		dot_can_crit = true,
+		accelerate = true,
+		lethal_hurt = true
+	}
+
+	-- Viper Grenade
+	self.dot_entries.poison.proj_gas_grenade_cloud = {
 		damage_ticks = 12,
 		dot_can_stack = "extend",
 		dot_can_crit = true,

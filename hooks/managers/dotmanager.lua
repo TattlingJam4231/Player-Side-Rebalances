@@ -234,23 +234,7 @@ function DOTManager:update_dot_info_oryo(existing_dot_info, existing_var_info, d
 
 	existing_var_info.hurt_animation = existing_var_info.hurt_animation or dot_data.hurt_animation
 
-	--[[ _add_doted_enemy
-	if existing_dot_info then ]]
-	local is_stronger, should_update = self:_is_new_dot_stronger(existing_var_info, data, t)
-
-	if is_stronger then
-		self:_update_variant_override(existing_dot_info, existing_var_info, data, t)
-	elseif should_update then
-		self:_update_variant(existing_dot_info, existing_var_info, data, t)
-	else
-		should_sync = false
-
-		self:_update_variant_attacker(existing_dot_info, existing_var_info, data)
-	end
-
 	return should_sync
-	--[[ _add_doted_enemy
-	if existing_dot_info then ]]
 end
 
 
