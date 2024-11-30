@@ -183,7 +183,7 @@ Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWea
 		end
 
 		if parts_stats.magazine_add then
-			self.extra_ammo = self.extra_ammo + math.floor(parts_stats.magazine_add)
+			self._extra_ammo = self._extra_ammo + math.floor(parts_stats.magazine_add)
 		end
 
 		if parts_stats.total_ammo_add then
@@ -367,13 +367,12 @@ end
 
 function NewRaycastWeaponBase:stop_shooting()
 	NewRaycastWeaponBase.super.stop_shooting(self)
-	
-	local fire_mode_data = tweak_data.weapon[self._name_id].fire_mode_data or {}
 
 	if self._fire_mode == Idstring("burst") then
-		fire_mode_data = fire_mode_data and fire_mode_data.burst or fire_mode_data
+		local weapon_tweak_data = self:weapon_tweak_data()
+		local fire_mode_data = weapon_tweak_data.fire_mode_data or {}
 		local fire_rate = fire_mode_data.fire_rate or 0
-		local burst_cooldown = fire_mode_data.burst_cooldown or fire_rate * 2
+		local burst_cooldown = (fire_mode_data.burst_cooldown or self:weapon_fire_rate()) / self:fire_rate_multiplier() or fire_rate * 2
 		local next_fire = burst_cooldown / self:fire_rate_multiplier()
 		self._next_fire_allowed = self._next_fire_allowed + next_fire
     elseif self._fire_mode == Idstring("volley") then

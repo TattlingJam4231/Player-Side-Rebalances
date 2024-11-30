@@ -43,6 +43,7 @@ function WeaponTweakData:_init_weapon_index_oryo()
 				"b682",				-- Joceline O/U 12G Shotgun
 				"huntsman",			-- Mosconi 12G Shotgun
 				"boot",				-- Breaker 12G Shotgun
+				"supernova",		-- Deimos Shotgun
 				"m37",				-- GSPS 12G Shotgun
 				"coach"				-- Claire 12G Shotgun
 			},
@@ -86,12 +87,14 @@ function WeaponTweakData:_init_weapon_index_oryo()
 			tier_1 = {
 				"m249",				-- KSP Light Machine Gun
 				"par",				-- KSP 58 Light Machine Gun
-				"mg42"				-- Buzzsaw 42 Light Machine Gun
+				"mg42",				-- Buzzsaw 42 Light Machine Gun
+				"kacchainsaw"		-- Campbell 74 LMG
 			}
 		},
 		snp = {
 			tier_5 = {
-				"m95"				-- Thanatos .50 cal Sniper Rifle
+				"m95",				-- Thanatos .50 cal Sniper Rifle
+				"awp"				-- Amaroq 900 Sniper Rifle
 			},
 			tier_4 = {
 				"mosin",			-- Nagant Sniper Rifle
@@ -1374,6 +1377,22 @@ function WeaponTweakData:_init_shotguns_oryo()
 			self.boot.stats.concealment = 22
 
 			
+			-- Deimos Shotgun
+			-- self.supernova.alt_fire_data.fire_rate = 0.2
+			self.supernova.alt_fire_data.damage_mul = 0.65
+			self.supernova.alt_fire_data.spread_mul = 1.35
+			-- self.supernova.alt_fire_data.recoil_mul = 0.75
+			self.supernova.damage_falloff = {
+				optimal_distance = 0,
+				optimal_range = 1200,
+				near_falloff = 0,
+				far_falloff = 2250,
+				near_multiplier = 1,
+				far_multiplier = 0.1
+			}
+			self.supernova.stats.spread = 14
+
+			
 			-- GSPS 12G Shotgun
 			self.m37.AMMO_MAX = 21
 			self.m37.rays = 12
@@ -1498,6 +1517,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 			-- Predator 12G Shotgun
 			self.spas12.rays = 12
+			self.spas12.fire_mode_data.fire_rate = 0.1714
 			self.spas12.stats.spread = 9
 			self.spas12.stats.recoil = 14
 			self.spas12.stats.reload = 11
@@ -1506,6 +1526,7 @@ function WeaponTweakData:_init_shotguns_oryo()
 
 
 			-- VD-12 Shotgun
+			self.sko12.fire_mode_data.fire_rate = 0.24
 			self.sko12.damage_falloff = {
 				optimal_distance = 0,
 				optimal_range = 1200,
@@ -1838,6 +1859,47 @@ function WeaponTweakData:_init_lmgs_oryo()
 					}
 				}
 			}
+			
+			-- Campbell 74
+			self.kacchainsaw.AMMO_MAX = 600
+			self.kacchainsaw.stats.damage = 57
+			self.kacchainsaw.stats.spread = 12
+			self.kacchainsaw.stats.recoil = 7
+			self.kacchainsaw.stats.suppression = 1
+			self.kacchainsaw.panic_suppression_chance = 1
+			self.kacchainsaw.kick.standing = {
+				-0.2,
+				0.8,
+				-1,
+				1.4
+			}
+			self.kacchainsaw.kick.crouching = self.kacchainsaw.kick.standing
+			self.kacchainsaw.kick.steelsight = self:kick_steelsight_oryo(self.kacchainsaw.kick.standing)
+			self.kacchainsaw.kick_table = {
+				state_mul = {
+					standing = 1,
+					crouching = 1,
+					steelsight = 0.75
+				},
+				scale_factor = 1,
+				v_scale_factor = 1,
+				h_scale_factor = 1,
+				variance = {
+					{
+						index = 5,
+						v = {-0.2,0.8},
+						h = {-1,1.4}
+					},
+					{
+						index = 40,
+						v = {-0.15,0.15},
+						h = {-0.6,1}
+					}
+				}
+			}
+			self.kacchainsaw_flamethrower.CLIP_AMMO_MAX = 100
+			self.kacchainsaw_flamethrower.AMMO_MAX = 200
+			self.kacchainsaw_flamethrower.AMMO_PICKUP = {15, 25}
 end
 
 
@@ -1861,6 +1923,9 @@ function WeaponTweakData:_init_snipers_oryo()
 					}
 				}
 			}
+
+			-- amaroq
+			self.awp.AMMO_PICKUP = {0.2	/1.35, 0.3 /1.35}
 
 	--t4 snipers----------------------------------------------------------------
 		
@@ -3654,7 +3719,8 @@ function WeaponTweakData:_init_pistols_oryo()
 
 			
 			--deagle
-			self.deagle.AMMO_MAX = 30
+			self.deagle.AMMO_MAX = 35
+			self.deagle.CLIP_AMMO_MAX = 7
 			self.deagle.fire_mode_data.fire_rate = 0.2
 			self.deagle.single.fire_rate = 0.2
 			self.deagle.stats.damage = 176
@@ -3664,7 +3730,8 @@ function WeaponTweakData:_init_pistols_oryo()
 			self.deagle.has_description = true
 			
 					--akimbo deagle
-					self.x_deagle.AMMO_MAX = 30
+					self.x_deagle.AMMO_MAX = 35
+					self.x_deagle.CLIP_AMMO_MAX = 14
 					self.x_deagle.fire_mode_data.fire_rate = 0.2
 					self.x_deagle.single.fire_rate = 0.2
 					self.x_deagle.stats.damage = 176
@@ -3973,7 +4040,10 @@ Hooks:PostHook(WeaponTweakData, "init", "Oryo WeaponTweakData init", function(se
 	end
 	
 	--turret
-	self.swat_van_turret_module.BODY_DAMAGE_CLAMP = 40000
+	self.swat_van_turret_module.BODY_DAMAGE_CLAMP = nil
+	self.aa_turret_module.BODY_DAMAGE_CLAMP = nil
+	self.crate_turret_module.BODY_DAMAGE_CLAMP = nil
+	self.ceiling_turret_module.BODY_DAMAGE_CLAMP = nil
 	
 	--sentry
 	self.sentry_gun.DAMAGE = 4
