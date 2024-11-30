@@ -120,19 +120,18 @@ function FPCameraPlayerBase:recoil_kick(up, down, left, right, recoil_table) -- 
 		if math.abs(self._recoil_kick.accumulated) < 100 --[[ oryo: changed to 100 from 20 ]] then
 			local v = math.lerp(up, down, math.random())
 
-			self._recoil_kick.accumulated = (self._recoil_kick.accumulated or 0) + (v * 5 / (5 + self._recoil_kick.accumulated)) -- oryo: added multiplier to v of (5 / (5 + self._recoil_kick.accumulated))
+			self._recoil_kick.accumulated = (self._recoil_kick.accumulated or 0) + (v * 5 / (5 + math.abs(self._recoil_kick.accumulated))) -- oryo: added multiplier to v of (5 / (5 + math.abs(self._recoil_kick.accumulated)))
 
 		end
 
 		local h = math.lerp(left, right, math.random())
 
 		-- <oryo
-		local recoil_max = math.abs((self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated)))
+		local recoil_max = math.abs((self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + math.abs(self._recoil_kick.h.accumulated))))
 		local recoil_min = math.abs((self._recoil_kick.h.accumulated or 0) + h)
-		self._recoil_kick.h.accumulated = recoil_min < recoil_max and (self._recoil_kick.h.accumulated or 0) + h or (self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + self._recoil_kick.h.accumulated)) -- oryo: added multiplier to h of (5 / (5 + self._recoil_kick.accumulated)) if horizontal recoil would move camera away from center
+		self._recoil_kick.h.accumulated = recoil_min < recoil_max and (self._recoil_kick.h.accumulated or 0) + h or (self._recoil_kick.h.accumulated or 0) + (h * 5 / (5 + math.abs(self._recoil_kick.h.accumulated))) -- oryo: added multiplier to h of (5 / (5 + math.abs(self._recoil_kick.accumulated))) if horizontal recoil would move camera away from center
 		-- oryo>
 	end
-
 end
 
 
