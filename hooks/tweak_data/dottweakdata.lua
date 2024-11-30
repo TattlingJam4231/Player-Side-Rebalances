@@ -40,13 +40,13 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_trigger_max_distance = false
 	}
 	self.dot_entries.fire.ammo_system_low = {
-		dot_damage = 0.6,
-		damage_ticks = 3,
+		dot_damage = 1.0,
+		damage_ticks = 2,
 		dot_trigger_max_distance = false
 	}
 	self.dot_entries.fire.ammo_system_high = {
-		dot_damage = 1.0,
-		damage_ticks = 3,
+		dot_damage = 0.7,
+		damage_ticks = 4,
 		dot_trigger_max_distance = false
 	}
 
