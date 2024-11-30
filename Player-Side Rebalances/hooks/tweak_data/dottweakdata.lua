@@ -250,3 +250,14 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 	}
 
 end)
+
+
+Hooks:PostHook(DOTTweakData, "_process_dot_entries", "Oryo DOTTweakData _process_dot_entries", function(self)
+	for variant, dot_tweaks in pairs(self.dot_entries) do
+		for dot_tweak_name, dot_tweak_data in pairs(dot_tweaks) do
+			if dot_tweak_data.damage_ticks then
+				dot_tweak_data.dot_length = dot_tweak_data.damage_ticks * dot_tweak_data.dot_tick_period
+			end
+		end
+	end
+end)
