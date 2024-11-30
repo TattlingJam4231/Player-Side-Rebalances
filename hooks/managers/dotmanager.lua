@@ -212,25 +212,7 @@ function DOTManager:update_dot_info_oryo(existing_dot_info, existing_var_info, d
 		existing_var_info.weapons[weapon_key].dot_applied_time = existing_var_info.weapons[weapon_key].dot_applied_time + dot_data.dot_application_period
 	end
 
-	if existing_var_info.damage_table and dot_data.damage_ticks then
-		self:update_damage_table_oryo(existing_var_info, data)
-	elseif existing_var_info.scale_length and dot_data.scale_length then
-		self:update_dot_length_oryo(existing_var_info, dot_data, t)
-
-	elseif existing_var_info.reset_dot_length and existing_var_info.dot_damage_received_time + existing_var_info.dot_length <
-			t + dot_data.dot_length then
-		existing_var_info.dot_damage_received_time = t
-		existing_var_info.dot_length = dot_data.dot_length
-
-	end
-
-	-- update dot_tick_period
-	if existing_var_info.scale_tick_period and dot_data.scale_tick_period then
-		existing_var_info.dot_tick_period = math.max(existing_var_info.dot_tick_period - dot_data.scale_tick_period, existing_var_info.min_tick_period)
-		existing_var_info.dot_ticks_remaining = dot_data.damage_ticks or math.max(1, math.floor(var_info.dot_length / var_info.dot_tick_period))
-	elseif existing_var_info.dot_tick_period > dot_data.dot_tick_period then
-		existing_var_info.dot_tick_period = dot_data.dot_tick_period
-	end
+	self:update_damage_table_oryo(existing_var_info, data)
 
 	existing_var_info.hurt_animation = existing_var_info.hurt_animation or dot_data.hurt_animation
 
@@ -269,29 +251,6 @@ function DOTManager:update_damage_table_oryo(existing_var_info, data)
 end
 
 
-function DOTManager:update_dot_length_oryo(existing_var_info, dot_data, t)
-	local elapsed_time = (TimerManager:game():time() - existing_var_info.dot_damage_received_time)
-	existing_var_info.dot_length = existing_var_info.dot_length - elapsed_time
-	existing_var_info.dot_damage_received_time = t
-
-	if existing_var_info.diminish_scale_length then
-		if existing_var_info.diminish_scale_length and existing_var_info.diminish_scale_length <= existing_var_info.dot_length then
-			existing_var_info.dot_length = existing_var_info.dot_length + (dot_data.scale_length *
-												   (existing_var_info.diminish_scale_length /
-														   (existing_var_info.dot_length + dot_data.scale_length)))
-		else
-			existing_var_info.dot_length = existing_var_info.dot_length + dot_data.scale_length
-		end
-
-	elseif existing_var_info.length_cap then
-		existing_var_info.dot_length = math.min(existing_var_info.dot_length + dot_data.scale_length,
-				existing_var_info.length_cap)
-	else
-		existing_var_info.dot_length = existing_var_info.dot_length + dot_data.scale_length
-	end
-end
-
-
 function DOTManager:_add_variant_data(dot_info, data, t)
 	t = t or data.time_override or TimerManager:game():time()
 	local var_info = {}
@@ -318,7 +277,7 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 
 	var_info.use_weapon_damage_falloff = dot_data.use_weapon_damage_falloff or var_info.use_weapon_damage_falloff or false
 
-	var_info.dot_trigger_chance = dot_data.dot_trigger_chance or 100
+	var_info.dot_trigger_chance = dot_data.dot_trigger_chance or 1
 	var_info.hurt_animation_chance = dot_data.hurt_animation_chance or 0
 	var_info.dot_trigger_max_distance = dot_data.dot_trigger_max_distance
 	var_info.dot_can_stack = dot_data.dot_can_stack
@@ -326,13 +285,6 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 
 	-- Damage Variables
 	var_info.dot_damage = dot_data.dot_damage
-
-	if dot_data.scale_damage then
-		var_info.scale_damage = dot_data.scale_damage
-	end
-	if dot_data.damage_cap then
-		var_info.damage_cap = dot_data.damage_cap
-	end
 
 	-- Tick Period variables
 	var_info.dot_tick_period = dot_data.dot_tick_period
@@ -343,34 +295,16 @@ function DOTManager:_add_variant_data(dot_info, data, t)
 		var_info.accelerate_hurt = not var_info.unit:base():has_tag("tank")
 	end
 
-
-	dot_data.scale_tick_period = dot_data.scale_tick_period
-	dot_data.min_tick_period = dot_data.min_tick_period or 0.1
-
 	-- Length variables
 	var_info.dot_length = data.modified_length or dot_data.dot_length
 	var_info.add_ticks = dot_data.add_ticks
 	var_info.damage_ticks = self:_calc_damage_ticks_oryo(data)
 	var_info.dot_damage_received_time = t
-
-	if dot_data.reset_dot_length == nil then
-		var_info.reset_dot_length = true
-	end
-
-	var_info.scale_length = dot_data.scale_length
-	var_info.length_cap = dot_data.length_cap
-	var_info.diminish_scale_length = dot_data.diminish_scale_length
-
 	var_info.dot_grace_period = dot_data.dot_grace_period
 	var_info.dot_ticks_remaining = var_info.damage_ticks or math.max(1, math.floor(var_info.dot_length / var_info.dot_tick_period))
 	var_info.dot_counter = var_info.dot_tick_period - math.max(var_info.dot_tick_period, var_info.dot_grace_period)
-	--
 
 	-- Misc Variables
-	if dot_data.damage_decay and dot_data.decay_period then
-		var_info.dot_length = ((dot_data.dot_damage / dot_data.damage_decay) * dot_data.decay_period) + 0.1
-		var_info.decay_counter = 0
-	end
 	if var_info.damage_ticks and dot_data.dot_can_stack then
 		var_info.damage_table = {{var_info.damage_ticks, var_info.dot_damage}}
 	end
