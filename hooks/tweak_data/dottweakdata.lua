@@ -16,7 +16,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_can_crit = true
 	}
 
-	-- Flamethrower DoT
+	-- Flamethrower
 	self.dot_entries.fire.weapon_flamethrower_mk2 = {
 		dot_damage = 1.0,
 		damage_ticks = 3,
@@ -33,7 +33,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_trigger_max_distance = false
 	}
 
-	-- MA-17 Flamethrower DoT
+	-- MA-17 Flamethrower
 	self.dot_entries.fire.weapon_system  = {
 		dot_damage = 0.8,
 		damage_ticks = 3,
@@ -129,15 +129,22 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 	self.dot_entries.fire.ammo_dragons_breath_1 = deep_clone(ammo_dragons_breath)
 	self.dot_entries.fire.ammo_dragons_breath_1.dot_damage = 2.2
 
-	-- The Motherforker DoT
+	
+	-- Comically Large Spoon of Gold
+	self.dot_entries.melee_spoon_gold = {
+		dot_damage = 0.6,
+		damage_ticks = 6,
+		dot_trigger_max_distance = false,
+		max_values = {
+			dot_damage = 4.0
+		}
+	}
+
+	-- The Motherforker
 	self.dot_entries.fire.melee_fork = {
 		dot_trigger_chance = 0.5,
-		dot_grace_period = 0,
 		dot_damage = 1.0,
-		dot_tick_period = 0.5,
 		damage_ticks = 6,
-		dot_can_stack = true,
-		dot_can_crit = true,
 		max_values = {
 			dot_trigger_chance = 1,
 			dot_damage = 4.0,
@@ -145,29 +152,19 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		}
 	}
 
-	-- Spatula DoT
+	-- Spatula
 	self.dot_entries.fire.melee_spatula = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_damage = 1.5,
-		dot_tick_period = 0.5,
 		damage_ticks = 2,
-		dot_can_stack = true,
-		dot_can_crit = true,
 		max_values = {
 			dot_damage = 5.0
 		}
 	}
 
-	-- You're Mine DoT
+	-- You're Mine
 	self.dot_entries.fire.melee_branding_iron = {
-		dot_trigger_chance = 1,
-		dot_grace_period = 0,
 		dot_damage = 1.0,
-		dot_tick_period = 0.5,
 		damage_ticks = 2,
-		dot_can_stack = true,
-		dot_can_crit = true,
 		max_values = {
 			dot_damage = 3.5,
 			damage_ticks = 4
@@ -187,6 +184,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 		damage_class = "PoisonBulletBase",
 		dot_grace_period = 0,
 		dot_damage = 2,
+		damage_ticks = 12
 		dot_tick_period = 1,
 		dot_can_stack = "extend",
 		dot_can_crit = true,
@@ -196,50 +194,25 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 
 	-- Viper Grenade
 	self.dot_entries.poison.proj_gas_grenade_cloud = {
-		damage_ticks = 12,
-		dot_can_stack = "extend",
-		dot_can_crit = true,
-		accelerate = true,
-		lethal_hurt = true
+		damage_ticks = 12
 	}
 
 	-- Launcher Viper Grenade
 	self.dot_entries.poison.proj_launcher_cloud = {
-		dot_grace_period = 0,
 		dot_application_period = 1,
-		dot_damage = 2,
-		dot_tick_period = 1,
-		damage_ticks = 8,
-		dot_can_stack = "extend",
-		dot_can_crit = true,
-		accelerate = true,
-		lethal_hurt = true
+		damage_ticks = 8
 	}
 
 	-- Arbiter Viper Grenade
 	self.dot_entries.poison.proj_launcher_arbiter_cloud = {
-		dot_grace_period = 0,
 		dot_application_period = 1,
-		dot_damage = 2,
-		dot_tick_period = 1,
-		damage_ticks = 8,
-		dot_can_stack = "extend",
-		dot_can_crit = true,
-		accelerate = true,
-		lethal_hurt = true
+		damage_ticks = 8
 	}
 
 	-- Tombstone Slug
 	local ammo_rip = {
-		dot_grace_period = 0,
-		dot_damage = 2,
-		dot_tick_period = 1,
 		damage_ticks = 7,
 		use_weapon_damage_falloff = true,
-		dot_can_stack = "extend",
-		dot_can_crit = true,
-		accelerate = true,
-		lethal_hurt = true,
 		headshot_length_scale = true
 	}
 
@@ -258,32 +231,18 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 	self.dot_entries.poison.ammo_rip_1 = deep_clone(ammo_rip)
 	self.dot_entries.poison.ammo_rip_1.damage_ticks = 7
 
-	-- Kunai Knife DoT
+	-- Kunai Knife
 	self.dot_entries.poison.melee_cqc = {
-		dot_grace_period = 0,
-		dot_damage = 2,
-		dot_tick_period = 1,
 		damage_ticks = 2,
-		dot_can_stack = "extend",
-		dot_can_crit = true,
-		accelerate = true,
-		lethal_hurt = true,
 		max_values = {
 			damage_ticks = 8,
 			-- dot_tick_period = 0.5
 		}
 	}
 
-	-- Stainless Steel Syringe DoT
+	-- Stainless Steel Syringe
 	self.dot_entries.poison.melee_fear = {
-		dot_grace_period = 0,
-		dot_damage = 2,
-		dot_tick_period = 1,
 		damage_ticks = 2,
-		dot_can_stack = "extend",
-		dot_can_crit = true,
-		accelerate = true,
-		lethal_hurt = true,
 		max_values = {
 			damage_ticks = 8,
 			-- dot_tick_period = 0.5
