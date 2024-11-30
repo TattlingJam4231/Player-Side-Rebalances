@@ -131,7 +131,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 
 	
 	-- Comically Large Spoon of Gold
-	self.dot_entries.melee_spoon_gold = {
+	self.dot_entries.fire.melee_spoon_gold = {
 		dot_damage = 0.6,
 		damage_ticks = 6,
 		dot_trigger_max_distance = false,
@@ -184,7 +184,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 		damage_class = "PoisonBulletBase",
 		dot_grace_period = 0,
 		dot_damage = 2,
-		damage_ticks = 12
+		damage_ticks = 12,
 		dot_tick_period = 1,
 		dot_can_stack = "extend",
 		dot_can_crit = true,
