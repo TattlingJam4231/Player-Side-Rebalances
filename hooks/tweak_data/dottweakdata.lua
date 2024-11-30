@@ -10,7 +10,7 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 		dot_grace_period = 0,
 		dot_damage = 4.0,
 		dot_tick_period = 0.5,
-		damage_ticks = 3,
+		damage_ticks = 6,
 		dot_trigger_max_distance = 3000,
 		dot_can_stack = true,
 		dot_can_crit = true
@@ -176,7 +176,6 @@ end)
 
 Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _init_dot_entries_poison", function(self, entries)
 
-
 	self.dot_entries.poison.default_poison = {
 		PROCESSED = true,
 		name = "default",
@@ -184,8 +183,8 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 		damage_class = "PoisonBulletBase",
 		dot_grace_period = 0,
 		dot_damage = 2,
-		damage_ticks = 12,
 		dot_tick_period = 1,
+		damage_ticks = 12,
 		dot_can_stack = "extend",
 		dot_can_crit = true,
 		accelerate = true,
@@ -249,4 +248,17 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 		}
 	}
 
+end)
+
+
+Hooks:PostHook(DOTTweakData, "_process_dot_entries", "Oryo DOTTweakData _process_dot_entries", function(self)
+	for variant, dot_tweaks in pairs(self.dot_entries) do
+		for dot_tweak_name, dot_tweak_data in pairs(dot_tweaks) do
+			if dot_tweak_data.damage_ticks then
+				dot_tweak_data.dot_length = dot_tweak_data.damage_ticks * dot_tweak_data.dot_tick_period
+			else
+				-- log(dot_tweak_name)
+			end
+		end
+	end
 end)
