@@ -198,7 +198,7 @@ Hooks:PostHook(NewRaycastWeaponBase, "_update_stats_values", "Oryo NewRaycastWea
 	if not disallow_replenish  and managers.weapon_factory:get_factory_id_by_weapon_id(self._name_id) then
 		self:replenish()
 	end
-	self._spread_multiplier = spread_multiplier or	self._spread_multiplier
+	self._spread_multiplier = self._spread_multiplier or spread_multiplier
 	
 end)
 
