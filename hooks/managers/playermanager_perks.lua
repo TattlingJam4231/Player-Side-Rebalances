@@ -650,6 +650,76 @@ function PlayerManager:upd_shallow_grave_oryo()
 	end
 end
 
+-- oryo: Biker
+function PlayerManager:chk_wild_kill_counter(killed_unit, variant) -- oryo: cooldown dynamic instead of snapshotting
+	local player_unit = self:player_unit()
+
+	if not player_unit then
+		return
+	end
+
+	if CopDamage.is_civilian(killed_unit:base()._tweak_table) then
+		return
+	end
+
+	local damage_ext = player_unit:character_damage()
+
+	if damage_ext and (managers.player:has_category_upgrade("player", "wild_health_amount") or managers.player:has_category_upgrade("player", "wild_armor_amount")) then
+		self._wild_kill_triggers = self._wild_kill_triggers or {}
+		local t = Application:time()
+
+		local trigger_cooldown = tweak_data.upgrades.wild_trigger_time or 30
+		local wild_health_amount = managers.player:upgrade_value("player", "wild_health_amount", 0)
+		local wild_armor_amount = managers.player:upgrade_value("player", "wild_armor_amount", 0)
+		local less_health_wild_armor = managers.player:upgrade_value("player", "less_health_wild_armor", 0)
+		local less_armor_wild_health = managers.player:upgrade_value("player", "less_armor_wild_health", 0)
+		local less_health_wild_cooldown = managers.player:upgrade_value("player", "less_health_wild_cooldown", 0)
+		local less_armor_wild_cooldown = managers.player:upgrade_value("player", "less_armor_wild_cooldown", 0)
+		local missing_health_ratio = math.clamp(1 - damage_ext:health_ratio(), 0, 1)
+		local missing_armor_ratio = math.clamp(1 - damage_ext:armor_ratio(), 0, 1)
+
+		if less_health_wild_armor ~= 0 and less_health_wild_armor[1] ~= 0 then
+			local missing_health_stacks = math.floor(missing_health_ratio / less_health_wild_armor[1])
+			wild_armor_amount = wild_armor_amount + less_health_wild_armor[2] * missing_health_stacks
+		end
+
+		if less_armor_wild_health ~= 0 and less_armor_wild_health[1] ~= 0 then
+			local missing_armor_stacks = math.floor(missing_armor_ratio / less_armor_wild_health[1])
+			wild_health_amount = wild_health_amount + less_armor_wild_health[2] * missing_armor_stacks
+		end
+
+		while self._wild_kill_triggers[1] and self._wild_kill_triggers[1] <= t - trigger_cooldown do
+			table.remove(self._wild_kill_triggers, 1)
+		end
+
+		if tweak_data.upgrades.wild_max_triggers_per_time <= #self._wild_kill_triggers then
+			return
+		end
+
+		damage_ext:restore_health(wild_health_amount, true, false)
+		damage_ext:restore_armor(wild_armor_amount)
+
+		if less_health_wild_cooldown ~= 0 and less_health_wild_cooldown[1] ~= 0 then
+			local missing_health_stacks = math.floor(missing_health_ratio / less_health_wild_cooldown[1])
+			trigger_cooldown = trigger_cooldown - less_health_wild_cooldown[2] * missing_health_stacks
+		end
+
+		if less_armor_wild_cooldown ~= 0 and less_armor_wild_cooldown[1] ~= 0 then
+			local missing_armor_stacks = math.floor(missing_armor_ratio / less_armor_wild_cooldown[1])
+			trigger_cooldown = trigger_cooldown - less_armor_wild_cooldown[2] * missing_armor_stacks
+		end
+
+		local trigger_time = t --[[ + math.max(trigger_cooldown, 0) ]]
+		local insert_index = #self._wild_kill_triggers
+
+		while insert_index > 0 and trigger_time < self._wild_kill_triggers[insert_index] do
+			insert_index = insert_index - 1
+		end
+
+		table.insert(self._wild_kill_triggers, insert_index + 1, trigger_time)
+	end
+end
+
 -- oryo: Sicario
 function PlayerManager:_dodge_shot_gain(gain_value)
 	self.last_dodge_time = self.last_dodge_time or 0
