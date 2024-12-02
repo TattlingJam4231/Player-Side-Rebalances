@@ -129,6 +129,26 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_fire", "Oryo DOTTweakData _init_
 	self.dot_entries.fire.ammo_dragons_breath_1 = deep_clone(ammo_dragons_breath)
 	self.dot_entries.fire.ammo_dragons_breath_1.dot_damage = 2.2
 
+	-- Incendiary Rounds
+	local ammo_incendiary = {
+		dot_ddot_trigger_chance = 1,
+		dot_damage = 2,
+		damage_ticks = 2,
+		dot_trigger_max_distance = false
+	}
+
+	self.dot_entries.fire.ammo_incendiary_4 = deep_clone(ammo_incendiary)
+	self.dot_entries.fire.ammo_incendiary_4.dot_trigger_chance = 0.75
+	
+	self.dot_entries.fire.ammo_incendiary_3 = deep_clone(ammo_incendiary)
+	self.dot_entries.fire.ammo_incendiary_3.dot_trigger_chance = 0.5
+	
+	self.dot_entries.fire.ammo_incendiary_2 = deep_clone(ammo_incendiary)
+	self.dot_entries.fire.ammo_incendiary_2.dot_trigger_chance = 0.3
+
+	self.dot_entries.fire.ammo_incendiary_1 = deep_clone(ammo_incendiary)
+	self.dot_entries.fire.ammo_incendiary_1.dot_trigger_chance = 0.25
+
 	
 	-- Comically Large Spoon of Gold
 	self.dot_entries.fire.melee_spoon_gold = {
@@ -229,6 +249,25 @@ Hooks:PostHook(DOTTweakData, "_init_dot_entries_poison", "Oryo DOTTweakData _ini
 
 	self.dot_entries.poison.ammo_rip_1 = deep_clone(ammo_rip)
 	self.dot_entries.poison.ammo_rip_1.damage_ticks = 7
+
+	-- Tombstone Tip
+	local ammo_rip_tip = {
+		damage_ticks = 2,
+		use_weapon_damage_falloff = true,
+		headshot_length_scale = true
+	}
+
+	self.dot_entries.poison.ammo_rip_tip_4 = deep_clone(ammo_rip_tip)
+	self.dot_entries.poison.ammo_rip_tip_4.damage_ticks = 8
+	
+	self.dot_entries.poison.ammo_rip_tip_3 = deep_clone(ammo_rip_tip)
+	self.dot_entries.poison.ammo_rip_tip_3.damage_ticks = 4
+	
+	self.dot_entries.poison.ammo_rip_tip_2 = deep_clone(ammo_rip_tip)
+	self.dot_entries.poison.ammo_rip_tip_2.damage_ticks = 3
+
+	self.dot_entries.poison.ammo_rip_tip_1 = deep_clone(ammo_rip_tip)
+	self.dot_entries.poison.ammo_rip_tip_1.damage_ticks = 2
 
 	-- Kunai Knife
 	self.dot_entries.poison.melee_cqc = {

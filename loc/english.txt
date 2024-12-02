@@ -3,6 +3,10 @@
 	"FMJ_desc" : "Rounds that can penetrate up to one enemy."
 	"Ballistic Tip" : "Ballistic Tip Rounds"
 	"Ballistic Tip_desc" : "High impact rounds."
+	"Incendiary" : "Incendiary Rounds"
+	"Incendiary_desc" : "Rounds that have a chance to ingnite enemies, briefly interupting them."
+	"Tombstone Tip" : "Tombstone Tip Rounds"
+	"Tombstone Tip_desc" : "Poisoned bullets that deal damage over time, continuously interupting enemies once lethal."
 	"FMJ Pistol" : "FMJ Rounds"
 	"FMJ Pistol_desc" : "Rounds that have a longer effective range and can penetrate enemies up to two times."
 	"Hollow Point" : "Hollow Point Rounds"
@@ -10,7 +14,4 @@
 	"AP" : "AP Rounds"
 	"AP_desc" : "Rounds that have a longer effective range and can penetrate enemies, shields and walls up to four times. Penetrates body armor. This ammo type is harder to find"
 	"SLAP" : "Saboted Light Armor Penetrator Rounds"
-	"dragons_breath_alt" : "moved to Dragon's Breath"
-	"piercing_alt" : "moved to Flechette"
-	
 }

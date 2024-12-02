@@ -253,7 +253,9 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 	self.ammo = {
 		assault_rifle = {
 			wpn_upg_a_fmj = {},
-			wpn_upg_a_ballistic_tip = {}
+			wpn_upg_a_ballistic_tip = {},
+			wpn_fps_upg_a_incendiary = {},
+			wpn_fps_upg_a_rip_tip = {}
 		},
 		shotgun = {
 			wpn_fps_upg_a_custom = {},
@@ -383,6 +385,78 @@ function WeaponFactoryTweakData:_init_ammo_types_oryo()
 
 			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_1 = deep_clone(ballistic_tip)
 			self.ammo.assault_rifle.wpn_upg_a_ballistic_tip.tier_1.stats.damage = 8
+
+		-- Incendiary Rounds
+		local incendiary = {
+			stats = {
+				value = 5, 
+				damage = 0,
+				total_ammo_mod = 0
+			},
+			custom_stats = {
+				ammo_pickup_min_mul = 1,
+				ammo_pickup_max_mul = 1,
+				dot_data_name = "ammo_dragons_breath_1",
+				armor_piercing_add = 0, 
+				ignore_statistic = true,  
+				-- muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_dragons_breath", 
+				far_falloff_mul = 1,
+				can_shoot_through_shield = false, 
+				can_headshot = true,
+				bullet_class = "FlameBulletBase",
+				rays = 1
+			}
+		}
+
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_4 = deep_clone(incendiary)
+		-- self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_4.stats.damage = -80
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_4.custom_stats.dot_data_name = "ammo_incendiary_4"
+
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_3 = deep_clone(incendiary)
+		-- self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_3.stats.damage = -40
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_3.custom_stats.dot_data_name = "ammo_incendiary_3"
+
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_2 = deep_clone(incendiary)
+		-- self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_2.stats.damage = -30
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_2.custom_stats.dot_data_name = "ammo_incendiary_2"
+
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_1 = deep_clone(incendiary)
+		-- self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_1.stats.damage = -20
+		self.ammo.assault_rifle.wpn_fps_upg_a_incendiary.tier_1.custom_stats.dot_data_name = "ammo_incendiary_1"
+			
+		-- Tomstone Tip
+			local tombstone_tip = {
+				stats = {
+					value = 5,
+					total_ammo_mod = -6,
+					damage = -20
+				},
+				custom_stats = {
+					armor_piercing_add = 0,
+					-- muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash_rip",
+					dot_data_name = "ammo_rip_tip_1",
+					damage_far_mul = 1,
+					damage_near_mul = 1,
+					bullet_class = "PoisonBulletBase",
+					rays = 1
+				}
+			}
+
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_4 = deep_clone(tombstone_tip)
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_4.stats.damage = -80
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_4.custom_stats.dot_data_name = "ammo_rip_tip_4"
+
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_3 = deep_clone(tombstone_tip)
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_3.stats.damage = -40
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_3.custom_stats.dot_data_name = "ammo_rip_tip_3"
+
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_2 = deep_clone(tombstone_tip)
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_2.stats.damage = -30
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_2.custom_stats.dot_data_name = "ammo_rip_tip_2"
+
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_1 = deep_clone(tombstone_tip)
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_1.stats.damage = -20
+			self.ammo.assault_rifle.wpn_fps_upg_a_rip_tip.tier_1.custom_stats.dot_data_name = "ammo_rip_tip_1"
 
 	-- Shotgun Ammo
 		-- Buckshot

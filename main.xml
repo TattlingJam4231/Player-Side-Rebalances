@@ -70,7 +70,6 @@
 				<value_node value="wpn_fps_ass_s552"/>
 				<value_node value="wpn_fps_ass_g36"/>
 				<value_node value="wpn_fps_ass_asval"/>
-				
 			</weapons>
 		</WeaponMod>
 	
@@ -95,6 +94,128 @@
 				damage_far_mul = "1"
 				damage_near_mul = "1"
 				armor_piercing_add = "0"
+				can_shoot_through_shield = "false"
+				can_shoot_through_wall = "false"
+				can_shoot_through_enemy = "false"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_ass_sub2000"/>
+				<value_node value="wpn_fps_ass_m14"/>
+				<value_node value="wpn_fps_ass_ching"/>
+				<value_node value="wpn_fps_ass_contraband"/>
+				
+				<value_node value="wpn_fps_ass_akm"/>
+				<value_node value="wpn_fps_ass_akm_gold"/>
+				<value_node value="wpn_fps_ass_m16"/>
+				<value_node value="wpn_fps_ass_scar"/>
+				<value_node value="wpn_fps_ass_fal"/>
+				<value_node value="wpn_fps_ass_flint"/>
+				<value_node value="wpn_fps_ass_g3"/>
+				<value_node value="wpn_fps_ass_groza"/>
+				<value_node value="wpn_fps_ass_shak12"/>
+				
+				<value_node value="wpn_fps_ass_74"/>
+				<value_node value="wpn_fps_ass_corgi"/>
+				<value_node value="wpn_fps_ass_komodo"/>
+				<value_node value="wpn_fps_ass_aug"/>
+				<value_node value="wpn_fps_ass_vhs"/>
+				<value_node value="wpn_fps_ass_ak5"/>
+				<value_node value="wpn_fps_ass_l85a2"/>
+				<value_node value="wpn_fps_ass_m4"/>
+				<value_node value="wpn_fps_ass_galil"/>
+				
+				<value_node value="wpn_fps_ass_amcar"/>
+				<value_node value="wpn_fps_ass_tecci"/>
+				<value_node value="wpn_fps_ass_famas"/>
+				<value_node value="wpn_fps_ass_s552"/>
+				<value_node value="wpn_fps_ass_g36"/>
+				<value_node value="wpn_fps_ass_asval"/>
+			</weapons>
+		</WeaponMod>
+		
+	<!-- Incendiary rounds -->
+		<WeaponMod
+			id="wpn_fps_upg_a_incendiary"
+			name_id="Incendiary"
+			based_on="wpn_fps_upg_a_dragons_breath"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2">
+			<stats
+				damage = "0"
+				spread = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				armor_piercing_add = "0"
+				dot_data_name = "ammo_incendiary_1"
+				can_shoot_through_shield = "false"
+				can_headshot = "true"
+				rays = "1"
+			/>
+			<weapons>
+				<value_node value="wpn_fps_ass_sub2000"/>
+				<value_node value="wpn_fps_ass_m14"/>
+				<value_node value="wpn_fps_ass_ching"/>
+				<value_node value="wpn_fps_ass_contraband"/>
+				
+				<value_node value="wpn_fps_ass_akm"/>
+				<value_node value="wpn_fps_ass_akm_gold"/>
+				<value_node value="wpn_fps_ass_m16"/>
+				<value_node value="wpn_fps_ass_scar"/>
+				<value_node value="wpn_fps_ass_fal"/>
+				<value_node value="wpn_fps_ass_flint"/>
+				<value_node value="wpn_fps_ass_g3"/>
+				<value_node value="wpn_fps_ass_groza"/>
+				<value_node value="wpn_fps_ass_shak12"/>
+				
+				<value_node value="wpn_fps_ass_74"/>
+				<value_node value="wpn_fps_ass_corgi"/>
+				<value_node value="wpn_fps_ass_komodo"/>
+				<value_node value="wpn_fps_ass_aug"/>
+				<value_node value="wpn_fps_ass_vhs"/>
+				<value_node value="wpn_fps_ass_ak5"/>
+				<value_node value="wpn_fps_ass_l85a2"/>
+				<value_node value="wpn_fps_ass_m4"/>
+				<value_node value="wpn_fps_ass_galil"/>
+				
+				<value_node value="wpn_fps_ass_amcar"/>
+				<value_node value="wpn_fps_ass_tecci"/>
+				<value_node value="wpn_fps_ass_famas"/>
+				<value_node value="wpn_fps_ass_s552"/>
+				<value_node value="wpn_fps_ass_g36"/>
+				<value_node value="wpn_fps_ass_asval"/>
+			</weapons>
+		</WeaponMod>
+		
+	<!-- Tombstone Tip rounds -->
+		<WeaponMod
+			id="wpn_fps_upg_a_rip_tip"
+			name_id="Tombstone Tip"
+			based_on="wpn_fps_upg_a_rip"
+			inherit_weapons="false"
+			inherit_adds="false"
+			inherit_override="false"
+			inherit_parts_override="false"
+			inherit_parts_forbids="false"
+			type="ammo"
+			ver="2">
+			<stats
+				damage = "-20"
+				spread = "0"
+				total_ammo_mod = "0"
+			/>
+			<custom_stats
+				damage_far_mul = "1"
+				damage_near_mul = "1"
+				armor_piercing_add = "0"
+				dot_data_name = "ammo_rip_tip_1"
 				can_shoot_through_shield = "false"
 				can_shoot_through_wall = "false"
 				can_shoot_through_enemy = "false"
@@ -538,6 +659,8 @@
 	<AddFiles directory="assets">
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_ballistic_tip"/>
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_fmj"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_incendiary"/>
+		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_rip_tip"/>
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_ap"/>
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_fmj"/>
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_hp"/>
