@@ -634,3 +634,8 @@ function CopActionHurt:init(action_desc, common_data)
 
 	return true
 end
+
+
+function CopActionHurt:set_action_expired_oryo()
+	self._expired = true
+end

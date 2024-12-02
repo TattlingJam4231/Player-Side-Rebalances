@@ -45,6 +45,7 @@ function DOTManager:update(t, dt)
 					end
 
 					if not var_info.damage_table[1] then
+						self:stop_fire_hurt_oryo(var_info.unit)
 						self:_remove_variant(dot_info, var_name)
 
 						if not next(dot_info.variants) then
@@ -196,6 +197,16 @@ function DOTManager:_add_doted_enemy(data)
 end
 
 
+function DOTManager:stop_fire_hurt_oryo(unit)
+	local movement_ext = unit:movement()
+	local action = movement_ext:get_action(1)
+
+	if action and action.hurt_type and action:hurt_type() == "fire_hurt" then
+		action:set_action_expired_oryo()
+	end
+end
+
+
 function DOTManager:update_dot_info_oryo(existing_dot_info, existing_var_info, data, t, should_sync)
 	local dot_data = data.dot_data
 
@@ -327,15 +338,14 @@ function DOTManager:_calc_damage_ticks_oryo(data, add_ticks)
 		local damage_ext = data.unit:character_damage()
 		local weap_base = data.weapon_unit and data.weapon_unit:base()
 		local modified_ticks
-		local headshot = damage_ext:is_headshot_oryo(data.col_ray)
+		local headshot, headshot_multiplier = damage_ext:is_headshot_oryo(data)
 
 		if dot_data.use_weapon_damage_falloff and weap_base and weap_base.get_damage_falloff then
 			modified_ticks = weap_base:get_damage_falloff(ticks, data.col_ray, data.attacker_unit)
 		end
 
-		if dot_data.headshot_length_scale and headshot then
-			local headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
-			modified_ticks = (modified_ticks or 1) * damage_ext._char_tweak.headshot_dmg_mul * headshot_multiplier
+		if dot_data.headshot_length_scale then
+			modified_ticks = (modified_ticks or 1) * headshot_multiplier
 		end
 
 		modified_ticks = math.ceil(modified_ticks)

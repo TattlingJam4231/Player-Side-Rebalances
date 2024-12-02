@@ -24,10 +24,32 @@ function CopDamage:get_real_damage_oryo(damage)
 end
 
 
-function CopDamage:is_headshot_oryo(col_ray)
-	local headshot = self._head_body_name and col_ray.body and col_ray.body:name() == self._ids_head_body_name
+function CopDamage:is_headshot_oryo(attack_data)
+	local headshot = self._head_body_name and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_head_body_name
+	local headshot_multiplier = 1
 
-	return headshot
+	if headshot then
+
+		if not self._char_tweak.ignore_headshot and not self._damage_reduction_multiplier and self._char_tweak.headshot_dmg_mul then
+
+			if attack_data.attacker_unit == managers.player:player_unit() then
+				headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
+			end
+
+			headshot_multiplier = self._char_tweak.headshot_dmg_mul * headshot_multiplier
+		end
+
+	elseif not self._char_tweak.no_headshot_add_mul and attack_data.weapon_unit:base().get_add_head_shot_mul then
+
+		local add_head_shot_mul = attack_data.weapon_unit:base():get_add_head_shot_mul()
+
+		if add_head_shot_mul and self._char_tweak.headshot_dmg_mul then
+			local tweak_headshot_mul = math.max(0, self._char_tweak.headshot_dmg_mul - 1)
+			headshot_multiplier = tweak_headshot_mul * add_head_shot_mul + 1
+		end
+	end
+
+	return headshot, headshot_multiplier
 end
 
 
@@ -52,6 +74,7 @@ function CopDamage:damage_fire(attack_data)
 
 
 	-- <oryo
+	attack_data.hit_unit_max_health = self._HEALTH_INIT -- oryo: used for graze damage
 	if attack_data.attacker_unit == managers.player:player_unit() then
 		local damage_scale = nil
 
@@ -115,10 +138,13 @@ function CopDamage:damage_fire(attack_data)
 			end
 		end
 	end
-	-- oryo>
-
 
 	damage = self:_apply_damage_reduction(damage)
+	attack_data.raw_damage = damage
+	attack_data.headshot = head
+	-- oryo>
+
+	
 	damage = math.clamp(damage, 0, self._HEALTH_INIT)
 	local damage_percent = math.ceil(damage / self._HEALTH_INIT_PRECENT)
 	damage = damage_percent * self._HEALTH_INIT_PRECENT
@@ -284,7 +310,7 @@ end
 -- <oryo
 local damage_bullet_original = CopDamage.damage_bullet
 function CopDamage:damage_bullet(attack_data)
-	attack_data.hit_unit_max_health = self._HEALTH_INIT -- used for graze damage
+	attack_data.hit_unit_max_health = self._HEALTH_INIT -- oryo: used for graze damage
 
 	return damage_bullet_original(self, attack_data)
 end
