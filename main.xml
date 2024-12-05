@@ -25,7 +25,7 @@
 			<custom_stats
 				damage_far_mul = "1"
 				damage_near_mul = "1"
-				armor_piercing_add = "0"
+				armor_piercing_add = "0.5"
 				can_shoot_through_shield = "false"
 				can_shoot_through_wall = "false"
 				can_shoot_through_enemy = "1"
@@ -156,7 +156,6 @@
 				armor_piercing_add = "0"
 				dot_data_name = "ammo_incendiary_1"
 				can_shoot_through_shield = "false"
-				can_headshot = "true"
 				rays = "1"
 			/>
 			<weapons>
@@ -665,10 +664,14 @@
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_fmj"/>
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_a_pis_hp"/>
 		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_upg_snp_slap"/>
-		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_dragons_breath_alt"/>
-		<texture path="guis/dlcs/mods/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_piercing_alt"/>
 		
-        <effect path="effects\particles\explosions\smoke_screen"/>
-        <effect path="effects\particles\explosions\poison_gas"/>
+        <effect path="effects/particles/explosions/smoke_screen"/>
+        <effect path="effects/particles/explosions/poison_gas"/>
+        <effect path="effects/mods/particles/weapons/muzzleflash_rip_tip"/>
+        <effect path="effects/mods/particles/weapons/muzzleflash_incendiary"/>
+        <effect path="effects/mods/particles/weapons/fps_parts/fps_incendiary_part_a"/>
+        <effect path="effects/mods/particles/weapons/fps_parts/fps_incendiary_part_b"/>
+        <effect path="effects/mods/particles/weapons/fps_parts/fps_incendiary_part_c"/>
+        <effect path="effects/payday2/particles/weapons/shotgun/sho_muzzleflash_rip"/>
 	</AddFiles>
 </mod>
